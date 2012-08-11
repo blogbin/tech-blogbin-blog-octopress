@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Installation | Tech.Blogbin's Blog]]></title>
   <link href="http://tech-blogbin.herokuapp.com//blog/categories/installation/atom.xml" rel="self"/>
   <link href="http://tech-blogbin.herokuapp.com//"/>
-  <updated>2012-08-11T16:33:53+08:00</updated>
+  <updated>2012-08-11T16:41:58+08:00</updated>
   <id>http://tech-blogbin.herokuapp.com//</id>
   <author>
     <name><![CDATA[Tech Blogbin ]]></name>
@@ -48,7 +48,7 @@
 
 <p>二. 操作过程</p>
 
-<p>``` Bash shell scripts
+<p>```
 blogbins-MacBook-Pro:tech.blogbin blogbin$ rvm list</p>
 
 <p>rvm rubies</p>
