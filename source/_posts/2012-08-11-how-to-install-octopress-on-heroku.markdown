@@ -19,7 +19,7 @@ tags:
 
 1. 基于我最喜爱编程语言：Ruby 语言；
 2. 支持 unix shell 命令操作，比传统仅能使用 Web UI 界面管理更加灵活和可控，但上手很容易，操作并不繁琐；
-3. 本地和远端都能用 Git 分布式版本系统来管理，减低数据丢失风险，并能通过 Git 和 Rsync 等技术快速部署到远端多个服务器，包括物理服务器和 IAAS 和 PAAS；
+3. 本地和远端都能用 Git 分布式版本系统来管理，减低数据丢失风险，并能通过 Git 和 Rsync 等技术快速部署到远端多个服务器，包括物理服务器， IAAS 和 PAAS；
 4. 对内嵌代码片段的具有独特的风格展现（支持 Markdown 语法），代码容易阅读和分享，这是编程类技术博客最看重的优势之一；
 5. 最终生成静态页面，对服务器部署没有特别的要求
 
@@ -40,7 +40,7 @@ https://devcenter.heroku.com/articles/renaming-apps
 
 二. 操作过程
 
-```
+``` Bash shell scripts
 blogbins-MacBook-Pro:tech.blogbin blogbin$ rvm list
 
 rvm rubies
@@ -470,7 +470,7 @@ To git@heroku.com:tech-blogbin.git
 
 ```
 
-访问
+现在可以访问 http://tech-blogbin.herokuapp.com/
 
 三. 问题
 

@@ -4,7 +4,7 @@
 
 url: http://tech-blogbin.herokuapp.com/
 title: Tech.Blogbin's Blog
-subtitle: A blogging for hackers.
+subtitle: A blogging for geeker.
 author: Tech Blogbin <tech.blogbin@gmail.com>
 simple_search: http://google.com/search
 description:
@@ -89,8 +89,8 @@ delicious_user:
 delicious_count: 3
 
 # Disqus Comments
-disqus_short_name:
-disqus_show_comment_count: false
+disqus_short_name: tech-blogbin-blog
+disqus_show_comment_count: true
 
 # Google Analytics
 google_analytics_tracking_id:

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Ruby | Tech.Blogbin's Blog]]></title>
   <link href="http://tech-blogbin.herokuapp.com//blog/categories/ruby/atom.xml" rel="self"/>
   <link href="http://tech-blogbin.herokuapp.com//"/>
-  <updated>2012-08-11T13:07:10+08:00</updated>
+  <updated>2012-08-11T16:06:52+08:00</updated>
   <id>http://tech-blogbin.herokuapp.com//</id>
   <author>
     <name><![CDATA[Tech Blogbin ]]></name>
@@ -23,7 +23,7 @@
 <ol>
 <li>基于我最喜爱编程语言：Ruby 语言；</li>
 <li>支持 unix shell 命令操作，比传统仅能使用 Web UI 界面管理更加灵活和可控，但上手很容易，操作并不繁琐；</li>
-<li>本地和远端都能用 Git 分布式版本系统来管理，减低数据丢失风险，并能通过 Git 和 Rsync 等技术快速部署到远端多个服务器，包括物理服务器和 IAAS 和 PAAS；</li>
+<li>本地和远端都能用 Git 分布式版本系统来管理，减低数据丢失风险，并能通过 Git 和 Rsync 等技术快速部署到远端多个服务器，包括物理服务器， IAAS 和 PAAS；</li>
 <li>对内嵌代码片段的具有独特的风格展现（支持 Markdown 语法），代码容易阅读和分享，这是编程类技术博客最看重的优势之一；</li>
 <li>最终生成静态页面，对服务器部署没有特别的要求</li>
 </ol>
@@ -46,7 +46,7 @@
 
 <p>二. 操作过程</p>
 
-<p>```
+<p>``` Bash shell scripts
 blogbins-MacBook-Pro:tech.blogbin blogbin$ rvm list</p>
 
 <p>rvm rubies</p>
@@ -487,7 +487,7 @@ Total 4035 (delta 2310), reused 3968 (delta 2289)</p>
 
 <p>```</p>
 
-<p>访问</p>
+<p>现在可以访问 http://tech-blogbin.herokuapp.com/</p>
 
 <p>三. 问题</p>
 
