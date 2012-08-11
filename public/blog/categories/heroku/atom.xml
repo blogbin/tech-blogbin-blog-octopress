@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Heroku | Tech.Blogbin's Blog]]></title>
   <link href="http://tech-blogbin.herokuapp.com//blog/categories/heroku/atom.xml" rel="self"/>
   <link href="http://tech-blogbin.herokuapp.com//"/>
-  <updated>2012-08-11T21:41:16+08:00</updated>
+  <updated>2012-08-11T23:48:05+08:00</updated>
   <id>http://tech-blogbin.herokuapp.com//</id>
   <author>
     <name><![CDATA[Tech Blogbin ]]></name>
@@ -38,19 +38,21 @@
 
 <p>参阅教程：</p>
 
-<p>http://octopress.org/docs/setup/</p>
+<p><a href="http://octopress.org/docs/setup/">http://octopress.org/docs/setup/</a></p>
 
-<p>http://octopress.org/docs/deploying/heroku</p>
+<p><a href="http://octopress.org/docs/deploying/heroku">http://octopress.org/docs/deploying/heroku</a></p>
 
-<p>https://devcenter.heroku.com/articles/quickstart</p>
+<p><a href="https://devcenter.heroku.com/articles/quickstart">https://devcenter.heroku.com/articles/quickstart</a></p>
 
-<p>https://devcenter.heroku.com/articles/renaming-apps</p>
+<p><a href="https://devcenter.heroku.com/articles/renaming-apps">https://devcenter.heroku.com/articles/renaming-apps</a></p>
 
 <p>二. 操作过程</p>
 
 <p>使用 RVM 为 Octopress 创建新的 Gemset：</p>
 
 <p>```
+blogbins-MacBook-Pro:octopress blogbin$ pwd
+/Users/blogbin/projects/workspaces/octopress/tech.blogbin
 blogbins-MacBook-Pro:tech.blogbin blogbin$ rvm list</p>
 
 <p>rvm rubies</p>

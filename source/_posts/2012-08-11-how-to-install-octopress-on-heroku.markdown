@@ -8,11 +8,13 @@ categories:
 - Heroku
 - Ruby
 - Installation
+- Deployment
 tags:
 - Octopress
 - Heroku
 - Ruby
 - Installation
+- Deployment
 ---
 
 我选择 Octopress 作为搭建技术博客的理由：
@@ -31,13 +33,13 @@ tags:
 
 参阅教程：
 
-http://octopress.org/docs/setup/
+[http://octopress.org/docs/setup/](http://octopress.org/docs/setup/)
 
-http://octopress.org/docs/deploying/heroku
+[http://octopress.org/docs/deploying/heroku](http://octopress.org/docs/deploying/heroku)
 
-https://devcenter.heroku.com/articles/quickstart
+[https://devcenter.heroku.com/articles/quickstart](https://devcenter.heroku.com/articles/quickstart)
 
-https://devcenter.heroku.com/articles/renaming-apps
+[https://devcenter.heroku.com/articles/renaming-apps](https://devcenter.heroku.com/articles/renaming-apps)
 
 
 二. 操作过程
@@ -45,6 +47,8 @@ https://devcenter.heroku.com/articles/renaming-apps
 使用 RVM 为 Octopress 创建新的 Gemset：
 
 ```
+blogbins-MacBook-Pro:octopress blogbin$ pwd
+/Users/blogbin/projects/workspaces/octopress/tech.blogbin
 blogbins-MacBook-Pro:tech.blogbin blogbin$ rvm list
 
 rvm rubies

@@ -7,10 +7,12 @@ categories:
 - Octopress
 - Ruby
 - Configuration
+- Deployment
 tags:
 - Octopress
 - Ruby
 - Configuration
+- Deployment
 - GitHub
 - Twitter
 - Google+
@@ -28,7 +30,7 @@ Google 搜索结果并不多，那是因为在 Octopress 很容易配置，几�
 一. 前期准备
 
 参阅：
-http://octopress.org/docs/configuring/
+[http://octopress.org/docs/configuring/](http://octopress.org/docs/configuring/)
 
 Github - List your github repositories in the sidebar
 
@@ -52,6 +54,8 @@ Facebook - Add a Facebook like button
 _config.yml 配置文件如下：
 
 ```
+blogbins-MacBook-Pro:octopress blogbin$ pwd
+/Users/blogbin/projects/workspaces/octopress/tech.blogbin/octopress
 blogbins-MacBook-Pro:octopress blogbin$  vi _config.yml
 # ----------------------- #
 #      Main Configs       #
