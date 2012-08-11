@@ -2,10 +2,10 @@
 #      Main Configs       #
 # ----------------------- #
 
-url: http://yoursite.com
-title: My Octopress Blog
-subtitle: A blogging framework for hackers.
-author: Tech Blogbin
+url: http://tech-blogbin.herokuapp.com/
+title: Tech.Blogbin's Blog
+subtitle: A blogging for hackers.
+author: Tech Blogbin <tech.blogbin@gmail.com>
 simple_search: http://google.com/search
 description:
 
