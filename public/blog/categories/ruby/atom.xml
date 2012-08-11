@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Ruby | Tech.Blogbin's Blog]]></title>
   <link href="http://tech-blogbin.herokuapp.com//blog/categories/ruby/atom.xml" rel="self"/>
   <link href="http://tech-blogbin.herokuapp.com//"/>
-  <updated>2012-08-11T16:06:52+08:00</updated>
+  <updated>2012-08-11T16:33:53+08:00</updated>
   <id>http://tech-blogbin.herokuapp.com//</id>
   <author>
     <name><![CDATA[Tech Blogbin ]]></name>
@@ -39,6 +39,8 @@
 <p>参阅教程：</p>
 
 <p>http://octopress.org/docs/setup/</p>
+
+<p>http://octopress.org/docs/deploying/heroku</p>
 
 <p>https://devcenter.heroku.com/articles/quickstart</p>
 

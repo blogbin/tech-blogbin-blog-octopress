@@ -33,6 +33,8 @@ tags:
 
 http://octopress.org/docs/setup/
 
+http://octopress.org/docs/deploying/heroku
+
 https://devcenter.heroku.com/articles/quickstart
 
 https://devcenter.heroku.com/articles/renaming-apps
