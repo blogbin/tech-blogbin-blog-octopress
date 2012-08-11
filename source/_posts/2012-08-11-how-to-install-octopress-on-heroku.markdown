@@ -42,6 +42,8 @@ https://devcenter.heroku.com/articles/renaming-apps
 
 二. 操作过程
 
+使用 RVM 为 Octopress 创建新的 Gemset：
+
 ```
 blogbins-MacBook-Pro:tech.blogbin blogbin$ rvm list
 

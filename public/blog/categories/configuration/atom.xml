@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Configuration | Tech.Blogbin's Blog]]></title>
   <link href="http://tech-blogbin.herokuapp.com//blog/categories/configuration/atom.xml" rel="self"/>
   <link href="http://tech-blogbin.herokuapp.com//"/>
-  <updated>2012-08-11T18:38:25+08:00</updated>
+  <updated>2012-08-11T20:24:40+08:00</updated>
   <id>http://tech-blogbin.herokuapp.com//</id>
   <author>
     <name><![CDATA[Tech Blogbin ]]></name>
@@ -18,8 +18,11 @@
     <link href="http://tech-blogbin.herokuapp.com//blog/2012/08/11/configuring-octopress-with-3rd-party-settings/"/>
     <updated>2012-08-11T17:11:00+08:00</updated>
     <id>http://tech-blogbin.herokuapp.com//blog/2012/08/11/configuring-octopress-with-3rd-party-settings</id>
-    <content type="html"><![CDATA[<p>接下来为 Octopress 配置 Disqus 留言，Github, Twitter, Google+, Google Analytics 和 Facebook。
-Google 搜索结果并不多，那是因为在 Octopress 很容易配置。</p>
+    <content type="html"><![CDATA[<p>为 Octopress 配置 Disqus 留言，Github, Twitter, Google+, Google Analytics 和 Facebook。
+Google 搜索结果并不多，那是因为在 Octopress 很容易配置，几乎不需要求助。</p>
+
+<!--more-->
+
 
 <p>一. 前期准备</p>
 
@@ -58,7 +61,7 @@ blogbins-MacBook-Pro:octopress blogbin$  vi _config.yml</p>
 <p>url: http://tech-blogbin.herokuapp.com/
 title: Tech.Blogbin's Blog
 subtitle: A blogging for geeker.
-author: Tech Blogbin <a href="&#x6d;&#x61;&#105;&#108;&#x74;&#x6f;&#58;&#x74;&#101;&#99;&#104;&#x2e;&#98;&#x6c;&#x6f;&#103;&#98;&#105;&#x6e;&#x40;&#x67;&#x6d;&#97;&#x69;&#x6c;&#x2e;&#99;&#111;&#x6d;">&#x74;&#x65;&#99;&#104;&#46;&#x62;&#108;&#x6f;&#x67;&#x62;&#105;&#x6e;&#x40;&#x67;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#109;</a>
+author: Tech Blogbin <a href="&#x6d;&#97;&#105;&#x6c;&#x74;&#x6f;&#x3a;&#116;&#x65;&#x63;&#104;&#x2e;&#x62;&#108;&#111;&#103;&#98;&#x69;&#x6e;&#x40;&#103;&#x6d;&#97;&#105;&#108;&#46;&#99;&#x6f;&#x6d;">&#x74;&#101;&#99;&#x68;&#46;&#x62;&#x6c;&#111;&#103;&#x62;&#x69;&#x6e;&#64;&#103;&#109;&#97;&#x69;&#x6c;&#46;&#99;&#111;&#x6d;</a>
 simple_search: http://google.com/search
 description:</p>
 

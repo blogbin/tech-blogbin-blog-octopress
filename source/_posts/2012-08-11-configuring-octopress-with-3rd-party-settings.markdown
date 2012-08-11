@@ -20,8 +20,10 @@ tags:
 - Facebook
 ---
 
-接下来为 Octopress 配置 Disqus 留言，Github, Twitter, Google+, Google Analytics 和 Facebook。
-Google 搜索结果并不多，那是因为在 Octopress 很容易配置。
+为 Octopress 配置 Disqus 留言，Github, Twitter, Google+, Google Analytics 和 Facebook。
+Google 搜索结果并不多，那是因为在 Octopress 很容易配置，几乎不需要求助。
+
+<!--more-->
 
 一. 前期准备
 
@@ -43,6 +45,7 @@ Disqus Comments - Add your disqus short name to enable disqus comments on your s
 Google Analytics - Add your tracking id to enable Google Analytics tracking for your site.
 
 Facebook - Add a Facebook like button
+
 
 二. 配置过程
 

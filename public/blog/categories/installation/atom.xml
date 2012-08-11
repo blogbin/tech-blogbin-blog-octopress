@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Installation | Tech.Blogbin's Blog]]></title>
   <link href="http://tech-blogbin.herokuapp.com//blog/categories/installation/atom.xml" rel="self"/>
   <link href="http://tech-blogbin.herokuapp.com//"/>
-  <updated>2012-08-11T18:38:25+08:00</updated>
+  <updated>2012-08-11T20:24:40+08:00</updated>
   <id>http://tech-blogbin.herokuapp.com//</id>
   <author>
     <name><![CDATA[Tech Blogbin ]]></name>
@@ -47,6 +47,8 @@
 <p>https://devcenter.heroku.com/articles/renaming-apps</p>
 
 <p>二. 操作过程</p>
+
+<p>使用 RVM 为 Octopress 创建新的 Gemset：</p>
 
 <p>```
 blogbins-MacBook-Pro:tech.blogbin blogbin$ rvm list</p>

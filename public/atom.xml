@@ -4,7 +4,7 @@
   <title><![CDATA[Tech.Blogbin's Blog]]></title>
   <link href="http://tech-blogbin.herokuapp.com//atom.xml" rel="self"/>
   <link href="http://tech-blogbin.herokuapp.com//"/>
-  <updated>2012-08-11T18:38:25+08:00</updated>
+  <updated>2012-08-11T20:24:40+08:00</updated>
   <id>http://tech-blogbin.herokuapp.com//</id>
   <author>
     <name><![CDATA[Tech Blogbin ]]></name>
@@ -18,8 +18,11 @@
     <link href="http://tech-blogbin.herokuapp.com//blog/2012/08/11/configuring-octopress-with-3rd-party-settings/"/>
     <updated>2012-08-11T17:11:00+08:00</updated>
     <id>http://tech-blogbin.herokuapp.com//blog/2012/08/11/configuring-octopress-with-3rd-party-settings</id>
-    <content type="html"><![CDATA[<p>接下来为 Octopress 配置 Disqus 留言，Github, Twitter, Google+, Google Analytics 和 Facebook。
-Google 搜索结果并不多，那是因为在 Octopress 很容易配置。</p>
+    <content type="html"><![CDATA[<p>为 Octopress 配置 Disqus 留言，Github, Twitter, Google+, Google Analytics 和 Facebook。
+Google 搜索结果并不多，那是因为在 Octopress 很容易配置，几乎不需要求助。</p>
+
+<!--more-->
+
 
 <p>一. 前期准备</p>
 
@@ -391,6 +394,8 @@ http://octopress.org/docs/configuring/</p>
 <p>https://devcenter.heroku.com/articles/renaming-apps</p>
 
 <p>二. 操作过程</p>
+
+<p>使用 RVM 为 Octopress 创建新的 Gemset：</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
