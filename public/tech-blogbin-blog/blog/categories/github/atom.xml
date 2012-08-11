@@ -4,7 +4,7 @@
   <title><![CDATA[Category: GitHub | Tech.Blogbin's Blog]]></title>
   <link href="http://blogbin.github.com/tech-blogbin-blog/blog/categories/github/atom.xml" rel="self"/>
   <link href="http://blogbin.github.com/tech-blogbin-blog/"/>
-  <updated>2012-08-11T23:48:23+08:00</updated>
+  <updated>2012-08-11T23:56:47+08:00</updated>
   <id>http://blogbin.github.com/tech-blogbin-blog/</id>
   <author>
     <name><![CDATA[Tech Blogbin ]]></name>
@@ -18,16 +18,18 @@
     <link href="http://blogbin.github.com/tech-blogbin-blog/blog/2012/08/11/deploying-to-github-pages/"/>
     <updated>2012-08-11T23:13:00+08:00</updated>
     <id>http://blogbin.github.com/tech-blogbin-blog/blog/2012/08/11/deploying-to-github-pages</id>
-    <content type="html"><![CDATA[<p>将 Octopress 部署到 GitHub，即同时支持 Hereku 和 GitHub</p>
+    <content type="html"><![CDATA[<p>将 Octopress 部署到 GitHub，即同时支持 Hereku 和 GitHub。</p>
+
+<p>Octopress 官方网站有文档详细说明，因此过程比较顺利。</p>
+
+<!--more-->
+
 
 <p>一. 前期准备</p>
 
 <p>参阅：</p>
 
 <p><a href="http://octopress.org/docs/deploying/github/">http://octopress.org/docs/deploying/github/</a></p>
-
-<!--more-->
-
 
 <p>二. 部署过程</p>
 
