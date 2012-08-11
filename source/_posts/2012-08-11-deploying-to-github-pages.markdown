@@ -15,7 +15,11 @@ tags:
 - Deployment
 ---
 
-将 Octopress 部署到 GitHub，即同时支持 Hereku 和 GitHub
+将 Octopress 部署到 GitHub，即同时支持 Hereku 和 GitHub。
+
+Octopress 官方网站有文档详细说明，因此过程比较顺利。
+
+<!--more-->
 
 一. 前期准备
 
@@ -23,7 +27,6 @@ tags:
 
 [http://octopress.org/docs/deploying/github/](http://octopress.org/docs/deploying/github/)
 
-<!--more-->
 
 二. 部署过程
 
