@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Tech.Blogbin's Blog</title>
+  <title>Configuring Octopress with 3rd Party Settings - Tech.Blogbin's Blog</title>
   <meta name="author" content="Tech Blogbin <tech.blogbin@gmail.com>">
 
   
@@ -20,7 +20,7 @@ http://octopress &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://tech-blogbin.herokuapp.com//">
+  <link rel="canonical" href="http://tech-blogbin.herokuapp.com//blog/2012/08/11/configuring-octopress-with-3rd-party-settings/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -76,15 +76,12 @@ http://octopress &hellip;">
 </nav>
   <div id="main">
     <div id="content">
-      <div class="blog-index">
+      <div>
+<article class="hentry" role="article">
   
-  
-  
-    <article>
-      
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2012/08/11/configuring-octopress-with-3rd-party-settings/">Configuring Octopress With 3rd Party Settings</a></h1>
+      <h1 class="entry-title">Configuring Octopress With 3rd Party Settings</h1>
     
     
       <p class="meta">
@@ -102,14 +99,14 @@ http://octopress &hellip;">
 
 <time datetime="2012-08-11T17:11:00+08:00" pubdate data-updated="true">Aug 11<span>th</span>, 2012</time>
         
-         | <a href="/blog/2012/08/11/configuring-octopress-with-3rd-party-settings/#disqus_thread">Comments</a>
+         | <a href="#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>接下来为 Octopress 配置 Disqus 留言，Github, Twitter, Google+, Google Analytics 和 Facebook。
+<div class="entry-content"><p>接下来为 Octopress 配置 Disqus 留言，Github, Twitter, Google+, Google Analytics 和 Facebook。
 Google 搜索结果并不多，那是因为在 Octopress 很容易配置。</p>
 
 <p>一. 前期准备</p>
@@ -446,22 +443,16 @@ http://octopress.org/docs/configuring/</p>
 </span><span class='line'>Successfully generated site: source -&gt; public</span></code></pre></td></tr></table></div></figure>
 
 </div>
-  
-  
 
 
-    </article>
-  
-  
-    <article>
+  <footer>
+    <p class="meta">
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/08/11/how-to-install-octopress-on-heroku/">How to Install Octopress on Heroku</a></h1>
-    
-    
-      <p class="meta">
-        
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Tech Blogbin <tech.blogbin@gmail.com></span></span>
+
+      
 
 
 
@@ -473,45 +464,48 @@ http://octopress.org/docs/configuring/</p>
   
 
 
-<time datetime="2012-08-11T11:08:00+08:00" pubdate data-updated="true">Aug 11<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/08/11/how-to-install-octopress-on-heroku/#disqus_thread">Comments</a>
-        
-      </p>
+<time datetime="2012-08-11T17:11:00+08:00" pubdate data-updated="true">Aug 11<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/configuration/'>Configuration</a>, <a class='category' href='/blog/categories/octopress/'>Octopress</a>, <a class='category' href='/blog/categories/ruby/'>Ruby</a>
+  
+</span>
+
+
+    </p>
     
-  </header>
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://tech-blogbin.herokuapp.com//blog/2012/08/11/configuring-octopress-with-3rd-party-settings/" data-via="tech_blogbin" data-counturl="http://tech-blogbin.herokuapp.com//blog/2012/08/11/configuring-octopress-with-3rd-party-settings/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
 
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2012/08/11/how-to-install-octopress-on-heroku/" title="Previous Post: How to Install Octopress on Heroku">&laquo; How to Install Octopress on Heroku</a>
+      
+      
+    </p>
+  </footer>
+</article>
 
-  <div class="entry-content"><p>我选择 Octopress 作为搭建技术博客的理由：</p>
-
-<ol>
-<li>基于我最喜爱编程语言：Ruby 语言；</li>
-<li>支持 unix shell 命令操作，比传统仅能使用 Web UI 界面管理更加灵活和可控，但上手很容易，操作并不繁琐；</li>
-<li>本地和远端都能用 Git 分布式版本系统来管理，减低数据丢失风险，并能通过 Git 和 Rsync 等技术快速部署到远端多个服务器，包括物理服务器， IAAS 和 PAAS；</li>
-<li>对内嵌代码片段的具有独特的风格展现（支持 Markdown 语法），代码容易阅读和分享，这是编程类技术博客最看重的优势之一；</li>
-<li>最终生成静态页面，对服务器部署没有特别的要求</li>
-</ol>
-
-
-<p>下面是安装 Octopress，并部署到 Heroku 的过程。</p>
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2012/08/11/how-to-install-octopress-on-heroku/">Read on &rarr;</a>
-    </footer>
-  
 
-
-    </article>
-  
-  <div class="pagination">
-    
-    <a href="/blog/archives">Blog Archives</a>
-    
-  </div>
-</div>
 <aside class="sidebar">
   
     <section>
@@ -532,7 +526,7 @@ http://octopress.org/docs/configuring/</p>
 <section>
   <h1>GitHub Repos</h1>
   <ul id="gh_repos">
-    <li class="loading">Status updating&#8230;</li>
+    <li class="loading">Status updating...</li>
   </ul>
   
   <a href="https://github.com/tech.blogbin@gmail.com">@tech.blogbin@gmail.com</a> on GitHub
@@ -562,7 +556,7 @@ http://octopress.org/docs/configuring/</p>
 <section>
   <h1>Latest Tweets</h1>
   <ul id="tweets">
-    <li class="loading">Status updating&#8230;</li>
+    <li class="loading">Status updating...</li>
   </ul>
   <script type="text/javascript">
     $.domReady(function(){
@@ -591,6 +585,7 @@ http://octopress.org/docs/configuring/</p>
   
 </aside>
 
+
     </div>
   </div>
   <footer role="contentinfo"><p>
@@ -605,7 +600,10 @@ http://octopress.org/docs/configuring/</p>
       var disqus_shortname = 'tech-blogbin-blog';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://tech-blogbin.herokuapp.com//blog/2012/08/11/configuring-octopress-with-3rd-party-settings/';
+        var disqus_url = 'http://tech-blogbin.herokuapp.com//blog/2012/08/11/configuring-octopress-with-3rd-party-settings/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
