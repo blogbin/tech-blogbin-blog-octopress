@@ -179,7 +179,7 @@ Successfully generated site: source -> public
 rake watch 和 rake preview 编译不会报错，所以发现改动一直没有更新，运行 rake generate 强制编译。
 
 ```
-\*```Bash shell scripts\*
+###```Bash shell scripts
 blogbins-MacBook-Pro:octopress blogbin$ rake generate
 ```
 

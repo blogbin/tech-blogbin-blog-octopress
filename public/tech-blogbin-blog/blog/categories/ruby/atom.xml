@@ -4,11 +4,11 @@
   <title><![CDATA[Category: Ruby | Tech.Blogbin's Blog]]></title>
   <link href="http://blogbin.github.com/tech-blogbin-blog/blog/categories/ruby/atom.xml" rel="self"/>
   <link href="http://blogbin.github.com/tech-blogbin-blog/"/>
-  <updated>2012-08-11T23:56:47+08:00</updated>
+  <updated>2012-08-12T10:01:31+08:00</updated>
   <id>http://blogbin.github.com/tech-blogbin-blog/</id>
   <author>
     <name><![CDATA[Tech Blogbin ]]></name>
-    
+    <email><![CDATA[Tech Blogbin <tech.blogbin@gmail.com>]]></email>
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
@@ -531,7 +531,7 @@ blogbins-MacBook-Pro:octopress blogbin$  vi _config.yml</p>
 <p>url: http://tech-blogbin.herokuapp.com/
 title: Tech.Blogbin's Blog
 subtitle: A blogging for geeker.
-author: Tech Blogbin <a href="&#x6d;&#x61;&#x69;&#x6c;&#116;&#111;&#58;&#116;&#x65;&#x63;&#x68;&#46;&#x62;&#108;&#111;&#103;&#98;&#x69;&#x6e;&#x40;&#x67;&#x6d;&#x61;&#x69;&#x6c;&#46;&#x63;&#x6f;&#109;">&#116;&#x65;&#x63;&#x68;&#46;&#98;&#x6c;&#111;&#x67;&#x62;&#x69;&#110;&#64;&#103;&#109;&#x61;&#105;&#108;&#x2e;&#x63;&#x6f;&#109;</a>
+author: Tech Blogbin <a href="&#109;&#97;&#x69;&#x6c;&#x74;&#x6f;&#x3a;&#116;&#101;&#x63;&#x68;&#46;&#x62;&#108;&#x6f;&#103;&#98;&#x69;&#110;&#x40;&#x67;&#x6d;&#x61;&#x69;&#108;&#46;&#99;&#x6f;&#109;">&#116;&#x65;&#99;&#104;&#46;&#x62;&#108;&#x6f;&#103;&#98;&#105;&#x6e;&#64;&#103;&#x6d;&#97;&#105;&#x6c;&#46;&#x63;&#x6f;&#x6d;</a>
 simple_search: http://google.com/search
 description:</p>
 
@@ -678,9 +678,11 @@ Successfully generated site: source -> public
 
 <p>rake watch 和 rake preview 编译不会报错，所以发现改动一直没有更新，运行 rake generate 强制编译。</p>
 
-<p><code>
-\*</code>Bash shell scripts*
-blogbins-MacBook-Pro:octopress blogbin$ rake generate
+<p>```</p>
+
+<h3>```Bash shell scripts</h3>
+
+<p>blogbins-MacBook-Pro:octopress blogbin$ rake generate
 ```</p>
 
 <p>报错信息如下：</p>

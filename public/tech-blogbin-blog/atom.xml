@@ -4,11 +4,11 @@
   <title><![CDATA[Tech.Blogbin's Blog]]></title>
   <link href="http://blogbin.github.com/tech-blogbin-blog/atom.xml" rel="self"/>
   <link href="http://blogbin.github.com/tech-blogbin-blog/"/>
-  <updated>2012-08-11T23:56:47+08:00</updated>
+  <updated>2012-08-12T10:01:31+08:00</updated>
   <id>http://blogbin.github.com/tech-blogbin-blog/</id>
   <author>
     <name><![CDATA[Tech Blogbin ]]></name>
-    
+    <email><![CDATA[Tech Blogbin <tech.blogbin@gmail.com>]]></email>
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
@@ -985,7 +985,7 @@ Google 搜索结果并不多，那是因为在 Octopress 很容易配置，几�
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>\*```Bash shell scripts\*
+</pre></td><td class='code'><pre><code class=''><span class='line'>###```Bash shell scripts
 </span><span class='line'>blogbins-MacBook-Pro:octopress blogbin$ rake generate</span></code></pre></td></tr></table></div></figure>
 
 

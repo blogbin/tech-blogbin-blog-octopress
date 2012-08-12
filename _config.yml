@@ -17,9 +17,9 @@ date_format: "ordinal"
 
 # RSS / Email (optional) subscription links (change if using something like Feedburner)
 subscribe_rss: /tech-blogbin-blog/atom.xml
-subscribe_email:
+subscribe_email: Tech Blogbin <tech.blogbin@gmail.com>
 # RSS feeds can list your email address if you like
-email:
+email: Tech Blogbin <tech.blogbin@gmail.com>
 
 # ----------------------- #
 #    Jekyll & Plugins     #
