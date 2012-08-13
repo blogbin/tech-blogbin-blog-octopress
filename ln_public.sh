@@ -8,7 +8,7 @@ rm -r public/atom.xml
 ln public/tech-blogbin-blog/atom.xml public/atom.xml
 
 rm -r public/favicon.png
-ln public/tech-blogbin-blog/favicon.png public/favion.png
+ln public/tech-blogbin-blog/favicon.png public/favicon.png
 
 rm -r public/images
 ln -s public/tech-blogbin-blog/images public/images
