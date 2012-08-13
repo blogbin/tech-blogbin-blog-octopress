@@ -125,7 +125,12 @@
 <blockquote><p>module类的实例方法included_modules 可以返回一个模块或类包含的模块（Class继承自Module，自然继承了此方法）。<br/><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span><br/><span class='line-number'>2</span><br/></pre></td><td class='code'><pre><code class=''><span class='line'>irb(main):033:0]]&gt; B.included_modules<br/></span><span class='line'>=&gt; [M, Kernel]</span></code></pre></td></tr></table></div></figure><br/>Kernel模块，诚如教科书所写，他包含在每一个类或模块里，这样才使得Ruby中有了“函数”。</p></blockquote>
 
 
-<h3>3. Fixnum 的对象和 Symbol 的对象一样不可变</h3>
+<h3>3. 而Object#singleton_methods方法同样以数组的方式返回对象的 eigenclass 方法</h3>
+
+<blockquote><p>而Object#singleton_methods方法同样以数组的方式返回对象的单例方法（Singleton Method）。<br/><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span><br/><span class='line-number'>2</span><br/></pre></td><td class='code'><pre><code class=''><span class='line'>irb(main):007:0&gt; Math.singleton_methods<br/></span><span class='line'>=&gt; [:atan2, :cos, :sin, :tan, :acos, :asin, :atan, :cosh, :sinh, :tanh, :acosh,:asinh, :atanh, :exp, :log, :log2, :log10, :sqrt, :cbrt, :frexp, :ldexp, :hypot, :erf, :erfc, :gamma, :lgamma]</span></code></pre></td></tr></table></div></figure></p></blockquote>
+
+
+<h3>4. Fixnum 的对象和 Symbol 的对象一样不可变</h3>
 
 <blockquote><p>使用object_id获取对象的一个全局id，可以用于确定对象是不是同一个对象。<br/><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span><br/><span class='line-number'>2</span><br/><span class='line-number'>3</span><br/><span class='line-number'>4</span><br/><span class='line-number'>5</span><br/><span class='line-number'>6</span><br/><span class='line-number'>7</span><br/><span class='line-number'>8</span><br/></pre></td><td class='code'><pre><code class=''><span class='line'>irb(main):010:0]]&gt; 1.object_id == 1.object_id<br/></span><span class='line'>=&gt; true<br/></span><span class='line'> <br/></span><span class='line'>irb(main):011:0]]&gt; "obj".object_id == "obj".object_id<br/></span><span class='line'>=&gt; false<br/></span><span class='line'> <br/></span><span class='line'>irb(main):012:0]]&gt; :sym.object_id == :sym.object_id<br/></span><span class='line'>=&gt; true</span></code></pre></td></tr></table></div></figure><br/>　　Fixnum类的实例都是立即数因此只有一个副本，Symbol类的对象也一样，但是其他类的可能就不一样咯~</p></blockquote>
 

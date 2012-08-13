@@ -57,7 +57,17 @@ irb(main):033:0]]> B.included_modules
 Kernel模块，诚如教科书所写，他包含在每一个类或模块里，这样才使得Ruby中有了“函数”。
 {% endblockquote %}
 
-### 3. Fixnum 的对象和 Symbol 的对象一样不可变
+### 3. 而Object#singleton_methods方法同样以数组的方式返回对象的 eigenclass 方法
+{% blockquote %}
+而Object#singleton_methods方法同样以数组的方式返回对象的单例方法（Singleton Method）。
+```
+irb(main):007:0> Math.singleton_methods
+=> [:atan2, :cos, :sin, :tan, :acos, :asin, :atan, :cosh, :sinh, :tanh, :acosh,:asinh, :atanh, :exp, :log, :log2, :log10, :sqrt, :cbrt, :frexp, :ldexp, :hypot, :erf, :erfc, :gamma, :lgamma]
+```
+{% endblockquote %}
+
+
+### 4. Fixnum 的对象和 Symbol 的对象一样不可变
 
 {% blockquote %}
 使用object_id获取对象的一个全局id，可以用于确定对象是不是同一个对象。
