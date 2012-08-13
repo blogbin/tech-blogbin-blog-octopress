@@ -2,22 +2,52 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Tech.Blogbin's Blog]]></title>
-  <link href="http://tech-blogbin.herokuapp.com//atom.xml" rel="self"/>
-  <link href="http://tech-blogbin.herokuapp.com//"/>
-  <updated>2012-08-12T13:02:24+08:00</updated>
-  <id>http://tech-blogbin.herokuapp.com//</id>
+  <link href="http://blogbin.github.com/tech-blogbin-blog/atom.xml" rel="self"/>
+  <link href="http://blogbin.github.com/tech-blogbin-blog/"/>
+  <updated>2012-08-13T22:04:27+08:00</updated>
+  <id>http://blogbin.github.com/tech-blogbin-blog/</id>
   <author>
     <name><![CDATA[Tech Blogbin ]]></name>
-    
+    <email><![CDATA[Tech Blogbin <tech.blogbin@gmail.com>]]></email>
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
   
   <entry>
+    <title type="html"><![CDATA[元编程的魅力——反射机制 - 逸光 - (_2b || ! _2b).is_a? Question 读后感]]></title>
+    <link href="http://blogbin.github.com/tech-blogbin-blog/blog/2012/08/13/the-metaprogramming-charm-reflection/"/>
+    <updated>2012-08-13T21:20:00+08:00</updated>
+    <id>http://blogbin.github.com/tech-blogbin-blog/blog/2012/08/13/the-metaprogramming-charm-reflection</id>
+    <content type="html"><![CDATA[<p>  近期在准备 MetaProgramming Ruby 元编程的培训。除了 MetaProgramming Ruby 元编程这本书之外，想参阅一下其它资源，
+作为培训 PPT 的补充。毕竟 MetaProgramming Ruby 元编程 虽然蕴含的知识量不小，但相比 Ruby 元编程本身，还是稍微有点薄。</p>
+
+<p><a href="http://www.slideshare.net/fullscreen/ihower/designing-ruby-apis/">元编程的魅力——反射机制 - 逸光 - (<em>2b || ! </em>2b).is_a? Question</a> 的读后感：</p>
+
+<!--more-->
+
+
+<h3>1. is_a?, kind_of? 和 instace_of? 的区别</h3>
+
+<blockquote><p>is_a?由Object类提供并接受一个参数，参数为类名的标识符（一个常量标识符），该方法用于确认对象是否为指定类的实例。区别与instance_of?，is_a?的判定条件比较宽松，ri提供的例子就足够详细了，让我们来看看吧。</p><p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span><br/><span class='line-number'>2</span><br/><span class='line-number'>3</span><br/><span class='line-number'>4</span><br/><span class='line-number'>5</span><br/><span class='line-number'>6</span><br/><span class='line-number'>7</span><br/><span class='line-number'>8</span><br/><span class='line-number'>9</span><br/><span class='line-number'>10</span><br/><span class='line-number'>11</span><br/><span class='line-number'>12</span><br/><span class='line-number'>13</span><br/><span class='line-number'>14</span><br/><span class='line-number'>15</span><br/></pre></td><td class='code'><pre><code class=''><span class='line'>module M; end<br/></span><span class='line'>class A; include M; end<br/></span><span class='line'>class B &lt; A; end<br/></span><span class='line'>class C &lt; B; end<br/></span><span class='line'><br/></span><span class='line'>b = B.new<br/></span><span class='line'>b.instance_of? A  #=&gt; false<br/></span><span class='line'>b.instance_of? B  #=&gt; true<br/></span><span class='line'>b.instance_of? C  #=&gt; false<br/></span><span class='line'>b.instance_of? M  #=&gt; false<br/></span><span class='line'><br/></span><span class='line'>b.kind_of? A      #=&gt; true<br/></span><span class='line'>b.kind_of? B      #=&gt; true<br/></span><span class='line'>b.kind_of? C      #=&gt; false<br/></span><span class='line'>b.kind_of? M      #=&gt; true</span></code></pre></td></tr></table></div></figure></p><p>如果给定的类，是直接生成对象的类，那么，instance_of?方法才返回true。而如果是直接生成对象的类的父类或者引用的模块、父类引用的模块发，instance_of?就会无情的返回false。不过不要紧，kind_of?方法（is_a?方法也如此）会返回true的。</p></blockquote>
+
+
+<h3>2. Module#included_modules 返回一个模块或类包含的模块</h3>
+
+<blockquote><p>module类的实例方法included_modules 可以返回一个模块或类包含的模块（Class继承自Module，自然继承了此方法）。<br/><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span><br/><span class='line-number'>2</span><br/></pre></td><td class='code'><pre><code class=''><span class='line'>irb(main):033:0]]&gt; B.included_modules<br/></span><span class='line'>=&gt; [M, Kernel]</span></code></pre></td></tr></table></div></figure><br/>Kernel模块，诚如教科书所写，他包含在每一个类或模块里，这样才使得Ruby中有了“函数”。</p></blockquote>
+
+
+<h3>3. Fixnum 的对象和 Symbol 的对象一样不可变</h3>
+
+<blockquote><p>使用object_id获取对象的一个全局id，可以用于确定对象是不是同一个对象。<br/><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span><br/><span class='line-number'>2</span><br/><span class='line-number'>3</span><br/><span class='line-number'>4</span><br/><span class='line-number'>5</span><br/><span class='line-number'>6</span><br/><span class='line-number'>7</span><br/><span class='line-number'>8</span><br/></pre></td><td class='code'><pre><code class=''><span class='line'>irb(main):010:0]]&gt; 1.object_id == 1.object_id<br/></span><span class='line'>=&gt; true<br/></span><span class='line'> <br/></span><span class='line'>irb(main):011:0]]&gt; "obj".object_id == "obj".object_id<br/></span><span class='line'>=&gt; false<br/></span><span class='line'> <br/></span><span class='line'>irb(main):012:0]]&gt; :sym.object_id == :sym.object_id<br/></span><span class='line'>=&gt; true</span></code></pre></td></tr></table></div></figure><br/>　　Fixnum类的实例都是立即数因此只有一个副本，Symbol类的对象也一样，但是其他类的可能就不一样咯~</p></blockquote>
+
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Deploying to Github Pages]]></title>
-    <link href="http://tech-blogbin.herokuapp.com//blog/2012/08/11/deploying-to-github-pages/"/>
+    <link href="http://blogbin.github.com/tech-blogbin-blog/blog/2012/08/11/deploying-to-github-pages/"/>
     <updated>2012-08-11T23:13:00+08:00</updated>
-    <id>http://tech-blogbin.herokuapp.com//blog/2012/08/11/deploying-to-github-pages</id>
+    <id>http://blogbin.github.com/tech-blogbin-blog/blog/2012/08/11/deploying-to-github-pages</id>
     <content type="html"><![CDATA[<p>将 Octopress 部署到 GitHub，即同时支持 Hereku 和 GitHub。</p>
 
 <p>Octopress 官方网站有文档详细说明，因此过程比较顺利。</p>
@@ -714,9 +744,9 @@
   
   <entry>
     <title type="html"><![CDATA[Configuring Octopress with 3rd Party Settings]]></title>
-    <link href="http://tech-blogbin.herokuapp.com//blog/2012/08/11/configuring-octopress-with-3rd-party-settings/"/>
+    <link href="http://blogbin.github.com/tech-blogbin-blog/blog/2012/08/11/configuring-octopress-with-3rd-party-settings/"/>
     <updated>2012-08-11T17:11:00+08:00</updated>
-    <id>http://tech-blogbin.herokuapp.com//blog/2012/08/11/configuring-octopress-with-3rd-party-settings</id>
+    <id>http://blogbin.github.com/tech-blogbin-blog/blog/2012/08/11/configuring-octopress-with-3rd-party-settings</id>
     <content type="html"><![CDATA[<p>为 Octopress 配置 Disqus 留言，Github, Twitter, Google+, Google Analytics 和 Facebook。
 Google 搜索结果并不多，那是因为在 Octopress 很容易配置，几乎不需要求助。</p>
 
@@ -1065,9 +1095,9 @@ Google 搜索结果并不多，那是因为在 Octopress 很容易配置，几�
   
   <entry>
     <title type="html"><![CDATA[How to Install Octopress on Heroku]]></title>
-    <link href="http://tech-blogbin.herokuapp.com//blog/2012/08/11/how-to-install-octopress-on-heroku/"/>
+    <link href="http://blogbin.github.com/tech-blogbin-blog/blog/2012/08/11/how-to-install-octopress-on-heroku/"/>
     <updated>2012-08-11T11:08:00+08:00</updated>
-    <id>http://tech-blogbin.herokuapp.com//blog/2012/08/11/how-to-install-octopress-on-heroku</id>
+    <id>http://blogbin.github.com/tech-blogbin-blog/blog/2012/08/11/how-to-install-octopress-on-heroku</id>
     <content type="html"><![CDATA[<p>我选择 Octopress 作为搭建技术博客的理由：</p>
 
 <ol>
