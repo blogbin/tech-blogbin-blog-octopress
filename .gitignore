@@ -15,3 +15,5 @@ node_modules
 ._config.yml.swp
 
 .idea/
+*.pui
+*.prj
