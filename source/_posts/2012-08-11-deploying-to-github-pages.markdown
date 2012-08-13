@@ -17,6 +17,31 @@ tags:
 
 将 Octopress 部署到 GitHub，即同时支持 Hereku 和 GitHub。
 
+{% blockquote %}
+2012 年 8 月 13 日更新：
+
+Heroku 采用二级域名方式部署，如 http://tech-blogbin.herokuapp.com/，
+但 GitHub 采用子目录方式部署，如 http://blogbin.github.com/tech-blogbin-blog/，
+
+支持 GitHub 部署后，Rakefile 和 config.rb 都有改动，造成运行 rake generate 时，编译输出的静态页面在 public/tech-blogbin-blog 目录下，而非之前 Heroku 的 public 目录下。这造成 Heroku 和 GitHub 网站内容不一致。
+
+临时解决办法是，通过 ln 或者 ln -s 确保 public 和 public/tech-blogbin-blog 内容保持一致。
+
+提供以下 shell 脚本:
+{% include_code shell/octopress/ln_public.sh %}
+
+运行 ./ln_public.sh
+
+```
+blogbins-MacBook-Pro:octopress blogbin$ pwd
+/Users/blogbin/projects/workspaces/octopress/tech.blogbin/octopress
+blogbins-MacBook-Pro:octopress blogbin$ chmod 700 ln_public.sh 
+
+blogbins-MacBook-Pro:octopress blogbin$ ./ln_public.sh 
+```
+
+{% endblockquote %}
+
 Octopress 官方网站有文档详细说明，因此过程比较顺利。
 
 <!--more-->
