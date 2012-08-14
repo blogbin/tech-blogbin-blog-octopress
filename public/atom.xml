@@ -4,7 +4,7 @@
   <title><![CDATA[Tech.Blogbin's Blog]]></title>
   <link href="http://blogbin.github.com/tech-blogbin-blog/atom.xml" rel="self"/>
   <link href="http://blogbin.github.com/tech-blogbin-blog/"/>
-  <updated>2012-08-13T23:43:32+08:00</updated>
+  <updated>2012-08-14T15:17:10+08:00</updated>
   <id>http://blogbin.github.com/tech-blogbin-blog/</id>
   <author>
     <name><![CDATA[Tech Blogbin ]]></name>
@@ -14,7 +14,16 @@
 
   
   <entry>
-    <title type="html"><![CDATA[元编程的魅力——反射机制 - 逸光 - (_2b || ! _2b).is_a? Question 读后感]]></title>
+    <title type="html"><![CDATA[申思维 @sg552sg552 meta ruby programming]]></title>
+    <link href="http://blogbin.github.com/tech-blogbin-blog/blog/2012/08/14/shen-si-wei-at-sg552sg552-meta-ruby-programming/"/>
+    <updated>2012-08-14T12:47:00+08:00</updated>
+    <id>http://blogbin.github.com/tech-blogbin-blog/blog/2012/08/14/shen-si-wei-at-sg552sg552-meta-ruby-programming</id>
+    <content type="html"><![CDATA[
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[元编程的魅力——反射机制 - 逸光 - (_2b || ! _2b).is_a? Question]]></title>
     <link href="http://blogbin.github.com/tech-blogbin-blog/blog/2012/08/13/the-metaprogramming-charm-reflection/"/>
     <updated>2012-08-13T21:20:00+08:00</updated>
     <id>http://blogbin.github.com/tech-blogbin-blog/blog/2012/08/13/the-metaprogramming-charm-reflection</id>

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "元编程的魅力——反射机制 - 逸光 - (_2b || ! _2b).is_a? Question 读后感"
+title: "元编程的魅力——反射机制 - 逸光 - (_2b || ! _2b).is_a? Question"
 date: 2012-08-13 21:20
 comments: true
 external-url: http://www.slideshare.net/fullscreen/ihower/designing-ruby-apis/ 
