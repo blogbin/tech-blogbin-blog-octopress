@@ -18,6 +18,30 @@ tags:
 将 Octopress 部署到 GitHub，即同时支持 Hereku 和 GitHub。
 
 {% blockquote %}
+2012 年 8 月 14 日更新：
+
+之前仅把 _deploy 目录的文件发布到 GitHub。但 Octopress's source 等其它目录并没有在 GitHub 中管理。
+
+需要运行以下命令：
+
+```
+blogbins-MacBook-Pro:octopress blogbin$ git remote add origin git@github.com:blogbin/tech-blogbin-blog-octopress.git
+blogbins-MacBook-Pro:octopress blogbin$ git config branch.master.remote 
+
+blogbins-MacBook-Pro:octopress blogbin$ git push origin master
+Counting objects: 5060, done.
+Delta compression using up to 2 threads.
+Compressing objects: 100% (2316/2316), done.
+Writing objects: 100% (5060/5060), 1.11 MiB, done.
+Total 5060 (delta 2872), reused 3968 (delta 2289)
+To git@github.com:blogbin/tech-blogbin-blog-octopress.git
+ * [new branch]      master -> master 
+```
+
+{% endblockquote %}
+
+
+{% blockquote %}
 2012 年 8 月 13 日更新：
 
 Heroku 采用二级域名方式部署，如 http://tech-blogbin.herokuapp.com/，
