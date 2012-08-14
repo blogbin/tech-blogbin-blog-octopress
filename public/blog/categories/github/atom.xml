@@ -1,0 +1,613 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: GitHub | Tech.Blogbin's Blog]]></title>
+  <link href="http://tech-blog.blogbin.info/blog/categories/github/atom.xml" rel="self"/>
+  <link href="http://tech-blog.blogbin.info/"/>
+  <updated>2012-08-14T23:40:46+08:00</updated>
+  <id>http://tech-blog.blogbin.info/</id>
+  <author>
+    <name><![CDATA[Tech Blogbin ]]></name>
+    <email><![CDATA[Tech Blogbin <tech.blogbin@gmail.com>]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[购买个人域名以及为部署在 GitHub 的Octopress 配置个人域名]]></title>
+    <link href="http://tech-blog.blogbin.info/blog/2012/08/14/buying-domain-and-configuring-domain-for-githubs-octopress/"/>
+    <updated>2012-08-14T22:41:00+08:00</updated>
+    <id>http://tech-blog.blogbin.info/blog/2012/08/14/buying-domain-and-configuring-domain-for-githubs-octopress</id>
+    <content type="html"><![CDATA[<p>部署到 GitHub 的 Octopress 默认采用二级域名 ＋ 二级目录来访问，如：
+<a href="http://blogbin.github.com/tech-blogbin-blog" title="Tech.Blogbin'Blog at GitHub">http://blogbin.github.com/tech-blogbin-blog</a></p>
+
+<p>现计划启用个人独立二级域名直接访问，即：
+<a href="http://tech-blog.blogbin.info/" title="Tech.Blogbin'Blog">http://tech-blog.blogbin.info/</a></p>
+
+<p>一. 调整过程：</p>
+
+<!--more-->
+
+
+<p>参阅：
+<a href="http://octopress.org/docs/deploying/github/" title="Octopress's document to deploying GitHub">http://octopress.org/docs/deploying/github/</a></p>
+
+<p><a href="https://help.github.com/articles/setting-up-a-custom-domain-with-pages">https://help.github.com/articles/setting-up-a-custom-domain-with-pages</a></p>
+
+<h5>1. 购买 blogbin.info 域名</h5>
+
+<p>Domain Name Registration and Web Hosting | Eznow.com
+<a href="http://www.eznow.com/">http://www.eznow.com/</a></p>
+
+<h5>2. 配置域名</h5>
+
+<p><code>
+@               A               207.97.227.245
+tech-blog     CNAME                 blogbin.github.com.
+</code></p>
+
+<h5>3. 为 GitHub 创建 CNAME</h5>
+
+<p><code>
+blogbins-MacBook-Pro:octopress blogbin$ echo 'tech-blog.blogbin.info' &gt;&gt; source/CNAME
+</code></p>
+
+<h5>4. 调整 Octopress 配置文件</h5>
+
+<p>因为之前参阅：
+<a href="http://octopress.org/docs/deploying/github/" title="Octopress's document to deploying GitHub">http://octopress.org/docs/deploying/github/</a>，运行过：
+<code>
+blogbins-MacBook-Pro:octopress blogbin$ rake setup_github_pages
+</code>
+public 和 _deploy 目录均出现 tech-blogbin-blog 子目录，</p>
+
+<p>使得部署到 GitHub 的 Octopress 默认采用二级域名 ＋ 二级目录来访问，如：
+<a href="http://blogbin.github.com/tech-blogbin-blog" title="Tech.Blogbin'Blog at GitHub">http://blogbin.github.com/tech-blogbin-blog</a></p>
+
+<p>现若改为个人独立二级域名直接访问，即：
+<a href="http://tech-blog.blogbin.info/" title="Tech.Blogbin'Blog">http://tech-blog.blogbin.info/</a></p>
+
+<p>需要将以下文件中有关子目录 tech-blogbin-blog 的配置项目进行相应的调整：</p>
+
+<p><code>
+_config.yml
+config.rb
+Rakefile
+</code></p>
+
+<p>_config.yml
+```</p>
+
+<h1>url: http://blogbin.github.com/tech-blogbin-blog</h1>
+
+<p>url: http://tech-blog.blogbin.info</p>
+
+<h1>subscribe_rss: /tech-blogbin-blog/atom.xml</h1>
+
+<p>subscribe_rss: /atom.xml</p>
+
+<h1>root: /tech-blogbin-blog</h1>
+
+<p>root: /</p>
+
+<h1>destination: public/tech-blogbin-blog</h1>
+
+<p>destination: public
+```</p>
+
+<p>config.rb
+```</p>
+
+<h1>http_path = "/tech-blogbin-blog/"</h1>
+
+<h1>http_images_path = "/tech-blogbin-blog/images"</h1>
+
+<h1>http_fonts_path = "/tech-blogbin-blog/fonts"</h1>
+
+<h1>css_dir = "public/tech-blogbin-blog/stylesheets"</h1>
+
+<p>http_path = "/"
+http_images_path = "/images"
+http_fonts_path = "/fonts"
+css_dir = "public/stylesheets"
+```</p>
+
+<p>Rakefile
+```</p>
+
+<h1>public_dir      = "public/tech-blogbin-blog"    # compiled site directory</h1>
+
+<p>public_dir      = "public"    # compiled site directory
+```</p>
+
+<h5>5. 运行 rake generate 重新编译，最后运行 rake deploy 部署至 GitHub</h5>
+
+<p>等待一段时间后，可以通过 <a href="http://tech-blog.blogbin.info/" title="Tech.Blogbin'Blog">http://tech-blog.blogbin.info/</a> 正常访问</p>
+
+<p>二. 问题</p>
+
+<h5>1. 404 错误：There isn't a GitHub Page hosted here, sorry.</h5>
+
+<p>主要原因是没有设置正确的 source/CNAME，或者域名解析设置错误，或者耐心等待一段时间。
+<blockquote><p><img src="/images/2012-08-14-buying-domain-and-configuring-domain-for-githubs-octopress/404.png"></p></blockquote></p>
+
+<h5>2. 加载错误的 CSS 路径</h5>
+
+<p>首页 index.html 中仍要加载 tech-blogbin-blog 子目录的 css 文件，正确调整第 4 点的 Octopress 配置文件可解决问题。
+<blockquote><p><img src="/images/2012-08-14-buying-domain-and-configuring-domain-for-githubs-octopress/missing_css.png"></p></blockquote></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Deploying to Github Pages]]></title>
+    <link href="http://tech-blog.blogbin.info/blog/2012/08/11/deploying-to-github-pages/"/>
+    <updated>2012-08-11T23:13:00+08:00</updated>
+    <id>http://tech-blog.blogbin.info/blog/2012/08/11/deploying-to-github-pages</id>
+    <content type="html"><![CDATA[<p>将 Octopress 部署到 GitHub，即同时支持 Hereku 和 GitHub。</p>
+
+<p><blockquote><p>2012 年 8 月 14 日更新：</p></p><p><p>之前仅把 _deploy 目录的文件发布到 GitHub。但 Octopress's source 等其它目录并没有在 GitHub 中管理。</p></p><p><p>需要运行以下命令：</p></p><p><p>```<br/>blogbins-MacBook-Pro:octopress blogbin$ git remote add origin git@github.com:blogbin/tech-blogbin-blog-octopress.git<br/>blogbins-MacBook-Pro:octopress blogbin$ git config branch.master.remote</p></p><p><p>blogbins-MacBook-Pro:octopress blogbin$ git push origin master<br/>Counting objects: 5060, done.<br/>Delta compression using up to 2 threads.<br/>Compressing objects: 100% (2316/2316), done.<br/>Writing objects: 100% (5060/5060), 1.11 MiB, done.<br/>Total 5060 (delta 2872), reused 3968 (delta 2289)<br/>To git@github.com:blogbin/tech-blogbin-blog-octopress.git<br/> * [new branch]      master -> master<br/>```</p></p><p><p></p></blockquote></p>
+
+<p><blockquote><p>2012 年 8 月 13 日更新：</p></p><p><p>Heroku 采用二级域名方式部署，如 http://tech-blogbin.herokuapp.com/，<br/>但 GitHub 采用子目录方式部署，如 http://blogbin.github.com/tech-blogbin-blog/，</p></p><p><p>支持 GitHub 部署后，Rakefile 和 config.rb 都有改动，造成运行 rake generate 时，编译输出的静态页面在 public/tech-blogbin-blog 目录下，而非之前 Heroku 的 public 目录下。这造成 Heroku 和 GitHub 网站内容不一致。</p></p><p><p>临时解决办法是，通过 ln 或者 ln -s 确保 public 和 public/tech-blogbin-blog 内容保持一致。</p></p><p><p>提供以下 shell 脚本:<br/><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span> (ln_public.sh)</span> <a href='/downloads/code/shell/octopress/ln_public.sh'>download</a></figcaption><br/> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span><br/><span class='line-number'>2</span><br/><span class='line-number'>3</span><br/><span class='line-number'>4</span><br/><span class='line-number'>5</span><br/><span class='line-number'>6</span><br/><span class='line-number'>7</span><br/><span class='line-number'>8</span><br/><span class='line-number'>9</span><br/><span class='line-number'>10</span><br/><span class='line-number'>11</span><br/><span class='line-number'>12</span><br/><span class='line-number'>13</span><br/><span class='line-number'>14</span><br/><span class='line-number'>15</span><br/><span class='line-number'>16</span><br/><span class='line-number'>17</span><br/><span class='line-number'>18</span><br/><span class='line-number'>19</span><br/><span class='line-number'>20</span><br/><span class='line-number'>21</span><br/><span class='line-number'>22</span><br/><span class='line-number'>23</span><br/><span class='line-number'>24</span><br/><span class='line-number'>25</span><br/><span class='line-number'>26</span><br/><span class='line-number'>27</span><br/><span class='line-number'>28</span><br/><span class='line-number'>29</span><br/></pre></td><td class='code'><pre><code class='sh'><span class='line'>rm -r public/blog<br/></span><span class='line'>ln -s public/tech-blogbin-blog/blog public/blog<br/></span><span class='line'><br/></span><span class='line'>rm -r public/assets<br/></span><span class='line'>ln -s public/tech-blogbin-blog/assets public/assets<br/></span><span class='line'><br/></span><span class='line'>rm -r public/CNAME<br/></span><span class='line'>ln public/tech-blogbin-blog/CNAME public/CNAME<br/></span><span class='line'><br/></span><span class='line'>rm -r public/atom.xml<br/></span><span class='line'>ln public/tech-blogbin-blog/atom.xml public/atom.xml<br/></span><span class='line'><br/></span><span class='line'>rm -r public/favicon.png<br/></span><span class='line'>ln public/tech-blogbin-blog/favicon.png public/favicon.png<br/></span><span class='line'><br/></span><span class='line'>rm -r public/images<br/></span><span class='line'>ln -s public/tech-blogbin-blog/images public/images<br/></span><span class='line'><br/></span><span class='line'>rm -r public/index.html<br/></span><span class='line'>ln public/tech-blogbin-blog/index.html public/index.html<br/></span><span class='line'><br/></span><span class='line'>rm -r public/javascripts<br/></span><span class='line'>ln -s public/tech-blogbin-blog/javascripts public/javascripts<br/></span><span class='line'><br/></span><span class='line'>rm -r public/sitemap.xml<br/></span><span class='line'>ln public/tech-blogbin-blog/sitemap.xml public/sitemap.xml<br/></span><span class='line'><br/></span><span class='line'>rm -r public/stylesheets<br/></span><span class='line'>ln -s public/tech-blogbin-blog/stylesheets public/stylesheets<br/></span></code></pre></td></tr></table></div></figure></notextile></div></p></p><p><p>运行 ./ln_public.sh</p></p><p><p>```<br/>blogbins-MacBook-Pro:octopress blogbin$ pwd<br/>/Users/blogbin/projects/workspaces/octopress/tech.blogbin/octopress<br/>blogbins-MacBook-Pro:octopress blogbin$ chmod 700 ln_public.sh</p></p><p><p>blogbins-MacBook-Pro:octopress blogbin$ ./ln_public.sh<br/>```</p></p><p><p></p></blockquote></p>
+
+<p>Octopress 官方网站有文档详细说明，因此过程比较顺利。</p>
+
+<!--more-->
+
+
+<p>一. 前期准备</p>
+
+<p>参阅：</p>
+
+<p><a href="http://octopress.org/docs/deploying/github/">http://octopress.org/docs/deploying/github/</a></p>
+
+<p>二. 部署过程</p>
+
+<p>先将本地 Octopress 备份</p>
+
+<p>```
+blogbins-MacBook-Pro:octopress blogbin$ pwd
+/Users/blogbin/projects/workspaces/octopress/tech.blogbin/octopress</p>
+
+<p>blogbins-MacBook-Pro:octopress blogbin$ cd ..
+blogbins-MacBook-Pro:tech.blogbin blogbin$ ls
+octopress
+blogbins-MacBook-Pro:tech.blogbin blogbin$ cp -r octopress octopress.20120811
+blogbins-MacBook-Pro:tech.blogbin blogbin$ ls
+octopress       octopress.20120811</p>
+
+<p>```</p>
+
+<p>```
+blogbins-MacBook-Pro:tech.blogbin blogbin$ cd octopress
+Using /Users/blogbin/.rvm/gems/ruby-1.9.3-p0 with gemset octopress</p>
+
+<p>blogbins-MacBook-Pro:octopress blogbin$ rake setup_github_pages
+Enter the read/write url for your repository
+(For example, 'git@github.com:your_username/your_username.github.com)
+Repository url: git@github.com:blogbin/tech-blogbin-blog.git
+rm -rf public
+mkdir -p public/tech-blogbin-blog</p>
+
+<h2>Site's root directory is now '/tech-blogbin-blog'</h2>
+
+<p>rm -rf <em>deploy
+mkdir </em>deploy
+cd <em>deploy
+Initialized empty Git repository in /Users/blogbin/projects/workspaces/octopress/tech.blogbin/octopress/</em>deploy/.git/
+[master (root-commit) 4dda66a] Octopress init
+ 1 file changed, 1 insertion(+)
+ create mode 100644 index.html
+cd -</p>
+
+<hr />
+
+<h2>Now you can deploy to http://blogbin.github.com/tech-blogbin-blog with <code>rake deploy</code></h2>
+
+<p>blogbins-MacBook-Pro:octopress blogbin$ rake generate</p>
+
+<h2>Generating Site with Jekyll</h2>
+
+<p>   remove .sass-cache/
+   remove source/stylesheets/screen.css
+   create source/stylesheets/screen.css
+/Users/blogbin/.rvm/gems/ruby-1.9.3-p0@octopress/gems/maruku-0.6.0/lib/maruku/input/parse_doc.rb:22:in `<top (required)>': iconv will be deprecated in the future, use String#encode instead.
+Configuration from /Users/blogbin/projects/workspaces/octopress/tech.blogbin/octopress/_config.yml
+Building site: source -> public/tech-blogbin-blog
+Successfully generated site: source -> public/tech-blogbin-blog</p>
+
+<p>blogbins-MacBook-Pro:octopress blogbin$ git status</p>
+
+<h1>On branch master</h1>
+
+<h1>Changes not staged for commit:</h1>
+
+<h1>(use "git add <file>..." to update what will be committed)</h1>
+
+<h1>(use "git checkout -- <file>..." to discard changes in working directory)</h1>
+
+<p>#</p>
+
+<h1>modified:   Rakefile</h1>
+
+<h1>modified:   _config.yml</h1>
+
+<h1>modified:   config.rb</h1>
+
+<h1>modified:   public/atom.xml</h1>
+
+<h1>modified:   public/blog/2012/08/11/configuring-octopress-with-3rd-party-settings/index.html</h1>
+
+<h1>modified:   public/blog/2012/08/11/how-to-install-octopress-on-heroku/index.html</h1>
+
+<h1>modified:   public/blog/archives/index.html</h1>
+
+<h1>modified:   public/blog/categories/configuration/atom.xml</h1>
+
+<h1>modified:   public/blog/categories/configuration/index.html</h1>
+
+<h1>modified:   public/blog/categories/heroku/atom.xml</h1>
+
+<h1>modified:   public/blog/categories/heroku/index.html</h1>
+
+<h1>modified:   public/blog/categories/installation/atom.xml</h1>
+
+<h1>modified:   public/blog/categories/installation/index.html</h1>
+
+<h1>modified:   public/blog/categories/octopress/atom.xml</h1>
+
+<h1>modified:   public/blog/categories/octopress/index.html</h1>
+
+<h1>modified:   public/blog/categories/ruby/atom.xml</h1>
+
+<h1>modified:   public/blog/categories/ruby/index.html</h1>
+
+<h1>modified:   public/index.html</h1>
+
+<h1>modified:   public/stylesheets/screen.css</h1>
+
+<p>#</p>
+
+<h1>Untracked files:</h1>
+
+<h1>(use "git add <file>..." to include in what will be committed)</h1>
+
+<p>#</p>
+
+<h1>public/tech-blogbin-blog/</h1>
+
+<p>no changes added to commit (use "git add" and/or "git commit -a")</p>
+
+<p>```</p>
+
+<p>git://github.com/imathis/octopress.git 已经有 origin 改为 octopress</p>
+
+<p>```</p>
+
+<p>blogbins-MacBook-Pro:octopress blogbin$ git remote -v
+heroku  git@heroku.com:tech-blogbin.git (fetch)
+heroku  git@heroku.com:tech-blogbin.git (push)
+octopress   git://github.com/imathis/octopress.git (fetch)
+octopress   git://github.com/imathis/octopress.git (push)</p>
+
+<p>```</p>
+
+<p>本地机器已经存在公钥 id_rsa.pub ，但没有添加到 GitHub。
+直接运行 rake deploy 提交会出现最后面的错误：Permission denied (publickey).</p>
+
+<p><code>
+blogbins-MacBook-Pro:octopress blogbin$ ls ~/.ssh/ | grep id_rsa
+id_rsa      id_rsa.pub
+</code></p>
+
+<p>需要将本地机器 公钥 id_rsa.pub 提交到 GitHub
+参阅：</p>
+
+<p><a href="https://help.github.com/articles/generating-ssh-keys">https://help.github.com/articles/generating-ssh-keys</a></p>
+
+<p>并 skip to Step 4.</p>
+
+<p><code>
+blogbins-MacBook-Pro:octopress blogbin$ pbcopy &lt; ~/.ssh/id_rsa.pub
+</code></p>
+
+<p>运行 rake deploy 部署至 GitHub。</p>
+
+<p>```
+blogbins-MacBook-Pro:octopress blogbin$ rake deploy</p>
+
+<h2>Deploying branch to Github Pages</h2>
+
+<p>rm -rf <em>deploy/assets
+rm -rf </em>deploy/atom.xml
+rm -rf <em>deploy/blog
+rm -rf </em>deploy/favicon.png
+rm -rf <em>deploy/images
+rm -rf </em>deploy/index.html
+rm -rf <em>deploy/javascripts
+rm -rf </em>deploy/sitemap.xml
+rm -rf _deploy/stylesheets</p>
+
+<h2>copying public/tech-blogbin-blog to _deploy</h2>
+
+<p>cp -r public/tech-blogbin-blog/. <em>deploy
+cd </em>deploy</p>
+
+<h2>Commiting: Site updated at 2012-08-11 13:47:38 UTC</h2>
+
+<h1>On branch gh-pages</h1>
+
+<p>nothing to commit (working directory clean)</p>
+
+<h2>Pushing generated _deploy website</h2>
+
+<p>Counting objects: 102, done.
+Delta compression using up to 2 threads.
+Compressing objects: 100% (92/92), done.
+Writing objects: 100% (102/102), 204.84 KiB, done.
+Total 102 (delta 13), reused 0 (delta 0)
+To git@github.com:blogbin/tech-blogbin-blog.git
+ * [new branch]      gh-pages -> gh-pages</p>
+
+<h2>Github Pages deploy complete</h2>
+
+<p>cd -</p>
+
+<p>```</p>
+
+<p>向本地仓库提交变更。</p>
+
+<p>```</p>
+
+<p>blogbins-MacBook-Pro:octopress blogbin$ git status</p>
+
+<h1>On branch master</h1>
+
+<h1>Changes not staged for commit:</h1>
+
+<h1>(use "git add <file>..." to update what will be committed)</h1>
+
+<h1>(use "git checkout -- <file>..." to discard changes in working directory)</h1>
+
+<p>#</p>
+
+<h1>modified:   Rakefile</h1>
+
+<h1>modified:   _config.yml</h1>
+
+<h1>modified:   config.rb</h1>
+
+<h1>modified:   public/atom.xml</h1>
+
+<h1>modified:   public/blog/2012/08/11/configuring-octopress-with-3rd-party-settings/index.html</h1>
+
+<h1>modified:   public/blog/2012/08/11/how-to-install-octopress-on-heroku/index.html</h1>
+
+<h1>modified:   public/blog/archives/index.html</h1>
+
+<h1>modified:   public/blog/categories/configuration/atom.xml</h1>
+
+<h1>modified:   public/blog/categories/configuration/index.html</h1>
+
+<h1>modified:   public/blog/categories/heroku/atom.xml</h1>
+
+<h1>modified:   public/blog/categories/heroku/index.html</h1>
+
+<h1>modified:   public/blog/categories/installation/atom.xml</h1>
+
+<h1>modified:   public/blog/categories/installation/index.html</h1>
+
+<h1>modified:   public/blog/categories/octopress/atom.xml</h1>
+
+<h1>modified:   public/blog/categories/octopress/index.html</h1>
+
+<h1>modified:   public/blog/categories/ruby/atom.xml</h1>
+
+<h1>modified:   public/blog/categories/ruby/index.html</h1>
+
+<h1>modified:   public/index.html</h1>
+
+<h1>modified:   public/stylesheets/screen.css</h1>
+
+<p>#</p>
+
+<h1>Untracked files:</h1>
+
+<h1>(use "git add <file>..." to include in what will be committed)</h1>
+
+<p>#</p>
+
+<h1>public/tech-blogbin-blog/</h1>
+
+<p>no changes added to commit (use "git add" and/or "git commit -a")
+blogbins-MacBook-Pro:octopress blogbin$ git add .
+blogbins-MacBook-Pro:octopress blogbin$ git commit -m 'update Github'
+[master de0f825] update Github
+ 92 files changed, 11202 insertions(+), 47 deletions(-)
+ rewrite public/stylesheets/screen.css (95%)
+ create mode 100644 public/tech-blogbin-blog/assets/jwplayer/glow/controlbar/background.png
+ create mode 100644 public/tech-blogbin-blog/assets/jwplayer/glow/controlbar/blankButton.png
+ create mode 100644 public/tech-blogbin-blog/assets/jwplayer/glow/controlbar/divider.png
+ create mode 100644 public/tech-blogbin-blog/assets/jwplayer/glow/controlbar/fullscreenButton.png
+ create mode 100644 public/tech-blogbin-blog/assets/jwplayer/glow/controlbar/fullscreenButtonOver.png
+ create mode 100644 public/tech-blogbin-blog/assets/jwplayer/glow/controlbar/muteButton.png
+ create mode 100644 public/tech-blogbin-blog/assets/jwplayer/glow/controlbar/muteButtonOver.png
+ create mode 100644 public/tech-blogbin-blog/assets/jwplayer/glow/controlbar/normalscreenButton.png
+ create mode 100644 public/tech-blogbin-blog/assets/jwplayer/glow/controlbar/normalscreenButtonOver.png
+ create mode 100644 public/tech-blogbin-blog/assets/jwplayer/glow/controlbar/pauseButton.png
+ create mode 100644 public/tech-blogbin-blog/assets/jwplayer/glow/controlbar/pauseButtonOver.png
+ create mode 100644 public/tech-blogbin-blog/assets/jwplayer/glow/controlbar/playButton.png
+ create mode 100644 public/tech-blogbin-blog/assets/jwplayer/glow/controlbar/playButtonOver.png
+ create mode 100644 public/tech-blogbin-blog/assets/jwplayer/glow/controlbar/timeSliderBuffer.png
+ create mode 100644 public/tech-blogbin-blog/assets/jwplayer/glow/controlbar/timeSliderCapLeft.png
+ create mode 100644 public/tech-blogbin-blog/assets/jwplayer/glow/controlbar/timeSliderCapRight.png
+ create mode 100644 public/tech-blogbin-blog/assets/jwplayer/glow/controlbar/timeSliderProgress.png
+ create mode 100644 public/tech-blogbin-blog/assets/jwplayer/glow/controlbar/timeSliderRail.png
+ create mode 100644 public/tech-blogbin-blog/assets/jwplayer/glow/controlbar/unmuteButton.png
+ create mode 100644 public/tech-blogbin-blog/assets/jwplayer/glow/controlbar/unmuteButtonOver.png
+ create mode 100644 public/tech-blogbin-blog/assets/jwplayer/glow/display/background.png
+ create mode 100644 public/tech-blogbin-blog/assets/jwplayer/glow/display/bufferIcon.png
+ create mode 100644 public/tech-blogbin-blog/assets/jwplayer/glow/display/muteIcon.png
+ create mode 100644 public/tech-blogbin-blog/assets/jwplayer/glow/display/playIcon.png
+ create mode 100644 public/tech-blogbin-blog/assets/jwplayer/glow/dock/button.png
+ create mode 100644 public/tech-blogbin-blog/assets/jwplayer/glow/glow.xml
+ create mode 100644 public/tech-blogbin-blog/assets/jwplayer/glow/playlist/item.png
+ create mode 100644 public/tech-blogbin-blog/assets/jwplayer/glow/playlist/itemOver.png
+ create mode 100644 public/tech-blogbin-blog/assets/jwplayer/glow/playlist/sliderCapBottom.png
+ create mode 100644 public/tech-blogbin-blog/assets/jwplayer/glow/playlist/sliderCapTop.png
+ create mode 100644 public/tech-blogbin-blog/assets/jwplayer/glow/playlist/sliderRail.png
+ create mode 100644 public/tech-blogbin-blog/assets/jwplayer/glow/playlist/sliderThumb.png
+ create mode 100644 public/tech-blogbin-blog/assets/jwplayer/glow/sharing/embedIcon.png
+ create mode 100644 public/tech-blogbin-blog/assets/jwplayer/glow/sharing/embedScreen.png
+ create mode 100644 public/tech-blogbin-blog/assets/jwplayer/glow/sharing/shareIcon.png
+ create mode 100644 public/tech-blogbin-blog/assets/jwplayer/glow/sharing/shareScreen.png
+ create mode 100644 public/tech-blogbin-blog/assets/jwplayer/player.swf
+ create mode 100644 public/tech-blogbin-blog/atom.xml
+ create mode 100644 public/tech-blogbin-blog/blog/2012/08/11/configuring-octopress-with-3rd-party-settings/index.html
+ create mode 100644 public/tech-blogbin-blog/blog/2012/08/11/how-to-install-octopress-on-heroku/index.html
+ create mode 100644 public/tech-blogbin-blog/blog/archives/index.html
+ create mode 100644 public/tech-blogbin-blog/blog/categories/configuration/atom.xml
+ create mode 100644 public/tech-blogbin-blog/blog/categories/configuration/index.html
+ create mode 100644 public/tech-blogbin-blog/blog/categories/heroku/atom.xml
+ create mode 100644 public/tech-blogbin-blog/blog/categories/heroku/index.html
+ create mode 100644 public/tech-blogbin-blog/blog/categories/installation/atom.xml
+ create mode 100644 public/tech-blogbin-blog/blog/categories/installation/index.html
+ create mode 100644 public/tech-blogbin-blog/blog/categories/octopress/atom.xml
+ create mode 100644 public/tech-blogbin-blog/blog/categories/octopress/index.html
+ create mode 100644 public/tech-blogbin-blog/blog/categories/ruby/atom.xml
+ create mode 100644 public/tech-blogbin-blog/blog/categories/ruby/index.html
+ create mode 100644 public/tech-blogbin-blog/favicon.png
+ create mode 100644 public/tech-blogbin-blog/images/bird_32_gray.png
+ create mode 100644 public/tech-blogbin-blog/images/bird_32_gray_fail.png
+ create mode 100644 public/tech-blogbin-blog/images/code_bg.png
+ create mode 100644 public/tech-blogbin-blog/images/dotted-border.png
+ create mode 100644 public/tech-blogbin-blog/images/email.png
+ create mode 100644 public/tech-blogbin-blog/images/line-tile.png
+ create mode 100644 public/tech-blogbin-blog/images/noise.png
+ create mode 100644 public/tech-blogbin-blog/images/rss.png
+ create mode 100644 public/tech-blogbin-blog/images/search.png
+ create mode 100644 public/tech-blogbin-blog/index.html
+ create mode 100644 public/tech-blogbin-blog/javascripts/ender.js
+ create mode 100644 public/tech-blogbin-blog/javascripts/github.js
+ create mode 100644 public/tech-blogbin-blog/javascripts/libs/ender.js
+ create mode 100644 public/tech-blogbin-blog/javascripts/libs/jXHR.js
+ create mode 100644 public/tech-blogbin-blog/javascripts/libs/swfobject-dynamic.js
+ create mode 100644 public/tech-blogbin-blog/javascripts/modernizr-2.0.js
+ create mode 100644 public/tech-blogbin-blog/javascripts/octopress.js
+ create mode 100644 public/tech-blogbin-blog/javascripts/pinboard.js
+ create mode 100644 public/tech-blogbin-blog/javascripts/twitter.js
+ create mode 100644 public/tech-blogbin-blog/sitemap.xml
+ create mode 100644 public/tech-blogbin-blog/stylesheets/screen.css</p>
+
+<p>```</p>
+
+<p>三. 问题</p>
+
+<ol>
+<li>错误：Permission denied (publickey).</li>
+</ol>
+
+
+<p>```
+blogbins-MacBook-Pro:octopress blogbin$ rake deploy</p>
+
+<h2>Deploying branch to Github Pages</h2>
+
+<p>rm -rf _deploy/index.html</p>
+
+<h2>copying public/tech-blogbin-blog to _deploy</h2>
+
+<p>cp -r public/tech-blogbin-blog/. <em>deploy
+cd </em>deploy</p>
+
+<h2>Commiting: Site updated at 2012-08-11 13:41:36 UTC</h2>
+
+<p>[gh-pages 68c6a21] Site updated at 2012-08-11 13:41:36 UTC
+ 73 files changed, 11155 insertions(+), 1 deletion(-)
+ create mode 100644 assets/jwplayer/glow/controlbar/background.png
+ create mode 100644 assets/jwplayer/glow/controlbar/blankButton.png
+ create mode 100644 assets/jwplayer/glow/controlbar/divider.png
+ create mode 100644 assets/jwplayer/glow/controlbar/fullscreenButton.png
+ create mode 100644 assets/jwplayer/glow/controlbar/fullscreenButtonOver.png
+ create mode 100644 assets/jwplayer/glow/controlbar/muteButton.png
+ create mode 100644 assets/jwplayer/glow/controlbar/muteButtonOver.png
+ create mode 100644 assets/jwplayer/glow/controlbar/normalscreenButton.png
+ create mode 100644 assets/jwplayer/glow/controlbar/normalscreenButtonOver.png
+ create mode 100644 assets/jwplayer/glow/controlbar/pauseButton.png
+ create mode 100644 assets/jwplayer/glow/controlbar/pauseButtonOver.png
+ create mode 100644 assets/jwplayer/glow/controlbar/playButton.png
+ create mode 100644 assets/jwplayer/glow/controlbar/playButtonOver.png
+ create mode 100644 assets/jwplayer/glow/controlbar/timeSliderBuffer.png
+ create mode 100644 assets/jwplayer/glow/controlbar/timeSliderCapLeft.png
+ create mode 100644 assets/jwplayer/glow/controlbar/timeSliderCapRight.png
+ create mode 100644 assets/jwplayer/glow/controlbar/timeSliderProgress.png
+ create mode 100644 assets/jwplayer/glow/controlbar/timeSliderRail.png
+ create mode 100644 assets/jwplayer/glow/controlbar/unmuteButton.png
+ create mode 100644 assets/jwplayer/glow/controlbar/unmuteButtonOver.png
+ create mode 100644 assets/jwplayer/glow/display/background.png
+ create mode 100644 assets/jwplayer/glow/display/bufferIcon.png
+ create mode 100644 assets/jwplayer/glow/display/muteIcon.png
+ create mode 100644 assets/jwplayer/glow/display/playIcon.png
+ create mode 100644 assets/jwplayer/glow/dock/button.png
+ create mode 100644 assets/jwplayer/glow/glow.xml
+ create mode 100644 assets/jwplayer/glow/playlist/item.png
+ create mode 100644 assets/jwplayer/glow/playlist/itemOver.png
+ create mode 100644 assets/jwplayer/glow/playlist/sliderCapBottom.png
+ create mode 100644 assets/jwplayer/glow/playlist/sliderCapTop.png
+ create mode 100644 assets/jwplayer/glow/playlist/sliderRail.png
+ create mode 100644 assets/jwplayer/glow/playlist/sliderThumb.png
+ create mode 100644 assets/jwplayer/glow/sharing/embedIcon.png
+ create mode 100644 assets/jwplayer/glow/sharing/embedScreen.png
+ create mode 100644 assets/jwplayer/glow/sharing/shareIcon.png
+ create mode 100644 assets/jwplayer/glow/sharing/shareScreen.png
+ create mode 100644 assets/jwplayer/player.swf
+ create mode 100644 atom.xml
+ create mode 100644 blog/2012/08/11/configuring-octopress-with-3rd-party-settings/index.html
+ create mode 100644 blog/2012/08/11/how-to-install-octopress-on-heroku/index.html
+ create mode 100644 blog/archives/index.html
+ create mode 100644 blog/categories/configuration/atom.xml
+ create mode 100644 blog/categories/configuration/index.html
+ create mode 100644 blog/categories/heroku/atom.xml
+ create mode 100644 blog/categories/heroku/index.html
+ create mode 100644 blog/categories/installation/atom.xml
+ create mode 100644 blog/categories/installation/index.html
+ create mode 100644 blog/categories/octopress/atom.xml
+ create mode 100644 blog/categories/octopress/index.html
+ create mode 100644 blog/categories/ruby/atom.xml
+ create mode 100644 blog/categories/ruby/index.html
+ create mode 100644 favicon.png
+ create mode 100644 images/bird_32_gray.png
+ create mode 100644 images/bird_32_gray_fail.png
+ create mode 100644 images/code_bg.png
+ create mode 100644 images/dotted-border.png
+ create mode 100644 images/email.png
+ create mode 100644 images/line-tile.png
+ create mode 100644 images/noise.png
+ create mode 100644 images/rss.png
+ create mode 100644 images/search.png
+ rewrite index.html (100%)
+ create mode 100644 javascripts/ender.js
+ create mode 100644 javascripts/github.js
+ create mode 100644 javascripts/libs/ender.js
+ create mode 100644 javascripts/libs/jXHR.js
+ create mode 100644 javascripts/libs/swfobject-dynamic.js
+ create mode 100644 javascripts/modernizr-2.0.js
+ create mode 100644 javascripts/octopress.js
+ create mode 100644 javascripts/pinboard.js
+ create mode 100644 javascripts/twitter.js
+ create mode 100644 sitemap.xml
+ create mode 100644 stylesheets/screen.css</p>
+
+<h2>Pushing generated _deploy website</h2>
+
+<p>Permission denied (publickey).
+fatal: The remote end hung up unexpectedly</p>
+
+<h2>Github Pages deploy complete</h2>
+
+<p>cd -</p>
+
+<p>```</p>
+]]></content>
+  </entry>
+  
+</feed>

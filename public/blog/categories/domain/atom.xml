@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Domain | Tech.Blogbin's Blog]]></title>
+  <link href="http://tech-blog.blogbin.info/blog/categories/domain/atom.xml" rel="self"/>
+  <link href="http://tech-blog.blogbin.info/"/>
+  <updated>2012-08-14T23:40:46+08:00</updated>
+  <id>http://tech-blog.blogbin.info/</id>
+  <author>
+    <name><![CDATA[Tech Blogbin ]]></name>
+    <email><![CDATA[Tech Blogbin <tech.blogbin@gmail.com>]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[购买个人域名以及为部署在 GitHub 的Octopress 配置个人域名]]></title>
+    <link href="http://tech-blog.blogbin.info/blog/2012/08/14/buying-domain-and-configuring-domain-for-githubs-octopress/"/>
+    <updated>2012-08-14T22:41:00+08:00</updated>
+    <id>http://tech-blog.blogbin.info/blog/2012/08/14/buying-domain-and-configuring-domain-for-githubs-octopress</id>
+    <content type="html"><![CDATA[<p>部署到 GitHub 的 Octopress 默认采用二级域名 ＋ 二级目录来访问，如：
+<a href="http://blogbin.github.com/tech-blogbin-blog" title="Tech.Blogbin'Blog at GitHub">http://blogbin.github.com/tech-blogbin-blog</a></p>
+
+<p>现计划启用个人独立二级域名直接访问，即：
+<a href="http://tech-blog.blogbin.info/" title="Tech.Blogbin'Blog">http://tech-blog.blogbin.info/</a></p>
+
+<p>一. 调整过程：</p>
+
+<!--more-->
+
+
+<p>参阅：
+<a href="http://octopress.org/docs/deploying/github/" title="Octopress's document to deploying GitHub">http://octopress.org/docs/deploying/github/</a></p>
+
+<p><a href="https://help.github.com/articles/setting-up-a-custom-domain-with-pages">https://help.github.com/articles/setting-up-a-custom-domain-with-pages</a></p>
+
+<h5>1. 购买 blogbin.info 域名</h5>
+
+<p>Domain Name Registration and Web Hosting | Eznow.com
+<a href="http://www.eznow.com/">http://www.eznow.com/</a></p>
+
+<h5>2. 配置域名</h5>
+
+<p><code>
+@               A               207.97.227.245
+tech-blog     CNAME                 blogbin.github.com.
+</code></p>
+
+<h5>3. 为 GitHub 创建 CNAME</h5>
+
+<p><code>
+blogbins-MacBook-Pro:octopress blogbin$ echo 'tech-blog.blogbin.info' &gt;&gt; source/CNAME
+</code></p>
+
+<h5>4. 调整 Octopress 配置文件</h5>
+
+<p>因为之前参阅：
+<a href="http://octopress.org/docs/deploying/github/" title="Octopress's document to deploying GitHub">http://octopress.org/docs/deploying/github/</a>，运行过：
+<code>
+blogbins-MacBook-Pro:octopress blogbin$ rake setup_github_pages
+</code>
+public 和 _deploy 目录均出现 tech-blogbin-blog 子目录，</p>
+
+<p>使得部署到 GitHub 的 Octopress 默认采用二级域名 ＋ 二级目录来访问，如：
+<a href="http://blogbin.github.com/tech-blogbin-blog" title="Tech.Blogbin'Blog at GitHub">http://blogbin.github.com/tech-blogbin-blog</a></p>
+
+<p>现若改为个人独立二级域名直接访问，即：
+<a href="http://tech-blog.blogbin.info/" title="Tech.Blogbin'Blog">http://tech-blog.blogbin.info/</a></p>
+
+<p>需要将以下文件中有关子目录 tech-blogbin-blog 的配置项目进行相应的调整：</p>
+
+<p><code>
+_config.yml
+config.rb
+Rakefile
+</code></p>
+
+<p>_config.yml
+```</p>
+
+<h1>url: http://blogbin.github.com/tech-blogbin-blog</h1>
+
+<p>url: http://tech-blog.blogbin.info</p>
+
+<h1>subscribe_rss: /tech-blogbin-blog/atom.xml</h1>
+
+<p>subscribe_rss: /atom.xml</p>
+
+<h1>root: /tech-blogbin-blog</h1>
+
+<p>root: /</p>
+
+<h1>destination: public/tech-blogbin-blog</h1>
+
+<p>destination: public
+```</p>
+
+<p>config.rb
+```</p>
+
+<h1>http_path = "/tech-blogbin-blog/"</h1>
+
+<h1>http_images_path = "/tech-blogbin-blog/images"</h1>
+
+<h1>http_fonts_path = "/tech-blogbin-blog/fonts"</h1>
+
+<h1>css_dir = "public/tech-blogbin-blog/stylesheets"</h1>
+
+<p>http_path = "/"
+http_images_path = "/images"
+http_fonts_path = "/fonts"
+css_dir = "public/stylesheets"
+```</p>
+
+<p>Rakefile
+```</p>
+
+<h1>public_dir      = "public/tech-blogbin-blog"    # compiled site directory</h1>
+
+<p>public_dir      = "public"    # compiled site directory
+```</p>
+
+<h5>5. 运行 rake generate 重新编译，最后运行 rake deploy 部署至 GitHub</h5>
+
+<p>等待一段时间后，可以通过 <a href="http://tech-blog.blogbin.info/" title="Tech.Blogbin'Blog">http://tech-blog.blogbin.info/</a> 正常访问</p>
+
+<p>二. 问题</p>
+
+<h5>1. 404 错误：There isn't a GitHub Page hosted here, sorry.</h5>
+
+<p>主要原因是没有设置正确的 source/CNAME，或者域名解析设置错误，或者耐心等待一段时间。
+<blockquote><p><img src="/images/2012-08-14-buying-domain-and-configuring-domain-for-githubs-octopress/404.png"></p></blockquote></p>
+
+<h5>2. 加载错误的 CSS 路径</h5>
+
+<p>首页 index.html 中仍要加载 tech-blogbin-blog 子目录的 css 文件，正确调整第 4 点的 Octopress 配置文件可解决问题。
+<blockquote><p><img src="/images/2012-08-14-buying-domain-and-configuring-domain-for-githubs-octopress/missing_css.png"></p></blockquote></p>
+]]></content>
+  </entry>
+  
+</feed>

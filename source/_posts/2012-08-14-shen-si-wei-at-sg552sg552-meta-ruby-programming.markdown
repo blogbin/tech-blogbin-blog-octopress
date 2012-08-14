@@ -13,3 +13,7 @@ tags:
 - MetaProgramming Ruby
 public: false
 ---
+
+{% blockquote %}
+{% img /images/2012-08-14-shen-si-wei-at-sg552sg552-meta-ruby-programming/core_methods.jpeg %}
+{% endblockquote %}

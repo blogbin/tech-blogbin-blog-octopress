@@ -1,0 +1,474 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>购买个人域名以及为部署在 GitHub 的Octopress 配置个人域名 - Tech.Blogbin's Blog</title>
+  <meta name="author" content="Tech Blogbin <tech.blogbin@gmail.com>">
+
+  
+  <meta name="description" content="部署到 GitHub 的 Octopress 默认采用二级域名 ＋ 二级目录来访问，如：
+http://blogbin.github.com/tech-blogbin-blog 现计划启用个人独立二级域名直接访问，即：
+http://tech-blog.blogbin.info/ 一. 调整过程 &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://tech-blog.blogbin.info/blog/2012/08/14/buying-domain-and-configuring-domain-for-githubs-octopress/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Tech.Blogbin's Blog" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-34083026-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Tech.Blogbin's Blog</a></h1>
+  
+    <h2>A blogging for geeker.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss email">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+    <li><a href="Tech Blogbin <tech.blogbin@gmail.com>" rel="subscribe-email" title="subscribe via email">Email</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:tech-blog.blogbin.info" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">购买个人域名以及为部署在 GitHub 的Octopress 配置个人域名</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-14T22:41:00+08:00" pubdate data-updated="true">Aug 14<span>th</span>, 2012</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>部署到 GitHub 的 Octopress 默认采用二级域名 ＋ 二级目录来访问，如：
+<a href="http://blogbin.github.com/tech-blogbin-blog" title="Tech.Blogbin'Blog at GitHub">http://blogbin.github.com/tech-blogbin-blog</a></p>
+
+<p>现计划启用个人独立二级域名直接访问，即：
+<a href="http://tech-blog.blogbin.info/" title="Tech.Blogbin'Blog">http://tech-blog.blogbin.info/</a></p>
+
+<p>一. 调整过程：</p>
+
+<!--more-->
+
+
+<p>参阅：
+<a href="http://octopress.org/docs/deploying/github/" title="Octopress's document to deploying GitHub">http://octopress.org/docs/deploying/github/</a></p>
+
+<p><a href="https://help.github.com/articles/setting-up-a-custom-domain-with-pages">https://help.github.com/articles/setting-up-a-custom-domain-with-pages</a></p>
+
+<h5>1. 购买 blogbin.info 域名</h5>
+
+<p>Domain Name Registration and Web Hosting | Eznow.com
+<a href="http://www.eznow.com/">http://www.eznow.com/</a></p>
+
+<h5>2. 配置域名</h5>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>@               A               207.97.227.245
+</span><span class='line'>tech-blog     CNAME               blogbin.github.com.</span></code></pre></td></tr></table></div></figure>
+
+
+<h5>3. 为 GitHub 创建 CNAME</h5>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>blogbins-MacBook-Pro:octopress blogbin$ echo 'tech-blog.blogbin.info' &gt;&gt; source/CNAME</span></code></pre></td></tr></table></div></figure>
+
+
+<h5>4. 调整 Octopress 配置文件</h5>
+
+<p>因为之前参阅：
+<a href="http://octopress.org/docs/deploying/github/" title="Octopress's document to deploying GitHub">http://octopress.org/docs/deploying/github/</a>，运行过：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>blogbins-MacBook-Pro:octopress blogbin$ rake setup_github_pages</span></code></pre></td></tr></table></div></figure>
+
+
+<p>public 和 _deploy 目录均出现 tech-blogbin-blog 子目录，</p>
+
+<p>使得部署到 GitHub 的 Octopress 默认采用二级域名 ＋ 二级目录来访问，如：
+<a href="http://blogbin.github.com/tech-blogbin-blog" title="Tech.Blogbin'Blog at GitHub">http://blogbin.github.com/tech-blogbin-blog</a></p>
+
+<p>现若改为个人独立二级域名直接访问，即：
+<a href="http://tech-blog.blogbin.info/" title="Tech.Blogbin'Blog">http://tech-blog.blogbin.info/</a></p>
+
+<p>需要将以下文件中有关子目录 tech-blogbin-blog 的配置项目进行相应的调整：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>_config.yml
+</span><span class='line'>config.rb
+</span><span class='line'>Rakefile</span></code></pre></td></tr></table></div></figure>
+
+
+<p>_config.yml</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#url: http://blogbin.github.com/tech-blogbin-blog
+</span><span class='line'>url: http://tech-blog.blogbin.info
+</span><span class='line'>
+</span><span class='line'>#subscribe_rss: /tech-blogbin-blog/atom.xml
+</span><span class='line'>subscribe_rss: /atom.xml
+</span><span class='line'>
+</span><span class='line'>#root: /tech-blogbin-blog
+</span><span class='line'>root: /
+</span><span class='line'>
+</span><span class='line'>#destination: public/tech-blogbin-blog
+</span><span class='line'>destination: public</span></code></pre></td></tr></table></div></figure>
+
+
+<p>config.rb</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#http_path = "/tech-blogbin-blog/"
+</span><span class='line'>#http_images_path = "/tech-blogbin-blog/images"
+</span><span class='line'>#http_fonts_path = "/tech-blogbin-blog/fonts"
+</span><span class='line'>#css_dir = "public/tech-blogbin-blog/stylesheets"
+</span><span class='line'>
+</span><span class='line'>http_path = "/"
+</span><span class='line'>http_images_path = "/images"
+</span><span class='line'>http_fonts_path = "/fonts"
+</span><span class='line'>css_dir = "public/stylesheets"</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Rakefile</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#public_dir      = "public/tech-blogbin-blog"    # compiled site directory
+</span><span class='line'>public_dir      = "public"    # compiled site directory</span></code></pre></td></tr></table></div></figure>
+
+
+<h5>5. 运行 rake generate 重新编译，最后运行 rake deploy 部署至 GitHub</h5>
+
+<p>等待一段时间后，可以通过 <a href="http://tech-blog.blogbin.info/" title="Tech.Blogbin'Blog">http://tech-blog.blogbin.info/</a> 正常访问</p>
+
+<p>二. 问题</p>
+
+<h5>1. 404 错误：There isn&#8217;t a GitHub Page hosted here, sorry.</h5>
+
+<p>主要原因是没有设置正确的 source/CNAME，或者域名解析设置错误，或者耐心等待一段时间。</p>
+
+<blockquote><p><img src="/images/2012-08-14-buying-domain-and-configuring-domain-for-githubs-octopress/404.png"></p></blockquote>
+
+
+<h5>2. 加载错误的 CSS 路径</h5>
+
+<p>首页 index.html 中仍要加载 tech-blogbin-blog 子目录的 css 文件，正确调整第 4 点的 Octopress 配置文件可解决问题。</p>
+
+<blockquote><p><img src="/images/2012-08-14-buying-domain-and-configuring-domain-for-githubs-octopress/missing_css.png"></p></blockquote>
+
+
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Tech Blogbin <tech.blogbin@gmail.com></span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-14T22:41:00+08:00" pubdate data-updated="true">Aug 14<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/domain/'>Domain</a>, <a class='category' href='/blog/categories/github/'>GitHub</a>, <a class='category' href='/blog/categories/octopress/'>Octopress</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://tech-blog.blogbin.info/blog/2012/08/14/buying-domain-and-configuring-domain-for-githubs-octopress/" data-via="tech_blogbin" data-counturl="http://tech-blog.blogbin.info/blog/2012/08/14/buying-domain-and-configuring-domain-for-githubs-octopress/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2012/08/14/shen-si-wei-at-sg552sg552-meta-ruby-programming/" title="Previous Post: 申思维 @sg552sg552 meta ruby programming">&laquo; 申思维 @sg552sg552 meta ruby programming</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>About Me</h1>
+  <p><a href=mailto:tech.blogbin@gmail.com>tech.blogbin@gmail.com</a></p>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2012/08/14/buying-domain-and-configuring-domain-for-githubs-octopress/">购买个人域名以及为部署在 GitHub 的Octopress 配置个人域名</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/08/14/shen-si-wei-at-sg552sg552-meta-ruby-programming/">申思维 @sg552sg552 meta ruby programming</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/08/13/the-metaprogramming-charm-reflection/">元编程的魅力——反射机制 - 逸光 - (_2b || ! _2b).is_a? Question</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/08/11/deploying-to-github-pages/">Deploying to Github Pages</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/08/11/configuring-octopress-with-3rd-party-settings/">Configuring Octopress with 3rd Party Settings</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/blogbin">@blogbin</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'blogbin',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("tech_blogbin", 4, true);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/tech_blogbin" class="twitter-follow-button" data-show-count="true">Follow @tech_blogbin</a>
+  
+</section>
+
+
+
+<section class="googleplus">
+  <h1>
+    <a href="https://plus.google.com/tech.blogbin@gmail.com?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - Tech Blogbin <tech.blogbin@gmail.com> -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'tech-blogbin-blog';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://tech-blog.blogbin.info/blog/2012/08/14/buying-domain-and-configuring-domain-for-githubs-octopress/';
+        var disqus_url = 'http://tech-blog.blogbin.info/blog/2012/08/14/buying-domain-and-configuring-domain-for-githubs-octopress/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
