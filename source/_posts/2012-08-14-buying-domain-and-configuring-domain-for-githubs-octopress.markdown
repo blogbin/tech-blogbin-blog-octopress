@@ -40,7 +40,7 @@ Domain Name Registration and Web Hosting | Eznow.com
 ##### 2. 配置域名 
 
 ```
-@               A               207.97.227.245
+@               A               	207.97.227.245
 tech-blog     CNAME     			blogbin.github.com.
 ```
 
@@ -73,6 +73,10 @@ Rakefile
 ```
 
 _config.yml
+
+
+{% gist f0a65a7b4c537e1b5a484ea014713171e8186c66 _config.xml %}
+
 ```
 #url: http://blogbin.github.com/tech-blogbin-blog
 url: http://tech-blog.blogbin.info
@@ -88,6 +92,7 @@ destination: public
 ```
 
 config.rb
+{% gist f0a65a7b4c537e1b5a484ea014713171e8186c66 config.rb %}
 ```
 #http_path = "/tech-blogbin-blog/"
 #http_images_path = "/tech-blogbin-blog/images"
@@ -101,6 +106,7 @@ css_dir = "public/stylesheets"
 ```
 
 Rakefile
+{% gist f0a65a7b4c537e1b5a484ea014713171e8186c66 Rakefile %}
 ```
 #public_dir      = "public/tech-blogbin-blog"    # compiled site directory
 public_dir      = "public"    # compiled site directory
