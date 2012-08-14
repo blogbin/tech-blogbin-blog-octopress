@@ -93,7 +93,9 @@ disqus_short_name: tech-blogbin-blog
 disqus_show_comment_count: true
 
 # Google Analytics
-google_analytics_tracking_id: UA-34029049-1
+#UA-34029049-1
+#UA-34083026-1	blogbin.info
+google_analytics_tracking_id: UA-34083026-1
 
 # Facebook Like
 facebook_like: true

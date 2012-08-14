@@ -4,6 +4,9 @@ ln -s public/tech-blogbin-blog/blog public/blog
 rm -r public/assets
 ln -s public/tech-blogbin-blog/assets public/assets
 
+rm -r public/CNAME
+ln public/tech-blogbin-blog/CNAME public/CNAME
+
 rm -r public/atom.xml
 ln public/tech-blogbin-blog/atom.xml public/atom.xml
 
