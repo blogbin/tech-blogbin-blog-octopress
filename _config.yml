@@ -2,7 +2,8 @@
 #      Main Configs       #
 # ----------------------- #
 
-url: http://blogbin.github.com/tech-blogbin-blog
+#url: http://blogbin.github.com/tech-blogbin-blog
+url: http://tech-blog.blogbin.info
 title: Tech.Blogbin's Blog
 subtitle: A blogging for geeker.
 author: Tech Blogbin <tech.blogbin@gmail.com>

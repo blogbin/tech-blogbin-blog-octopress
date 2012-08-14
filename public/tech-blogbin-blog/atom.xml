@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Tech.Blogbin's Blog]]></title>
-  <link href="http://blogbin.github.com/tech-blogbin-blog/atom.xml" rel="self"/>
-  <link href="http://blogbin.github.com/tech-blogbin-blog/"/>
-  <updated>2012-08-14T16:21:45+08:00</updated>
-  <id>http://blogbin.github.com/tech-blogbin-blog/</id>
+  <link href="http://tech-blog.blogbin.info/atom.xml" rel="self"/>
+  <link href="http://tech-blog.blogbin.info/"/>
+  <updated>2012-08-14T17:32:07+08:00</updated>
+  <id>http://tech-blog.blogbin.info/</id>
   <author>
     <name><![CDATA[Tech Blogbin ]]></name>
     <email><![CDATA[Tech Blogbin <tech.blogbin@gmail.com>]]></email>
@@ -15,18 +15,18 @@
   
   <entry>
     <title type="html"><![CDATA[申思维 @sg552sg552 meta ruby programming]]></title>
-    <link href="http://blogbin.github.com/tech-blogbin-blog/blog/2012/08/14/shen-si-wei-at-sg552sg552-meta-ruby-programming/"/>
+    <link href="http://tech-blog.blogbin.info/blog/2012/08/14/shen-si-wei-at-sg552sg552-meta-ruby-programming/"/>
     <updated>2012-08-14T12:47:00+08:00</updated>
-    <id>http://blogbin.github.com/tech-blogbin-blog/blog/2012/08/14/shen-si-wei-at-sg552sg552-meta-ruby-programming</id>
+    <id>http://tech-blog.blogbin.info/blog/2012/08/14/shen-si-wei-at-sg552sg552-meta-ruby-programming</id>
     <content type="html"><![CDATA[
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[元编程的魅力——反射机制 - 逸光 - (_2b || ! _2b).is_a? Question]]></title>
-    <link href="http://blogbin.github.com/tech-blogbin-blog/blog/2012/08/13/the-metaprogramming-charm-reflection/"/>
+    <link href="http://tech-blog.blogbin.info/blog/2012/08/13/the-metaprogramming-charm-reflection/"/>
     <updated>2012-08-13T21:20:00+08:00</updated>
-    <id>http://blogbin.github.com/tech-blogbin-blog/blog/2012/08/13/the-metaprogramming-charm-reflection</id>
+    <id>http://tech-blog.blogbin.info/blog/2012/08/13/the-metaprogramming-charm-reflection</id>
     <content type="html"><![CDATA[<p>  近期在准备 MetaProgramming Ruby 元编程的培训。除了 MetaProgramming Ruby 元编程这本书之外，想参阅一下其它资源，
 作为培训 PPT 的补充。毕竟 MetaProgramming Ruby 元编程 虽然蕴含的知识量不小，但相比 Ruby 元编程本身，还是稍微有点薄。</p>
 
@@ -59,9 +59,9 @@
   
   <entry>
     <title type="html"><![CDATA[Deploying to Github Pages]]></title>
-    <link href="http://blogbin.github.com/tech-blogbin-blog/blog/2012/08/11/deploying-to-github-pages/"/>
+    <link href="http://tech-blog.blogbin.info/blog/2012/08/11/deploying-to-github-pages/"/>
     <updated>2012-08-11T23:13:00+08:00</updated>
-    <id>http://blogbin.github.com/tech-blogbin-blog/blog/2012/08/11/deploying-to-github-pages</id>
+    <id>http://tech-blog.blogbin.info/blog/2012/08/11/deploying-to-github-pages</id>
     <content type="html"><![CDATA[<p>将 Octopress 部署到 GitHub，即同时支持 Hereku 和 GitHub。</p>
 
 <blockquote><p>2012 年 8 月 14 日更新：</p><p>之前仅把 _deploy 目录的文件发布到 GitHub。但 Octopress&#8217;s source 等其它目录并没有在 GitHub 中管理。</p><p>需要运行以下命令：</p><p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span><br/><span class='line-number'>2</span><br/><span class='line-number'>3</span><br/><span class='line-number'>4</span><br/><span class='line-number'>5</span><br/><span class='line-number'>6</span><br/><span class='line-number'>7</span><br/><span class='line-number'>8</span><br/><span class='line-number'>9</span><br/><span class='line-number'>10</span><br/><span class='line-number'>11</span><br/></pre></td><td class='code'><pre><code class=''><span class='line'>blogbins-MacBook-Pro:octopress blogbin$ git remote add origin git@github.com:blogbin/tech-blogbin-blog-octopress.git<br/></span><span class='line'>blogbins-MacBook-Pro:octopress blogbin$ git config branch.master.remote <br/></span><span class='line'><br/></span><span class='line'>blogbins-MacBook-Pro:octopress blogbin$ git push origin master<br/></span><span class='line'>Counting objects: 5060, done.<br/></span><span class='line'>Delta compression using up to 2 threads.<br/></span><span class='line'>Compressing objects: 100% (2316/2316), done.<br/></span><span class='line'>Writing objects: 100% (5060/5060), 1.11 MiB, done.<br/></span><span class='line'>Total 5060 (delta 2872), reused 3968 (delta 2289)<br/></span><span class='line'>To git@github.com:blogbin/tech-blogbin-blog-octopress.git<br/></span><span class='line'> * [new branch]      master -&gt; master </span></code></pre></td></tr></table></div></figure></p></blockquote>
@@ -69,7 +69,7 @@
 
 
 
-<blockquote><p>2012 年 8 月 13 日更新：</p><p>Heroku 采用二级域名方式部署，如 http://tech-blogbin.herokuapp.com/，<br/>但 GitHub 采用子目录方式部署，如 http://blogbin.github.com/tech-blogbin-blog/，</p><p>支持 GitHub 部署后，Rakefile 和 config.rb 都有改动，造成运行 rake generate 时，编译输出的静态页面在 public/tech-blogbin-blog 目录下，而非之前 Heroku 的 public 目录下。这造成 Heroku 和 GitHub 网站内容不一致。</p><p>临时解决办法是，通过 ln 或者 ln -s 确保 public 和 public/tech-blogbin-blog 内容保持一致。</p><p>提供以下 shell 脚本:<br/><figure class='code'><figcaption><span> (ln_public.sh)</span> <a href='http://blogbin.github.com/tech-blogbin-blog/downloads/code/shell/octopress/ln_public.sh'>download</a></figcaption><br/> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span><br/><span class='line-number'>2</span><br/><span class='line-number'>3</span><br/><span class='line-number'>4</span><br/><span class='line-number'>5</span><br/><span class='line-number'>6</span><br/><span class='line-number'>7</span><br/><span class='line-number'>8</span><br/><span class='line-number'>9</span><br/><span class='line-number'>10</span><br/><span class='line-number'>11</span><br/><span class='line-number'>12</span><br/><span class='line-number'>13</span><br/><span class='line-number'>14</span><br/><span class='line-number'>15</span><br/><span class='line-number'>16</span><br/><span class='line-number'>17</span><br/><span class='line-number'>18</span><br/><span class='line-number'>19</span><br/><span class='line-number'>20</span><br/><span class='line-number'>21</span><br/><span class='line-number'>22</span><br/><span class='line-number'>23</span><br/><span class='line-number'>24</span><br/><span class='line-number'>25</span><br/><span class='line-number'>26</span><br/><span class='line-number'>27</span><br/><span class='line-number'>28</span><br/><span class='line-number'>29</span><br/></pre></td><td class='code'><pre><code class='sh'><span class='line'>rm -r public/blog<br/></span><span class='line'>ln -s public/tech-blogbin-blog/blog public/blog<br/></span><span class='line'><br/></span><span class='line'>rm -r public/assets<br/></span><span class='line'>ln -s public/tech-blogbin-blog/assets public/assets<br/></span><span class='line'><br/></span><span class='line'>rm -r public/CNAME<br/></span><span class='line'>ln public/tech-blogbin-blog/CNAME public/CNAME<br/></span><span class='line'><br/></span><span class='line'>rm -r public/atom.xml<br/></span><span class='line'>ln public/tech-blogbin-blog/atom.xml public/atom.xml<br/></span><span class='line'><br/></span><span class='line'>rm -r public/favicon.png<br/></span><span class='line'>ln public/tech-blogbin-blog/favicon.png public/favicon.png<br/></span><span class='line'><br/></span><span class='line'>rm -r public/images<br/></span><span class='line'>ln -s public/tech-blogbin-blog/images public/images<br/></span><span class='line'><br/></span><span class='line'>rm -r public/index.html<br/></span><span class='line'>ln public/tech-blogbin-blog/index.html public/index.html<br/></span><span class='line'><br/></span><span class='line'>rm -r public/javascripts<br/></span><span class='line'>ln -s public/tech-blogbin-blog/javascripts public/javascripts<br/></span><span class='line'><br/></span><span class='line'>rm -r public/sitemap.xml<br/></span><span class='line'>ln public/tech-blogbin-blog/sitemap.xml public/sitemap.xml<br/></span><span class='line'><br/></span><span class='line'>rm -r public/stylesheets<br/></span><span class='line'>ln -s public/tech-blogbin-blog/stylesheets public/stylesheets<br/></span></code></pre></td></tr></table></div></figure></p><p>运行 ./ln_public.sh</p><p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span><br/><span class='line-number'>2</span><br/><span class='line-number'>3</span><br/><span class='line-number'>4</span><br/><span class='line-number'>5</span><br/></pre></td><td class='code'><pre><code class=''><span class='line'>blogbins-MacBook-Pro:octopress blogbin$ pwd<br/></span><span class='line'>/Users/blogbin/projects/workspaces/octopress/tech.blogbin/octopress<br/></span><span class='line'>blogbins-MacBook-Pro:octopress blogbin$ chmod 700 ln_public.sh <br/></span><span class='line'><br/></span><span class='line'>blogbins-MacBook-Pro:octopress blogbin$ ./ln_public.sh </span></code></pre></td></tr></table></div></figure></p></blockquote>
+<blockquote><p>2012 年 8 月 13 日更新：</p><p>Heroku 采用二级域名方式部署，如 http://tech-blogbin.herokuapp.com/，<br/>但 GitHub 采用子目录方式部署，如 http://blogbin.github.com/tech-blogbin-blog/，</p><p>支持 GitHub 部署后，Rakefile 和 config.rb 都有改动，造成运行 rake generate 时，编译输出的静态页面在 public/tech-blogbin-blog 目录下，而非之前 Heroku 的 public 目录下。这造成 Heroku 和 GitHub 网站内容不一致。</p><p>临时解决办法是，通过 ln 或者 ln -s 确保 public 和 public/tech-blogbin-blog 内容保持一致。</p><p>提供以下 shell 脚本:<br/><figure class='code'><figcaption><span> (ln_public.sh)</span> <a href='http://tech-blog.blogbin.info/downloads/code/shell/octopress/ln_public.sh'>download</a></figcaption><br/> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span><br/><span class='line-number'>2</span><br/><span class='line-number'>3</span><br/><span class='line-number'>4</span><br/><span class='line-number'>5</span><br/><span class='line-number'>6</span><br/><span class='line-number'>7</span><br/><span class='line-number'>8</span><br/><span class='line-number'>9</span><br/><span class='line-number'>10</span><br/><span class='line-number'>11</span><br/><span class='line-number'>12</span><br/><span class='line-number'>13</span><br/><span class='line-number'>14</span><br/><span class='line-number'>15</span><br/><span class='line-number'>16</span><br/><span class='line-number'>17</span><br/><span class='line-number'>18</span><br/><span class='line-number'>19</span><br/><span class='line-number'>20</span><br/><span class='line-number'>21</span><br/><span class='line-number'>22</span><br/><span class='line-number'>23</span><br/><span class='line-number'>24</span><br/><span class='line-number'>25</span><br/><span class='line-number'>26</span><br/><span class='line-number'>27</span><br/><span class='line-number'>28</span><br/><span class='line-number'>29</span><br/></pre></td><td class='code'><pre><code class='sh'><span class='line'>rm -r public/blog<br/></span><span class='line'>ln -s public/tech-blogbin-blog/blog public/blog<br/></span><span class='line'><br/></span><span class='line'>rm -r public/assets<br/></span><span class='line'>ln -s public/tech-blogbin-blog/assets public/assets<br/></span><span class='line'><br/></span><span class='line'>rm -r public/CNAME<br/></span><span class='line'>ln public/tech-blogbin-blog/CNAME public/CNAME<br/></span><span class='line'><br/></span><span class='line'>rm -r public/atom.xml<br/></span><span class='line'>ln public/tech-blogbin-blog/atom.xml public/atom.xml<br/></span><span class='line'><br/></span><span class='line'>rm -r public/favicon.png<br/></span><span class='line'>ln public/tech-blogbin-blog/favicon.png public/favicon.png<br/></span><span class='line'><br/></span><span class='line'>rm -r public/images<br/></span><span class='line'>ln -s public/tech-blogbin-blog/images public/images<br/></span><span class='line'><br/></span><span class='line'>rm -r public/index.html<br/></span><span class='line'>ln public/tech-blogbin-blog/index.html public/index.html<br/></span><span class='line'><br/></span><span class='line'>rm -r public/javascripts<br/></span><span class='line'>ln -s public/tech-blogbin-blog/javascripts public/javascripts<br/></span><span class='line'><br/></span><span class='line'>rm -r public/sitemap.xml<br/></span><span class='line'>ln public/tech-blogbin-blog/sitemap.xml public/sitemap.xml<br/></span><span class='line'><br/></span><span class='line'>rm -r public/stylesheets<br/></span><span class='line'>ln -s public/tech-blogbin-blog/stylesheets public/stylesheets<br/></span></code></pre></td></tr></table></div></figure></p><p>运行 ./ln_public.sh</p><p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span><br/><span class='line-number'>2</span><br/><span class='line-number'>3</span><br/><span class='line-number'>4</span><br/><span class='line-number'>5</span><br/></pre></td><td class='code'><pre><code class=''><span class='line'>blogbins-MacBook-Pro:octopress blogbin$ pwd<br/></span><span class='line'>/Users/blogbin/projects/workspaces/octopress/tech.blogbin/octopress<br/></span><span class='line'>blogbins-MacBook-Pro:octopress blogbin$ chmod 700 ln_public.sh <br/></span><span class='line'><br/></span><span class='line'>blogbins-MacBook-Pro:octopress blogbin$ ./ln_public.sh </span></code></pre></td></tr></table></div></figure></p></blockquote>
 
 
 <p>Octopress 官方网站有文档详细说明，因此过程比较顺利。</p>
@@ -766,9 +766,9 @@
   
   <entry>
     <title type="html"><![CDATA[Configuring Octopress with 3rd Party Settings]]></title>
-    <link href="http://blogbin.github.com/tech-blogbin-blog/blog/2012/08/11/configuring-octopress-with-3rd-party-settings/"/>
+    <link href="http://tech-blog.blogbin.info/blog/2012/08/11/configuring-octopress-with-3rd-party-settings/"/>
     <updated>2012-08-11T17:11:00+08:00</updated>
-    <id>http://blogbin.github.com/tech-blogbin-blog/blog/2012/08/11/configuring-octopress-with-3rd-party-settings</id>
+    <id>http://tech-blog.blogbin.info/blog/2012/08/11/configuring-octopress-with-3rd-party-settings</id>
     <content type="html"><![CDATA[<p>为 Octopress 配置 Disqus 留言，Github, Twitter, Google+, Google Analytics 和 Facebook。
 Google 搜索结果并不多，那是因为在 Octopress 很容易配置，几乎不需要求助。</p>
 
@@ -1117,9 +1117,9 @@ Google 搜索结果并不多，那是因为在 Octopress 很容易配置，几�
   
   <entry>
     <title type="html"><![CDATA[How to Install Octopress on Heroku]]></title>
-    <link href="http://blogbin.github.com/tech-blogbin-blog/blog/2012/08/11/how-to-install-octopress-on-heroku/"/>
+    <link href="http://tech-blog.blogbin.info/blog/2012/08/11/how-to-install-octopress-on-heroku/"/>
     <updated>2012-08-11T11:08:00+08:00</updated>
-    <id>http://blogbin.github.com/tech-blogbin-blog/blog/2012/08/11/how-to-install-octopress-on-heroku</id>
+    <id>http://tech-blog.blogbin.info/blog/2012/08/11/how-to-install-octopress-on-heroku</id>
     <content type="html"><![CDATA[<p>我选择 Octopress 作为搭建技术博客的理由：</p>
 
 <ol>
