@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: MetaProgramming Ruby | Tech.Blogbin's Blog]]></title>
-  <link href="http://tech-blog.blogbin.info/blog/categories/metaprogramming-ruby/atom.xml" rel="self"/>
-  <link href="http://tech-blog.blogbin.info/"/>
-  <updated>2012-08-14T17:34:36+08:00</updated>
-  <id>http://tech-blog.blogbin.info/</id>
+  <link href="http://blogbin.info/tech-blogbin-blog/blog/categories/metaprogramming-ruby/atom.xml" rel="self"/>
+  <link href="http://blogbin.info/tech-blogbin-blog/"/>
+  <updated>2012-08-14T17:56:52+08:00</updated>
+  <id>http://blogbin.info/tech-blogbin-blog/</id>
   <author>
     <name><![CDATA[Tech Blogbin ]]></name>
     <email><![CDATA[Tech Blogbin <tech.blogbin@gmail.com>]]></email>
@@ -15,18 +15,18 @@
   
   <entry>
     <title type="html"><![CDATA[申思维 @sg552sg552 meta ruby programming]]></title>
-    <link href="http://tech-blog.blogbin.info/blog/2012/08/14/shen-si-wei-at-sg552sg552-meta-ruby-programming/"/>
+    <link href="http://blogbin.info/tech-blogbin-blog/blog/2012/08/14/shen-si-wei-at-sg552sg552-meta-ruby-programming/"/>
     <updated>2012-08-14T12:47:00+08:00</updated>
-    <id>http://tech-blog.blogbin.info/blog/2012/08/14/shen-si-wei-at-sg552sg552-meta-ruby-programming</id>
+    <id>http://blogbin.info/tech-blogbin-blog/blog/2012/08/14/shen-si-wei-at-sg552sg552-meta-ruby-programming</id>
     <content type="html"><![CDATA[
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[元编程的魅力——反射机制 - 逸光 - (_2b || ! _2b).is_a? Question]]></title>
-    <link href="http://tech-blog.blogbin.info/blog/2012/08/13/the-metaprogramming-charm-reflection/"/>
+    <link href="http://blogbin.info/tech-blogbin-blog/blog/2012/08/13/the-metaprogramming-charm-reflection/"/>
     <updated>2012-08-13T21:20:00+08:00</updated>
-    <id>http://tech-blog.blogbin.info/blog/2012/08/13/the-metaprogramming-charm-reflection</id>
+    <id>http://blogbin.info/tech-blogbin-blog/blog/2012/08/13/the-metaprogramming-charm-reflection</id>
     <content type="html"><![CDATA[<p>  近期在准备 MetaProgramming Ruby 元编程的培训。除了 MetaProgramming Ruby 元编程这本书之外，想参阅一下其它资源，
 作为培训 PPT 的补充。毕竟 MetaProgramming Ruby 元编程 虽然蕴含的知识量不小，但相比 Ruby 元编程本身，还是稍微有点薄。</p>
 

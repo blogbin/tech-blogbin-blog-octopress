@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Octopress | Tech.Blogbin's Blog]]></title>
-  <link href="http://tech-blog.blogbin.info/blog/categories/octopress/atom.xml" rel="self"/>
-  <link href="http://tech-blog.blogbin.info/"/>
-  <updated>2012-08-14T17:34:36+08:00</updated>
-  <id>http://tech-blog.blogbin.info/</id>
+  <link href="http://blogbin.info/tech-blogbin-blog/blog/categories/octopress/atom.xml" rel="self"/>
+  <link href="http://blogbin.info/tech-blogbin-blog/"/>
+  <updated>2012-08-14T17:56:52+08:00</updated>
+  <id>http://blogbin.info/tech-blogbin-blog/</id>
   <author>
     <name><![CDATA[Tech Blogbin ]]></name>
     <email><![CDATA[Tech Blogbin <tech.blogbin@gmail.com>]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Deploying to Github Pages]]></title>
-    <link href="http://tech-blog.blogbin.info/blog/2012/08/11/deploying-to-github-pages/"/>
+    <link href="http://blogbin.info/tech-blogbin-blog/blog/2012/08/11/deploying-to-github-pages/"/>
     <updated>2012-08-11T23:13:00+08:00</updated>
-    <id>http://tech-blog.blogbin.info/blog/2012/08/11/deploying-to-github-pages</id>
+    <id>http://blogbin.info/tech-blogbin-blog/blog/2012/08/11/deploying-to-github-pages</id>
     <content type="html"><![CDATA[<p>将 Octopress 部署到 GitHub，即同时支持 Hereku 和 GitHub。</p>
 
 <p><blockquote><p>2012 年 8 月 14 日更新：</p></p><p><p>之前仅把 _deploy 目录的文件发布到 GitHub。但 Octopress's source 等其它目录并没有在 GitHub 中管理。</p></p><p><p>需要运行以下命令：</p></p><p><p>```<br/>blogbins-MacBook-Pro:octopress blogbin$ git remote add origin git@github.com:blogbin/tech-blogbin-blog-octopress.git<br/>blogbins-MacBook-Pro:octopress blogbin$ git config branch.master.remote</p></p><p><p>blogbins-MacBook-Pro:octopress blogbin$ git push origin master<br/>Counting objects: 5060, done.<br/>Delta compression using up to 2 threads.<br/>Compressing objects: 100% (2316/2316), done.<br/>Writing objects: 100% (5060/5060), 1.11 MiB, done.<br/>Total 5060 (delta 2872), reused 3968 (delta 2289)<br/>To git@github.com:blogbin/tech-blogbin-blog-octopress.git<br/> * [new branch]      master -> master<br/>```</p></p><p><p></p></blockquote></p>
@@ -487,9 +487,9 @@ fatal: The remote end hung up unexpectedly</p>
   
   <entry>
     <title type="html"><![CDATA[Configuring Octopress with 3rd Party Settings]]></title>
-    <link href="http://tech-blog.blogbin.info/blog/2012/08/11/configuring-octopress-with-3rd-party-settings/"/>
+    <link href="http://blogbin.info/tech-blogbin-blog/blog/2012/08/11/configuring-octopress-with-3rd-party-settings/"/>
     <updated>2012-08-11T17:11:00+08:00</updated>
-    <id>http://tech-blog.blogbin.info/blog/2012/08/11/configuring-octopress-with-3rd-party-settings</id>
+    <id>http://blogbin.info/tech-blogbin-blog/blog/2012/08/11/configuring-octopress-with-3rd-party-settings</id>
     <content type="html"><![CDATA[<p>为 Octopress 配置 Disqus 留言，Github, Twitter, Google+, Google Analytics 和 Facebook。
 Google 搜索结果并不多，那是因为在 Octopress 很容易配置，几乎不需要求助。</p>
 
@@ -535,7 +535,7 @@ blogbins-MacBook-Pro:octopress blogbin$  vi _config.yml</p>
 <p>url: http://tech-blogbin.herokuapp.com/
 title: Tech.Blogbin's Blog
 subtitle: A blogging for geeker.
-author: Tech Blogbin <a href="&#109;&#97;&#105;&#x6c;&#x74;&#x6f;&#58;&#x74;&#x65;&#99;&#x68;&#46;&#x62;&#108;&#111;&#103;&#98;&#105;&#110;&#64;&#103;&#x6d;&#x61;&#x69;&#x6c;&#x2e;&#x63;&#x6f;&#x6d;">&#x74;&#101;&#x63;&#104;&#x2e;&#x62;&#x6c;&#111;&#x67;&#x62;&#x69;&#x6e;&#64;&#103;&#109;&#97;&#105;&#108;&#x2e;&#99;&#x6f;&#x6d;</a>
+author: Tech Blogbin <a href="&#109;&#97;&#x69;&#108;&#116;&#111;&#x3a;&#116;&#x65;&#99;&#x68;&#x2e;&#x62;&#108;&#x6f;&#103;&#x62;&#x69;&#110;&#x40;&#x67;&#109;&#97;&#x69;&#108;&#x2e;&#x63;&#x6f;&#x6d;">&#116;&#x65;&#99;&#104;&#x2e;&#98;&#x6c;&#x6f;&#x67;&#x62;&#105;&#x6e;&#64;&#x67;&#109;&#97;&#x69;&#x6c;&#x2e;&#99;&#x6f;&#109;</a>
 simple_search: http://google.com/search
 description:</p>
 
@@ -739,9 +739,9 @@ Successfully generated site: source -> public
   
   <entry>
     <title type="html"><![CDATA[How to Install Octopress on Heroku]]></title>
-    <link href="http://tech-blog.blogbin.info/blog/2012/08/11/how-to-install-octopress-on-heroku/"/>
+    <link href="http://blogbin.info/tech-blogbin-blog/blog/2012/08/11/how-to-install-octopress-on-heroku/"/>
     <updated>2012-08-11T11:08:00+08:00</updated>
-    <id>http://tech-blog.blogbin.info/blog/2012/08/11/how-to-install-octopress-on-heroku</id>
+    <id>http://blogbin.info/tech-blogbin-blog/blog/2012/08/11/how-to-install-octopress-on-heroku</id>
     <content type="html"><![CDATA[<p>我选择 Octopress 作为搭建技术博客的理由：</p>
 
 <ol>
