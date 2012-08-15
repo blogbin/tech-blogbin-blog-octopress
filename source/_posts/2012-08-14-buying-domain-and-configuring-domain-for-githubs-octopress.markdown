@@ -7,10 +7,12 @@ categories:
 - Domain
 - GitHub
 - Octopress
+- Eznow
 tags: 
 - Domain
 - GitHub
 - Octopress
+- Eznow
 ---
 
 [tech-blog]: http://tech-blog.blogbin.info/        "Tech.Blogbin'Blog"

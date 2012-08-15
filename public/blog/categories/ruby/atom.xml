@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Ruby | Tech.Blogbin's Blog]]></title>
   <link href="http://tech-blog.blogbin.info/blog/categories/ruby/atom.xml" rel="self"/>
   <link href="http://tech-blog.blogbin.info/"/>
-  <updated>2012-08-14T23:54:46+08:00</updated>
+  <updated>2012-08-15T12:56:26+08:00</updated>
   <id>http://tech-blog.blogbin.info/</id>
   <author>
     <name><![CDATA[Tech Blogbin ]]></name>
@@ -18,7 +18,63 @@
     <link href="http://tech-blog.blogbin.info/blog/2012/08/14/shen-si-wei-at-sg552sg552-meta-ruby-programming/"/>
     <updated>2012-08-14T12:47:00+08:00</updated>
     <id>http://tech-blog.blogbin.info/blog/2012/08/14/shen-si-wei-at-sg552sg552-meta-ruby-programming</id>
-    <content type="html"><![CDATA[<p><blockquote><p><img src="/images/2012-08-14-shen-si-wei-at-sg552sg552-meta-ruby-programming/core_methods.jpeg"></p></blockquote></p>
+    <content type="html"><![CDATA[<p>申思维 @sg552sg552 非常热情，主动告知我 PPT 的下载地址，非常感谢！</p>
+
+<p>参阅：</p>
+
+<p>[北京][2012年08月11日] Ruby 活动公告+媒体资料+小结 » 社区 | Ruby China
+<a href="http://ruby-china.org/topics/4662">http://ruby-china.org/topics/4662</a></p>
+
+<p>PPT：meta programming ruby // Speaker Deck
+<a href="https://speakerdeck.com/u/sg552sg552/p/meta-programming-ruby">https://speakerdeck.com/u/sg552sg552/p/meta-programming-ruby</a></p>
+
+<p>MP3：<a href="http://vdisk.weibo.com/s/alUOz">http://vdisk.weibo.com/s/alUOz</a></p>
+
+<p>一些总结：</p>
+
+<!--more-->
+
+
+<h5>1. const_set 和 const_get 操作常量的用法</h5>
+
+<p><blockquote><p><img src="/images/2012-08-14-shen-si-wei-at-sg552sg552-meta-ruby-programming/core_methods.jpeg"></p></blockquote></p>
+
+<h5>2. 举例子说明：动态方法的好处，减少代码冗余</h5>
+
+<p><blockquote><p><img src="/images/2012-08-14-shen-si-wei-at-sg552sg552-meta-ruby-programming/refactoring.jpeg"></p></blockquote></p>
+
+<h5>3. %Q{} 语法使用，表示一行字符串</h5>
+
+<p><blockquote><p><img src="/images/2012-08-14-shen-si-wei-at-sg552sg552-meta-ruby-programming/basic_class_eval.jpeg"></p></blockquote></p>
+
+<h5>4. class_variables，class_variable_defined? 和 <em>get, </em>set 方法的使用</h5>
+
+<p><blockquote><p><img src="/images/2012-08-14-shen-si-wei-at-sg552sg552-meta-ruby-programming/basic_class_variables.jpeg"></p></blockquote></p>
+
+<h5>5. remove_const 和 const_set 对常量的动态操作</h5>
+
+<p><blockquote><p><img src="/images/2012-08-14-shen-si-wei-at-sg552sg552-meta-ruby-programming/substitude_class.jpeg"></p></blockquote></p>
+
+<p>想了半天才明白，Symbal 估计实现 Symbal#to_proc 方法：</p>
+
+<p>``` ruby
+class Symbal
+  def to_proc</p>
+
+<pre><code>Proc.new { | x | x.send self }
+</code></pre>
+
+<p>  end
+end
+```</p>
+
+<h5>6. 适合迭代中，对每一个其中的元素做一次 Symbal 对象对应的方法调用。</h5>
+
+<p><blockquote><p><img src="/images/2012-08-14-shen-si-wei-at-sg552sg552-meta-ruby-programming/symbol_to_proc.jpeg"></p></blockquote></p>
+
+<h5>7. stub 方法实现测试中 Mock 的功能，估计 stub 方法实现是通过 Module#define_method 重新定义了方法，返回代码块执行的结果。</h5>
+
+<p><blockquote><p><img src="/images/2012-08-14-shen-si-wei-at-sg552sg552-meta-ruby-programming/symbol_to_proc.jpeg"></p></blockquote></p>
 ]]></content>
   </entry>
   
@@ -575,7 +631,7 @@ blogbins-MacBook-Pro:octopress blogbin$  vi _config.yml</p>
 <p>url: http://tech-blogbin.herokuapp.com/
 title: Tech.Blogbin's Blog
 subtitle: A blogging for geeker.
-author: Tech Blogbin <a href="&#109;&#97;&#x69;&#108;&#116;&#x6f;&#58;&#x74;&#x65;&#x63;&#x68;&#x2e;&#x62;&#x6c;&#111;&#103;&#x62;&#x69;&#110;&#64;&#x67;&#x6d;&#x61;&#105;&#x6c;&#46;&#x63;&#111;&#x6d;">&#x74;&#101;&#x63;&#x68;&#x2e;&#x62;&#108;&#x6f;&#x67;&#x62;&#105;&#x6e;&#64;&#103;&#109;&#97;&#105;&#x6c;&#x2e;&#x63;&#x6f;&#x6d;</a>
+author: Tech Blogbin <a href="&#x6d;&#97;&#105;&#x6c;&#116;&#x6f;&#58;&#x74;&#x65;&#99;&#x68;&#x2e;&#98;&#108;&#x6f;&#103;&#98;&#x69;&#110;&#x40;&#103;&#109;&#97;&#105;&#108;&#x2e;&#x63;&#111;&#x6d;">&#116;&#101;&#99;&#104;&#46;&#x62;&#108;&#x6f;&#103;&#98;&#x69;&#110;&#x40;&#103;&#109;&#x61;&#x69;&#108;&#x2e;&#99;&#111;&#x6d;</a>
 simple_search: http://google.com/search
 description:</p>
 

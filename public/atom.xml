@@ -4,7 +4,7 @@
   <title><![CDATA[Tech.Blogbin's Blog]]></title>
   <link href="http://tech-blog.blogbin.info/atom.xml" rel="self"/>
   <link href="http://tech-blog.blogbin.info/"/>
-  <updated>2012-08-14T23:54:46+08:00</updated>
+  <updated>2012-08-15T12:56:26+08:00</updated>
   <id>http://tech-blog.blogbin.info/</id>
   <author>
     <name><![CDATA[Tech Blogbin ]]></name>
@@ -2163,7 +2163,71 @@ I think you should use an
     <link href="http://tech-blog.blogbin.info/blog/2012/08/14/shen-si-wei-at-sg552sg552-meta-ruby-programming/"/>
     <updated>2012-08-14T12:47:00+08:00</updated>
     <id>http://tech-blog.blogbin.info/blog/2012/08/14/shen-si-wei-at-sg552sg552-meta-ruby-programming</id>
-    <content type="html"><![CDATA[<blockquote><p><img src="http://tech-blog.blogbin.info/images/2012-08-14-shen-si-wei-at-sg552sg552-meta-ruby-programming/core_methods.jpeg"></p></blockquote>
+    <content type="html"><![CDATA[<p>申思维 @sg552sg552 非常热情，主动告知我 PPT 的下载地址，非常感谢！</p>
+
+<p>参阅：</p>
+
+<p>[北京][2012年08月11日] Ruby 活动公告+媒体资料+小结 » 社区 | Ruby China
+<a href="http://ruby-china.org/topics/4662">http://ruby-china.org/topics/4662</a></p>
+
+<p>PPT：meta programming ruby // Speaker Deck
+<a href="https://speakerdeck.com/u/sg552sg552/p/meta-programming-ruby">https://speakerdeck.com/u/sg552sg552/p/meta-programming-ruby</a></p>
+
+<p>MP3：<a href="http://vdisk.weibo.com/s/alUOz">http://vdisk.weibo.com/s/alUOz</a></p>
+
+<p>一些总结：</p>
+
+<!--more-->
+
+
+<h5>1. const_set 和 const_get 操作常量的用法</h5>
+
+<blockquote><p><img src="http://tech-blog.blogbin.info/images/2012-08-14-shen-si-wei-at-sg552sg552-meta-ruby-programming/core_methods.jpeg"></p></blockquote>
+
+
+<h5>2. 举例子说明：动态方法的好处，减少代码冗余</h5>
+
+<blockquote><p><img src="http://tech-blog.blogbin.info/images/2012-08-14-shen-si-wei-at-sg552sg552-meta-ruby-programming/refactoring.jpeg"></p></blockquote>
+
+
+<h5>3. %Q{} 语法使用，表示一行字符串</h5>
+
+<blockquote><p><img src="http://tech-blog.blogbin.info/images/2012-08-14-shen-si-wei-at-sg552sg552-meta-ruby-programming/basic_class_eval.jpeg"></p></blockquote>
+
+
+<h5>4. class_variables，class_variable_defined? 和 <em>get, </em>set 方法的使用</h5>
+
+<blockquote><p><img src="http://tech-blog.blogbin.info/images/2012-08-14-shen-si-wei-at-sg552sg552-meta-ruby-programming/basic_class_variables.jpeg"></p></blockquote>
+
+
+<h5>5. remove_const 和 const_set 对常量的动态操作</h5>
+
+<blockquote><p><img src="http://tech-blog.blogbin.info/images/2012-08-14-shen-si-wei-at-sg552sg552-meta-ruby-programming/substitude_class.jpeg"></p></blockquote>
+
+
+<p>想了半天才明白，Symbal 估计实现 Symbal#to_proc 方法：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Symbal</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">to_proc</span>
+</span><span class='line'>    <span class="no">Proc</span><span class="o">.</span><span class="n">new</span> <span class="p">{</span> <span class="o">|</span> <span class="n">x</span> <span class="o">|</span> <span class="n">x</span><span class="o">.</span><span class="n">send</span> <span class="nb">self</span> <span class="p">}</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h5>6. 适合迭代中，对每一个其中的元素做一次 Symbal 对象对应的方法调用。</h5>
+
+<blockquote><p><img src="http://tech-blog.blogbin.info/images/2012-08-14-shen-si-wei-at-sg552sg552-meta-ruby-programming/symbol_to_proc.jpeg"></p></blockquote>
+
+
+<h5>7. stub 方法实现测试中 Mock 的功能，估计 stub 方法实现是通过 Module#define_method 重新定义了方法，返回代码块执行的结果。</h5>
+
+<blockquote><p><img src="http://tech-blog.blogbin.info/images/2012-08-14-shen-si-wei-at-sg552sg552-meta-ruby-programming/symbol_to_proc.jpeg"></p></blockquote>
 
 ]]></content>
   </entry>
