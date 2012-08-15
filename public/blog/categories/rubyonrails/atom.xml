@@ -4,7 +4,7 @@
   <title><![CDATA[Category: RubyOnRails | Tech.Blogbin's Blog]]></title>
   <link href="http://tech-blog.blogbin.info/blog/categories/rubyonrails/atom.xml" rel="self"/>
   <link href="http://tech-blog.blogbin.info/"/>
-  <updated>2012-08-16T00:12:42+08:00</updated>
+  <updated>2012-08-16T07:32:17+08:00</updated>
   <id>http://tech-blog.blogbin.info/</id>
   <author>
     <name><![CDATA[Tech Blogbin ]]></name>
@@ -31,6 +31,10 @@
 <p>尝试好几种方案，均不成功。最后考虑给 Issue 模型加一个实例变量临时保存附件信息。</p>
 
 <p>Redmine 版本基于 1.2.1</p>
+
+<p>与邮件正文内容显示相关的关键代码在 show_detail.rb 的 show_detail() 方法：</p>
+
+<p><a href="https://github.com/redmine/redmine/blob/master/app/helpers/issues_helper.rb">https://github.com/redmine/redmine/blob/master/app/helpers/issues_helper.rb</a></p>
 
 <p>具体调整如下：</p>
 

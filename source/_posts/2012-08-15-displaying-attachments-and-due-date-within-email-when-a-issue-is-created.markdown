@@ -31,6 +31,11 @@ Redmine [http://www.redmine.org/](http://www.redmine.org/) 的确是一款优秀
 
 Redmine 版本基于 1.2.1
 
+与邮件正文内容显示相关的关键代码在 show_detail.rb 的 show_detail() 方法：
+
+[https://github.com/redmine/redmine/blob/master/app/helpers/issues_helper.rb](https://github.com/redmine/redmine/blob/master/app/helpers/issues_helper.rb)
+
+
 具体调整如下：
 
 <!--more-->
