@@ -1,0 +1,470 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Redmine 改进：新建问题发送邮件中显示完成时间和上传的附件信息 - Tech.Blogbin's Blog</title>
+
+  <meta name="alexaVerifyID" content="-6pNt74TSllotvjLFDIa77kSKLI" />
+
+  <meta name="author" content="Tech Blogbin <tech.blogbin@gmail.com>">
+
+  
+  <meta name="description" content="Redmine http://www.redmine.org/ 的确是一款优秀的任务跟踪管理系统，是开源免费，而且是基于 RubyOnRails 来开发的 Web 系统，代码具有很强的学习的价值。 很奇怪为何新建问题，系统自动发送的邮件没有显示要求完成时间和附件信息， &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://tech-blog.blogbin.info/blog/2012/08/15/displaying-attachments-and-due-date-within-email-when-a-issue-is-created/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Tech.Blogbin's Blog" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-34083026-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Tech.Blogbin's Blog</a></h1>
+  
+    <h2>A blogging for geeker.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss email">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+    <li><a href="Tech Blogbin <tech.blogbin@gmail.com>" rel="subscribe-email" title="subscribe via email">Email</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:tech-blog.blogbin.info" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Redmine 改进：新建问题发送邮件中显示完成时间和上传的附件信息</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-15T23:44:00+08:00" pubdate data-updated="true">Aug 15<span>th</span>, 2012</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Redmine <a href="http://www.redmine.org/">http://www.redmine.org/</a> 的确是一款优秀的任务跟踪管理系统，是开源免费，而且是基于 RubyOnRails 来开发的 Web 系统，代码具有很强的学习的价值。</p>
+
+<p>很奇怪为何新建问题，系统自动发送的邮件没有显示要求完成时间和附件信息，而更新问题时发送的邮件却有两者信息。</p>
+
+<p>阅读代码后发现，Redmine 负责渲染新建问题自动发送的邮件的地方，没有显示要求完成时间和附件信息。</p>
+
+<p>要求完成时间比较好好处理，直接从 @issue.due_date 获得；</p>
+
+<p>但新建问题后，就触发 Observer 自动发邮件，此时上传过的附件还没保存入库，所以利用现有途径无法从 @issue 获得附件。</p>
+
+<p>尝试好几种方案，均不成功。最后考虑给 Issue 模型加一个实例变量临时保存附件信息。</p>
+
+<p>Redmine 版本基于 1.2.1</p>
+
+<p>具体调整如下：</p>
+
+<!--more-->
+
+
+<h5>1. 打开 Issue 类，添加新的实例变量 original_attachments，用于临时保存刚上传的附件</h5>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Issue</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kp">attr_accessor</span> <span class="ss">:original_attachments</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h5>2. 修改 IssuesController#create 方法</h5>
+
+<figure class='code'><figcaption><span>issues_controller.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">create</span>
+</span><span class='line'>    <span class="n">call_hook</span><span class="p">(</span><span class="ss">:controller_issues_new_before_save</span><span class="p">,</span> <span class="p">{</span> <span class="ss">:params</span> <span class="o">=&gt;</span> <span class="n">params</span><span class="p">,</span> <span class="ss">:issue</span> <span class="o">=&gt;</span> <span class="vi">@issue</span> <span class="p">})</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1"># 对 @issue.original_attachments 进行赋值</span>
+</span><span class='line'>    <span class="vi">@issue</span><span class="o">.</span><span class="n">original_attachments</span> <span class="o">=</span> <span class="n">params</span><span class="o">[</span><span class="ss">:attachments</span><span class="o">]</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">if</span> <span class="vi">@issue</span><span class="o">.</span><span class="n">save</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1"># ... 以下省略</span>
+</span><span class='line'>  <span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h5>3. 渲染邮件格式的地方补充显示要求完成时间和附件信息</h5>
+
+<figure class='code'><figcaption><span>issue_add_text_html.rhtml</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&lt;</span><span class="sx">%= l(:text_issue_added, :id =</span><span class="o">&gt;</span> <span class="s2">&quot;#</span><span class="si">#{</span><span class="vi">@issue</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="ss">:author</span> <span class="o">=&gt;</span> <span class="n">h</span><span class="p">(</span><span class="vi">@issue</span><span class="o">.</span><span class="n">author</span><span class="p">))</span> <span class="sx">%&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sx">&lt;% </span>
+</span><span class='line'><span class="sx">  # 显示完成时间信息</span>
+</span><span class='line'><span class="sx">  if @issue.due_date </span>
+</span><span class='line'><span class="sx">%&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="n">ul</span><span class="o">&gt;</span>
+</span><span class='line'>  <span class="o">&lt;</span><span class="n">li</span><span class="o">&gt;&lt;</span><span class="sx">%= l(:text_journal_set_to, :label =</span><span class="o">&gt;</span> <span class="n">l</span><span class="p">(</span><span class="ss">:field_due_date</span><span class="p">),</span> <span class="ss">:value</span> <span class="o">=&gt;</span> <span class="n">format_date</span><span class="p">(</span> <span class="vi">@issue</span><span class="o">.</span><span class="n">due_date</span> <span class="p">)</span> <span class="p">)</span> <span class="sx">%&gt; &lt;/li&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="sr">/ul&gt;</span>
+</span><span class='line'><span class="sr">&lt;% end %&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;%</span>
+</span><span class='line'><span class="sr">  # 显示附件信息</span>
+</span><span class='line'><span class="sr">  attachments = @issue.original_attachments</span>
+</span><span class='line'><span class="sr">  puts &quot;attachments = </span><span class="si">#{</span><span class="n">attachments</span><span class="si">}</span><span class="sr">&quot;</span>
+</span><span class='line'><span class="sr">  if attachments &amp;&amp; attachments.is_a?(Hash)</span>
+</span><span class='line'><span class="sr">%&gt;</span>
+</span><span class='line'><span class="sr">     &lt;ul&gt;</span>
+</span><span class='line'><span class="sr">         &lt;%</span>
+</span><span class='line'><span class="sr">         attachments.each_value do |attachment|</span>
+</span><span class='line'><span class="sr">           file = attachment[&#39;file&#39;]</span>
+</span><span class='line'><span class="sr">           next unless file &amp;&amp; file.size &gt; 0</span>
+</span><span class='line'><span class="sr">         %&gt;</span>
+</span><span class='line'><span class="sr">             &lt;li&gt;&lt;%= l(:text_journal_added, :label =&gt; l(:label_attachment), :value =&gt; file.original_filename ) %&gt; &lt;/</span><span class="n">li</span><span class="o">&gt;</span>
+</span><span class='line'>      <span class="o">&lt;</span><span class="sx">% end %&gt;</span>
+</span><span class='line'><span class="sx">     &lt;/ul&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="sx">% end %&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sx">&lt;hr /&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="sx">%= render :partial =</span><span class="o">&gt;</span> <span class="s2">&quot;issue_text_html&quot;</span><span class="p">,</span> <span class="ss">:locals</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="ss">:issue</span> <span class="o">=&gt;</span> <span class="vi">@issue</span><span class="p">,</span> <span class="ss">:issue_url</span> <span class="o">=&gt;</span> <span class="vi">@issue_url</span> <span class="p">}</span> <span class="o">%&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h5>4. 最终效果如图</h5>
+
+<blockquote><p><img src="/images/2012-08-15-displaying-attachments-and-due-date-within-email-when-a-issue-is-created/redmine_issue_add_email.png"></p></blockquote>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Tech Blogbin <tech.blogbin@gmail.com></span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-15T23:44:00+08:00" pubdate data-updated="true">Aug 15<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/rails/'>Rails</a>, <a class='category' href='/blog/categories/redmine/'>Redmine</a>, <a class='category' href='/blog/categories/ror/'>RoR</a>, <a class='category' href='/blog/categories/ruby/'>Ruby</a>, <a class='category' href='/blog/categories/rubyonrails/'>RubyOnRails</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://tech-blog.blogbin.info/blog/2012/08/15/displaying-attachments-and-due-date-within-email-when-a-issue-is-created/" data-via="tech_blogbin" data-counturl="http://tech-blog.blogbin.info/blog/2012/08/15/displaying-attachments-and-due-date-within-email-when-a-issue-is-created/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2012/08/14/buying-domain-and-configuring-domain-for-githubs-octopress/" title="Previous Post: 购买个人域名以及为部署在 GitHub 的Octopress 配置个人域名">&laquo; 购买个人域名以及为部署在 GitHub 的Octopress 配置个人域名</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>About Me</h1>
+  <p><a href=mailto:tech.blogbin@gmail.com>tech.blogbin@gmail.com</a></p>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2012/08/15/displaying-attachments-and-due-date-within-email-when-a-issue-is-created/">Redmine 改进：新建问题发送邮件中显示完成时间和上传的附件信息</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/08/14/buying-domain-and-configuring-domain-for-githubs-octopress/">购买个人域名以及为部署在 GitHub 的Octopress 配置个人域名</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/08/14/shen-si-wei-at-sg552sg552-meta-ruby-programming/">申思维 @sg552sg552 meta ruby programming</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/08/13/the-metaprogramming-charm-reflection/">元编程的魅力——反射机制 - 逸光 - (_2b || ! _2b).is_a? Question</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/08/11/deploying-to-github-pages/">Deploying to Github Pages</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/blogbin">@blogbin</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'blogbin',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("tech_blogbin", 4, true);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/tech_blogbin" class="twitter-follow-button" data-show-count="true">Follow @tech_blogbin</a>
+  
+</section>
+
+
+
+<section class="googleplus">
+  <h1>
+    <a href="https://plus.google.com/tech.blogbin@gmail.com?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - Tech Blogbin <tech.blogbin@gmail.com> -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'tech-blogbin-blog';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://tech-blog.blogbin.info/blog/2012/08/15/displaying-attachments-and-due-date-within-email-when-a-issue-is-created/';
+        var disqus_url = 'http://tech-blog.blogbin.info/blog/2012/08/15/displaying-attachments-and-due-date-within-email-when-a-issue-is-created/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fd6efaaa40f50ef1ec634f16880c40100' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+</body>
+</html>
