@@ -4,7 +4,7 @@
   <title><![CDATA[Tech.Blogbin's Blog]]></title>
   <link href="http://tech-blog.blogbin.info/atom.xml" rel="self"/>
   <link href="http://tech-blog.blogbin.info/"/>
-  <updated>2012-08-16T09:06:54+08:00</updated>
+  <updated>2012-08-16T16:30:54+08:00</updated>
   <id>http://tech-blog.blogbin.info/</id>
   <author>
     <name><![CDATA[Tech Blogbin ]]></name>
@@ -14,14 +14,43 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Ruby和元编程的故事 - 第1回: 色色空空，万物皆为对象]]></title>
+    <title type="html"><![CDATA[Hisea's Ruby和元编程的故事 - 第2回: 类与模块，Ruby的绝代双骄]]></title>
+    <link href="http://tech-blog.blogbin.info/blog/2012/08/16/a-story-about-ruby-and-metaprogramming-ruby-2/"/>
+    <updated>2012-08-16T16:22:00+08:00</updated>
+    <id>http://tech-blog.blogbin.info/blog/2012/08/16/a-story-about-ruby-and-metaprogramming-ruby-2</id>
+    <content type="html"><![CDATA[<p>参阅：
+Hisea <a href="http://hisea.me/">http://hisea.me/</a></p>
+
+<p>Ruby和元编程的故事 - 第2回: 类与模块，Ruby的绝代双骄 <a href="http://ruby-china.org/topics/1581">http://ruby-china.org/topics/1581</a></p>
+
+<h5>1. 注意向已有的常量再次赋值很容易引起错误，所以 Ruby 语言会自动警告提示该情况</h5>
+
+<p>有很多名字，比如单例类，估计是因为 eigenclass 本体类很容易就解决设计模式的单例，结果就误传下来了。</p>
+
+<blockquote><p>实际上，如果已经存在一个同名常量，Ruby会重新使用那个常量,如果常量不是class就会报错>> Test = 2<br/><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span><br/><span class='line-number'>2</span><br/><span class='line-number'>3</span><br/><span class='line-number'>4</span><br/><span class='line-number'>5</span><br/></pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">=&gt;</span> <span class="mi">2</span><br/></span><span class='line'><span class="o">&gt;&gt;</span> <span class="k">class</span> <span class="nc">Test</span><br/></span><span class='line'><span class="o">&gt;&gt;</span> <span class="k">end</span><br/></span><span class='line'><span class="no">TypeError</span><span class="p">:</span> <span class="no">Test</span> <span class="n">is</span> <span class="ow">not</span> <span class="n">a</span> <span class="k">class</span><br/></span><span class='line'><span class="n">from</span> <span class="p">(</span><span class="n">irb</span><span class="p">):</span><span class="mi">2</span><br/></span></code></pre></td></tr></table></div></figure></p></blockquote>
+
+
+
+
+<!--more-->
+
+
+<h5>2. Module 的模块方法可以直接被调用</h5>
+
+<blockquote><p>module的方法有两种，一种是module方法，这类方法可以直接调用。<br/><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span><br/><span class='line-number'>2</span><br/><span class='line-number'>3</span><br/><span class='line-number'>4</span><br/><span class='line-number'>5</span><br/><span class='line-number'>6</span><br/><span class='line-number'>7</span><br/><span class='line-number'>8</span><br/><span class='line-number'>9</span><br/></pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&gt;&gt;</span> <span class="k">module</span> <span class="nn">Test</span><br/></span><span class='line'><span class="o">&gt;&gt;</span>   <span class="k">def</span> <span class="nc">Test</span><span class="o">.</span><span class="nf">test_method</span><br/></span><span class='line'><span class="o">&gt;&gt;</span>     <span class="nb">puts</span> <span class="s2">&quot;hello from module&quot;</span><br/></span><span class='line'><span class="o">&gt;&gt;</span>   <span class="k">end</span><br/></span><span class='line'><span class="o">&gt;&gt;</span> <span class="k">end</span><br/></span><span class='line'><span class="o">=&gt;</span> <span class="kp">nil</span><br/></span><span class='line'><span class="o">&gt;&gt;</span> <span class="no">Test</span><span class="o">::</span><span class="n">test_method</span><br/></span><span class='line'><span class="n">hello</span> <span class="n">from</span> <span class="n">module</span><br/></span><span class='line'><span class="o">=&gt;</span> <span class="kp">nil</span><br/></span></code></pre></td></tr></table></div></figure></p></blockquote>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Hisea's Ruby和元编程的故事 - 第1回: 色色空空，万物皆为对象]]></title>
     <link href="http://tech-blog.blogbin.info/blog/2012/08/16/a-story-about-ruby-and-programming-ruby-1/"/>
     <updated>2012-08-16T08:01:00+08:00</updated>
     <id>http://tech-blog.blogbin.info/blog/2012/08/16/a-story-about-ruby-and-programming-ruby-1</id>
     <content type="html"><![CDATA[<p>参阅：
 Hisea <a href="http://hisea.me/">http://hisea.me/</a></p>
 
-<p>的Ruby和元编程的故事 - 第0回: 欲练神功，必先自废武功 <a href="http://ruby-china.org/topics/1171">http://ruby-china.org/topics/1171</a></p>
+<p>Ruby和元编程的故事 - 第0回: 欲练神功，必先自废武功 <a href="http://ruby-china.org/topics/1171">http://ruby-china.org/topics/1171</a></p>
 
 <h5>1. 官方说法是 eigenclass 本体类</h5>
 
@@ -43,14 +72,14 @@ Hisea <a href="http://hisea.me/">http://hisea.me/</a></p>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Ruby和元编程的故事 - 第0回: 欲练神功，必先自废武功]]></title>
+    <title type="html"><![CDATA[Hisea's Ruby和元编程的故事 - 第0回: 欲练神功，必先自废武功]]></title>
     <link href="http://tech-blog.blogbin.info/blog/2012/08/16/a-story-about-ruby-and-metaprogramming-ruby-0/"/>
     <updated>2012-08-16T08:01:00+08:00</updated>
     <id>http://tech-blog.blogbin.info/blog/2012/08/16/a-story-about-ruby-and-metaprogramming-ruby-0</id>
     <content type="html"><![CDATA[<p>参阅：
 Hisea <a href="http://hisea.me/">http://hisea.me/</a></p>
 
-<p>的Ruby和元编程的故事 - 第0回: 欲练神功，必先自废武功</p>
+<p>Ruby和元编程的故事 - 第0回: 欲练神功，必先自废武功</p>
 
 <p><a href="http://ruby-china.org/topics/1171">http://ruby-china.org/topics/1171</a></p>
 

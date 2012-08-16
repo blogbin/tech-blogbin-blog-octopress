@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Ruby和元编程的故事 - 第0回: 欲练神功，必先自废武功"
+title: "Hisea's Ruby和元编程的故事 - 第0回: 欲练神功，必先自废武功"
 date: 2012-08-16 08:01
 comments: true
 external-url: http://ruby-china.org/topics/1171
@@ -15,7 +15,7 @@ tags:
 参阅：
 Hisea [http://hisea.me/](http://hisea.me/) 
 
-的Ruby和元编程的故事 - 第0回: 欲练神功，必先自废武功
+Ruby和元编程的故事 - 第0回: 欲练神功，必先自废武功
 
 [http://ruby-china.org/topics/1171](http://ruby-china.org/topics/1171)
 

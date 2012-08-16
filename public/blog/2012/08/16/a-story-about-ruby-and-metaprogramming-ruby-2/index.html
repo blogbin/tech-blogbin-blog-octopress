@@ -5,14 +5,15 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Category: Installation - Tech.Blogbin's Blog</title>
+  <title>Hisea's Ruby和元编程的故事 - 第2回: 类与模块，Ruby的绝代双骄 - Tech.Blogbin's Blog</title>
 
   <meta name="alexaVerifyID" content="-6pNt74TSllotvjLFDIa77kSKLI" />
 
   <meta name="author" content="Tech Blogbin <tech.blogbin@gmail.com>">
 
   
-  <meta name="description" content="Category: Installation">
+  <meta name="description" content="参阅：
+Hisea http://hisea.me/ Ruby和元编程的故事 - 第2回: 类与模块，Ruby的绝代双骄 http://ruby-china.org/topics/1581 1. 注意向已有的常量再次赋值很容易引起错误，所以 Ruby 语言会自动警告提示该情况 有很多名字， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -21,7 +22,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://tech-blog.blogbin.infoblog/categories/installation/">
+  <link rel="canonical" href="http://tech-blog.blogbin.info/blog/2012/08/16/a-story-about-ruby-and-metaprogramming-ruby-2/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -80,36 +81,117 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Category: Installation</h1>
+    
+      <h1 class="entry-title">Hisea's Ruby和元编程的故事 - 第2回: 类与模块，Ruby的绝代双骄</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-16T16:22:00+08:00" pubdate data-updated="true">Aug 16<span>th</span>, 2012</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives" class="category">
+
+
+<div class="entry-content"><p>参阅：
+Hisea <a href="http://hisea.me/">http://hisea.me/</a></p>
+
+<p>Ruby和元编程的故事 - 第2回: 类与模块，Ruby的绝代双骄 <a href="http://ruby-china.org/topics/1581">http://ruby-china.org/topics/1581</a></p>
+
+<h5>1. 注意向已有的常量再次赋值很容易引起错误，所以 Ruby 语言会自动警告提示该情况</h5>
+
+<p>有很多名字，比如单例类，估计是因为 eigenclass 本体类很容易就解决设计模式的单例，结果就误传下来了。</p>
+
+<blockquote><p>实际上，如果已经存在一个同名常量，Ruby会重新使用那个常量,如果常量不是class就会报错>> Test = 2<br/><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span><br/><span class='line-number'>2</span><br/><span class='line-number'>3</span><br/><span class='line-number'>4</span><br/><span class='line-number'>5</span><br/></pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">=&gt;</span> <span class="mi">2</span><br/></span><span class='line'><span class="o">&gt;&gt;</span> <span class="k">class</span> <span class="nc">Test</span><br/></span><span class='line'><span class="o">&gt;&gt;</span> <span class="k">end</span><br/></span><span class='line'><span class="no">TypeError</span><span class="p">:</span> <span class="no">Test</span> <span class="n">is</span> <span class="ow">not</span> <span class="n">a</span> <span class="k">class</span><br/></span><span class='line'><span class="n">from</span> <span class="p">(</span><span class="n">irb</span><span class="p">):</span><span class="mi">2</span><br/></span></code></pre></td></tr></table></div></figure></p></blockquote>
 
 
 
-  
-  <h2>2012</h2>
 
-<article>
-  
-<h1><a href="/blog/2012/08/11/how-to-install-octopress-on-heroku/">How to Install Octopress on Heroku</a></h1>
-<time datetime="2012-08-11T11:08:00+08:00" pubdate><span class='month'>Aug</span> <span class='day'>11</span> <span class='year'>2012</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/deployment/'>Deployment</a>, <a class='category' href='/blog/categories/heroku/'>Heroku</a>, <a class='category' href='/blog/categories/installation/'>Installation</a>, <a class='category' href='/blog/categories/octopress/'>Octopress</a>, <a class='category' href='/blog/categories/ruby/'>Ruby</a></span>
-</footer>
+<!--more-->
 
 
-</article>
+<h5>2. Module 的模块方法可以直接被调用</h5>
+
+<blockquote><p>module的方法有两种，一种是module方法，这类方法可以直接调用。<br/><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span><br/><span class='line-number'>2</span><br/><span class='line-number'>3</span><br/><span class='line-number'>4</span><br/><span class='line-number'>5</span><br/><span class='line-number'>6</span><br/><span class='line-number'>7</span><br/><span class='line-number'>8</span><br/><span class='line-number'>9</span><br/></pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&gt;&gt;</span> <span class="k">module</span> <span class="nn">Test</span><br/></span><span class='line'><span class="o">&gt;&gt;</span>   <span class="k">def</span> <span class="nc">Test</span><span class="o">.</span><span class="nf">test_method</span><br/></span><span class='line'><span class="o">&gt;&gt;</span>     <span class="nb">puts</span> <span class="s2">&quot;hello from module&quot;</span><br/></span><span class='line'><span class="o">&gt;&gt;</span>   <span class="k">end</span><br/></span><span class='line'><span class="o">&gt;&gt;</span> <span class="k">end</span><br/></span><span class='line'><span class="o">=&gt;</span> <span class="kp">nil</span><br/></span><span class='line'><span class="o">&gt;&gt;</span> <span class="no">Test</span><span class="o">::</span><span class="n">test_method</span><br/></span><span class='line'><span class="n">hello</span> <span class="n">from</span> <span class="n">module</span><br/></span><span class='line'><span class="o">=&gt;</span> <span class="kp">nil</span><br/></span></code></pre></td></tr></table></div></figure></p></blockquote>
 
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">Tech Blogbin <tech.blogbin@gmail.com></span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-16T16:22:00+08:00" pubdate data-updated="true">Aug 16<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/metaprogramming-ruby/'>MetaProgramming Ruby</a>, <a class='category' href='/blog/categories/ruby/'>Ruby</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://tech-blog.blogbin.info/blog/2012/08/16/a-story-about-ruby-and-metaprogramming-ruby-2/" data-via="tech_blogbin" data-counturl="http://tech-blog.blogbin.info/blog/2012/08/16/a-story-about-ruby-and-metaprogramming-ruby-2/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2012/08/16/a-story-about-ruby-and-programming-ruby-1/" title="Previous Post: Hisea's Ruby和元编程的故事 - 第1回: 色色空空，万物皆为对象">&laquo; Hisea's Ruby和元编程的故事 - 第1回: 色色空空，万物皆为对象</a>
+      
+      
+    </p>
+  </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -243,7 +325,10 @@
       var disqus_shortname = 'tech-blogbin-blog';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://tech-blog.blogbin.info/blog/2012/08/16/a-story-about-ruby-and-metaprogramming-ruby-2/';
+        var disqus_url = 'http://tech-blog.blogbin.info/blog/2012/08/16/a-story-about-ruby-and-metaprogramming-ruby-2/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
