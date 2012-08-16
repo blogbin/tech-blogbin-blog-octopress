@@ -105,3 +105,7 @@ def create
 {% blockquote %}
 {% img /images/2012-08-15-displaying-attachments-and-due-date-within-email-when-a-issue-is-created/redmine_issue_add_email.png %}
 {% endblockquote %}
+
+
+
+

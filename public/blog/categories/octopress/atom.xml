@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Octopress | Tech.Blogbin's Blog]]></title>
   <link href="http://tech-blog.blogbin.info/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://tech-blog.blogbin.info/"/>
-  <updated>2012-08-16T07:32:17+08:00</updated>
+  <updated>2012-08-16T08:23:38+08:00</updated>
   <id>http://tech-blog.blogbin.info/</id>
   <author>
     <name><![CDATA[Tech Blogbin ]]></name>
@@ -2651,7 +2651,7 @@ blogbins-MacBook-Pro:octopress blogbin$  vi _config.yml</p>
 <p>url: http://tech-blogbin.herokuapp.com/
 title: Tech.Blogbin's Blog
 subtitle: A blogging for geeker.
-author: Tech Blogbin <a href="&#x6d;&#x61;&#105;&#x6c;&#116;&#111;&#58;&#x74;&#101;&#99;&#104;&#x2e;&#x62;&#108;&#x6f;&#103;&#x62;&#x69;&#110;&#x40;&#x67;&#x6d;&#97;&#105;&#x6c;&#46;&#x63;&#111;&#x6d;">&#116;&#101;&#x63;&#x68;&#x2e;&#98;&#108;&#x6f;&#103;&#x62;&#x69;&#110;&#x40;&#103;&#x6d;&#x61;&#105;&#x6c;&#46;&#x63;&#x6f;&#x6d;</a>
+author: Tech Blogbin <a href="&#x6d;&#97;&#x69;&#x6c;&#116;&#x6f;&#58;&#x74;&#x65;&#99;&#104;&#x2e;&#98;&#x6c;&#x6f;&#x67;&#98;&#x69;&#110;&#x40;&#x67;&#109;&#97;&#x69;&#x6c;&#x2e;&#99;&#111;&#109;">&#x74;&#101;&#x63;&#x68;&#x2e;&#98;&#x6c;&#111;&#103;&#x62;&#x69;&#x6e;&#x40;&#x67;&#x6d;&#x61;&#105;&#108;&#x2e;&#x63;&#111;&#x6d;</a>
 simple_search: http://google.com/search
 description:</p>
 

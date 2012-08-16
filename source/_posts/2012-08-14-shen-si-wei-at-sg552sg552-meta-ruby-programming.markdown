@@ -3,7 +3,6 @@ layout: post
 title: "申思维 @sg552sg552 meta ruby programming"
 date: 2012-08-14 12:47
 comments: true
-categories: 
 external-url: http://ruby-china.org/topics/4662 
 categories: 
 - Ruby
@@ -11,7 +10,6 @@ categories:
 tags: 
 - Ruby
 - MetaProgramming Ruby
-public: false
 ---
 
 申思维 @sg552sg552 非常热情，主动告知我 PPT 的下载地址，非常感谢！ 
