@@ -14,12 +14,12 @@ tags:
 
 参阅：
 Hisea [http://hisea.me/](http://hisea.me/) 
-的Ruby和元编程的故事 - 第0回: 欲练神功，必先自废武功
 
-介绍了 Ruby 和元编程的一些特点，主要是在一些思维上的改变，特别是从 Java 等其它语言过来的人。
+的Ruby和元编程的故事 - 第0回: 欲练神功，必先自废武功
 
 [http://ruby-china.org/topics/1171](http://ruby-china.org/topics/1171)
 
+介绍了 Ruby 和元编程的一些特点，主要是在一些思维上的改变，特别是从 Java 等其它语言过来的人。
 
 ##### 1. 注意动态语言和动态类型的区别，动态类型仅为动态语言其中一个部分。
 {% blockquote %}

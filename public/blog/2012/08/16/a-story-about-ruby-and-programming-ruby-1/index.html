@@ -5,15 +5,15 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>申思维 @sg552sg552 meta ruby programming - Tech.Blogbin's Blog</title>
+  <title>Ruby和元编程的故事 - 第1回: 色色空空，万物皆为对象 - Tech.Blogbin's Blog</title>
 
   <meta name="alexaVerifyID" content="-6pNt74TSllotvjLFDIa77kSKLI" />
 
   <meta name="author" content="Tech Blogbin <tech.blogbin@gmail.com>">
 
   
-  <meta name="description" content="申思维 @sg552sg552 非常热情，主动告知我 PPT 的下载地址，非常感谢！ 参阅： [北京][2012年08月11日] Ruby 活动公告+媒体资料+小结 » 社区 | Ruby China
-http://ruby-china.org/topics/4662 PPT：meta &hellip;">
+  <meta name="description" content="参阅：
+Hisea http://hisea.me/ 的Ruby和元编程的故事 - 第0回: 欲练神功，必先自废武功 http://ruby-china.org/topics/1171 1. 官方说法是 eigenclass 本体类 有很多名字，比如单例类，估计是因为 eigenclass &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -22,7 +22,7 @@ http://ruby-china.org/topics/4662 PPT：meta &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://tech-blog.blogbin.info/blog/2012/08/14/shen-si-wei-at-sg552sg552-meta-ruby-programming/">
+  <link rel="canonical" href="http://tech-blog.blogbin.info/blog/2012/08/16/a-story-about-ruby-and-programming-ruby-1/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -85,7 +85,7 @@ http://ruby-china.org/topics/4662 PPT：meta &hellip;">
   
   <header>
     
-      <h1 class="entry-title">申思维 @sg552sg552 Meta Ruby Programming</h1>
+      <h1 class="entry-title">Ruby和元编程的故事 - 第1回: 色色空空，万物皆为对象</h1>
     
     
       <p class="meta">
@@ -101,7 +101,7 @@ http://ruby-china.org/topics/4662 PPT：meta &hellip;">
   
 
 
-<time datetime="2012-08-14T12:47:00+08:00" pubdate data-updated="true">Aug 14<span>th</span>, 2012</time>
+<time datetime="2012-08-16T08:01:00+08:00" pubdate data-updated="true">Aug 16<span>th</span>, 2012</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -110,71 +110,26 @@ http://ruby-china.org/topics/4662 PPT：meta &hellip;">
   </header>
 
 
-<div class="entry-content"><p>申思维 @sg552sg552 非常热情，主动告知我 PPT 的下载地址，非常感谢！</p>
+<div class="entry-content"><p>参阅：
+Hisea <a href="http://hisea.me/">http://hisea.me/</a></p>
 
-<p>参阅：</p>
+<p>的Ruby和元编程的故事 - 第0回: 欲练神功，必先自废武功 <a href="http://ruby-china.org/topics/1171">http://ruby-china.org/topics/1171</a></p>
 
-<p>[北京][2012年08月11日] Ruby 活动公告+媒体资料+小结 » 社区 | Ruby China
-<a href="http://ruby-china.org/topics/4662">http://ruby-china.org/topics/4662</a></p>
+<h5>1. 官方说法是 eigenclass 本体类</h5>
 
-<p>PPT：meta programming ruby // Speaker Deck
-<a href="https://speakerdeck.com/u/sg552sg552/p/meta-programming-ruby">https://speakerdeck.com/u/sg552sg552/p/meta-programming-ruby</a></p>
+<p>有很多名字，比如单例类，估计是因为 eigenclass 本体类很容易就解决设计模式的单例，结果就误传下来了。</p>
 
-<p>MP3：<a href="http://vdisk.weibo.com/s/alUOz">http://vdisk.weibo.com/s/alUOz</a></p>
+<blockquote><p>Singleton/Meta/Anonymous/Ghost/Shadow Class</p><p>   * Singleton Class: 单例类<br/>   * Meta Class：元类<br/>   * Anonymous Class: 匿名类<br/>   * Ghost Class：鬼类<br/>   * Shadow Class: 影子类<br/>上面的这些东东其实说的都是一个东西，我喜欢叫它 影子类。</p></blockquote>
 
-<p>一些总结：</p>
+
+
 
 <!--more-->
 
 
-<h5>1. const_set 和 const_get 操作常量的用法</h5>
+<h5>2. 关于 Object#dup 和 Object#clone 的区别</h5>
 
-<blockquote><p><img src="/images/2012-08-14-shen-si-wei-at-sg552sg552-meta-ruby-programming/core_methods.jpeg"></p></blockquote>
-
-
-<h5>2. 举例子说明：动态方法的好处，减少代码冗余</h5>
-
-<blockquote><p><img src="/images/2012-08-14-shen-si-wei-at-sg552sg552-meta-ruby-programming/refactoring.jpeg"></p></blockquote>
-
-
-<h5>3. %Q{} 语法使用，表示一行字符串</h5>
-
-<blockquote><p><img src="/images/2012-08-14-shen-si-wei-at-sg552sg552-meta-ruby-programming/basic_class_eval.jpeg"></p></blockquote>
-
-
-<h5>4. class_variables，class_variable_defined? 和 <em>get, </em>set 方法的使用</h5>
-
-<blockquote><p><img src="/images/2012-08-14-shen-si-wei-at-sg552sg552-meta-ruby-programming/basic_class_variables.jpeg"></p></blockquote>
-
-
-<h5>5. remove_const 和 const_set 对常量的动态操作</h5>
-
-<blockquote><p><img src="/images/2012-08-14-shen-si-wei-at-sg552sg552-meta-ruby-programming/substitude_class.jpeg"></p></blockquote>
-
-
-<p>想了半天才明白，Symbal 估计实现 Symbal#to_proc 方法：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Symbal</span>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">to_proc</span>
-</span><span class='line'>    <span class="no">Proc</span><span class="o">.</span><span class="n">new</span> <span class="p">{</span> <span class="o">|</span> <span class="n">x</span> <span class="o">|</span> <span class="n">x</span><span class="o">.</span><span class="n">send</span> <span class="nb">self</span> <span class="p">}</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h5>6. 适合迭代中，对每一个其中的元素做一次 Symbal 对象对应的方法调用。</h5>
-
-<blockquote><p><img src="/images/2012-08-14-shen-si-wei-at-sg552sg552-meta-ruby-programming/symbol_to_proc.jpeg"></p></blockquote>
-
-
-<h5>7. stub 方法实现测试中 Mock 的功能，估计 stub 方法实现是通过 Module#define_method 重新定义了方法，返回代码块执行的结果。</h5>
-
-<blockquote><p><img src="/images/2012-08-14-shen-si-wei-at-sg552sg552-meta-ruby-programming/symbol_to_proc.jpeg"></p></blockquote>
+<blockquote><p>对象的复制<br/>前文说对象的存在包括两部分，一是状态/实例变量，另一个是行为，本回专注讲了单例方法和影子类。</p><p>Ruby中对象的复制也有两种模式，一个是只复制当前的状态/实例变量 dup。另外一种是连同影子类和引用的对象一起复制，从而把单例方法也复制一份。<br/><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span><br/><span class='line-number'>2</span><br/><span class='line-number'>3</span><br/><span class='line-number'>4</span><br/><span class='line-number'>5</span><br/><span class='line-number'>6</span><br/><span class='line-number'>7</span><br/><span class='line-number'>8</span><br/><span class='line-number'>9</span><br/><span class='line-number'>10</span><br/><span class='line-number'>11</span><br/><span class='line-number'>12</span><br/><span class='line-number'>13</span><br/></pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&gt;&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="s2">&quot;obj&quot;</span><br/></span><span class='line'><span class="o">&gt;&gt;</span> <span class="k">def</span> <span class="nc">a</span><span class="o">.</span><span class="nf">hello_self</span><br/></span><span class='line'><span class="o">&gt;&gt;</span> <span class="nb">puts</span> <span class="s2">&quot;hello </span><span class="si">#{</span><span class="nb">self</span><span class="si">}</span><span class="s2">&quot;</span><br/></span><span class='line'><span class="o">&gt;&gt;</span> <span class="k">end</span><br/></span><span class='line'><span class="o">&gt;&gt;</span> <span class="n">b</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">dup</span><br/></span><span class='line'><span class="o">=&gt;</span> <span class="s2">&quot;obj&quot;</span><br/></span><span class='line'><span class="o">&gt;&gt;</span> <span class="n">b</span><span class="o">.</span><span class="n">hello_self</span><br/></span><span class='line'><span class="no">NoMethodError</span><span class="p">:</span> <span class="n">undefined</span> <span class="nb">method</span> <span class="sb">`hello_self&#39; for &quot;obj&quot;:String</span><br/></span><span class='line'><span class="sb">    from (irb):90</span><br/></span><span class='line'><span class="sb">&gt;&gt; b = a.clone</span><br/></span><span class='line'><span class="sb">=&gt; &quot;obj&quot;</span><br/></span><span class='line'><span class="sb">&gt;&gt; b.hello_self</span><br/></span><span class='line'><span class="sb">hello obj</span><br/></span></code></pre></td></tr></table></div></figure></p><p>其实有本回上述的这些功能，即便是没有class，Ruby也可以作为一种Prototype(类似JavaScript)的面向对象语言了。</p><p>你可以建立一个对象，生成默认的实例变量，把行为作为单例方法定以在这个对象的影子类上，然后用clone生成千千万万个实例。当然这样比较麻烦，但却是可行的途径之一。</p><p>其他Object API<br/>对象还有很多其他的功能，比如可以freeze,另外dup跟clone也有一些其他的引用上面的区别，dup只复制引用，clone会吧引用的对象也复制。</p><p>这些都可以在Object类(Ruby所有对象的父类)API上找到，可以查看apidock.com的文档</p><p>例如关于dup</p><p>.dup() produces a shallow copy of obj—the instance variables of obj are copied, but not the objects they reference. dup copies the tainted state of obj. See also the discussion under Object#clone. In general, clone and dup may have different semantics in descendant classes. While clone is used to duplicate an object, including its internal state, dup typically uses the class of the descendant object to create the new instance.</p></blockquote>
 
 </div>
 
@@ -198,7 +153,7 @@ http://ruby-china.org/topics/4662 PPT：meta &hellip;">
   
 
 
-<time datetime="2012-08-14T12:47:00+08:00" pubdate data-updated="true">Aug 14<span>th</span>, 2012</time>
+<time datetime="2012-08-16T08:01:00+08:00" pubdate data-updated="true">Aug 16<span>th</span>, 2012</time>
       
 
 <span class="categories">
@@ -212,7 +167,7 @@ http://ruby-china.org/topics/4662 PPT：meta &hellip;">
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://tech-blog.blogbin.info/blog/2012/08/14/shen-si-wei-at-sg552sg552-meta-ruby-programming/" data-via="tech_blogbin" data-counturl="http://tech-blog.blogbin.info/blog/2012/08/14/shen-si-wei-at-sg552sg552-meta-ruby-programming/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://tech-blog.blogbin.info/blog/2012/08/16/a-story-about-ruby-and-programming-ruby-1/" data-via="tech_blogbin" data-counturl="http://tech-blog.blogbin.info/blog/2012/08/16/a-story-about-ruby-and-programming-ruby-1/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -225,10 +180,8 @@ http://ruby-china.org/topics/4662 PPT：meta &hellip;">
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2012/08/13/the-metaprogramming-charm-reflection/" title="Previous Post: 元编程的魅力——反射机制 - 逸光 - (_2b || ! _2b).is_a? Question">&laquo; 元编程的魅力——反射机制 - 逸光 - (_2b || ! _2b).is_a? Question</a>
+        <a class="basic-alignment left" href="/blog/2012/08/16/a-story-about-ruby-and-metaprogramming-ruby-0/" title="Previous Post: Ruby和元编程的故事 - 第0回: 欲练神功，必先自废武功">&laquo; Ruby和元编程的故事 - 第0回: 欲练神功，必先自废武功</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2012/08/14/buying-domain-and-configuring-domain-for-githubs-octopress/" title="Next Post: 购买个人域名以及为部署在 GitHub 的Octopress 配置个人域名">购买个人域名以及为部署在 GitHub 的Octopress 配置个人域名 &raquo;</a>
       
     </p>
   </footer>
@@ -369,8 +322,8 @@ http://ruby-china.org/topics/4662 PPT：meta &hellip;">
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://tech-blog.blogbin.info/blog/2012/08/14/shen-si-wei-at-sg552sg552-meta-ruby-programming/';
-        var disqus_url = 'http://tech-blog.blogbin.info/blog/2012/08/14/shen-si-wei-at-sg552sg552-meta-ruby-programming/';
+        var disqus_identifier = 'http://tech-blog.blogbin.info/blog/2012/08/16/a-story-about-ruby-and-programming-ruby-1/';
+        var disqus_url = 'http://tech-blog.blogbin.info/blog/2012/08/16/a-story-about-ruby-and-programming-ruby-1/';
         var disqus_script = 'embed.js';
       
     (function () {
