@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Net | Tech.Blogbin's Blog]]></title>
+  <link href="http://tech-blog.blogbin.info/blog/categories/net/atom.xml" rel="self"/>
+  <link href="http://tech-blog.blogbin.info/"/>
+  <updated>2012-08-17T23:19:22+08:00</updated>
+  <id>http://tech-blog.blogbin.info/</id>
+  <author>
+    <name><![CDATA[Tech Blogbin ]]></name>
+    <email><![CDATA[Tech Blogbin <tech.blogbin@gmail.com>]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[softwareishard's introduction to firebug net panel]]></title>
+    <link href="http://tech-blog.blogbin.info/blog/2012/08/17/softwareishards-introduction-to-firebug-net-panel/"/>
+    <updated>2012-08-17T23:06:00+08:00</updated>
+    <id>http://tech-blog.blogbin.info/blog/2012/08/17/softwareishards-introduction-to-firebug-net-panel</id>
+    <content type="html"><![CDATA[<p>Firebug 监控浏览器的网络请求，softwareishard 网站有很详细的介绍。</p>
+
+<p><a href="http://www.softwareishard.com/blog/firebug/introduction-to-firebug-net-panel/">http://www.softwareishard.com/blog/firebug/introduction-to-firebug-net-panel/</a></p>
+
+<p><a href="http://www.softwareishard.com/blog/firebug/firebug-net-panel-timings/">http://www.softwareishard.com/blog/firebug/firebug-net-panel-timings/</a></p>
+
+<p>甚至比 Firebug 官方 Wiki <a href="http://getfirebug.com/wiki/index.php/Net_Panel">http://getfirebug.com/wiki/index.php/Net_Panel</a> 都要详细。</p>
+
+<p>特别留意一下 DomContentLoaded event 和 load event 代表的意思，其它都比较好理解。</p>
+
+<p><blockquote><p>DomContentLoaded event<br/>- time when DomContentLoad event was fired (since the beginning of the request, can be negative if the request has been started after the event)</p></p><p><p>load event<br/>- time when page load event was fired (since the beginning of the request, can be negative if the request has been started after the event)</p></blockquote></p>
+]]></content>
+  </entry>
+  
+</feed>
