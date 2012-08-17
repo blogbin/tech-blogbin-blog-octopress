@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Ruby | Tech.Blogbin's Blog]]></title>
   <link href="http://tech-blog.blogbin.info/blog/categories/ruby/atom.xml" rel="self"/>
   <link href="http://tech-blog.blogbin.info/"/>
-  <updated>2012-08-16T16:30:54+08:00</updated>
+  <updated>2012-08-17T09:46:56+08:00</updated>
   <id>http://tech-blog.blogbin.info/</id>
   <author>
     <name><![CDATA[Tech Blogbin ]]></name>
@@ -12,6 +12,37 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Ruby元编程 - 逸光 - 我信仰超越光的不是物质，是思维]]></title>
+    <link href="http://tech-blog.blogbin.info/blog/2012/08/17/metaprogramming-ruby/"/>
+    <updated>2012-08-17T09:36:00+08:00</updated>
+    <id>http://tech-blog.blogbin.info/blog/2012/08/17/metaprogramming-ruby</id>
+    <content type="html"><![CDATA[<p>参阅：
+逸光 <a href="http://deathking.is-programmer.com/">http://deathking.is-programmer.com//</a></p>
+
+<p>Ruby元编程 - 逸光 - 我信仰超越光的不是物质，是思维 <a href="http://deathking.is-programmer.com/posts/28864.html">http://deathking.is-programmer.com/posts/28864.html</a></p>
+
+<h5>1. 慎用 eval</h5>
+
+<p><blockquote><p>一般来说，能避免 eval 就尽量避免，因为 eval 有额外的“分析时”开销（将字符串作为源代码进行词法、文法分析），而这个“剖析时”却又是在程序“运行时”进行的。把不需要惰性求值的表达式预先进行及早求值，能避免一些分析时开销。如果可能的话，用 instance_exec，或 instance_eval 带块的形式，也比直接在字符串上求值好。</p></blockquote></p>
+
+<!--more-->
+
+
+<h5>2. 一句话明了 class_eval 的区别</h5>
+
+<p><blockquote><p>当作用于类时，class_eval将会定义实例方法，而instance_eval定义类方法。</p></blockquote></p>
+
+<h5>3. class_variables 操作的是类变量，而非类实例变量</h5>
+
+<p><blockquote><p>1.3.9 class_variables<br/>　　如果你想知道一个类中有哪些类变量，我们可以使用class_varibles方法。他返回一个数组（Array），以符号（Symbol）的形式返回类变量的名称。<br/>```<br/>classRubyist<br/>  @@geek="Ruby's Matz"<br/>  @@country="USA"<br/>end</p></p><p><p>classChild &lt; Rubyist<br/>  @@city="Nashville"<br/>end<br/>print Rubyist.class_variables# => [:@@geek, :@@country]<br/>puts<br/>p Child.class_variables# => [:@@city]<br/>```<br/>　　你可以从程序的输出中观察到Child.class_variables输出的是在Child类中定义的类变量（@@city）。Child类没有从父类中继承类变量（@@geek, @@country）。</p></blockquote></p>
+
+<h5>4. 常量操作 const_get 和 const_set</h5>
+
+<p><blockquote><p>1.3.11 const_get, const_set</p></p><p><p>　　类似的，const_get和const_set用于操作常量。const_get返回指定常量的值：</p></p><p><p><code>ruby<br/>puts Float.const_get(:MIN) # =&gt; 2.2250738585072e-308<br/></code><br/>　　const_set为指定的常量设置指定的值，并返回该对象。如果常量不存在，那么他会创建该常量，就是下面示范的那样：<br/>``` ruby<br/>class Rubyist</p></p><p><p>end<br/>puts Rubyist.const_set("PI", 22.0/7.0) # => 3.14285714285714<br/>```</p></p><p><p>　　因为const_get返回常量的值，因此，你可以使用此方法获得一个类的名字并为这个类添加一个新的实例化对象的方法。这样使得我们有能力在运行时创建类并实例化其实例。<br/>``` ruby</p></p><p><h1>Let us call our new class 'Rubyist'</h1></p><p><h1>(we could have prompted the user for a class name)</h1></p><p><p>class_name = "rubyist".capitalize</p></p><p><p>Object.const_set(class_name, Class.new)</p></p><p><h1>Let us create a method 'who'</h1></p><p><h1>(we could have prompted the user for a method name)</h1></p><p><p>class_name = Object.const_get(class_name)</p></p><p><p>puts class_name # => Rubyist</p></p><p><p>class_name.class_eval do</p></p><p><p>  define_method :who do |my_arg|</p></p><p><pre><code>my_arg<br/></code></pre></p><p><p>  end<br/>end<br/>obj = class_name.new<br/>puts obj.who('Matz') # => Matz<br/>```</p></blockquote></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Hisea's Ruby和元编程的故事 - 第2回: 类与模块，Ruby的绝代双骄]]></title>
@@ -216,71 +247,6 @@ if @issue.save
 <h5>4. 最终效果如图</h5>
 
 <p><blockquote><p><img src="/images/2012-08-15-displaying-attachments-and-due-date-within-email-when-a-issue-is-created/redmine_issue_add_email.png"></p></blockquote></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[申思维 @sg552sg552 meta ruby programming]]></title>
-    <link href="http://tech-blog.blogbin.info/blog/2012/08/14/shen-si-wei-at-sg552sg552-meta-ruby-programming/"/>
-    <updated>2012-08-14T12:47:00+08:00</updated>
-    <id>http://tech-blog.blogbin.info/blog/2012/08/14/shen-si-wei-at-sg552sg552-meta-ruby-programming</id>
-    <content type="html"><![CDATA[<p>申思维 @sg552sg552 非常热情，主动告知我 PPT 的下载地址，非常感谢！</p>
-
-<p>参阅：</p>
-
-<p>[北京][2012年08月11日] Ruby 活动公告+媒体资料+小结 » 社区 | Ruby China
-<a href="http://ruby-china.org/topics/4662">http://ruby-china.org/topics/4662</a></p>
-
-<p>PPT：meta programming ruby // Speaker Deck
-<a href="https://speakerdeck.com/u/sg552sg552/p/meta-programming-ruby">https://speakerdeck.com/u/sg552sg552/p/meta-programming-ruby</a></p>
-
-<p>MP3：<a href="http://vdisk.weibo.com/s/alUOz">http://vdisk.weibo.com/s/alUOz</a></p>
-
-<p>一些总结：</p>
-
-<!--more-->
-
-
-<h5>1. const_set 和 const_get 操作常量的用法</h5>
-
-<p><blockquote><p><img src="/images/2012-08-14-shen-si-wei-at-sg552sg552-meta-ruby-programming/core_methods.jpeg"></p></blockquote></p>
-
-<h5>2. 举例子说明：动态方法的好处，减少代码冗余</h5>
-
-<p><blockquote><p><img src="/images/2012-08-14-shen-si-wei-at-sg552sg552-meta-ruby-programming/refactoring.jpeg"></p></blockquote></p>
-
-<h5>3. %Q{} 语法使用，表示一行字符串</h5>
-
-<p><blockquote><p><img src="/images/2012-08-14-shen-si-wei-at-sg552sg552-meta-ruby-programming/basic_class_eval.jpeg"></p></blockquote></p>
-
-<h5>4. class_variables，class_variable_defined? 和 <em>get, </em>set 方法的使用</h5>
-
-<p><blockquote><p><img src="/images/2012-08-14-shen-si-wei-at-sg552sg552-meta-ruby-programming/basic_class_variables.jpeg"></p></blockquote></p>
-
-<h5>5. remove_const 和 const_set 对常量的动态操作</h5>
-
-<p><blockquote><p><img src="/images/2012-08-14-shen-si-wei-at-sg552sg552-meta-ruby-programming/substitude_class.jpeg"></p></blockquote></p>
-
-<p>想了半天才明白，Symbal 估计实现 Symbal#to_proc 方法：</p>
-
-<p>``` ruby
-class Symbal
-  def to_proc</p>
-
-<pre><code>Proc.new { | x | x.send self }
-</code></pre>
-
-<p>  end
-end
-```</p>
-
-<h5>6. 适合迭代中，对每一个其中的元素做一次 Symbal 对象对应的方法调用。</h5>
-
-<p><blockquote><p><img src="/images/2012-08-14-shen-si-wei-at-sg552sg552-meta-ruby-programming/symbol_to_proc.jpeg"></p></blockquote></p>
-
-<h5>7. stub 方法实现测试中 Mock 的功能，估计 stub 方法实现是通过 Module#define_method 重新定义了方法，返回代码块执行的结果。</h5>
-
-<p><blockquote><p><img src="/images/2012-08-14-shen-si-wei-at-sg552sg552-meta-ruby-programming/symbol_to_proc.jpeg"></p></blockquote></p>
 ]]></content>
   </entry>
   

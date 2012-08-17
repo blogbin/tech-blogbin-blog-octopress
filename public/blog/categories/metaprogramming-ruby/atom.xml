@@ -4,7 +4,7 @@
   <title><![CDATA[Category: MetaProgramming Ruby | Tech.Blogbin's Blog]]></title>
   <link href="http://tech-blog.blogbin.info/blog/categories/metaprogramming-ruby/atom.xml" rel="self"/>
   <link href="http://tech-blog.blogbin.info/"/>
-  <updated>2012-08-16T16:30:54+08:00</updated>
+  <updated>2012-08-17T09:46:56+08:00</updated>
   <id>http://tech-blog.blogbin.info/</id>
   <author>
     <name><![CDATA[Tech Blogbin ]]></name>
@@ -12,6 +12,37 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Ruby元编程 - 逸光 - 我信仰超越光的不是物质，是思维]]></title>
+    <link href="http://tech-blog.blogbin.info/blog/2012/08/17/metaprogramming-ruby/"/>
+    <updated>2012-08-17T09:36:00+08:00</updated>
+    <id>http://tech-blog.blogbin.info/blog/2012/08/17/metaprogramming-ruby</id>
+    <content type="html"><![CDATA[<p>参阅：
+逸光 <a href="http://deathking.is-programmer.com/">http://deathking.is-programmer.com//</a></p>
+
+<p>Ruby元编程 - 逸光 - 我信仰超越光的不是物质，是思维 <a href="http://deathking.is-programmer.com/posts/28864.html">http://deathking.is-programmer.com/posts/28864.html</a></p>
+
+<h5>1. 慎用 eval</h5>
+
+<p><blockquote><p>一般来说，能避免 eval 就尽量避免，因为 eval 有额外的“分析时”开销（将字符串作为源代码进行词法、文法分析），而这个“剖析时”却又是在程序“运行时”进行的。把不需要惰性求值的表达式预先进行及早求值，能避免一些分析时开销。如果可能的话，用 instance_exec，或 instance_eval 带块的形式，也比直接在字符串上求值好。</p></blockquote></p>
+
+<!--more-->
+
+
+<h5>2. 一句话明了 class_eval 的区别</h5>
+
+<p><blockquote><p>当作用于类时，class_eval将会定义实例方法，而instance_eval定义类方法。</p></blockquote></p>
+
+<h5>3. class_variables 操作的是类变量，而非类实例变量</h5>
+
+<p><blockquote><p>1.3.9 class_variables<br/>　　如果你想知道一个类中有哪些类变量，我们可以使用class_varibles方法。他返回一个数组（Array），以符号（Symbol）的形式返回类变量的名称。<br/>```<br/>classRubyist<br/>  @@geek="Ruby's Matz"<br/>  @@country="USA"<br/>end</p></p><p><p>classChild &lt; Rubyist<br/>  @@city="Nashville"<br/>end<br/>print Rubyist.class_variables# => [:@@geek, :@@country]<br/>puts<br/>p Child.class_variables# => [:@@city]<br/>```<br/>　　你可以从程序的输出中观察到Child.class_variables输出的是在Child类中定义的类变量（@@city）。Child类没有从父类中继承类变量（@@geek, @@country）。</p></blockquote></p>
+
+<h5>4. 常量操作 const_get 和 const_set</h5>
+
+<p><blockquote><p>1.3.11 const_get, const_set</p></p><p><p>　　类似的，const_get和const_set用于操作常量。const_get返回指定常量的值：</p></p><p><p><code>ruby<br/>puts Float.const_get(:MIN) # =&gt; 2.2250738585072e-308<br/></code><br/>　　const_set为指定的常量设置指定的值，并返回该对象。如果常量不存在，那么他会创建该常量，就是下面示范的那样：<br/>``` ruby<br/>class Rubyist</p></p><p><p>end<br/>puts Rubyist.const_set("PI", 22.0/7.0) # => 3.14285714285714<br/>```</p></p><p><p>　　因为const_get返回常量的值，因此，你可以使用此方法获得一个类的名字并为这个类添加一个新的实例化对象的方法。这样使得我们有能力在运行时创建类并实例化其实例。<br/>``` ruby</p></p><p><h1>Let us call our new class 'Rubyist'</h1></p><p><h1>(we could have prompted the user for a class name)</h1></p><p><p>class_name = "rubyist".capitalize</p></p><p><p>Object.const_set(class_name, Class.new)</p></p><p><h1>Let us create a method 'who'</h1></p><p><h1>(we could have prompted the user for a method name)</h1></p><p><p>class_name = Object.const_get(class_name)</p></p><p><p>puts class_name # => Rubyist</p></p><p><p>class_name.class_eval do</p></p><p><p>  define_method :who do |my_arg|</p></p><p><pre><code>my_arg<br/></code></pre></p><p><p>  end<br/>end<br/>obj = class_name.new<br/>puts obj.who('Matz') # => Matz<br/>```</p></blockquote></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Hisea's Ruby和元编程的故事 - 第2回: 类与模块，Ruby的绝代双骄]]></title>
@@ -175,37 +206,6 @@ end
 <h5>7. stub 方法实现测试中 Mock 的功能，估计 stub 方法实现是通过 Module#define_method 重新定义了方法，返回代码块执行的结果。</h5>
 
 <p><blockquote><p><img src="/images/2012-08-14-shen-si-wei-at-sg552sg552-meta-ruby-programming/symbol_to_proc.jpeg"></p></blockquote></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[元编程的魅力——反射机制 - 逸光 - (_2b || ! _2b).is_a? Question]]></title>
-    <link href="http://tech-blog.blogbin.info/blog/2012/08/13/the-metaprogramming-charm-reflection/"/>
-    <updated>2012-08-13T21:20:00+08:00</updated>
-    <id>http://tech-blog.blogbin.info/blog/2012/08/13/the-metaprogramming-charm-reflection</id>
-    <content type="html"><![CDATA[<p>  近期在准备 MetaProgramming Ruby 元编程的培训。除了 MetaProgramming Ruby 元编程这本书之外，想参阅一下其它资源，
-作为培训 PPT 的补充。毕竟 MetaProgramming Ruby 元编程 虽然蕴含的知识量不小，但相比 Ruby 元编程本身，还是稍微有点薄。</p>
-
-<p><a href="http://www.slideshare.net/fullscreen/ihower/designing-ruby-apis/">元编程的魅力——反射机制 - 逸光 - (<em>2b || ! </em>2b).is_a? Question</a> 的读后感：</p>
-
-<!--more-->
-
-
-<h3>1. is_a?, kind_of? 和 instace_of? 的区别</h3>
-
-<p><blockquote><p>is_a?由Object类提供并接受一个参数，参数为类名的标识符（一个常量标识符），该方法用于确认对象是否为指定类的实例。区别与instance_of?，is_a?的判定条件比较宽松，ri提供的例子就足够详细了，让我们来看看吧。</p></p><p><p>```<br/>module M; end<br/>class A; include M; end<br/>class B &lt; A; end<br/>class C &lt; B; end</p></p><p><p>b = B.new<br/>b.instance_of? A  #=> false<br/>b.instance_of? B  #=> true<br/>b.instance_of? C  #=> false<br/>b.instance_of? M  #=> false</p></p><p><p>b.kind_of? A      #=> true<br/>b.kind_of? B      #=> true<br/>b.kind_of? C      #=> false<br/>b.kind_of? M      #=> true<br/>```</p></p><p><p>如果给定的类，是直接生成对象的类，那么，instance_of?方法才返回true。而如果是直接生成对象的类的父类或者引用的模块、父类引用的模块发，instance_of?就会无情的返回false。不过不要紧，kind_of?方法（is_a?方法也如此）会返回true的。</p></p><p><p></p></blockquote></p>
-
-<h3>2. Module#included_modules 返回一个模块或类包含的模块</h3>
-
-<p><blockquote><p>module类的实例方法included_modules 可以返回一个模块或类包含的模块（Class继承自Module，自然继承了此方法）。<br/><code><br/>irb(main):033:0]]&gt; B.included_modules<br/>=&gt; [M, Kernel]<br/></code><br/>Kernel模块，诚如教科书所写，他包含在每一个类或模块里，这样才使得Ruby中有了“函数”。</p></blockquote></p>
-
-<h3>3. 而Object#singleton_methods方法同样以数组的方式返回对象的 eigenclass 方法</h3>
-
-<p><blockquote><p>而Object#singleton_methods方法同样以数组的方式返回对象的单例方法（Singleton Method）。<br/><code><br/>irb(main):007:0&gt; Math.singleton_methods<br/>=&gt; [:atan2, :cos, :sin, :tan, :acos, :asin, :atan, :cosh, :sinh, :tanh, :acosh,:asinh, :atanh, :exp, :log, :log2, :log10, :sqrt, :cbrt, :frexp, :ldexp, :hypot, :erf, :erfc, :gamma, :lgamma]<br/></code></p></blockquote></p>
-
-<h3>4. Fixnum 的对象和 Symbol 的对象一样不可变</h3>
-
-<p><blockquote><p>使用object_id获取对象的一个全局id，可以用于确定对象是不是同一个对象。<br/>```<br/>irb(main):010:0]]&gt; 1.object_id == 1.object_id<br/>=> true</p></p><p><p>irb(main):011:0]]&gt; "obj".object_id == "obj".object_id<br/>=> false</p></p><p><p>irb(main):012:0]]&gt; :sym.object_id == :sym.object_id<br/>=> true<br/>```<br/>　　Fixnum类的实例都是立即数因此只有一个副本，Symbol类的对象也一样，但是其他类的可能就不一样咯~</p></blockquote></p>
 ]]></content>
   </entry>
   
