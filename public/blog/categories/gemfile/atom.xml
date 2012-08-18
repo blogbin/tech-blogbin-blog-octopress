@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Gemfile | Tech.Blogbin's Blog]]></title>
+  <link href="http://tech-blog.blogbin.info/blog/categories/gemfile/atom.xml" rel="self"/>
+  <link href="http://tech-blog.blogbin.info/"/>
+  <updated>2012-08-18T20:23:25+08:00</updated>
+  <id>http://tech-blog.blogbin.info/</id>
+  <author>
+    <name><![CDATA[Tech Blogbin ]]></name>
+    <email><![CDATA[Tech Blogbin <tech.blogbin@gmail.com>]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Gem install RMagick on Apple MacOS X Mountain Lion 10.8]]></title>
+    <link href="http://tech-blog.blogbin.info/blog/2012/08/18/gem-install-rmagick-on-apple-macos-x-mountain-lion-10-dot-8/"/>
+    <updated>2012-08-18T20:14:00+08:00</updated>
+    <id>http://tech-blog.blogbin.info/blog/2012/08/18/gem-install-rmagick-on-apple-macos-x-mountain-lion-10-dot-8</id>
+    <content type="html"><![CDATA[<p>最近升级了 Mountain Lion 10.8，结果发现使用 RMagick 的 Rails 项目无法正常启动，碉堡了！</p>
+
+<p><code>``
+blogbins-MacBook-Pro:xbmc blogbin$ rails server
+:macosx
+WARNING: Nokogiri was built against LibXML version 2.7.3, but has dynamically loaded 2.7.8
+/Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in</code>require': dlopen(/Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/rmagick-2.13.1/lib/RMagick2.bundle, 9): Library not loaded: /usr/lib/libltdl.7.dylib (LoadError)
+  Referenced from: /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/rmagick-2.13.1/lib/RMagick2.bundle
+  Reason: Incompatible library version: RMagick2.bundle requires version 10.0.0 or later, but libltdl.7.dylib provides version 5.0.0 - /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/rmagick-2.13.1/lib/RMagick2.bundle</p>
+
+<pre><code> from /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `block in require'
+ from /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:223:in `block in load_dependency'
+ from /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:640:in `new_constants_in'
+ from /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:223:in `load_dependency'
+ from /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `require'
+ from /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/rmagick-2.13.1/lib/rmagick.rb:11:in `&lt;top (required)&gt;'
+ from /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/bundler-1.1.3/lib/bundler/runtime.rb:68:in `require'
+ from /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/bundler-1.1.3/lib/bundler/runtime.rb:68:in `block (2 levels) in require'
+ from /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/bundler-1.1.3/lib/bundler/runtime.rb:66:in `each'
+ from /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/bundler-1.1.3/lib/bundler/runtime.rb:66:in `block in require'
+ from /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/bundler-1.1.3/lib/bundler/runtime.rb:55:in `each'
+ from /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/bundler-1.1.3/lib/bundler/runtime.rb:55:in `require'
+ from /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/bundler-1.1.3/lib/bundler.rb:119:in `require'
+ from /Users/blogbin/projects/workspaces/app_store/ruby/xbmc/config/application.rb:7:in `&lt;top (required)&gt;'
+ from /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/railties-3.1.0/lib/rails/commands.rb:52:in `require'
+ from /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/railties-3.1.0/lib/rails/commands.rb:52:in `block in &lt;top (required)&gt;'
+ from /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/railties-3.1.0/lib/rails/commands.rb:49:in `tap'
+ from /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/railties-3.1.0/lib/rails/commands.rb:49:in `&lt;top (required)&gt;'
+ from script/rails:6:in `require'
+ from script/rails:6:in `&lt;main&gt;
+</code></pre>
+
+<p>```</p>
+
+<p>Google 搜索了不少帖子，大部分都只是解决一部分问题，又冒出新的问题
+最后终于找到一篇介绍完整的解决的办法。</p>
+
+<p><a href="http://coderwall.com/p/njrnzq">http://coderwall.com/p/njrnzq</a></p>
+
+<!--more-->
+
+
+<p><blockquote><p>Managed to fix it following these steps:</p></p><p><p>Installed XCode 4.4 and Command Line Tools<br/>Ran this in terminal:</p></p><p><p>sudo chown -R <user> /usr/local<br/>brew update<br/>brew tap homebrew/dupes<br/>brew install apple-gcc42</p></p><p><p>Installed XQuartz 2.7.2 (http://xquartz.macosforge.org/landing)</p></p><p><p>Fixed any errors reported by brew doctor<br/>Ran this in terminal:</p></p><p><p>gem uninstall rmagick<br/>brew uninstall imagemagick<br/>brew install --fresh imagemagick<br/>gem install rmagick</p></p><p><p>After this, RMagick worked flawlessly again!</p></blockquote></p>
+]]></content>
+  </entry>
+  
+</feed>

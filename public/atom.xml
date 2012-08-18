@@ -4,7 +4,7 @@
   <title><![CDATA[Tech.Blogbin's Blog]]></title>
   <link href="http://tech-blog.blogbin.info/atom.xml" rel="self"/>
   <link href="http://tech-blog.blogbin.info/"/>
-  <updated>2012-08-17T23:19:22+08:00</updated>
+  <updated>2012-08-18T20:23:25+08:00</updated>
   <id>http://tech-blog.blogbin.info/</id>
   <author>
     <name><![CDATA[Tech Blogbin ]]></name>
@@ -12,6 +12,84 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Gem install RMagick on Apple MacOS X Mountain Lion 10.8]]></title>
+    <link href="http://tech-blog.blogbin.info/blog/2012/08/18/gem-install-rmagick-on-apple-macos-x-mountain-lion-10-dot-8/"/>
+    <updated>2012-08-18T20:14:00+08:00</updated>
+    <id>http://tech-blog.blogbin.info/blog/2012/08/18/gem-install-rmagick-on-apple-macos-x-mountain-lion-10-dot-8</id>
+    <content type="html"><![CDATA[<p>最近升级了 Mountain Lion 10.8，结果发现使用 RMagick 的 Rails 项目无法正常启动，碉堡了！</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>blogbins-MacBook-Pro:xbmc blogbin$ rails server
+</span><span class='line'>:macosx
+</span><span class='line'>WARNING: Nokogiri was built against LibXML version 2.7.3, but has dynamically loaded 2.7.8
+</span><span class='line'>/Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `require': dlopen(/Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/rmagick-2.13.1/lib/RMagick2.bundle, 9): Library not loaded: /usr/lib/libltdl.7.dylib (LoadError)
+</span><span class='line'>  Referenced from: /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/rmagick-2.13.1/lib/RMagick2.bundle
+</span><span class='line'>  Reason: Incompatible library version: RMagick2.bundle requires version 10.0.0 or later, but libltdl.7.dylib provides version 5.0.0 - /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/rmagick-2.13.1/lib/RMagick2.bundle
+</span><span class='line'>     from /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `block in require'
+</span><span class='line'>     from /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:223:in `block in load_dependency'
+</span><span class='line'>     from /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:640:in `new_constants_in'
+</span><span class='line'>     from /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:223:in `load_dependency'
+</span><span class='line'>     from /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `require'
+</span><span class='line'>     from /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/rmagick-2.13.1/lib/rmagick.rb:11:in `&lt;top (required)&gt;'
+</span><span class='line'>     from /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/bundler-1.1.3/lib/bundler/runtime.rb:68:in `require'
+</span><span class='line'>     from /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/bundler-1.1.3/lib/bundler/runtime.rb:68:in `block (2 levels) in require'
+</span><span class='line'>     from /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/bundler-1.1.3/lib/bundler/runtime.rb:66:in `each'
+</span><span class='line'>     from /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/bundler-1.1.3/lib/bundler/runtime.rb:66:in `block in require'
+</span><span class='line'>     from /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/bundler-1.1.3/lib/bundler/runtime.rb:55:in `each'
+</span><span class='line'>     from /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/bundler-1.1.3/lib/bundler/runtime.rb:55:in `require'
+</span><span class='line'>     from /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/bundler-1.1.3/lib/bundler.rb:119:in `require'
+</span><span class='line'>     from /Users/blogbin/projects/workspaces/app_store/ruby/xbmc/config/application.rb:7:in `&lt;top (required)&gt;'
+</span><span class='line'>     from /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/railties-3.1.0/lib/rails/commands.rb:52:in `require'
+</span><span class='line'>     from /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/railties-3.1.0/lib/rails/commands.rb:52:in `block in &lt;top (required)&gt;'
+</span><span class='line'>     from /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/railties-3.1.0/lib/rails/commands.rb:49:in `tap'
+</span><span class='line'>     from /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/railties-3.1.0/lib/rails/commands.rb:49:in `&lt;top (required)&gt;'
+</span><span class='line'>     from script/rails:6:in `require'
+</span><span class='line'>     from script/rails:6:in `&lt;main&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<p>Google 搜索了不少帖子，大部分都只是解决一部分问题，又冒出新的问题
+最后终于找到一篇介绍完整的解决的办法。</p>
+
+<p><a href="http://coderwall.com/p/njrnzq">http://coderwall.com/p/njrnzq</a></p>
+
+<!--more-->
+
+
+
+
+<blockquote><p>Managed to fix it following these steps:</p><p>Installed XCode 4.4 and Command Line Tools<br/>Ran this in terminal:</p><p>sudo chown -R <user> /usr/local<br/>brew update<br/>brew tap homebrew/dupes<br/>brew install apple-gcc42</p><p>Installed XQuartz 2.7.2 (http://xquartz.macosforge.org/landing)</p><p>Fixed any errors reported by brew doctor<br/>Ran this in terminal:</p><p>gem uninstall rmagick<br/>brew uninstall imagemagick<br/>brew install &#8211;fresh imagemagick<br/>gem install rmagick</p><p>After this, RMagick worked flawlessly again!</p></blockquote>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[softwareishard's introduction to firebug net panel]]></title>
@@ -126,6 +204,60 @@ Hisea <a href="http://hisea.me/">http://hisea.me/</a></p>
 <h5>2. 关于 Object#dup 和 Object#clone 的区别</h5>
 
 <blockquote><p>对象的复制<br/>前文说对象的存在包括两部分，一是状态/实例变量，另一个是行为，本回专注讲了单例方法和影子类。</p><p>Ruby中对象的复制也有两种模式，一个是只复制当前的状态/实例变量 dup。另外一种是连同影子类和引用的对象一起复制，从而把单例方法也复制一份。<br/><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span><br/><span class='line-number'>2</span><br/><span class='line-number'>3</span><br/><span class='line-number'>4</span><br/><span class='line-number'>5</span><br/><span class='line-number'>6</span><br/><span class='line-number'>7</span><br/><span class='line-number'>8</span><br/><span class='line-number'>9</span><br/><span class='line-number'>10</span><br/><span class='line-number'>11</span><br/><span class='line-number'>12</span><br/><span class='line-number'>13</span><br/></pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&gt;&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="s2">&quot;obj&quot;</span><br/></span><span class='line'><span class="o">&gt;&gt;</span> <span class="k">def</span> <span class="nc">a</span><span class="o">.</span><span class="nf">hello_self</span><br/></span><span class='line'><span class="o">&gt;&gt;</span> <span class="nb">puts</span> <span class="s2">&quot;hello </span><span class="si">#{</span><span class="nb">self</span><span class="si">}</span><span class="s2">&quot;</span><br/></span><span class='line'><span class="o">&gt;&gt;</span> <span class="k">end</span><br/></span><span class='line'><span class="o">&gt;&gt;</span> <span class="n">b</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">dup</span><br/></span><span class='line'><span class="o">=&gt;</span> <span class="s2">&quot;obj&quot;</span><br/></span><span class='line'><span class="o">&gt;&gt;</span> <span class="n">b</span><span class="o">.</span><span class="n">hello_self</span><br/></span><span class='line'><span class="no">NoMethodError</span><span class="p">:</span> <span class="n">undefined</span> <span class="nb">method</span> <span class="sb">`hello_self&#39; for &quot;obj&quot;:String</span><br/></span><span class='line'><span class="sb">    from (irb):90</span><br/></span><span class='line'><span class="sb">&gt;&gt; b = a.clone</span><br/></span><span class='line'><span class="sb">=&gt; &quot;obj&quot;</span><br/></span><span class='line'><span class="sb">&gt;&gt; b.hello_self</span><br/></span><span class='line'><span class="sb">hello obj</span><br/></span></code></pre></td></tr></table></div></figure></p><p>其实有本回上述的这些功能，即便是没有class，Ruby也可以作为一种Prototype(类似JavaScript)的面向对象语言了。</p><p>你可以建立一个对象，生成默认的实例变量，把行为作为单例方法定以在这个对象的影子类上，然后用clone生成千千万万个实例。当然这样比较麻烦，但却是可行的途径之一。</p><p>其他Object API<br/>对象还有很多其他的功能，比如可以freeze,另外dup跟clone也有一些其他的引用上面的区别，dup只复制引用，clone会吧引用的对象也复制。</p><p>这些都可以在Object类(Ruby所有对象的父类)API上找到，可以查看apidock.com的文档</p><p>例如关于dup</p><p>.dup() produces a shallow copy of obj—the instance variables of obj are copied, but not the objects they reference. dup copies the tainted state of obj. See also the discussion under Object#clone. In general, clone and dup may have different semantics in descendant classes. While clone is used to duplicate an object, including its internal state, dup typically uses the class of the descendant object to create the new instance.</p></blockquote>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Ruby和元编程的故事 - 第0回: 欲练神功，必先自废武功]]></title>
+    <link href="http://tech-blog.blogbin.info/blog/2012/08/16/a-story-about-ruby-and-metaprogramming-ruby-1/"/>
+    <updated>2012-08-16T08:01:00+08:00</updated>
+    <id>http://tech-blog.blogbin.info/blog/2012/08/16/a-story-about-ruby-and-metaprogramming-ruby-1</id>
+    <content type="html"><![CDATA[<p>参阅：
+Hisea <a href="http://hisea.me/">http://hisea.me/</a>
+的Ruby和元编程的故事 - 第0回: 欲练神功，必先自废武功</p>
+
+<p>介绍了 Ruby 和元编程的一些特点，主要是在一些思维上的改变，特别是从 Java 等其它语言过来的人。</p>
+
+<p><a href="http://ruby-china.org/topics/1171">http://ruby-china.org/topics/1171</a></p>
+
+<h5>1. 注意动态语言和动态类型的区别，动态类型仅为动态语言其中一个部分。</h5>
+
+<blockquote><p>动态语言:<br/>动态语言的定义还很模糊，很多人把动态语言跟动态类型语言搞混，对于Hisea来说，动态语言就是类，方法，及其他定义可以在运行时进行改变，元编程就是利用这一特性。由此可见，动态语言跟动态类型语言并不是一个概念.</p></blockquote>
+
+
+
+
+<!--more-->
+
+
+<h5>2. 推崇模块混入或者扩展的方式增加 API 功能，而非事事皆继承。</h5>
+
+<p>ps: 打开类也是一种途径。</p>
+
+<blockquote><p>父类的作用仅仅是定义了API的存在，这在Java中是非常常见的，可是在Ruby中，这个父类其实存在的意义不是特别大。Ruby更倾向于,任何能起飞(拥有‘起飞’方法)的对象都是飞行器，而不是任何继承飞行器的类的对象。</p><p>  1. 需要用继承分享代码么？ ActiveRecord需要你继承ActiveRecord::Base,例如:<br/><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span><br/><span class='line-number'>2</span><br/></pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Post</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span><br/></span><span class='line'><span class="k">end</span><br/></span></code></pre></td></tr></table></div></figure><br/>Hisea本人觉得类似Mongoid的Mixin方式更适合解决类似的问题。 Post从设计逻辑上来讲,跟ActiveRecord::Base没有半毛钱关系。继承关系完全用于分享代码，而在Ruby中，更好的分享代码的办法是用Mixin.</p></blockquote>
+
+
+<h5>3. 个人认为 UML 仍是需要的</h5>
+
+<p>特别是项目中涉及到十几以上模型的时候，模型相互之间关系通过 UML 等方式更容易展现。关键是要及时更新和维护。</p>
+
+<blockquote><p>4,忘记UML(或其他)设计大法<br/>这个话题是3的继续，公司新招了一个Ruby程序员，他来了一两个星期后问了个问题，问为什么公司(或者其他Ruby程序员)不爱用UML之类的设计工具，当时我也一时找不出答案，后来开车回家的路上用半个小时想明白了，UML是一个类只见关系的静态表示，Ruby运行时的情况却是不停在变幻。用静态去表示动态，自然捉襟见肘。</p></blockquote>
+
+
+<h5>4. 好的 IDE 对 Ruby 开发有一定好处的</h5>
+
+<p>比如  RubyMine :</p>
+
+<ol>
+<li>调试功能不错，可以运行时调试，设置断点，查看变量。。。</li>
+<li>支持一定类，模块，动法以及变量的查找，遇上 IDE 无法直接识别的，会列一个清单让用户选择</li>
+</ol>
+
+
+<p>唯一不好的地方就是，RubyMine 是用 Java 做的，占内存，运行有时会卡，最好机器配置为 intel Core i5，8 G 内存以上，用 SSD 固态硬盘更好。</p>
+
+<blockquote><p>5.为什么不用IDE?<br/>很多从Java阵营转来，尤其是有多年eclipse经验的Ruby初学者尤其是经常爱问，Ruby用什么IDE。</p><p><br/>得到的回答往往是text mate,vim,sublime text 2等等文本编辑器。</p><p><br/>很多人可能纳闷，为什么Ruby/Rails没有一个IDE占领大片江山的情况，为什么Netbeans／Eclipse再Ruby开发阵营中没有其他语言开发占的地位重要。</p><p>其实答案很简单。</p><p><br/>  1. IDE最讨喜的功能是什么？</p><p><br/>很多用惯了IDE开发的Java程序员甚至XCode程序员，都会说最爱的功能是代码不全，object之后按一下&#8217;.&#8217;立马生成一个方法列表。转到Ruby用文本编辑器，没有这个功能，很是郁闷。其实道理很简单，如果方法都是动态生成的，在写程序的时候怎么能给出一个列表呢。</p><p><br/>  2. Debugger还是必要工具么？</p><p><br/>静态语言开发，调试是居家旅行杀人灭口必备良药。而IDE又是调试的好帮手。</p><p>Ruby／Rails的Debugger还没那么成熟，而且如果用logger, raise在适当的地方输出inspect, to_yaml等内容，也可以很容易的找到错误。</p><p><br/>  3. Eclipse可以很好的配置Java开发环境。</p><p>Ruby/Rails有好用的RVM,RubyGems,Bundler.</p><p><br/>所以，不补全，不调试，不配环境，要IDE不也是拿来当文本编辑器用么</p></blockquote>
 
 ]]></content>
   </entry>
