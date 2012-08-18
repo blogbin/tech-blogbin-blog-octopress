@@ -5,14 +5,14 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Category: Gem - Tech.Blogbin's Blog</title>
+  <title>sinaweibo python sdk - Tech.Blogbin's Blog</title>
 
   <meta name="alexaVerifyID" content="-6pNt74TSllotvjLFDIa77kSKLI" />
 
   <meta name="author" content="Tech Blogbin <tech.blogbin@gmail.com>">
 
   
-  <meta name="description" content="Category: Gem">
+  <meta name="description" content="Python 客户端需要访问新浪微博 API，参照官方推荐的 Python SDK： http://michaelliao.github.com/sinaweibopy/d 发现自己使用的 Python 版本为 2.4，不支持 if &#8230; then 同在一行的语法。调整举例： weibo &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -21,7 +21,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://tech-blog.blogbin.infoblog/categories/gem/">
+  <link rel="canonical" href="http://tech-blog.blogbin.info/blog/2012/08/18/sinaweibo-python-sdk/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -80,36 +80,118 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Category: Gem</h1>
+    
+      <h1 class="entry-title">Sinaweibo Python Sdk</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-18T20:57:00+08:00" pubdate data-updated="true">Aug 18<span>th</span>, 2012</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives" class="category">
 
 
+<div class="entry-content"><p>Python 客户端需要访问新浪微博 API，参照官方推荐的 Python SDK：</p>
 
-  
-  <h2>2012</h2>
+<p><a href="http://michaelliao.github.com/sinaweibopy/">http://michaelliao.github.com/sinaweibopy/d</a></p>
 
-<article>
-  
-<h1><a href="/blog/2012/08/18/gem-install-rmagick-on-apple-macos-x-mountain-lion-10-dot-8/">Gem install RMagick on Apple MacOS X Mountain Lion 10.8</a></h1>
-<time datetime="2012-08-18T20:14:00+08:00" pubdate><span class='month'>Aug</span> <span class='day'>18</span> <span class='year'>2012</span></time>
+<p>发现自己使用的 Python 版本为 2.4，不支持 if &#8230; then 同在一行的语法。调整举例：</p>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/apple/'>Apple</a>, <a class='category' href='/blog/categories/bundle/'>Bundle</a>, <a class='category' href='/blog/categories/bundler/'>Bundler</a>, <a class='category' href='/blog/categories/gem/'>Gem</a>, <a class='category' href='/blog/categories/gemfile/'>Gemfile</a>, <a class='category' href='/blog/categories/macos-x/'>MacOS X</a>, <a class='category' href='/blog/categories/mountain-lion-10-8/'>Mountain Lion 10.8</a>, <a class='category' href='/blog/categories/rmagick/'>RMagick</a>, <a class='category' href='/blog/categories/rails/'>Rails</a>, <a class='category' href='/blog/categories/ror/'>RoR</a>, <a class='category' href='/blog/categories/ruby/'>Ruby</a>, <a class='category' href='/blog/categories/rubyonrails/'>RubyOnRails</a></span>
-</footer>
+<figure class='code'><figcaption><span>weibo.py </span><a href='https://github.com/blogbin/sinaweibopy/raw/9ea1bf949dbdf49153b50e9a2c787847d348fc9e/src/weibo.py'>link</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="c">#data.append(v.encode(&#39;utf-8&#39;) if isinstance(v, unicode) else v)</span>
+</span><span class='line'><span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="nb">unicode</span><span class="p">):</span>
+</span><span class='line'>    <span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">&#39;utf-8&#39;</span><span class="p">))</span>
+</span><span class='line'><span class="k">else</span><span class="p">:</span>
+</span><span class='line'>    <span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">v</span> <span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
-</article>
+<p>在 GitHub 发起一个 Pull Request 请求：</p>
 
+<p><a href="https://github.com/michaelliao/sinaweibopy/pull/2">https://github.com/michaelliao/sinaweibopy/pull/2</a></p>
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">Tech Blogbin <tech.blogbin@gmail.com></span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-18T20:57:00+08:00" pubdate data-updated="true">Aug 18<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/python/'>Python</a>, <a class='category' href='/blog/categories/sina-weibo-sdk/'>Sina Weibo SDK</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://tech-blog.blogbin.info/blog/2012/08/18/sinaweibo-python-sdk/" data-via="tech_blogbin" data-counturl="http://tech-blog.blogbin.info/blog/2012/08/18/sinaweibo-python-sdk/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2012/08/18/gem-install-rmagick-on-apple-macos-x-mountain-lion-10-dot-8/" title="Previous Post: Gem install RMagick on Apple MacOS X Mountain Lion 10.8">&laquo; Gem install RMagick on Apple MacOS X Mountain Lion 10.8</a>
+      
+      
+    </p>
+  </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -243,7 +325,10 @@
       var disqus_shortname = 'tech-blogbin-blog';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://tech-blog.blogbin.info/blog/2012/08/18/sinaweibo-python-sdk/';
+        var disqus_url = 'http://tech-blog.blogbin.info/blog/2012/08/18/sinaweibo-python-sdk/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
