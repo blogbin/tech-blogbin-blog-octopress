@@ -5,15 +5,15 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>申思维 @sg552sg552 meta ruby programming - Tech.Blogbin's Blog</title>
+  <title>Using binarylogic/settingslogic - Tech.Blogbin's Blog</title>
 
   <meta name="alexaVerifyID" content="-6pNt74TSllotvjLFDIa77kSKLI" />
 
   <meta name="author" content="Tech Blogbin <tech.blogbin@gmail.com>">
 
   
-  <meta name="description" content="申思维 @sg552sg552 非常热情，主动告知我 PPT 的下载地址，非常感谢！ 参阅： [北京][2012年08月11日] Ruby 活动公告+媒体资料+小结 » 社区 | Ruby China
-http://ruby-china.org/topics/4662 PPT：meta &hellip;">
+  <meta name="description" content="Rails 项目中有一些全局配置信息需要保存在文件中，采用 binarylogic/settingslogic 来管理这些配置信息： 参阅：
+binarylogic/settingslogic https://github.com/binarylogic/settingslogic 介紹 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -22,7 +22,7 @@ http://ruby-china.org/topics/4662 PPT：meta &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://tech-blog.blogbin.info/blog/2012/08/14/shen-si-wei-at-sg552sg552-meta-ruby-programming/">
+  <link rel="canonical" href="http://tech-blog.blogbin.info/blog/2012/08/22/using-binarylogic-slash-settingslogic/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -85,7 +85,7 @@ http://ruby-china.org/topics/4662 PPT：meta &hellip;">
   
   <header>
     
-      <h1 class="entry-title">申思维 @sg552sg552 Meta Ruby Programming</h1>
+      <h1 class="entry-title">Using Binarylogic/settingslogic</h1>
     
     
       <p class="meta">
@@ -101,7 +101,7 @@ http://ruby-china.org/topics/4662 PPT：meta &hellip;">
   
 
 
-<time datetime="2012-08-14T12:47:00+08:00" pubdate data-updated="true">Aug 14<span>th</span>, 2012</time>
+<time datetime="2012-08-22T22:00:00+08:00" pubdate data-updated="true">Aug 22<span>nd</span>, 2012</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -110,72 +110,99 @@ http://ruby-china.org/topics/4662 PPT：meta &hellip;">
   </header>
 
 
-<div class="entry-content"><p>申思维 @sg552sg552 非常热情，主动告知我 PPT 的下载地址，非常感谢！</p>
+<div class="entry-content"><p>Rails 项目中有一些全局配置信息需要保存在文件中，采用 binarylogic/settingslogic 来管理这些配置信息：</p>
 
-<p>参阅：</p>
+<p>参阅：
+binarylogic/settingslogic <a href="https://github.com/binarylogic/settingslogic">https://github.com/binarylogic/settingslogic</a></p>
 
-<p>[北京][2012年08月11日] Ruby 活动公告+媒体资料+小结 » 社区 | Ruby China
-<a href="http://ruby-china.org/topics/4662">http://ruby-china.org/topics/4662</a></p>
+<p>介紹 Settingslogic | Beryllium Work <a href="http://blog.berylliumwork.com/2012/02/settingslogic.html">http://blog.berylliumwork.com/2012/02/settingslogic.html</a></p>
 
-<p>PPT：meta programming ruby // Speaker Deck
-<a href="https://speakerdeck.com/u/sg552sg552/p/meta-programming-ruby">https://speakerdeck.com/u/sg552sg552/p/meta-programming-ruby</a></p>
+<p>假设 config 有配置文件：</p>
 
-<p>MP3：<a href="http://vdisk.weibo.com/s/alUOz">http://vdisk.weibo.com/s/alUOz</a></p>
-
-<p>一些总结：</p>
-
-<!--more-->
-
-
-<h5>1. const_set 和 const_get 操作常量的用法</h5>
-
-<blockquote><p><img src="/images/2012-08-14-shen-si-wei-at-sg552sg552-meta-ruby-programming/core_methods.jpeg"></p></blockquote>
-
-
-<h5>2. 举例子说明：动态方法的好处，减少代码冗余</h5>
-
-<blockquote><p><img src="/images/2012-08-14-shen-si-wei-at-sg552sg552-meta-ruby-programming/refactoring.jpeg"></p></blockquote>
-
-
-<h5>3. %Q{} 语法使用，表示一行字符串</h5>
-
-<blockquote><p><img src="/images/2012-08-14-shen-si-wei-at-sg552sg552-meta-ruby-programming/basic_class_eval.jpeg"></p></blockquote>
-
-
-<h5>4. class_variables，class_variable_defined? 和 <em>get, </em>set 方法的使用</h5>
-
-<blockquote><p><img src="/images/2012-08-14-shen-si-wei-at-sg552sg552-meta-ruby-programming/basic_class_variables.jpeg"></p></blockquote>
-
-
-<h5>5. remove_const 和 const_set 对常量的动态操作</h5>
-
-<blockquote><p><img src="/images/2012-08-14-shen-si-wei-at-sg552sg552-meta-ruby-programming/substitude_class.jpeg"></p></blockquote>
-
-
-<p>想了半天才明白，Symbal 估计实现 Symbal#to_proc 方法：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span>settings.yml</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Symbal</span>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">to_proc</span>
-</span><span class='line'>    <span class="no">Proc</span><span class="o">.</span><span class="n">new</span> <span class="p">{</span> <span class="o">|</span> <span class="n">x</span> <span class="o">|</span> <span class="n">x</span><span class="o">.</span><span class="n">send</span> <span class="nb">self</span> <span class="p">}</span>
-</span><span class='line'>  <span class="k">end</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">default</span><span class="p">:</span> <span class="o">*</span><span class="n">default</span>
+</span><span class='line'>  <span class="n">server_url</span><span class="p">:</span>
+</span><span class='line'>    <span class="n">check_sensitive_data</span><span class="p">:</span> <span class="s2">&quot;http://localhst:3000/bad_word_checker/check.json&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">development</span><span class="p">:</span>
+</span><span class='line'>  <span class="o">&lt;&lt;</span><span class="p">:</span> <span class="o">*</span><span class="n">default</span>
+</span><span class='line'>  <span class="n">server_url</span><span class="p">:</span>
+</span><span class='line'>    <span class="n">check_sensitive_data</span><span class="p">:</span> <span class="s2">&quot;http://localhst:3001/bad_word_checker/check.json&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">test</span><span class="p">:</span>
+</span><span class='line'>  <span class="o">&lt;&lt;</span><span class="p">:</span> <span class="o">*</span><span class="n">default</span>
+</span><span class='line'>  <span class="n">server_url</span><span class="p">:</span>
+</span><span class='line'>    <span class="n">check_sensitive_data</span><span class="p">:</span> <span class="s2">&quot;http://localhst:3002/bad_word_checker/check.json&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">production</span><span class="p">:</span>
+</span><span class='line'>  <span class="o">&lt;&lt;</span><span class="p">:</span> <span class="o">*</span><span class="n">default</span>
+</span><span class='line'>  <span class="n">server_url</span><span class="p">:</span>
+</span><span class='line'>    <span class="n">check_sensitive_data</span><span class="p">:</span> <span class="s2">&quot;http://localhst:3003/bad_word_checker/check.json&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<!--more-->
+
+
+<p>访问配置信息的代码比较丑陋，如</p>
+
+<figure class='code'><figcaption><span>settings.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">SYS_CONFIG</span> <span class="o">=</span> <span class="no">YAML</span><span class="o">.</span><span class="n">load_file</span><span class="p">(</span><span class="no">Rails</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;config/sys_config.yml&quot;</span><span class="p">))</span><span class="o">[</span><span class="no">Rails</span><span class="o">.</span><span class="n">env</span><span class="o">]</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">puts</span> <span class="no">SYS_CONFIG</span><span class="o">[</span><span class="s2">&quot;server_url&quot;</span><span class="o">][</span><span class="s2">&quot;check_sensitive_data&quot;</span><span class="o">]</span>     <span class="c1"># =&gt; &quot;http://localhst:3001/bad_word_checker/check.json&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>如果采用 settingslogic，先创建 settings.rb 文件</p>
+
+<figure class='code'><figcaption><span>app/model/settings.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># encoding: UTF-8</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">#binarylogic/settingslogic</span>
+</span><span class='line'><span class="c1">#https://github.com/binarylogic/settingslogic</span>
+</span><span class='line'><span class="k">class</span> <span class="nc">Settings</span> <span class="o">&lt;</span> <span class="no">Settingslogic</span>
+</span><span class='line'>  <span class="n">source</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="no">Rails</span><span class="o">.</span><span class="n">root</span><span class="si">}</span><span class="s2">/config/settings.yml&quot;</span>
+</span><span class='line'>  <span class="n">namespace</span> <span class="no">Rails</span><span class="o">.</span><span class="n">env</span>
 </span><span class='line'><span class="k">end</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<h5>6. 适合迭代中，对每一个其中的元素做一次 Symbal 对象对应的方法调用。</h5>
+<p>通过 Settings 来访问配置信息，如：</p>
 
-<blockquote><p><img src="/images/2012-08-14-shen-si-wei-at-sg552sg552-meta-ruby-programming/symbol_to_proc.jpeg"></p></blockquote>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">puts</span> <span class="no">Settings</span><span class="o">.</span><span class="n">server_url</span><span class="o">.</span><span class="n">check_sensitive_data</span>    <span class="c1"># =&gt; &quot;http://localhst:3001/bad_word_checker/check.json&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
-<h5>7. stub 方法实现测试中 Mock 的功能，估计 stub 方法实现是通过 Module#define_method 重新定义了方法，返回代码块执行的结果。</h5>
-
-<blockquote><p><img src="/images/2012-08-14-shen-si-wei-at-sg552sg552-meta-ruby-programming/symbol_to_proc.jpeg"></p></blockquote>
-
+<p>看看，不需要指定 yml 文件和 env 环境，非常容易。</p>
 </div>
 
 
@@ -198,12 +225,12 @@ http://ruby-china.org/topics/4662 PPT：meta &hellip;">
   
 
 
-<time datetime="2012-08-14T12:47:00+08:00" pubdate data-updated="true">Aug 14<span>th</span>, 2012</time>
+<time datetime="2012-08-22T22:00:00+08:00" pubdate data-updated="true">Aug 22<span>nd</span>, 2012</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/metaprogramming-ruby/'>MetaProgramming Ruby</a>, <a class='category' href='/blog/categories/ruby/'>Ruby</a>
+    <a class='category' href='/blog/categories/bundle/'>Bundle</a>, <a class='category' href='/blog/categories/bundler/'>Bundler</a>, <a class='category' href='/blog/categories/gem/'>Gem</a>, <a class='category' href='/blog/categories/gemfile/'>Gemfile</a>, <a class='category' href='/blog/categories/github/'>GitHub</a>, <a class='category' href='/blog/categories/rails/'>Rails</a>, <a class='category' href='/blog/categories/ror/'>RoR</a>, <a class='category' href='/blog/categories/ruby/'>Ruby</a>, <a class='category' href='/blog/categories/rubyonrails/'>RubyOnRails</a>, <a class='category' href='/blog/categories/settingslogic/'>Settingslogic</a>, <a class='category' href='/blog/categories/binarylogic/'>binarylogic</a>
   
 </span>
 
@@ -212,7 +239,7 @@ http://ruby-china.org/topics/4662 PPT：meta &hellip;">
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://tech-blog.blogbin.info/blog/2012/08/14/shen-si-wei-at-sg552sg552-meta-ruby-programming/" data-via="tech_blogbin" data-counturl="http://tech-blog.blogbin.info/blog/2012/08/14/shen-si-wei-at-sg552sg552-meta-ruby-programming/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://tech-blog.blogbin.info/blog/2012/08/22/using-binarylogic-slash-settingslogic/" data-via="tech_blogbin" data-counturl="http://tech-blog.blogbin.info/blog/2012/08/22/using-binarylogic-slash-settingslogic/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -225,10 +252,8 @@ http://ruby-china.org/topics/4662 PPT：meta &hellip;">
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2012/08/13/the-metaprogramming-charm-reflection/" title="Previous Post: 元编程的魅力——反射机制 - 逸光 - (_2b || ! _2b).is_a? Question">&laquo; 元编程的魅力——反射机制 - 逸光 - (_2b || ! _2b).is_a? Question</a>
+        <a class="basic-alignment left" href="/blog/2012/08/22/monitoring-server-performance-with-new-relic/" title="Previous Post: Monitoring server performance with New Relic">&laquo; Monitoring server performance with New Relic</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2012/08/14/buying-domain-and-configuring-domain-for-githubs-octopress/" title="Next Post: 购买个人域名以及为部署在 GitHub 的Octopress 配置个人域名">购买个人域名以及为部署在 GitHub 的Octopress 配置个人域名 &raquo;</a>
       
     </p>
   </footer>
@@ -373,8 +398,8 @@ http://ruby-china.org/topics/4662 PPT：meta &hellip;">
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://tech-blog.blogbin.info/blog/2012/08/14/shen-si-wei-at-sg552sg552-meta-ruby-programming/';
-        var disqus_url = 'http://tech-blog.blogbin.info/blog/2012/08/14/shen-si-wei-at-sg552sg552-meta-ruby-programming/';
+        var disqus_identifier = 'http://tech-blog.blogbin.info/blog/2012/08/22/using-binarylogic-slash-settingslogic/';
+        var disqus_url = 'http://tech-blog.blogbin.info/blog/2012/08/22/using-binarylogic-slash-settingslogic/';
         var disqus_script = 'embed.js';
       
     (function () {

@@ -4,7 +4,7 @@
   <title><![CDATA[Tech.Blogbin's Blog]]></title>
   <link href="http://tech-blog.blogbin.info/atom.xml" rel="self"/>
   <link href="http://tech-blog.blogbin.info/"/>
-  <updated>2012-08-22T21:47:07+08:00</updated>
+  <updated>2012-08-22T22:11:02+08:00</updated>
   <id>http://tech-blog.blogbin.info/</id>
   <author>
     <name><![CDATA[Tech Blogbin ]]></name>
@@ -12,6 +12,107 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Using binarylogic/settingslogic]]></title>
+    <link href="http://tech-blog.blogbin.info/blog/2012/08/22/using-binarylogic-slash-settingslogic/"/>
+    <updated>2012-08-22T22:00:00+08:00</updated>
+    <id>http://tech-blog.blogbin.info/blog/2012/08/22/using-binarylogic-slash-settingslogic</id>
+    <content type="html"><![CDATA[<p>Rails 项目中有一些全局配置信息需要保存在文件中，采用 binarylogic/settingslogic 来管理这些配置信息：</p>
+
+<p>参阅：
+binarylogic/settingslogic <a href="https://github.com/binarylogic/settingslogic">https://github.com/binarylogic/settingslogic</a></p>
+
+<p>介紹 Settingslogic | Beryllium Work <a href="http://blog.berylliumwork.com/2012/02/settingslogic.html">http://blog.berylliumwork.com/2012/02/settingslogic.html</a></p>
+
+<p>假设 config 有配置文件：</p>
+
+<figure class='code'><figcaption><span>settings.yml</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">default</span><span class="p">:</span> <span class="o">*</span><span class="n">default</span>
+</span><span class='line'>  <span class="n">server_url</span><span class="p">:</span>
+</span><span class='line'>    <span class="n">check_sensitive_data</span><span class="p">:</span> <span class="s2">&quot;http://localhst:3000/bad_word_checker/check.json&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">development</span><span class="p">:</span>
+</span><span class='line'>  <span class="o">&lt;&lt;</span><span class="p">:</span> <span class="o">*</span><span class="n">default</span>
+</span><span class='line'>  <span class="n">server_url</span><span class="p">:</span>
+</span><span class='line'>    <span class="n">check_sensitive_data</span><span class="p">:</span> <span class="s2">&quot;http://localhst:3001/bad_word_checker/check.json&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">test</span><span class="p">:</span>
+</span><span class='line'>  <span class="o">&lt;&lt;</span><span class="p">:</span> <span class="o">*</span><span class="n">default</span>
+</span><span class='line'>  <span class="n">server_url</span><span class="p">:</span>
+</span><span class='line'>    <span class="n">check_sensitive_data</span><span class="p">:</span> <span class="s2">&quot;http://localhst:3002/bad_word_checker/check.json&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">production</span><span class="p">:</span>
+</span><span class='line'>  <span class="o">&lt;&lt;</span><span class="p">:</span> <span class="o">*</span><span class="n">default</span>
+</span><span class='line'>  <span class="n">server_url</span><span class="p">:</span>
+</span><span class='line'>    <span class="n">check_sensitive_data</span><span class="p">:</span> <span class="s2">&quot;http://localhst:3003/bad_word_checker/check.json&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<!--more-->
+
+
+<p>访问配置信息的代码比较丑陋，如</p>
+
+<figure class='code'><figcaption><span>settings.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">SYS_CONFIG</span> <span class="o">=</span> <span class="no">YAML</span><span class="o">.</span><span class="n">load_file</span><span class="p">(</span><span class="no">Rails</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;config/sys_config.yml&quot;</span><span class="p">))</span><span class="o">[</span><span class="no">Rails</span><span class="o">.</span><span class="n">env</span><span class="o">]</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">puts</span> <span class="no">SYS_CONFIG</span><span class="o">[</span><span class="s2">&quot;server_url&quot;</span><span class="o">][</span><span class="s2">&quot;check_sensitive_data&quot;</span><span class="o">]</span>     <span class="c1"># =&gt; &quot;http://localhst:3001/bad_word_checker/check.json&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>如果采用 settingslogic，先创建 settings.rb 文件</p>
+
+<figure class='code'><figcaption><span>app/model/settings.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># encoding: UTF-8</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">#binarylogic/settingslogic</span>
+</span><span class='line'><span class="c1">#https://github.com/binarylogic/settingslogic</span>
+</span><span class='line'><span class="k">class</span> <span class="nc">Settings</span> <span class="o">&lt;</span> <span class="no">Settingslogic</span>
+</span><span class='line'>  <span class="n">source</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="no">Rails</span><span class="o">.</span><span class="n">root</span><span class="si">}</span><span class="s2">/config/settings.yml&quot;</span>
+</span><span class='line'>  <span class="n">namespace</span> <span class="no">Rails</span><span class="o">.</span><span class="n">env</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>通过 Settings 来访问配置信息，如：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">puts</span> <span class="no">Settings</span><span class="o">.</span><span class="n">server_url</span><span class="o">.</span><span class="n">check_sensitive_data</span>    <span class="c1"># =&gt; &quot;http://localhst:3001/bad_word_checker/check.json&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>看看，不需要指定 yml 文件和 env 环境，非常容易。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Monitoring server performance with New Relic]]></title>

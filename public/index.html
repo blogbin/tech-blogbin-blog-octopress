@@ -12,9 +12,8 @@
   <meta name="author" content="Tech Blogbin <tech.blogbin@gmail.com>">
 
   
-  <meta name="description" content="使用 New Relic 监控服务端性能，优点： 免费帐号可以监控任意数量服务器常规性能指标，如 CPU, Memory, DISK, I/O 和 Network；
-被监控的服务器采用 rpm + yum 方式安装监控代理，安装无损系统；
-监控数据主动发送到 New Relic， &hellip;">
+  <meta name="description" content="Rails 项目中有一些全局配置信息需要保存在文件中，采用 binarylogic/settingslogic 来管理这些配置信息： 参阅：
+binarylogic/settingslogic https://github.com/binarylogic/settingslogic 介紹 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -83,6 +82,97 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/08/22/using-binarylogic-slash-settingslogic/">Using Binarylogic/settingslogic</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-22T22:00:00+08:00" pubdate data-updated="true">Aug 22<span>nd</span>, 2012</time>
+        
+         | <a href="/blog/2012/08/22/using-binarylogic-slash-settingslogic/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Rails 项目中有一些全局配置信息需要保存在文件中，采用 binarylogic/settingslogic 来管理这些配置信息：</p>
+
+<p>参阅：
+binarylogic/settingslogic <a href="https://github.com/binarylogic/settingslogic">https://github.com/binarylogic/settingslogic</a></p>
+
+<p>介紹 Settingslogic | Beryllium Work <a href="http://blog.berylliumwork.com/2012/02/settingslogic.html">http://blog.berylliumwork.com/2012/02/settingslogic.html</a></p>
+
+<p>假设 config 有配置文件：</p>
+
+<figure class='code'><figcaption><span>settings.yml</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">default</span><span class="p">:</span> <span class="o">*</span><span class="n">default</span>
+</span><span class='line'>  <span class="n">server_url</span><span class="p">:</span>
+</span><span class='line'>    <span class="n">check_sensitive_data</span><span class="p">:</span> <span class="s2">&quot;http://localhst:3000/bad_word_checker/check.json&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">development</span><span class="p">:</span>
+</span><span class='line'>  <span class="o">&lt;&lt;</span><span class="p">:</span> <span class="o">*</span><span class="n">default</span>
+</span><span class='line'>  <span class="n">server_url</span><span class="p">:</span>
+</span><span class='line'>    <span class="n">check_sensitive_data</span><span class="p">:</span> <span class="s2">&quot;http://localhst:3001/bad_word_checker/check.json&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">test</span><span class="p">:</span>
+</span><span class='line'>  <span class="o">&lt;&lt;</span><span class="p">:</span> <span class="o">*</span><span class="n">default</span>
+</span><span class='line'>  <span class="n">server_url</span><span class="p">:</span>
+</span><span class='line'>    <span class="n">check_sensitive_data</span><span class="p">:</span> <span class="s2">&quot;http://localhst:3002/bad_word_checker/check.json&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">production</span><span class="p">:</span>
+</span><span class='line'>  <span class="o">&lt;&lt;</span><span class="p">:</span> <span class="o">*</span><span class="n">default</span>
+</span><span class='line'>  <span class="n">server_url</span><span class="p">:</span>
+</span><span class='line'>    <span class="n">check_sensitive_data</span><span class="p">:</span> <span class="s2">&quot;http://localhst:3003/bad_word_checker/check.json&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2012/08/22/using-binarylogic-slash-settingslogic/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -652,63 +742,6 @@ Hisea <a href="http://hisea.me/">http://hisea.me/</a>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/08/16/a-story-about-ruby-and-metaprogramming-ruby-0/">Hisea&#8217;s Ruby和元编程的故事 - 第0回: 欲练神功，必先自废武功</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-08-16T08:01:00+08:00" pubdate data-updated="true">Aug 16<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/08/16/a-story-about-ruby-and-metaprogramming-ruby-0/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>参阅：
-Hisea <a href="http://hisea.me/">http://hisea.me/</a></p>
-
-<p>Ruby和元编程的故事 - 第0回: 欲练神功，必先自废武功</p>
-
-<p><a href="http://ruby-china.org/topics/1171">http://ruby-china.org/topics/1171</a></p>
-
-<p>介绍了 Ruby 和元编程的一些特点，主要是在一些思维上的改变，特别是从 Java 等其它语言过来的人。</p>
-
-<h5>1. 注意动态语言和动态类型的区别，动态类型仅为动态语言其中一个部分。</h5>
-
-<blockquote><p>动态语言:<br/>动态语言的定义还很模糊，很多人把动态语言跟动态类型语言搞混，对于Hisea来说，动态语言就是类，方法，及其他定义可以在运行时进行改变，元编程就是利用这一特性。由此可见，动态语言跟动态类型语言并不是一个概念.</p></blockquote>
-
-
-
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2012/08/16/a-story-about-ruby-and-metaprogramming-ruby-0/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -726,6 +759,10 @@ Hisea <a href="http://hisea.me/">http://hisea.me/</a></p>
 <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2012/08/22/using-binarylogic-slash-settingslogic/">Using binarylogic/settingslogic</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2012/08/22/monitoring-server-performance-with-new-relic/">Monitoring server performance with New Relic</a>
@@ -761,10 +798,6 @@ Hisea <a href="http://hisea.me/">http://hisea.me/</a></p>
     
       <li class="post">
         <a href="/blog/2012/08/16/a-story-about-ruby-and-metaprogramming-ruby-1/">Ruby和元编程的故事 - 第0回: 欲练神功，必先自废武功</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/08/16/a-story-about-ruby-and-metaprogramming-ruby-0/">Hisea&#8217;s Ruby和元编程的故事 - 第0回: 欲练神功，必先自废武功</a>
       </li>
     
   </ul>
