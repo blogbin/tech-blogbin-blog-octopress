@@ -12,9 +12,9 @@
   <meta name="author" content="Tech Blogbin <tech.blogbin@gmail.com>">
 
   
-  <meta name="description" content="需要在 Rails 返回 json 格式的内容。虽然 Ruby 或者 Rails 内置对对象转为 json 的支持。
-但对于自定义的 json 格式和内容。 推荐使用 DHH 开发的Gem： rails/jbuilder
-https://github.com/rails/jbuilder &hellip;">
+  <meta name="description" content="使用 New Relic 监控服务端性能，优点： 免费帐号可以监控任意数量服务器常规性能指标，如 CPU, Memory, DISK, I/O 和 Network；
+被监控的服务器采用 rpm + yum 方式安装监控代理，安装无损系统；
+监控数据主动发送到 New Relic， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -83,6 +83,78 @@ https://github.com/rails/jbuilder &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/08/22/monitoring-server-performance-with-new-relic/">Monitoring Server Performance With New Relic</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-22T21:21:00+08:00" pubdate data-updated="true">Aug 22<span>nd</span>, 2012</time>
+        
+         | <a href="/blog/2012/08/22/monitoring-server-performance-with-new-relic/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>使用 New Relic 监控服务端性能，优点：</p>
+
+<ol>
+<li><p>免费帐号可以监控任意数量服务器常规性能指标，如 CPU, Memory, DISK, I/O 和 Network；</p></li>
+<li><p>被监控的服务器采用 rpm + yum 方式安装监控代理，安装无损系统；</p></li>
+<li><p>监控数据主动发送到 New Relic，一般无需调整防火墙策略；</p></li>
+<li><p>New Relic 和 Rails 核心团队合作，可以深入监控 Rails 项目执行情况，但这需要收费，或者申请试用一段时间；</p></li>
+</ol>
+
+
+<p>和 Zabbix 相比，省去本地安装监控中心的工作，本地监控代理安装也非常简单。</p>
+
+<p>参阅：
+Web Application Performance Management (APM) : New Relic
+<a href="www.newrelic.com">www.newrelic.com</a></p>
+
+<p>安装过程非常简单，以 CentOS 6.2 为例，执行以下命令：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo rpm -Uvh http://download.newrelic.com/pub/newrelic/el5/i386/newrelic-repo-5-3.noarch.rpm
+</span><span class='line'>
+</span><span class='line'>sudo yum install -y newrelic-sysmond
+</span><span class='line'>
+</span><span class='line'># 其中 a56esdse7cfdsfa5a49fbfdsdsfdsd1wewfwfew28 为您的监控 license_key
+</span><span class='line'>sudo nrsysmond-config --set license_key=a56esdse7cfdsfa5a49fbfdsdsfdsd1wewfwfew28
+</span><span class='line'>
+</span><span class='line'>sudo /etc/init.d/newrelic-sysmond start</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -652,67 +724,6 @@ Hisea <a href="http://hisea.me/">http://hisea.me/</a></p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/08/15/displaying-attachments-and-due-date-within-email-when-a-issue-is-created/">Redmine 改进：新建问题发送邮件中显示完成时间和上传的附件信息</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-08-15T23:44:00+08:00" pubdate data-updated="true">Aug 15<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/08/15/displaying-attachments-and-due-date-within-email-when-a-issue-is-created/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Redmine <a href="http://www.redmine.org/">http://www.redmine.org/</a> 的确是一款优秀的任务跟踪管理系统，是开源免费，而且是基于 RubyOnRails 来开发的 Web 系统，代码具有很强的学习的价值。</p>
-
-<p>很奇怪为何新建问题，系统自动发送的邮件没有显示要求完成时间和附件信息，而更新问题时发送的邮件却有两者信息。</p>
-
-<p>阅读代码后发现，Redmine 负责渲染新建问题自动发送的邮件的地方，没有显示要求完成时间和附件信息。</p>
-
-<p>要求完成时间比较好好处理，直接从 @issue.due_date 获得；</p>
-
-<p>但新建问题后，就触发 Observer 自动发邮件，此时上传过的附件还没保存入库，所以利用现有途径无法从 @issue 获得附件。</p>
-
-<p>尝试好几种方案，均不成功。最后考虑给 Issue 模型加一个实例变量临时保存附件信息。</p>
-
-<p>Redmine 版本基于 1.2.1</p>
-
-<p>与邮件正文内容显示相关的关键代码在 show_detail.rb 的 show_detail() 方法：</p>
-
-<p><a href="https://github.com/redmine/redmine/blob/master/app/helpers/issues_helper.rb">https://github.com/redmine/redmine/blob/master/app/helpers/issues_helper.rb</a></p>
-
-<p>具体调整如下：</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2012/08/15/displaying-attachments-and-due-date-within-email-when-a-issue-is-created/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -730,6 +741,10 @@ Hisea <a href="http://hisea.me/">http://hisea.me/</a></p>
 <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2012/08/22/monitoring-server-performance-with-new-relic/">Monitoring server performance with New Relic</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2012/08/20/dhhs-json-jbuilder-at-rails/">Rails 返回 json 格式的内容</a>
@@ -765,10 +780,6 @@ Hisea <a href="http://hisea.me/">http://hisea.me/</a></p>
     
       <li class="post">
         <a href="/blog/2012/08/16/a-story-about-ruby-and-metaprogramming-ruby-0/">Hisea&#8217;s Ruby和元编程的故事 - 第0回: 欲练神功，必先自废武功</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/08/15/displaying-attachments-and-due-date-within-email-when-a-issue-is-created/">Redmine 改进：新建问题发送邮件中显示完成时间和上传的附件信息</a>
       </li>
     
   </ul>
