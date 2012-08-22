@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Bundler | Tech.Blogbin's Blog]]></title>
   <link href="http://tech-blog.blogbin.info/blog/categories/bundler/atom.xml" rel="self"/>
   <link href="http://tech-blog.blogbin.info/"/>
-  <updated>2012-08-22T22:11:02+08:00</updated>
+  <updated>2012-08-22T23:33:47+08:00</updated>
   <id>http://tech-blog.blogbin.info/</id>
   <author>
     <name><![CDATA[Tech Blogbin ]]></name>
@@ -20,8 +20,9 @@
     <id>http://tech-blog.blogbin.info/blog/2012/08/22/using-binarylogic-slash-settingslogic</id>
     <content type="html"><![CDATA[<p>Rails 项目中有一些全局配置信息需要保存在文件中，采用 binarylogic/settingslogic 来管理这些配置信息：</p>
 
-<p>参阅：
-binarylogic/settingslogic <a href="https://github.com/binarylogic/settingslogic">https://github.com/binarylogic/settingslogic</a></p>
+<p>参阅：</p>
+
+<p>binarylogic/settingslogic <a href="https://github.com/binarylogic/settingslogic">https://github.com/binarylogic/settingslogic</a></p>
 
 <p>介紹 Settingslogic | Beryllium Work <a href="http://blog.berylliumwork.com/2012/02/settingslogic.html">http://blog.berylliumwork.com/2012/02/settingslogic.html</a></p>
 

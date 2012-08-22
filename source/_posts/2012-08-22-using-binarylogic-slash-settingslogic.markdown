@@ -19,9 +19,9 @@ categories:
 
 Rails 项目中有一些全局配置信息需要保存在文件中，采用 binarylogic/settingslogic 来管理这些配置信息：
 
-参阅：
-binarylogic/settingslogic [https://github.com/binarylogic/settingslogic](https://github.com/binarylogic/settingslogic)
+参阅： 
 
+binarylogic/settingslogic [https://github.com/binarylogic/settingslogic](https://github.com/binarylogic/settingslogic)
 
 介紹 Settingslogic | Beryllium Work [http://blog.berylliumwork.com/2012/02/settingslogic.html](http://blog.berylliumwork.com/2012/02/settingslogic.html)
 
