@@ -120,7 +120,7 @@
 <li><p>免费帐号可以监控任意数量服务器常规性能指标，如 CPU, Memory, DISK, I/O 和 Network；</p></li>
 <li><p>被监控的服务器采用 rpm + yum 方式安装监控代理，安装无损系统；</p></li>
 <li><p>监控数据主动发送到 New Relic，一般无需调整防火墙策略；</p></li>
-<li><p>New Relic 和 Rails 核心团队合作，可以深入监控 Rails 项目执行情况，但这需要收费，或者申请试用一段时间；</p></li>
+<li><p>New Relic 和 Rails 核心团队合作，可以深入监控 Rails 项目执行情况（如页面执行耗时，SQL 执行耗时等），但这需要收费，或者申请试用一段时间；</p></li>
 </ol>
 
 
@@ -130,27 +130,12 @@
 Web Application Performance Management (APM) : New Relic
 <a href="www.newrelic.com">www.newrelic.com</a></p>
 
-<p>安装过程非常简单，以 CentOS 6.2 为例，执行以下命令：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>sudo rpm -Uvh http://download.newrelic.com/pub/newrelic/el5/i386/newrelic-repo-5-3.noarch.rpm
-</span><span class='line'>
-</span><span class='line'>sudo yum install -y newrelic-sysmond
-</span><span class='line'>
-</span><span class='line'># 其中 a56esdse7cfdsfa5a49fbfdsdsfdsd1wewfwfew28 为您的监控 license_key
-</span><span class='line'>sudo nrsysmond-config --set license_key=a56esdse7cfdsfa5a49fbfdsdsfdsd1wewfwfew28
-</span><span class='line'>
-</span><span class='line'>sudo /etc/init.d/newrelic-sysmond start</span></code></pre></td></tr></table></div></figure>
-
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/blog/2012/08/22/monitoring-server-performance-with-new-relic/">Read on &rarr;</a>
+    </footer>
   
 
 

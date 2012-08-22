@@ -4,7 +4,7 @@
   <title><![CDATA[Category: CentOS | Tech.Blogbin's Blog]]></title>
   <link href="http://tech-blog.blogbin.info/blog/categories/centos/atom.xml" rel="self"/>
   <link href="http://tech-blog.blogbin.info/"/>
-  <updated>2012-08-22T21:34:43+08:00</updated>
+  <updated>2012-08-22T21:47:07+08:00</updated>
   <id>http://tech-blog.blogbin.info/</id>
   <author>
     <name><![CDATA[Tech Blogbin ]]></name>
@@ -24,7 +24,7 @@
 <li><p>免费帐号可以监控任意数量服务器常规性能指标，如 CPU, Memory, DISK, I/O 和 Network；</p></li>
 <li><p>被监控的服务器采用 rpm + yum 方式安装监控代理，安装无损系统；</p></li>
 <li><p>监控数据主动发送到 New Relic，一般无需调整防火墙策略；</p></li>
-<li><p>New Relic 和 Rails 核心团队合作，可以深入监控 Rails 项目执行情况，但这需要收费，或者申请试用一段时间；</p></li>
+<li><p>New Relic 和 Rails 核心团队合作，可以深入监控 Rails 项目执行情况（如页面执行耗时，SQL 执行耗时等），但这需要收费，或者申请试用一段时间；</p></li>
 </ol>
 
 
@@ -34,7 +34,12 @@
 Web Application Performance Management (APM) : New Relic
 <a href="www.newrelic.com">www.newrelic.com</a></p>
 
-<p>安装过程非常简单，以 CentOS 6.2 为例，执行以下命令：
+<!--more-->
+
+
+<h5>1. 监控服务器</h5>
+
+<p>安装监控代理过程非常简单，以 CentOS 6.2 为例，执行以下命令：
 ```
 sudo rpm -Uvh http://download.newrelic.com/pub/newrelic/el5/i386/newrelic-repo-5-3.noarch.rpm</p>
 
@@ -46,6 +51,21 @@ sudo rpm -Uvh http://download.newrelic.com/pub/newrelic/el5/i386/newrelic-repo-5
 
 <p>sudo /etc/init.d/newrelic-sysmond start
 ```</p>
+
+<h5>2. 监控 Rails 项目</h5>
+
+<p><code>ruby Gemfile
+gem "newrelic_rpm"
+</code></p>
+
+<p>运行 bundle install</p>
+
+<p>将 New Relic 提供的 newrelic.yml 部署在 config 目录</p>
+
+<p>最后按开发模式启动 Rails 项目</p>
+
+<p>浏览器访问 <a href="http://localhost:3000/newrelic">http://localhost:3000/newrelic</a>，效果如下：
+<blockquote><p><img src="/images/2012-08-22-monitoring-server-performance-with-new-relic/new_relic_development.png"></p></blockquote></p>
 ]]></content>
   </entry>
   
