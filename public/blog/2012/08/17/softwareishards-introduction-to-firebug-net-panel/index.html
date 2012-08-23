@@ -242,6 +242,32 @@
   </ul>
 </section>
 <section>
+    <h1>Related Posts</h1>
+    <ul class="posts">
+    
+        <li class="related">
+        <a href="/blog/2012/08/18/gem-install-rmagick-on-apple-macos-x-mountain-lion-10-dot-8/">Gem install RMagick on Apple MacOS X Mountain Lion 10.8</a>
+        </li>
+    
+        <li class="related">
+        <a href="/blog/2012/08/18/sinaweibo-python-sdk/">sinaweibo python sdk</a>
+        </li>
+    
+        <li class="related">
+        <a href="/blog/2012/08/14/shen-si-wei-at-sg552sg552-meta-ruby-programming/">申思维 @sg552sg552 meta ruby programming</a>
+        </li>
+    
+        <li class="related">
+        <a href="/blog/2012/08/16/a-story-about-ruby-and-metaprogramming-ruby-0/">Hisea's Ruby和元编程的故事 - 第0回: 欲练神功，必先自废武功</a>
+        </li>
+    
+        <li class="related">
+        <a href="/blog/2012/08/16/a-story-about-ruby-and-metaprogramming-ruby-1/">Ruby和元编程的故事 - 第0回: 欲练神功，必先自废武功</a>
+        </li>
+    
+    </ul>
+</section>
+<section>
   <h1>Categories</h1>
     <ul id="category-list"><li><a href='/blog/categories/apple'>Apple (1)</a></li><li><a href='/blog/categories/binarylogic'>binarylogic (1)</a></li><li><a href='/blog/categories/bundle'>Bundle (3)</a></li><li><a href='/blog/categories/bundler'>Bundler (3)</a></li><li><a href='/blog/categories/centos'>CentOS (1)</a></li><li><a href='/blog/categories/configuration'>Configuration (1)</a></li><li><a href='/blog/categories/deployment'>Deployment (3)</a></li><li><a href='/blog/categories/dhh'>DHH (1)</a></li><li><a href='/blog/categories/domain'>Domain (1)</a></li><li><a href='/blog/categories/eznow'>Eznow (1)</a></li><li><a href='/blog/categories/firebug'>Firebug (1)</a></li><li><a href='/blog/categories/firefox'>Firefox (1)</a></li><li><a href='/blog/categories/gem'>Gem (3)</a></li><li><a href='/blog/categories/gemfile'>Gemfile (3)</a></li><li><a href='/blog/categories/github'>GitHub (3)</a></li><li><a href='/blog/categories/heroku'>Heroku (1)</a></li><li><a href='/blog/categories/installation'>Installation (1)</a></li><li><a href='/blog/categories/jbuilder'>JBuilder (1)</a></li><li><a href='/blog/categories/json'>JSON (1)</a></li><li><a href='/blog/categories/macos-x'>MacOS X (1)</a></li><li><a href='/blog/categories/metaprogramming-ruby'>MetaProgramming Ruby (7)</a></li><li><a href='/blog/categories/mountain-lion-10-8'>Mountain Lion 10.8 (1)</a></li><li><a href='/blog/categories/net'>Net (1)</a></li><li><a href='/blog/categories/new-relic'>New Relic (1)</a></li><li><a href='/blog/categories/octopress'>Octopress (4)</a></li><li><a href='/blog/categories/python'>Python (1)</a></li><li><a href='/blog/categories/rails'>Rails (4)</a></li><li><a href='/blog/categories/redmine'>Redmine (1)</a></li><li><a href='/blog/categories/rmagick'>RMagick (1)</a></li><li><a href='/blog/categories/ror'>RoR (4)</a></li><li><a href='/blog/categories/ruby'>Ruby (14)</a></li><li><a href='/blog/categories/rubyonrails'>RubyOnRails (4)</a></li><li><a href='/blog/categories/settingslogic'>Settingslogic (1)</a></li><li><a href='/blog/categories/sina-weibo-sdk'>Sina Weibo SDK (1)</a></li><li><a href='/blog/categories/yum'>yum (1)</a></li></ul>
 </section>
@@ -291,7 +317,193 @@
 </section>
 
 
-Included file 'asides/calendar.html' not found in _includes directory
+<!--
+    Calendar aside/plugin for octopress blogging framework.
+    Copyright (C) 2012  Neeraj Kumar ( neerajpkumar@gmail.com, neerajkumar@outlook.com)
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+--!>
+<style>
+	.highlighted-calendar-day
+	{
+		color : #CCC;
+		font-weight : bold;
+	}
+	
+	.calendar-header-day{
+		font-weight : bold;
+		color : #AAA;
+		font-size : 14px;
+	}
+	
+	.highlighted-calendar-day a
+	{
+		
+	}
+	
+	.prev-link
+	{
+		float:left;
+	}
+	
+	.next-link
+	{
+		float: right;
+	}
+	.calendar-day
+	{
+		color : #888;
+		font-weight : 12px;
+	}
+	
+	.calendar-table
+	{
+		width : 100%;
+		
+	}
+	
+	.calendar-table td
+	{
+		border-right : dotted 1px lightgrey;
+		text-align : center;
+	}
+	
+	.calendar-table td:last-child
+	{
+		border-right : none;
+	}
+	
+	.calendar-table th
+	{
+		background-color : lightgrey;
+		text-align : center;
+	}
+	.prevCalendarLink img
+	{	
+		
+		width : 20px;
+		height : 20px;
+		border: 0px;
+		float: left;
+		
+	}
+	
+	.nextCalendarLink img
+	{
+		
+		width : 20px;
+		height: 20px;
+		border: 0px;
+		float: right;
+		
+	}
+</style>
+<script type="text/javascript" src="/javascripts/calendar.js"></script>
+<section id="calendarDiv">
+	<span style="display:block" id="calendarSpan"></span>
+	<div>
+		<a href="#" class="previousMonth show"/><a href="#" class="nextMonth hide"/>
+	</div>
+</section>
+<script type="text/javascript">
+  
+monthCalendar = function(id,year,month)
+{
+  var highlightArray = new Array();
+  var hightlightLinks = new Array();
+  
+  highlightArray.push('08/22/2012');
+  hightlightLinks.push('/blog/2012/08/22/using-binarylogic-slash-settingslogic/');
+  
+  highlightArray.push('08/22/2012');
+  hightlightLinks.push('/blog/2012/08/22/monitoring-server-performance-with-new-relic/');
+  
+  highlightArray.push('08/20/2012');
+  hightlightLinks.push('/blog/2012/08/20/dhhs-json-jbuilder-at-rails/');
+  
+  highlightArray.push('08/18/2012');
+  hightlightLinks.push('/blog/2012/08/18/sinaweibo-python-sdk/');
+  
+  highlightArray.push('08/18/2012');
+  hightlightLinks.push('/blog/2012/08/18/gem-install-rmagick-on-apple-macos-x-mountain-lion-10-dot-8/');
+  
+  highlightArray.push('08/17/2012');
+  hightlightLinks.push('/blog/2012/08/17/softwareishards-introduction-to-firebug-net-panel/');
+  
+  highlightArray.push('08/17/2012');
+  hightlightLinks.push('/blog/2012/08/17/metaprogramming-ruby/');
+  
+  highlightArray.push('08/16/2012');
+  hightlightLinks.push('/blog/2012/08/16/a-story-about-ruby-and-metaprogramming-ruby-2/');
+  
+  highlightArray.push('08/16/2012');
+  hightlightLinks.push('/blog/2012/08/16/a-story-about-ruby-and-programming-ruby-1/');
+  
+  highlightArray.push('08/16/2012');
+  hightlightLinks.push('/blog/2012/08/16/a-story-about-ruby-and-metaprogramming-ruby-1/');
+  		
+  var cal = new Calendar(month,year,highlightArray,hightlightLinks);
+  cal.generateHTML(id);
+  var element = document.getElementById(id);
+  element.innerHTML = cal.getHTML();
+}
+	
+loadCalendar = function(){
+  var now = new Date();
+  var month = now.getMonth();
+  var year = now.getFullYear();
+  monthCalendar('calendarDiv',year,month);
+}
+	
+	if(Array.prototype.indexOf == undefined)
+	{
+		 Array.prototype.indexOf = function (searchElement /*, fromIndex */ ) {
+			"use strict";
+			if (this == null) {
+				throw new TypeError();
+			}
+			var t = Object(this);
+			var len = t.length >>> 0;
+			if (len === 0) {
+				return -1;
+			}
+			var n = 0;
+			if (arguments.length > 0) {
+				n = Number(arguments[1]);
+				if (n != n) { // shortcut for verifying if it's NaN
+					n = 0;
+				} else if (n != 0 && n != Infinity && n != -Infinity) {
+					n = (n > 0 || -1) * Math.floor(Math.abs(n));
+				}
+			}
+			if (n >= len) {
+				return -1;
+			}
+			var k = n >= 0 ? n : Math.max(len - Math.abs(n), 0);
+			for (; k < len; k++) {
+				if (k in t && t[k] === searchElement) {
+					return k;
+				}
+			}
+			return -1;
+		}
+	}
+$(document).ready(function(){
+  loadCalendar();
+});
+</script>
+
   
 </aside>
 
