@@ -4,7 +4,7 @@
   <title><![CDATA[Category: yum | Tech.Blogbin's Blog]]></title>
   <link href="http://tech-blog.blogbin.info/blog/categories/yum/atom.xml" rel="self"/>
   <link href="http://tech-blog.blogbin.info/"/>
-  <updated>2012-08-23T08:52:22+08:00</updated>
+  <updated>2012-08-23T13:01:47+08:00</updated>
   <id>http://tech-blog.blogbin.info/</id>
   <author>
     <name><![CDATA[Tech Blogbin ]]></name>
@@ -65,7 +65,9 @@ gem "newrelic_rpm"
 <p>最后按开发模式启动 Rails 项目</p>
 
 <p>浏览器访问 <a href="http://localhost:3000/newrelic">http://localhost:3000/newrelic</a>，效果如下：
-<blockquote><p><img src="/images/2012-08-22-monitoring-server-performance-with-new-relic/new_relic_development.png"></p></blockquote></p>
+{% blockquote %}
+{% img /images/2012-08-22-monitoring-server-performance-with-new-relic/new_relic_development.png %}
+{% endblockquote %}</p>
 ]]></content>
   </entry>
   

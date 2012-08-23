@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Redmine | Tech.Blogbin's Blog]]></title>
   <link href="http://tech-blog.blogbin.info/blog/categories/redmine/atom.xml" rel="self"/>
   <link href="http://tech-blog.blogbin.info/"/>
-  <updated>2012-08-23T08:52:22+08:00</updated>
+  <updated>2012-08-23T13:01:47+08:00</updated>
   <id>http://tech-blog.blogbin.info/</id>
   <author>
     <name><![CDATA[Tech Blogbin ]]></name>
@@ -115,7 +115,9 @@ if @issue.save
 
 <h5>4. 最终效果如图</h5>
 
-<p><blockquote><p><img src="/images/2012-08-15-displaying-attachments-and-due-date-within-email-when-a-issue-is-created/redmine_issue_add_email.png"></p></blockquote></p>
+<p>{% blockquote %}
+{% img /images/2012-08-15-displaying-attachments-and-due-date-within-email-when-a-issue-is-created/redmine_issue_add_email.png %}
+{% endblockquote %}</p>
 ]]></content>
   </entry>
   
