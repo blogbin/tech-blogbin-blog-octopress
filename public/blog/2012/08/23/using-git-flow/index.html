@@ -5,14 +5,16 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Category: Octopress - Tech.Blogbin's Blog</title>
+  <title>用 git-flow 进行分支操作 - Tech.Blogbin's Blog</title>
 
   <meta name="alexaVerifyID" content="-6pNt74TSllotvjLFDIa77kSKLI" />
 
   <meta name="author" content="Tech Blogbin <tech.blogbin@gmail.com>">
 
   
-  <meta name="description" content="Category: Octopress">
+  <meta name="description" content="参阅： nvie/gitflow
+https://github.com/nvie/gitflow/ A successful Git branching model » nvie.com
+http://nvie.com/posts/a-successful-git-branching-model &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -21,7 +23,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://tech-blog.blogbin.infoblog/categories/octopress/">
+  <link rel="canonical" href="http://tech-blog.blogbin.info/blog/2012/08/23/using-git-flow/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -82,78 +84,285 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Category: Octopress</h1>
+    
+      <h1 class="entry-title">用 Git-flow 进行分支操作</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-23T22:28:00+08:00" pubdate data-updated="true">Aug 23<span>rd</span>, 2012</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives" class="category">
 
 
+<div class="entry-content"><p>参阅：</p>
 
-  
-  <h2>2012</h2>
+<p>nvie/gitflow
+<a href="https://github.com/nvie/gitflow/">https://github.com/nvie/gitflow/</a></p>
 
-<article>
-  
-<h1><a href="/blog/2012/08/14/buying-domain-and-configuring-domain-for-githubs-octopress/">购买个人域名以及为部署在 GitHub 的Octopress 配置个人域名</a></h1>
-<time datetime="2012-08-14T22:41:00+08:00" pubdate><span class='month'>Aug</span> <span class='day'>14</span> <span class='year'>2012</span></time>
+<p>A successful Git branching model » nvie.com
+<a href="http://nvie.com/posts/a-successful-git-branching-model/">http://nvie.com/posts/a-successful-git-branching-model/</a></p>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/domain/'>Domain</a>, <a class='category' href='/blog/categories/eznow/'>Eznow</a>, <a class='category' href='/blog/categories/github/'>GitHub</a>, <a class='category' href='/blog/categories/octopress/'>Octopress</a></span>
-</footer>
+<p>或者中文版</p>
 
+<p>Git开发管理之道 - 无网不剩
+<a href="http://blog.leezhong.com/translate/2010/10/30/a-successful-git-branch.html">http://blog.leezhong.com/translate/2010/10/30/a-successful-git-branch.html</a></p>
 
-</article>
+<p>其实 git-flow 只是对 git 分支 checkout, 创建, merge 等命令进行包装，采用推荐的命令方式来使用优秀的分支创建和合并实践策略，
+避免代码改动提交混乱，对本地仓库管理的代码几乎没有影响。</p>
 
+<p>首先要明白 master 为产品分支，develop 为开发分支。
+如果你以前采用 master 为主线或开发分支，产品分支为其他分支，脑筋要转过来。</p>
 
-
-<article>
-  
-<h1><a href="/blog/2012/08/11/deploying-to-github-pages/">Deploying to Github Pages</a></h1>
-<time datetime="2012-08-11T23:13:00+08:00" pubdate><span class='month'>Aug</span> <span class='day'>11</span> <span class='year'>2012</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/deployment/'>Deployment</a>, <a class='category' href='/blog/categories/github/'>GitHub</a>, <a class='category' href='/blog/categories/octopress/'>Octopress</a>, <a class='category' href='/blog/categories/ruby/'>Ruby</a></span>
-</footer>
+<!--more-->
 
 
-</article>
+<p>git flow 初始化本地仓库</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>blogbins-MacBook-Pro:octopress blogbin$ git flow init
+</span><span class='line'>
+</span><span class='line'>Which branch should be used for bringing forth production releases?
+</span><span class='line'>   - master
+</span><span class='line'>Branch name for production releases: [master]
+</span><span class='line'>Branch name for "next release" development: [develop]
+</span><span class='line'>
+</span><span class='line'>How to name your supporting branch prefixes?
+</span><span class='line'>Feature branches? [feature/]
+</span><span class='line'>Release branches? [release/]
+</span><span class='line'>Hotfix branches? [hotfix/]
+</span><span class='line'>Support branches? [support/]
+</span><span class='line'>Version tag prefix? [] TEBN
+</span><span class='line'>blogbins-MacBook-Pro:octopress blogbin$ git status
+</span><span class='line'># On branch develop
+</span><span class='line'>nothing to commit (working directory clean)</span></code></pre></td></tr></table></div></figure>
 
 
+<p>开始一个特性(octopress-indexer)开发</p>
 
-<article>
-  
-<h1><a href="/blog/2012/08/11/configuring-octopress-with-3rd-party-settings/">Configuring Octopress with 3rd Party Settings</a></h1>
-<time datetime="2012-08-11T17:11:00+08:00" pubdate><span class='month'>Aug</span> <span class='day'>11</span> <span class='year'>2012</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/configuration/'>Configuration</a>, <a class='category' href='/blog/categories/deployment/'>Deployment</a>, <a class='category' href='/blog/categories/octopress/'>Octopress</a>, <a class='category' href='/blog/categories/ruby/'>Ruby</a></span>
-</footer>
-
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/blog/2012/08/11/how-to-install-octopress-on-heroku/">How to Install Octopress on Heroku</a></h1>
-<time datetime="2012-08-11T11:08:00+08:00" pubdate><span class='month'>Aug</span> <span class='day'>11</span> <span class='year'>2012</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/deployment/'>Deployment</a>, <a class='category' href='/blog/categories/heroku/'>Heroku</a>, <a class='category' href='/blog/categories/installation/'>Installation</a>, <a class='category' href='/blog/categories/octopress/'>Octopress</a>, <a class='category' href='/blog/categories/ruby/'>Ruby</a></span>
-</footer>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>blogbins-MacBook-Pro:octopress blogbin$ git flow feature start octopress-indexer
+</span><span class='line'>Switched to a new branch 'feature/octopress-indexer'
+</span><span class='line'>
+</span><span class='line'>Summary of actions:
+</span><span class='line'>- A new branch 'feature/octopress-indexer' was created, based on 'develop'
+</span><span class='line'>- You are now on branch 'feature/octopress-indexer'
+</span><span class='line'>
+</span><span class='line'>Now, start committing on your feature. When done, use:
+</span><span class='line'>
+</span><span class='line'>     git flow feature finish octopress-indexer</span></code></pre></td></tr></table></div></figure>
 
 
-</article>
+<p>结束一个特性开发</p>
 
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>blogbins-MacBook-Pro:octopress blogbin$ git flow feature finish octopress-indexer
+</span><span class='line'>Switched to branch 'develop'
+</span><span class='line'>Updating 024efad..6a21c04
+</span><span class='line'>Fast-forward
+</span><span class='line'> plugins/indexer.rb                          |  255 +++++++++++++++++++++++++++
+</span><span class='line'> source/_includes/custom/asides/indexer.html |   10 ++
+</span><span class='line'> 2 files changed, 265 insertions(+)
+</span><span class='line'> create mode 100644 plugins/indexer.rb
+</span><span class='line'> create mode 100644 source/_includes/custom/asides/indexer.html
+</span><span class='line'>Deleted branch feature/octopress-indexer (was 6a21c04).
+</span><span class='line'>
+</span><span class='line'>Summary of actions:
+</span><span class='line'>- The feature branch 'feature/octopress-indexer' was merged into 'develop'
+</span><span class='line'>- Feature branch 'feature/octopress-indexer' has been removed
+</span><span class='line'>- You are now on branch 'develop'</span></code></pre></td></tr></table></div></figure>
+
+
+<p>手动将 develop 开发分支的改动 merge 回 master 产品分支</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>blogbins-MacBook-Pro:octopress blogbin$ git checkout master
+</span><span class='line'>Switched to branch 'master'
+</span><span class='line'>
+</span><span class='line'># 建议使用 --no-ff 选项，让 merge 也成为一个 commitment.
+</span><span class='line'>blogbins-MacBook-Pro:octopress blogbin$ git merge --no-ff develop
+</span><span class='line'>Merge made by the 'recursive' strategy.
+</span><span class='line'> plugins/indexer.rb                          |  255 +++++++++++++++++++++++++++
+</span><span class='line'> source/_includes/custom/asides/indexer.html |   10 ++
+</span><span class='line'> 2 files changed, 265 insertions(+)
+</span><span class='line'> create mode 100644 plugins/indexer.rb
+</span><span class='line'> create mode 100644 source/_includes/custom/asides/indexer.html</span></code></pre></td></tr></table></div></figure>
+
+
+<p>以上 git-flow 命令执行过程其实是对以下 git 命令的包装：</p>
+
+<p>先基于 master 产品分支创建并切换到 develop 开发分支</p>
+
+<p>git checkout -b develop master</p>
+
+<p>开始开发一个新特性，基于 develop 创建新特性分支</p>
+
+<p>git checkout -b feature/fengbin/using-git-flow develop</p>
+
+<p>修改文件，提交文件。。。</p>
+
+<p>切换回 develop 开发分支，将 using-git-flow 特性分支改动 merge 到 develop 开发分支</p>
+
+<p>git checkout develop</p>
+
+<p>git merge &#8211;no-ff feature/fengbin/using-git-flow</p>
+
+<p>最后删除 using-git-flow 特性分支</p>
+
+<p>git checkout -d feature/fengbin/using-git-flow develop</p>
+
+<p>已有项目中初始化 git-flow 可能会出现以下错误：</p>
+
+<p>Local branch &#8216;xxx&#8217; does not exist.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>blogbins-MacBook-Pro:app_store blogbin$ git flow init
+</span><span class='line'>
+</span><span class='line'>Which branch should be used for bringing forth production releases?
+</span><span class='line'>   - features/favorite
+</span><span class='line'>   - master
+</span><span class='line'>Branch name for production releases: [master] develop
+</span><span class='line'>Local branch 'develop' does not exist.</span></code></pre></td></tr></table></div></figure>
+
+
+<p>查阅 git-flow 官方教程或者网络资料，不管是已有项目或者新项目，初始化 git-flow 都是相同的命令 git flow init。</p>
+
+<p>怀疑可能是本地仓库之前已经运行过 git flow init，随后有不按 git-flow 模式创建分支所致。</p>
+
+<p>解决办法是，重现 git clone 远端仓库克隆出一个本地仓库，在本地仓库重新运行 git flow init。</p>
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">Tech Blogbin <tech.blogbin@gmail.com></span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-23T22:28:00+08:00" pubdate data-updated="true">Aug 23<span>rd</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/git/'>Git</a>, <a class='category' href='/blog/categories/git-flow/'>git-flow</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://tech-blog.blogbin.info/blog/2012/08/23/using-git-flow/" data-via="tech_blogbin" data-counturl="http://tech-blog.blogbin.info/blog/2012/08/23/using-git-flow/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2012/08/22/using-binarylogic-slash-settingslogic/" title="Previous Post: Using binarylogic/settingslogic">&laquo; Using binarylogic/settingslogic</a>
+      
+      
+    </p>
+  </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -212,6 +421,26 @@
 <section>
     <h1>Related Posts</h1>
     <ul class="posts">
+    
+        <li class="related">
+        <a href="/blog/2012/08/11/deploying-to-github-pages/">Deploying to Github Pages</a>
+        </li>
+    
+        <li class="related">
+        <a href="/blog/2012/08/11/how-to-install-octopress-on-heroku/">How to Install Octopress on Heroku</a>
+        </li>
+    
+        <li class="related">
+        <a href="/blog/2012/08/11/configuring-octopress-with-3rd-party-settings/">Configuring Octopress with 3rd Party Settings</a>
+        </li>
+    
+        <li class="related">
+        <a href="/blog/2012/08/14/buying-domain-and-configuring-domain-for-githubs-octopress/">购买个人域名以及为部署在 GitHub 的Octopress 配置个人域名</a>
+        </li>
+    
+        <li class="related">
+        <a href="/blog/2012/08/17/softwareishards-introduction-to-firebug-net-panel/">softwareishard's introduction to firebug net panel</a>
+        </li>
     
     </ul>
 </section>
@@ -470,7 +699,10 @@ $(document).ready(function(){
       var disqus_shortname = 'tech-blogbin-blog';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://tech-blog.blogbin.info/blog/2012/08/23/using-git-flow/';
+        var disqus_url = 'http://tech-blog.blogbin.info/blog/2012/08/23/using-git-flow/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

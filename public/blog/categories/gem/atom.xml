@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Gem | Tech.Blogbin's Blog]]></title>
   <link href="http://tech-blog.blogbin.info/blog/categories/gem/atom.xml" rel="self"/>
   <link href="http://tech-blog.blogbin.info/"/>
-  <updated>2012-08-23T13:01:47+08:00</updated>
+  <updated>2012-08-23T23:08:23+08:00</updated>
   <id>http://tech-blog.blogbin.info/</id>
   <author>
     <name><![CDATA[Tech Blogbin ]]></name>
@@ -181,29 +181,7 @@ WARNING: Nokogiri was built against LibXML version 2.7.3, but has dynamically lo
 <!--more-->
 
 
-<p>{% blockquote %}
-Managed to fix it following these steps:</p>
-
-<p>Installed XCode 4.4 and Command Line Tools
-Ran this in terminal:</p>
-
-<p>sudo chown -R <user> /usr/local
-brew update
-brew tap homebrew/dupes
-brew install apple-gcc42</p>
-
-<p>Installed XQuartz 2.7.2 (http://xquartz.macosforge.org/landing)</p>
-
-<p>Fixed any errors reported by brew doctor
-Ran this in terminal:</p>
-
-<p>gem uninstall rmagick
-brew uninstall imagemagick
-brew install --fresh imagemagick
-gem install rmagick</p>
-
-<p>After this, RMagick worked flawlessly again!
-{% endblockquote %}</p>
+<p><blockquote><p>Managed to fix it following these steps:</p></p><p><p>Installed XCode 4.4 and Command Line Tools<br/>Ran this in terminal:</p></p><p><p>sudo chown -R <user> /usr/local<br/>brew update<br/>brew tap homebrew/dupes<br/>brew install apple-gcc42</p></p><p><p>Installed XQuartz 2.7.2 (http://xquartz.macosforge.org/landing)</p></p><p><p>Fixed any errors reported by brew doctor<br/>Ran this in terminal:</p></p><p><p>gem uninstall rmagick<br/>brew uninstall imagemagick<br/>brew install --fresh imagemagick<br/>gem install rmagick</p></p><p><p>After this, RMagick worked flawlessly again!</p></blockquote></p>
 ]]></content>
   </entry>
   

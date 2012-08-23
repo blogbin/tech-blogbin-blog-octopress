@@ -12,7 +12,9 @@
   <meta name="author" content="Tech Blogbin <tech.blogbin@gmail.com>">
 
   
-  <meta name="description" content="Rails 项目中有一些全局配置信息需要保存在文件中，采用 binarylogic/settingslogic 来管理这些配置信息： 参阅： binarylogic/settingslogic https://github.com/binarylogic/settingslogic 介紹 &hellip;">
+  <meta name="description" content="参阅： nvie/gitflow
+https://github.com/nvie/gitflow/ A successful Git branching model » nvie.com
+http://nvie.com/posts/a-successful-git-branching-model &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -83,6 +85,66 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/08/23/using-git-flow/">用 Git-flow 进行分支操作</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-23T22:28:00+08:00" pubdate data-updated="true">Aug 23<span>rd</span>, 2012</time>
+        
+         | <a href="/blog/2012/08/23/using-git-flow/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>参阅：</p>
+
+<p>nvie/gitflow
+<a href="https://github.com/nvie/gitflow/">https://github.com/nvie/gitflow/</a></p>
+
+<p>A successful Git branching model » nvie.com
+<a href="http://nvie.com/posts/a-successful-git-branching-model/">http://nvie.com/posts/a-successful-git-branching-model/</a></p>
+
+<p>或者中文版</p>
+
+<p>Git开发管理之道 - 无网不剩
+<a href="http://blog.leezhong.com/translate/2010/10/30/a-successful-git-branch.html">http://blog.leezhong.com/translate/2010/10/30/a-successful-git-branch.html</a></p>
+
+<p>其实 git-flow 只是对 git 分支 checkout, 创建, merge 等命令进行包装，采用推荐的命令方式来使用优秀的分支创建和合并实践策略，
+避免代码改动提交混乱，对本地仓库管理的代码几乎没有影响。</p>
+
+<p>首先要明白 master 为产品分支，develop 为开发分支。
+如果你以前采用 master 为主线或开发分支，产品分支为其他分支，脑筋要转过来。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2012/08/23/using-git-flow/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -688,62 +750,6 @@ Hisea <a href="http://hisea.me/">http://hisea.me/</a></p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/08/16/a-story-about-ruby-and-metaprogramming-ruby-1/">Ruby和元编程的故事 - 第0回: 欲练神功，必先自废武功</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-08-16T08:01:00+08:00" pubdate data-updated="true">Aug 16<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/08/16/a-story-about-ruby-and-metaprogramming-ruby-1/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>参阅：
-Hisea <a href="http://hisea.me/">http://hisea.me/</a>
-的Ruby和元编程的故事 - 第0回: 欲练神功，必先自废武功</p>
-
-<p>介绍了 Ruby 和元编程的一些特点，主要是在一些思维上的改变，特别是从 Java 等其它语言过来的人。</p>
-
-<p><a href="http://ruby-china.org/topics/1171">http://ruby-china.org/topics/1171</a></p>
-
-<h5>1. 注意动态语言和动态类型的区别，动态类型仅为动态语言其中一个部分。</h5>
-
-<blockquote><p>动态语言:<br/>动态语言的定义还很模糊，很多人把动态语言跟动态类型语言搞混，对于Hisea来说，动态语言就是类，方法，及其他定义可以在运行时进行改变，元编程就是利用这一特性。由此可见，动态语言跟动态类型语言并不是一个概念.</p></blockquote>
-
-
-
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2012/08/16/a-story-about-ruby-and-metaprogramming-ruby-1/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -761,6 +767,10 @@ Hisea <a href="http://hisea.me/">http://hisea.me/</a>
 <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2012/08/23/using-git-flow/">用 git-flow 进行分支操作</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2012/08/22/using-binarylogic-slash-settingslogic/">Using binarylogic/settingslogic</a>
@@ -798,10 +808,6 @@ Hisea <a href="http://hisea.me/">http://hisea.me/</a>
         <a href="/blog/2012/08/16/a-story-about-ruby-and-programming-ruby-1/">Hisea's Ruby和元编程的故事 - 第1回: 色色空空，万物皆为对象</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2012/08/16/a-story-about-ruby-and-metaprogramming-ruby-1/">Ruby和元编程的故事 - 第0回: 欲练神功，必先自废武功</a>
-      </li>
-    
   </ul>
 </section>
 <section>
@@ -812,11 +818,11 @@ Hisea <a href="http://hisea.me/">http://hisea.me/</a>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/apple'>Apple (1)</a></li><li><a href='/blog/categories/binarylogic'>binarylogic (1)</a></li><li><a href='/blog/categories/bundle'>Bundle (3)</a></li><li><a href='/blog/categories/bundler'>Bundler (3)</a></li><li><a href='/blog/categories/centos'>CentOS (1)</a></li><li><a href='/blog/categories/configuration'>Configuration (1)</a></li><li><a href='/blog/categories/deployment'>Deployment (3)</a></li><li><a href='/blog/categories/dhh'>DHH (1)</a></li><li><a href='/blog/categories/domain'>Domain (1)</a></li><li><a href='/blog/categories/eznow'>Eznow (1)</a></li><li><a href='/blog/categories/firebug'>Firebug (1)</a></li><li><a href='/blog/categories/firefox'>Firefox (1)</a></li><li><a href='/blog/categories/gem'>Gem (3)</a></li><li><a href='/blog/categories/gemfile'>Gemfile (3)</a></li><li><a href='/blog/categories/github'>GitHub (3)</a></li><li><a href='/blog/categories/heroku'>Heroku (1)</a></li><li><a href='/blog/categories/installation'>Installation (1)</a></li><li><a href='/blog/categories/jbuilder'>JBuilder (1)</a></li><li><a href='/blog/categories/json'>JSON (1)</a></li><li><a href='/blog/categories/macos-x'>MacOS X (1)</a></li><li><a href='/blog/categories/metaprogramming-ruby'>MetaProgramming Ruby (7)</a></li><li><a href='/blog/categories/mountain-lion-10-8'>Mountain Lion 10.8 (1)</a></li><li><a href='/blog/categories/net'>Net (1)</a></li><li><a href='/blog/categories/new-relic'>New Relic (1)</a></li><li><a href='/blog/categories/octopress'>Octopress (4)</a></li><li><a href='/blog/categories/python'>Python (1)</a></li><li><a href='/blog/categories/rails'>Rails (4)</a></li><li><a href='/blog/categories/redmine'>Redmine (1)</a></li><li><a href='/blog/categories/rmagick'>RMagick (1)</a></li><li><a href='/blog/categories/ror'>RoR (4)</a></li><li><a href='/blog/categories/ruby'>Ruby (14)</a></li><li><a href='/blog/categories/rubyonrails'>RubyOnRails (4)</a></li><li><a href='/blog/categories/settingslogic'>Settingslogic (1)</a></li><li><a href='/blog/categories/sina-weibo-sdk'>Sina Weibo SDK (1)</a></li><li><a href='/blog/categories/yum'>yum (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/apple'>Apple (1)</a></li><li><a href='/blog/categories/binarylogic'>binarylogic (1)</a></li><li><a href='/blog/categories/bundle'>Bundle (3)</a></li><li><a href='/blog/categories/bundler'>Bundler (3)</a></li><li><a href='/blog/categories/centos'>CentOS (1)</a></li><li><a href='/blog/categories/configuration'>Configuration (1)</a></li><li><a href='/blog/categories/deployment'>Deployment (3)</a></li><li><a href='/blog/categories/dhh'>DHH (1)</a></li><li><a href='/blog/categories/domain'>Domain (1)</a></li><li><a href='/blog/categories/eznow'>Eznow (1)</a></li><li><a href='/blog/categories/firebug'>Firebug (1)</a></li><li><a href='/blog/categories/firefox'>Firefox (1)</a></li><li><a href='/blog/categories/gem'>Gem (3)</a></li><li><a href='/blog/categories/gemfile'>Gemfile (3)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/git-flow'>git-flow (1)</a></li><li><a href='/blog/categories/github'>GitHub (3)</a></li><li><a href='/blog/categories/heroku'>Heroku (1)</a></li><li><a href='/blog/categories/installation'>Installation (1)</a></li><li><a href='/blog/categories/jbuilder'>JBuilder (1)</a></li><li><a href='/blog/categories/json'>JSON (1)</a></li><li><a href='/blog/categories/macos-x'>MacOS X (1)</a></li><li><a href='/blog/categories/metaprogramming-ruby'>MetaProgramming Ruby (7)</a></li><li><a href='/blog/categories/mountain-lion-10-8'>Mountain Lion 10.8 (1)</a></li><li><a href='/blog/categories/net'>Net (1)</a></li><li><a href='/blog/categories/new-relic'>New Relic (1)</a></li><li><a href='/blog/categories/octopress'>Octopress (4)</a></li><li><a href='/blog/categories/python'>Python (1)</a></li><li><a href='/blog/categories/rails'>Rails (4)</a></li><li><a href='/blog/categories/redmine'>Redmine (1)</a></li><li><a href='/blog/categories/rmagick'>RMagick (1)</a></li><li><a href='/blog/categories/ror'>RoR (4)</a></li><li><a href='/blog/categories/ruby'>Ruby (14)</a></li><li><a href='/blog/categories/rubyonrails'>RubyOnRails (4)</a></li><li><a href='/blog/categories/settingslogic'>Settingslogic (1)</a></li><li><a href='/blog/categories/sina-weibo-sdk'>Sina Weibo SDK (1)</a></li><li><a href='/blog/categories/yum'>yum (1)</a></li></ul>
 </section>
 <section>
   <h1>Tag Cloud</h1>
-    <span id="tag-cloud"><a href='/blog/categories/apple' style='font-size: 104.28571428571429%'>Apple(1)</a> <a href='/blog/categories/binarylogic' style='font-size: 104.28571428571429%'>binarylogic(1)</a> <a href='/blog/categories/bundle' style='font-size: 112.85714285714286%'>Bundle(3)</a> <a href='/blog/categories/bundler' style='font-size: 112.85714285714286%'>Bundler(3)</a> <a href='/blog/categories/centos' style='font-size: 104.28571428571429%'>CentOS(1)</a> <a href='/blog/categories/configuration' style='font-size: 104.28571428571429%'>Configuration(1)</a> <a href='/blog/categories/deployment' style='font-size: 112.85714285714286%'>Deployment(3)</a> <a href='/blog/categories/dhh' style='font-size: 104.28571428571429%'>DHH(1)</a> <a href='/blog/categories/domain' style='font-size: 104.28571428571429%'>Domain(1)</a> <a href='/blog/categories/eznow' style='font-size: 104.28571428571429%'>Eznow(1)</a> <a href='/blog/categories/firebug' style='font-size: 104.28571428571429%'>Firebug(1)</a> <a href='/blog/categories/firefox' style='font-size: 104.28571428571429%'>Firefox(1)</a> <a href='/blog/categories/gem' style='font-size: 112.85714285714286%'>Gem(3)</a> <a href='/blog/categories/gemfile' style='font-size: 112.85714285714286%'>Gemfile(3)</a> <a href='/blog/categories/github' style='font-size: 112.85714285714286%'>GitHub(3)</a> <a href='/blog/categories/heroku' style='font-size: 104.28571428571429%'>Heroku(1)</a> <a href='/blog/categories/installation' style='font-size: 104.28571428571429%'>Installation(1)</a> <a href='/blog/categories/jbuilder' style='font-size: 104.28571428571429%'>JBuilder(1)</a> <a href='/blog/categories/json' style='font-size: 104.28571428571429%'>JSON(1)</a> <a href='/blog/categories/macos-x' style='font-size: 104.28571428571429%'>MacOS X(1)</a> <a href='/blog/categories/metaprogramming-ruby' style='font-size: 130.0%'>MetaProgramming Ruby(7)</a> <a href='/blog/categories/mountain-lion-10-8' style='font-size: 104.28571428571429%'>Mountain Lion 10.8(1)</a> <a href='/blog/categories/net' style='font-size: 104.28571428571429%'>Net(1)</a> <a href='/blog/categories/new-relic' style='font-size: 104.28571428571429%'>New Relic(1)</a> <a href='/blog/categories/octopress' style='font-size: 117.14285714285714%'>Octopress(4)</a> <a href='/blog/categories/python' style='font-size: 104.28571428571429%'>Python(1)</a> <a href='/blog/categories/rails' style='font-size: 117.14285714285714%'>Rails(4)</a> <a href='/blog/categories/redmine' style='font-size: 104.28571428571429%'>Redmine(1)</a> <a href='/blog/categories/rmagick' style='font-size: 104.28571428571429%'>RMagick(1)</a> <a href='/blog/categories/ror' style='font-size: 117.14285714285714%'>RoR(4)</a> <a href='/blog/categories/ruby' style='font-size: 160.0%'>Ruby(14)</a> <a href='/blog/categories/rubyonrails' style='font-size: 117.14285714285714%'>RubyOnRails(4)</a> <a href='/blog/categories/settingslogic' style='font-size: 104.28571428571429%'>Settingslogic(1)</a> <a href='/blog/categories/sina-weibo-sdk' style='font-size: 104.28571428571429%'>Sina Weibo SDK(1)</a> <a href='/blog/categories/yum' style='font-size: 104.28571428571429%'>yum(1)</a> </span>
+    <span id="tag-cloud"><a href='/blog/categories/apple' style='font-size: 104.28571428571429%'>Apple(1)</a> <a href='/blog/categories/binarylogic' style='font-size: 104.28571428571429%'>binarylogic(1)</a> <a href='/blog/categories/bundle' style='font-size: 112.85714285714286%'>Bundle(3)</a> <a href='/blog/categories/bundler' style='font-size: 112.85714285714286%'>Bundler(3)</a> <a href='/blog/categories/centos' style='font-size: 104.28571428571429%'>CentOS(1)</a> <a href='/blog/categories/configuration' style='font-size: 104.28571428571429%'>Configuration(1)</a> <a href='/blog/categories/deployment' style='font-size: 112.85714285714286%'>Deployment(3)</a> <a href='/blog/categories/dhh' style='font-size: 104.28571428571429%'>DHH(1)</a> <a href='/blog/categories/domain' style='font-size: 104.28571428571429%'>Domain(1)</a> <a href='/blog/categories/eznow' style='font-size: 104.28571428571429%'>Eznow(1)</a> <a href='/blog/categories/firebug' style='font-size: 104.28571428571429%'>Firebug(1)</a> <a href='/blog/categories/firefox' style='font-size: 104.28571428571429%'>Firefox(1)</a> <a href='/blog/categories/gem' style='font-size: 112.85714285714286%'>Gem(3)</a> <a href='/blog/categories/gemfile' style='font-size: 112.85714285714286%'>Gemfile(3)</a> <a href='/blog/categories/git' style='font-size: 104.28571428571429%'>Git(1)</a> <a href='/blog/categories/git-flow' style='font-size: 104.28571428571429%'>git-flow(1)</a> <a href='/blog/categories/github' style='font-size: 112.85714285714286%'>GitHub(3)</a> <a href='/blog/categories/heroku' style='font-size: 104.28571428571429%'>Heroku(1)</a> <a href='/blog/categories/installation' style='font-size: 104.28571428571429%'>Installation(1)</a> <a href='/blog/categories/jbuilder' style='font-size: 104.28571428571429%'>JBuilder(1)</a> <a href='/blog/categories/json' style='font-size: 104.28571428571429%'>JSON(1)</a> <a href='/blog/categories/macos-x' style='font-size: 104.28571428571429%'>MacOS X(1)</a> <a href='/blog/categories/metaprogramming-ruby' style='font-size: 130.0%'>MetaProgramming Ruby(7)</a> <a href='/blog/categories/mountain-lion-10-8' style='font-size: 104.28571428571429%'>Mountain Lion 10.8(1)</a> <a href='/blog/categories/net' style='font-size: 104.28571428571429%'>Net(1)</a> <a href='/blog/categories/new-relic' style='font-size: 104.28571428571429%'>New Relic(1)</a> <a href='/blog/categories/octopress' style='font-size: 117.14285714285714%'>Octopress(4)</a> <a href='/blog/categories/python' style='font-size: 104.28571428571429%'>Python(1)</a> <a href='/blog/categories/rails' style='font-size: 117.14285714285714%'>Rails(4)</a> <a href='/blog/categories/redmine' style='font-size: 104.28571428571429%'>Redmine(1)</a> <a href='/blog/categories/rmagick' style='font-size: 104.28571428571429%'>RMagick(1)</a> <a href='/blog/categories/ror' style='font-size: 117.14285714285714%'>RoR(4)</a> <a href='/blog/categories/ruby' style='font-size: 160.0%'>Ruby(14)</a> <a href='/blog/categories/rubyonrails' style='font-size: 117.14285714285714%'>RubyOnRails(4)</a> <a href='/blog/categories/settingslogic' style='font-size: 104.28571428571429%'>Settingslogic(1)</a> <a href='/blog/categories/sina-weibo-sdk' style='font-size: 104.28571428571429%'>Sina Weibo SDK(1)</a> <a href='/blog/categories/yum' style='font-size: 104.28571428571429%'>yum(1)</a> </span>
 </section>
 
 <section>
@@ -966,6 +972,9 @@ monthCalendar = function(id,year,month)
   var highlightArray = new Array();
   var hightlightLinks = new Array();
   
+  highlightArray.push('08/23/2012');
+  hightlightLinks.push('/blog/2012/08/23/using-git-flow/');
+  
   highlightArray.push('08/22/2012');
   hightlightLinks.push('/blog/2012/08/22/using-binarylogic-slash-settingslogic/');
   
@@ -992,9 +1001,6 @@ monthCalendar = function(id,year,month)
   
   highlightArray.push('08/16/2012');
   hightlightLinks.push('/blog/2012/08/16/a-story-about-ruby-and-programming-ruby-1/');
-  
-  highlightArray.push('08/16/2012');
-  hightlightLinks.push('/blog/2012/08/16/a-story-about-ruby-and-metaprogramming-ruby-1/');
   		
   var cal = new Calendar(month,year,highlightArray,hightlightLinks);
   cal.generateHTML(id);

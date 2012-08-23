@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Net | Tech.Blogbin's Blog]]></title>
   <link href="http://tech-blog.blogbin.info/blog/categories/net/atom.xml" rel="self"/>
   <link href="http://tech-blog.blogbin.info/"/>
-  <updated>2012-08-23T13:01:47+08:00</updated>
+  <updated>2012-08-23T23:08:23+08:00</updated>
   <id>http://tech-blog.blogbin.info/</id>
   <author>
     <name><![CDATA[Tech Blogbin ]]></name>
@@ -28,13 +28,7 @@
 
 <p>特别留意一下 DomContentLoaded event 和 load event 代表的意思，其它都比较好理解。</p>
 
-<p>{% blockquote %}
-DomContentLoaded event
-- time when DomContentLoad event was fired (since the beginning of the request, can be negative if the request has been started after the event)</p>
-
-<p>load event
-- time when page load event was fired (since the beginning of the request, can be negative if the request has been started after the event)
-{% endblockquote %}</p>
+<p><blockquote><p>DomContentLoaded event<br/>- time when DomContentLoad event was fired (since the beginning of the request, can be negative if the request has been started after the event)</p></p><p><p>load event<br/>- time when page load event was fired (since the beginning of the request, can be negative if the request has been started after the event)</p></blockquote></p>
 ]]></content>
   </entry>
   

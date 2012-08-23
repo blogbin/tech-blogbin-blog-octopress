@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Ruby | Tech.Blogbin's Blog]]></title>
   <link href="http://tech-blog.blogbin.info/blog/categories/ruby/atom.xml" rel="self"/>
   <link href="http://tech-blog.blogbin.info/"/>
-  <updated>2012-08-23T13:01:47+08:00</updated>
+  <updated>2012-08-23T23:08:23+08:00</updated>
   <id>http://tech-blog.blogbin.info/</id>
   <author>
     <name><![CDATA[Tech Blogbin ]]></name>
@@ -181,29 +181,7 @@ WARNING: Nokogiri was built against LibXML version 2.7.3, but has dynamically lo
 <!--more-->
 
 
-<p>{% blockquote %}
-Managed to fix it following these steps:</p>
-
-<p>Installed XCode 4.4 and Command Line Tools
-Ran this in terminal:</p>
-
-<p>sudo chown -R <user> /usr/local
-brew update
-brew tap homebrew/dupes
-brew install apple-gcc42</p>
-
-<p>Installed XQuartz 2.7.2 (http://xquartz.macosforge.org/landing)</p>
-
-<p>Fixed any errors reported by brew doctor
-Ran this in terminal:</p>
-
-<p>gem uninstall rmagick
-brew uninstall imagemagick
-brew install --fresh imagemagick
-gem install rmagick</p>
-
-<p>After this, RMagick worked flawlessly again!
-{% endblockquote %}</p>
+<p><blockquote><p>Managed to fix it following these steps:</p></p><p><p>Installed XCode 4.4 and Command Line Tools<br/>Ran this in terminal:</p></p><p><p>sudo chown -R <user> /usr/local<br/>brew update<br/>brew tap homebrew/dupes<br/>brew install apple-gcc42</p></p><p><p>Installed XQuartz 2.7.2 (http://xquartz.macosforge.org/landing)</p></p><p><p>Fixed any errors reported by brew doctor<br/>Ran this in terminal:</p></p><p><p>gem uninstall rmagick<br/>brew uninstall imagemagick<br/>brew install --fresh imagemagick<br/>gem install rmagick</p></p><p><p>After this, RMagick worked flawlessly again!</p></blockquote></p>
 ]]></content>
   </entry>
   
@@ -219,90 +197,22 @@ gem install rmagick</p>
 
 <h5>1. 慎用 eval</h5>
 
-<p>{% blockquote %}
-一般来说，能避免 eval 就尽量避免，因为 eval 有额外的“分析时”开销（将字符串作为源代码进行词法、文法分析），而这个“剖析时”却又是在程序“运行时”进行的。把不需要惰性求值的表达式预先进行及早求值，能避免一些分析时开销。如果可能的话，用 instance_exec，或 instance_eval 带块的形式，也比直接在字符串上求值好。
-{% endblockquote %}</p>
+<p><blockquote><p>一般来说，能避免 eval 就尽量避免，因为 eval 有额外的“分析时”开销（将字符串作为源代码进行词法、文法分析），而这个“剖析时”却又是在程序“运行时”进行的。把不需要惰性求值的表达式预先进行及早求值，能避免一些分析时开销。如果可能的话，用 instance_exec，或 instance_eval 带块的形式，也比直接在字符串上求值好。</p></blockquote></p>
 
 <!--more-->
 
 
 <h5>2. 一句话明了 class_eval 的区别</h5>
 
-<p>{% blockquote %}
-当作用于类时，class_eval将会定义实例方法，而instance_eval定义类方法。
-{% endblockquote %}</p>
+<p><blockquote><p>当作用于类时，class_eval将会定义实例方法，而instance_eval定义类方法。</p></blockquote></p>
 
 <h5>3. class_variables 操作的是类变量，而非类实例变量</h5>
 
-<p>{% blockquote %}
-1.3.9 class_variables
-　　如果你想知道一个类中有哪些类变量，我们可以使用class_varibles方法。他返回一个数组（Array），以符号（Symbol）的形式返回类变量的名称。
-```
-classRubyist
-  @@geek="Ruby's Matz"
-  @@country="USA"
-end</p>
-
-<p>classChild &lt; Rubyist
-  @@city="Nashville"
-end
-print Rubyist.class_variables# => [:@@geek, :@@country]
-puts
-p Child.class_variables# => [:@@city]
-```
-　　你可以从程序的输出中观察到Child.class_variables输出的是在Child类中定义的类变量（@@city）。Child类没有从父类中继承类变量（@@geek, @@country）。
-{% endblockquote %}</p>
+<p><blockquote><p>1.3.9 class_variables<br/>　　如果你想知道一个类中有哪些类变量，我们可以使用class_varibles方法。他返回一个数组（Array），以符号（Symbol）的形式返回类变量的名称。<br/>```<br/>classRubyist<br/>  @@geek="Ruby's Matz"<br/>  @@country="USA"<br/>end</p></p><p><p>classChild &lt; Rubyist<br/>  @@city="Nashville"<br/>end<br/>print Rubyist.class_variables# => [:@@geek, :@@country]<br/>puts<br/>p Child.class_variables# => [:@@city]<br/>```<br/>　　你可以从程序的输出中观察到Child.class_variables输出的是在Child类中定义的类变量（@@city）。Child类没有从父类中继承类变量（@@geek, @@country）。</p></blockquote></p>
 
 <h5>4. 常量操作 const_get 和 const_set</h5>
 
-<p>{% blockquote %}
-1.3.11 const_get, const_set</p>
-
-<p>　　类似的，const_get和const_set用于操作常量。const_get返回指定常量的值：</p>
-
-<p><code>ruby
-puts Float.const_get(:MIN) # =&gt; 2.2250738585072e-308
-</code>
-　　const_set为指定的常量设置指定的值，并返回该对象。如果常量不存在，那么他会创建该常量，就是下面示范的那样：
-``` ruby
-class Rubyist</p>
-
-<p>end
-puts Rubyist.const_set("PI", 22.0/7.0) # => 3.14285714285714
-```</p>
-
-<p>　　因为const_get返回常量的值，因此，你可以使用此方法获得一个类的名字并为这个类添加一个新的实例化对象的方法。这样使得我们有能力在运行时创建类并实例化其实例。
-``` ruby</p>
-
-<h1>Let us call our new class 'Rubyist'</h1>
-
-<h1>(we could have prompted the user for a class name)</h1>
-
-<p>class_name = "rubyist".capitalize</p>
-
-<p>Object.const_set(class_name, Class.new)</p>
-
-<h1>Let us create a method 'who'</h1>
-
-<h1>(we could have prompted the user for a method name)</h1>
-
-<p>class_name = Object.const_get(class_name)</p>
-
-<p>puts class_name # => Rubyist</p>
-
-<p>class_name.class_eval do</p>
-
-<p>  define_method :who do |my_arg|</p>
-
-<pre><code>my_arg
-</code></pre>
-
-<p>  end
-end
-obj = class_name.new
-puts obj.who('Matz') # => Matz
-```
-{% endblockquote %}</p>
+<p><blockquote><p>1.3.11 const_get, const_set</p></p><p><p>　　类似的，const_get和const_set用于操作常量。const_get返回指定常量的值：</p></p><p><p><code>ruby<br/>puts Float.const_get(:MIN) # =&gt; 2.2250738585072e-308<br/></code><br/>　　const_set为指定的常量设置指定的值，并返回该对象。如果常量不存在，那么他会创建该常量，就是下面示范的那样：<br/>``` ruby<br/>class Rubyist</p></p><p><p>end<br/>puts Rubyist.const_set("PI", 22.0/7.0) # => 3.14285714285714<br/>```</p></p><p><p>　　因为const_get返回常量的值，因此，你可以使用此方法获得一个类的名字并为这个类添加一个新的实例化对象的方法。这样使得我们有能力在运行时创建类并实例化其实例。<br/>``` ruby</p></p><p><h1>Let us call our new class 'Rubyist'</h1></p><p><h1>(we could have prompted the user for a class name)</h1></p><p><p>class_name = "rubyist".capitalize</p></p><p><p>Object.const_set(class_name, Class.new)</p></p><p><h1>Let us create a method 'who'</h1></p><p><h1>(we could have prompted the user for a method name)</h1></p><p><p>class_name = Object.const_get(class_name)</p></p><p><p>puts class_name # => Rubyist</p></p><p><p>class_name.class_eval do</p></p><p><p>  define_method :who do |my_arg|</p></p><p><pre><code>my_arg<br/></code></pre></p><p><p>  end<br/>end<br/>obj = class_name.new<br/>puts obj.who('Matz') # => Matz<br/>```</p></blockquote></p>
 ]]></content>
   </entry>
   
@@ -320,41 +230,14 @@ Hisea <a href="http://hisea.me/">http://hisea.me/</a></p>
 
 <p>有很多名字，比如单例类，估计是因为 eigenclass 本体类很容易就解决设计模式的单例，结果就误传下来了。</p>
 
-<p>{% blockquote %}
-实际上，如果已经存在一个同名常量，Ruby会重新使用那个常量,如果常量不是class就会报错>> Test = 2
-``` ruby
-=> 2</p>
-
-<blockquote><blockquote><p>class Test
-end
-TypeError: Test is not a class
-from (irb):2
-```
-{% endblockquote %}</p></blockquote></blockquote>
+<p><blockquote><p>实际上，如果已经存在一个同名常量，Ruby会重新使用那个常量,如果常量不是class就会报错>> Test = 2<br/>``` ruby<br/>=> 2</p></p><p><blockquote><blockquote><p>class Test<br/>end<br/>TypeError: Test is not a class<br/>from (irb):2<br/>```</p></blockquote></p></blockquote></blockquote>
 
 <!--more-->
 
 
 <h5>2. Module 的模块方法可以直接被调用</h5>
 
-<p>{% blockquote %}
-module的方法有两种，一种是module方法，这类方法可以直接调用。
-``` ruby</p>
-
-<blockquote><blockquote><p>module Test
-  def Test.test_method</p>
-
-<pre><code>puts "hello from module"
-</code></pre>
-
-<p>  end
-end
-=> nil
-Test::test_method
-hello from module
-=> nil
-```
-{% endblockquote %}</p></blockquote></blockquote>
+<p><blockquote><p>module的方法有两种，一种是module方法，这类方法可以直接调用。<br/>``` ruby</p></p><p><blockquote><blockquote><p>module Test<br/>  def Test.test_method</p></p><p><pre><code>puts "hello from module"<br/></code></pre></p><p><p>  end<br/>end<br/>=> nil<br/>Test::test_method<br/>hello from module<br/>=> nil<br/>```</p></blockquote></p></blockquote></blockquote>
 ]]></content>
   </entry>
   

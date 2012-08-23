@@ -4,7 +4,7 @@
   <title><![CDATA[Category: MetaProgramming Ruby | Tech.Blogbin's Blog]]></title>
   <link href="http://tech-blog.blogbin.info/blog/categories/metaprogramming-ruby/atom.xml" rel="self"/>
   <link href="http://tech-blog.blogbin.info/"/>
-  <updated>2012-08-23T13:01:47+08:00</updated>
+  <updated>2012-08-23T23:08:23+08:00</updated>
   <id>http://tech-blog.blogbin.info/</id>
   <author>
     <name><![CDATA[Tech Blogbin ]]></name>
@@ -25,90 +25,22 @@
 
 <h5>1. 慎用 eval</h5>
 
-<p>{% blockquote %}
-一般来说，能避免 eval 就尽量避免，因为 eval 有额外的“分析时”开销（将字符串作为源代码进行词法、文法分析），而这个“剖析时”却又是在程序“运行时”进行的。把不需要惰性求值的表达式预先进行及早求值，能避免一些分析时开销。如果可能的话，用 instance_exec，或 instance_eval 带块的形式，也比直接在字符串上求值好。
-{% endblockquote %}</p>
+<p><blockquote><p>一般来说，能避免 eval 就尽量避免，因为 eval 有额外的“分析时”开销（将字符串作为源代码进行词法、文法分析），而这个“剖析时”却又是在程序“运行时”进行的。把不需要惰性求值的表达式预先进行及早求值，能避免一些分析时开销。如果可能的话，用 instance_exec，或 instance_eval 带块的形式，也比直接在字符串上求值好。</p></blockquote></p>
 
 <!--more-->
 
 
 <h5>2. 一句话明了 class_eval 的区别</h5>
 
-<p>{% blockquote %}
-当作用于类时，class_eval将会定义实例方法，而instance_eval定义类方法。
-{% endblockquote %}</p>
+<p><blockquote><p>当作用于类时，class_eval将会定义实例方法，而instance_eval定义类方法。</p></blockquote></p>
 
 <h5>3. class_variables 操作的是类变量，而非类实例变量</h5>
 
-<p>{% blockquote %}
-1.3.9 class_variables
-　　如果你想知道一个类中有哪些类变量，我们可以使用class_varibles方法。他返回一个数组（Array），以符号（Symbol）的形式返回类变量的名称。
-```
-classRubyist
-  @@geek="Ruby's Matz"
-  @@country="USA"
-end</p>
-
-<p>classChild &lt; Rubyist
-  @@city="Nashville"
-end
-print Rubyist.class_variables# => [:@@geek, :@@country]
-puts
-p Child.class_variables# => [:@@city]
-```
-　　你可以从程序的输出中观察到Child.class_variables输出的是在Child类中定义的类变量（@@city）。Child类没有从父类中继承类变量（@@geek, @@country）。
-{% endblockquote %}</p>
+<p><blockquote><p>1.3.9 class_variables<br/>　　如果你想知道一个类中有哪些类变量，我们可以使用class_varibles方法。他返回一个数组（Array），以符号（Symbol）的形式返回类变量的名称。<br/>```<br/>classRubyist<br/>  @@geek="Ruby's Matz"<br/>  @@country="USA"<br/>end</p></p><p><p>classChild &lt; Rubyist<br/>  @@city="Nashville"<br/>end<br/>print Rubyist.class_variables# => [:@@geek, :@@country]<br/>puts<br/>p Child.class_variables# => [:@@city]<br/>```<br/>　　你可以从程序的输出中观察到Child.class_variables输出的是在Child类中定义的类变量（@@city）。Child类没有从父类中继承类变量（@@geek, @@country）。</p></blockquote></p>
 
 <h5>4. 常量操作 const_get 和 const_set</h5>
 
-<p>{% blockquote %}
-1.3.11 const_get, const_set</p>
-
-<p>　　类似的，const_get和const_set用于操作常量。const_get返回指定常量的值：</p>
-
-<p><code>ruby
-puts Float.const_get(:MIN) # =&gt; 2.2250738585072e-308
-</code>
-　　const_set为指定的常量设置指定的值，并返回该对象。如果常量不存在，那么他会创建该常量，就是下面示范的那样：
-``` ruby
-class Rubyist</p>
-
-<p>end
-puts Rubyist.const_set("PI", 22.0/7.0) # => 3.14285714285714
-```</p>
-
-<p>　　因为const_get返回常量的值，因此，你可以使用此方法获得一个类的名字并为这个类添加一个新的实例化对象的方法。这样使得我们有能力在运行时创建类并实例化其实例。
-``` ruby</p>
-
-<h1>Let us call our new class 'Rubyist'</h1>
-
-<h1>(we could have prompted the user for a class name)</h1>
-
-<p>class_name = "rubyist".capitalize</p>
-
-<p>Object.const_set(class_name, Class.new)</p>
-
-<h1>Let us create a method 'who'</h1>
-
-<h1>(we could have prompted the user for a method name)</h1>
-
-<p>class_name = Object.const_get(class_name)</p>
-
-<p>puts class_name # => Rubyist</p>
-
-<p>class_name.class_eval do</p>
-
-<p>  define_method :who do |my_arg|</p>
-
-<pre><code>my_arg
-</code></pre>
-
-<p>  end
-end
-obj = class_name.new
-puts obj.who('Matz') # => Matz
-```
-{% endblockquote %}</p>
+<p><blockquote><p>1.3.11 const_get, const_set</p></p><p><p>　　类似的，const_get和const_set用于操作常量。const_get返回指定常量的值：</p></p><p><p><code>ruby<br/>puts Float.const_get(:MIN) # =&gt; 2.2250738585072e-308<br/></code><br/>　　const_set为指定的常量设置指定的值，并返回该对象。如果常量不存在，那么他会创建该常量，就是下面示范的那样：<br/>``` ruby<br/>class Rubyist</p></p><p><p>end<br/>puts Rubyist.const_set("PI", 22.0/7.0) # => 3.14285714285714<br/>```</p></p><p><p>　　因为const_get返回常量的值，因此，你可以使用此方法获得一个类的名字并为这个类添加一个新的实例化对象的方法。这样使得我们有能力在运行时创建类并实例化其实例。<br/>``` ruby</p></p><p><h1>Let us call our new class 'Rubyist'</h1></p><p><h1>(we could have prompted the user for a class name)</h1></p><p><p>class_name = "rubyist".capitalize</p></p><p><p>Object.const_set(class_name, Class.new)</p></p><p><h1>Let us create a method 'who'</h1></p><p><h1>(we could have prompted the user for a method name)</h1></p><p><p>class_name = Object.const_get(class_name)</p></p><p><p>puts class_name # => Rubyist</p></p><p><p>class_name.class_eval do</p></p><p><p>  define_method :who do |my_arg|</p></p><p><pre><code>my_arg<br/></code></pre></p><p><p>  end<br/>end<br/>obj = class_name.new<br/>puts obj.who('Matz') # => Matz<br/>```</p></blockquote></p>
 ]]></content>
   </entry>
   
@@ -126,41 +58,14 @@ Hisea <a href="http://hisea.me/">http://hisea.me/</a></p>
 
 <p>有很多名字，比如单例类，估计是因为 eigenclass 本体类很容易就解决设计模式的单例，结果就误传下来了。</p>
 
-<p>{% blockquote %}
-实际上，如果已经存在一个同名常量，Ruby会重新使用那个常量,如果常量不是class就会报错>> Test = 2
-``` ruby
-=> 2</p>
-
-<blockquote><blockquote><p>class Test
-end
-TypeError: Test is not a class
-from (irb):2
-```
-{% endblockquote %}</p></blockquote></blockquote>
+<p><blockquote><p>实际上，如果已经存在一个同名常量，Ruby会重新使用那个常量,如果常量不是class就会报错>> Test = 2<br/>``` ruby<br/>=> 2</p></p><p><blockquote><blockquote><p>class Test<br/>end<br/>TypeError: Test is not a class<br/>from (irb):2<br/>```</p></blockquote></p></blockquote></blockquote>
 
 <!--more-->
 
 
 <h5>2. Module 的模块方法可以直接被调用</h5>
 
-<p>{% blockquote %}
-module的方法有两种，一种是module方法，这类方法可以直接调用。
-``` ruby</p>
-
-<blockquote><blockquote><p>module Test
-  def Test.test_method</p>
-
-<pre><code>puts "hello from module"
-</code></pre>
-
-<p>  end
-end
-=> nil
-Test::test_method
-hello from module
-=> nil
-```
-{% endblockquote %}</p></blockquote></blockquote>
+<p><blockquote><p>module的方法有两种，一种是module方法，这类方法可以直接调用。<br/>``` ruby</p></p><p><blockquote><blockquote><p>module Test<br/>  def Test.test_method</p></p><p><pre><code>puts "hello from module"<br/></code></pre></p><p><p>  end<br/>end<br/>=> nil<br/>Test::test_method<br/>hello from module<br/>=> nil<br/>```</p></blockquote></p></blockquote></blockquote>
 ]]></content>
   </entry>
   
@@ -177,17 +82,7 @@ Hisea <a href="http://hisea.me/">http://hisea.me/</a></p>
 <h5>1. 官方说法是 eigenclass 本体类</h5>
 
 <p>有很多名字，比如单例类，估计是因为 eigenclass 本体类很容易就解决设计模式的单例，结果就误传下来了。
-{% blockquote %}
-Singleton/Meta/Anonymous/Ghost/Shadow Class</p>
-
-<ul>
-<li> Singleton Class: 单例类</li>
-<li> Meta Class：元类</li>
-<li> Anonymous Class: 匿名类</li>
-<li> Ghost Class：鬼类</li>
-<li> Shadow Class: 影子类
-上面的这些东东其实说的都是一个东西，我喜欢叫它 影子类。
-{% endblockquote %}</li>
+<blockquote><p>Singleton/Meta/Anonymous/Ghost/Shadow Class</p></p><p><ul><br/><li> Singleton Class: 单例类</li><br/><li> Meta Class：元类</li><br/><li> Anonymous Class: 匿名类</li><br/><li> Ghost Class：鬼类</li><br/><li> Shadow Class: 影子类<br/>上面的这些东东其实说的都是一个东西，我喜欢叫它 影子类。</p></blockquote></li>
 </ul>
 
 
@@ -196,44 +91,7 @@ Singleton/Meta/Anonymous/Ghost/Shadow Class</p>
 
 <h5>2. 关于 Object#dup 和 Object#clone 的区别</h5>
 
-<p>{% blockquote %}
-对象的复制
-前文说对象的存在包括两部分，一是状态/实例变量，另一个是行为，本回专注讲了单例方法和影子类。</p>
-
-<p>Ruby中对象的复制也有两种模式，一个是只复制当前的状态/实例变量 dup。另外一种是连同影子类和引用的对象一起复制，从而把单例方法也复制一份。
-``` ruby</p>
-
-<blockquote><blockquote><p>a = "obj"
-def a.hello_self
-puts "hello #{self}"
-end
-b = a.dup
-=> "obj"
-b.hello_self
-NoMethodError: undefined method `hello_self' for "obj":String</p>
-
-<pre><code>from (irb):90
-</code></pre>
-
-<p>b = a.clone
-=> "obj"
-b.hello_self
-hello obj
-```</p></blockquote></blockquote>
-
-<p>其实有本回上述的这些功能，即便是没有class，Ruby也可以作为一种Prototype(类似JavaScript)的面向对象语言了。</p>
-
-<p>你可以建立一个对象，生成默认的实例变量，把行为作为单例方法定以在这个对象的影子类上，然后用clone生成千千万万个实例。当然这样比较麻烦，但却是可行的途径之一。</p>
-
-<p>其他Object API
-对象还有很多其他的功能，比如可以freeze,另外dup跟clone也有一些其他的引用上面的区别，dup只复制引用，clone会吧引用的对象也复制。</p>
-
-<p>这些都可以在Object类(Ruby所有对象的父类)API上找到，可以查看apidock.com的文档</p>
-
-<p>例如关于dup</p>
-
-<p>.dup() produces a shallow copy of obj—the instance variables of obj are copied, but not the objects they reference. dup copies the tainted state of obj. See also the discussion under Object#clone. In general, clone and dup may have different semantics in descendant classes. While clone is used to duplicate an object, including its internal state, dup typically uses the class of the descendant object to create the new instance.
-{% endblockquote %}</p>
+<p><blockquote><p>对象的复制<br/>前文说对象的存在包括两部分，一是状态/实例变量，另一个是行为，本回专注讲了单例方法和影子类。</p></p><p><p>Ruby中对象的复制也有两种模式，一个是只复制当前的状态/实例变量 dup。另外一种是连同影子类和引用的对象一起复制，从而把单例方法也复制一份。<br/>``` ruby</p></p><p><blockquote><blockquote><p>a = "obj"<br/>def a.hello_self<br/>puts "hello #{self}"<br/>end<br/>b = a.dup<br/>=> "obj"<br/>b.hello_self<br/>NoMethodError: undefined method `hello_self' for "obj":String</p></p><p><pre><code>from (irb):90<br/></code></pre></p><p><p>b = a.clone<br/>=> "obj"<br/>b.hello_self<br/>hello obj<br/>```</p></blockquote></blockquote></p><p><p>其实有本回上述的这些功能，即便是没有class，Ruby也可以作为一种Prototype(类似JavaScript)的面向对象语言了。</p></p><p><p>你可以建立一个对象，生成默认的实例变量，把行为作为单例方法定以在这个对象的影子类上，然后用clone生成千千万万个实例。当然这样比较麻烦，但却是可行的途径之一。</p></p><p><p>其他Object API<br/>对象还有很多其他的功能，比如可以freeze,另外dup跟clone也有一些其他的引用上面的区别，dup只复制引用，clone会吧引用的对象也复制。</p></p><p><p>这些都可以在Object类(Ruby所有对象的父类)API上找到，可以查看apidock.com的文档</p></p><p><p>例如关于dup</p></p><p><p>.dup() produces a shallow copy of obj—the instance variables of obj are copied, but not the objects they reference. dup copies the tainted state of obj. See also the discussion under Object#clone. In general, clone and dup may have different semantics in descendant classes. While clone is used to duplicate an object, including its internal state, dup typically uses the class of the descendant object to create the new instance.</p></blockquote></p>
 ]]></content>
   </entry>
   
@@ -252,10 +110,7 @@ Hisea <a href="http://hisea.me/">http://hisea.me/</a>
 
 <h5>1. 注意动态语言和动态类型的区别，动态类型仅为动态语言其中一个部分。</h5>
 
-<p>{% blockquote %}
-动态语言:
-动态语言的定义还很模糊，很多人把动态语言跟动态类型语言搞混，对于Hisea来说，动态语言就是类，方法，及其他定义可以在运行时进行改变，元编程就是利用这一特性。由此可见，动态语言跟动态类型语言并不是一个概念.
-{% endblockquote %}</p>
+<p><blockquote><p>动态语言:<br/>动态语言的定义还很模糊，很多人把动态语言跟动态类型语言搞混，对于Hisea来说，动态语言就是类，方法，及其他定义可以在运行时进行改变，元编程就是利用这一特性。由此可见，动态语言跟动态类型语言并不是一个概念.</p></blockquote></p>
 
 <!--more-->
 
@@ -263,27 +118,14 @@ Hisea <a href="http://hisea.me/">http://hisea.me/</a>
 <h5>2. 推崇模块混入或者扩展的方式增加 API 功能，而非事事皆继承。</h5>
 
 <p>ps: 打开类也是一种途径。
-{% blockquote %}
-父类的作用仅仅是定义了API的存在，这在Java中是非常常见的，可是在Ruby中，这个父类其实存在的意义不是特别大。Ruby更倾向于,任何能起飞(拥有‘起飞’方法)的对象都是飞行器，而不是任何继承飞行器的类的对象。</p>
-
-<ol>
-<li>需要用继承分享代码么？ ActiveRecord需要你继承ActiveRecord::Base,例如:
-<code>ruby
-class Post &lt; ActiveRecord::Base  
-end
-</code>
-Hisea本人觉得类似Mongoid的Mixin方式更适合解决类似的问题。 Post从设计逻辑上来讲,跟ActiveRecord::Base没有半毛钱关系。继承关系完全用于分享代码，而在Ruby中，更好的分享代码的办法是用Mixin.
-{% endblockquote %}</li>
+<blockquote><p>父类的作用仅仅是定义了API的存在，这在Java中是非常常见的，可是在Ruby中，这个父类其实存在的意义不是特别大。Ruby更倾向于,任何能起飞(拥有‘起飞’方法)的对象都是飞行器，而不是任何继承飞行器的类的对象。</p></p><p><ol><br/><li>需要用继承分享代码么？ ActiveRecord需要你继承ActiveRecord::Base,例如:<br/><code>ruby<br/>class Post &lt; ActiveRecord::Base  <br/>end<br/></code><br/>Hisea本人觉得类似Mongoid的Mixin方式更适合解决类似的问题。 Post从设计逻辑上来讲,跟ActiveRecord::Base没有半毛钱关系。继承关系完全用于分享代码，而在Ruby中，更好的分享代码的办法是用Mixin.</p></blockquote></li>
 </ol>
 
 
 <h5>3. 个人认为 UML 仍是需要的</h5>
 
 <p>特别是项目中涉及到十几以上模型的时候，模型相互之间关系通过 UML 等方式更容易展现。关键是要及时更新和维护。
-{% blockquote %}
-4,忘记UML(或其他)设计大法
-这个话题是3的继续，公司新招了一个Ruby程序员，他来了一两个星期后问了个问题，问为什么公司(或者其他Ruby程序员)不爱用UML之类的设计工具，当时我也一时找不出答案，后来开车回家的路上用半个小时想明白了，UML是一个类只见关系的静态表示，Ruby运行时的情况却是不停在变幻。用静态去表示动态，自然捉襟见肘。
-{% endblockquote %}</p>
+<blockquote><p>4,忘记UML(或其他)设计大法<br/>这个话题是3的继续，公司新招了一个Ruby程序员，他来了一两个星期后问了个问题，问为什么公司(或者其他Ruby程序员)不爱用UML之类的设计工具，当时我也一时找不出答案，后来开车回家的路上用半个小时想明白了，UML是一个类只见关系的静态表示，Ruby运行时的情况却是不停在变幻。用静态去表示动态，自然捉襟见肘。</p></blockquote></p>
 
 <h5>4. 好的 IDE 对 Ruby 开发有一定好处的</h5>
 
@@ -297,41 +139,7 @@ Hisea本人觉得类似Mongoid的Mixin方式更适合解决类似的问题。 Po
 
 <p>唯一不好的地方就是，RubyMine 是用 Java 做的，占内存，运行有时会卡，最好机器配置为 intel Core i5，8 G 内存以上，用 SSD 固态硬盘更好。</p>
 
-<p>{% blockquote %}
-5.为什么不用IDE?
-很多从Java阵营转来，尤其是有多年eclipse经验的Ruby初学者尤其是经常爱问，Ruby用什么IDE。</p>
-
-<p>得到的回答往往是text mate,vim,sublime text 2等等文本编辑器。</p>
-
-<p>很多人可能纳闷，为什么Ruby/Rails没有一个IDE占领大片江山的情况，为什么Netbeans／Eclipse再Ruby开发阵营中没有其他语言开发占的地位重要。</p>
-
-<p>其实答案很简单。</p>
-
-<ol>
-<li>IDE最讨喜的功能是什么？</li>
-</ol>
-
-
-<p>很多用惯了IDE开发的Java程序员甚至XCode程序员，都会说最爱的功能是代码不全，object之后按一下'.'立马生成一个方法列表。转到Ruby用文本编辑器，没有这个功能，很是郁闷。其实道理很简单，如果方法都是动态生成的，在写程序的时候怎么能给出一个列表呢。</p>
-
-<ol>
-<li>Debugger还是必要工具么？</li>
-</ol>
-
-
-<p>静态语言开发，调试是居家旅行杀人灭口必备良药。而IDE又是调试的好帮手。</p>
-
-<p>Ruby／Rails的Debugger还没那么成熟，而且如果用logger, raise在适当的地方输出inspect, to_yaml等内容，也可以很容易的找到错误。</p>
-
-<ol>
-<li>Eclipse可以很好的配置Java开发环境。</li>
-</ol>
-
-
-<p>Ruby/Rails有好用的RVM,RubyGems,Bundler.</p>
-
-<p>所以，不补全，不调试，不配环境，要IDE不也是拿来当文本编辑器用么
-{% endblockquote %}</p>
+<p><blockquote><p>5.为什么不用IDE?<br/>很多从Java阵营转来，尤其是有多年eclipse经验的Ruby初学者尤其是经常爱问，Ruby用什么IDE。</p></p><p><p>得到的回答往往是text mate,vim,sublime text 2等等文本编辑器。</p></p><p><p>很多人可能纳闷，为什么Ruby/Rails没有一个IDE占领大片江山的情况，为什么Netbeans／Eclipse再Ruby开发阵营中没有其他语言开发占的地位重要。</p></p><p><p>其实答案很简单。</p></p><p><ol><br/><li>IDE最讨喜的功能是什么？</li><br/></ol></p><p><br/><p>很多用惯了IDE开发的Java程序员甚至XCode程序员，都会说最爱的功能是代码不全，object之后按一下'.'立马生成一个方法列表。转到Ruby用文本编辑器，没有这个功能，很是郁闷。其实道理很简单，如果方法都是动态生成的，在写程序的时候怎么能给出一个列表呢。</p></p><p><ol><br/><li>Debugger还是必要工具么？</li><br/></ol></p><p><br/><p>静态语言开发，调试是居家旅行杀人灭口必备良药。而IDE又是调试的好帮手。</p></p><p><p>Ruby／Rails的Debugger还没那么成熟，而且如果用logger, raise在适当的地方输出inspect, to_yaml等内容，也可以很容易的找到错误。</p></p><p><ol><br/><li>Eclipse可以很好的配置Java开发环境。</li><br/></ol></p><p><br/><p>Ruby/Rails有好用的RVM,RubyGems,Bundler.</p></p><p><p>所以，不补全，不调试，不配环境，要IDE不也是拿来当文本编辑器用么</p></blockquote></p>
 ]]></content>
   </entry>
   
@@ -351,10 +159,7 @@ Hisea <a href="http://hisea.me/">http://hisea.me/</a></p>
 
 <h5>1. 注意动态语言和动态类型的区别，动态类型仅为动态语言其中一个部分。</h5>
 
-<p>{% blockquote %}
-动态语言:
-动态语言的定义还很模糊，很多人把动态语言跟动态类型语言搞混，对于Hisea来说，动态语言就是类，方法，及其他定义可以在运行时进行改变，元编程就是利用这一特性。由此可见，动态语言跟动态类型语言并不是一个概念.
-{% endblockquote %}</p>
+<p><blockquote><p>动态语言:<br/>动态语言的定义还很模糊，很多人把动态语言跟动态类型语言搞混，对于Hisea来说，动态语言就是类，方法，及其他定义可以在运行时进行改变，元编程就是利用这一特性。由此可见，动态语言跟动态类型语言并不是一个概念.</p></blockquote></p>
 
 <!--more-->
 
@@ -362,27 +167,14 @@ Hisea <a href="http://hisea.me/">http://hisea.me/</a></p>
 <h5>2. 推崇模块混入或者扩展的方式增加 API 功能，而非事事皆继承。</h5>
 
 <p>ps: 打开类也是一种途径。
-{% blockquote %}
-父类的作用仅仅是定义了API的存在，这在Java中是非常常见的，可是在Ruby中，这个父类其实存在的意义不是特别大。Ruby更倾向于,任何能起飞(拥有‘起飞’方法)的对象都是飞行器，而不是任何继承飞行器的类的对象。</p>
-
-<ol>
-<li>需要用继承分享代码么？ ActiveRecord需要你继承ActiveRecord::Base,例如:
-<code>ruby
-class Post &lt; ActiveRecord::Base  
-end
-</code>
-Hisea本人觉得类似Mongoid的Mixin方式更适合解决类似的问题。 Post从设计逻辑上来讲,跟ActiveRecord::Base没有半毛钱关系。继承关系完全用于分享代码，而在Ruby中，更好的分享代码的办法是用Mixin.
-{% endblockquote %}</li>
+<blockquote><p>父类的作用仅仅是定义了API的存在，这在Java中是非常常见的，可是在Ruby中，这个父类其实存在的意义不是特别大。Ruby更倾向于,任何能起飞(拥有‘起飞’方法)的对象都是飞行器，而不是任何继承飞行器的类的对象。</p></p><p><ol><br/><li>需要用继承分享代码么？ ActiveRecord需要你继承ActiveRecord::Base,例如:<br/><code>ruby<br/>class Post &lt; ActiveRecord::Base  <br/>end<br/></code><br/>Hisea本人觉得类似Mongoid的Mixin方式更适合解决类似的问题。 Post从设计逻辑上来讲,跟ActiveRecord::Base没有半毛钱关系。继承关系完全用于分享代码，而在Ruby中，更好的分享代码的办法是用Mixin.</p></blockquote></li>
 </ol>
 
 
 <h5>3. 个人认为 UML 仍是需要的</h5>
 
 <p>特别是项目中涉及到十几以上模型的时候，模型相互之间关系通过 UML 等方式更容易展现。关键是要及时更新和维护。
-{% blockquote %}
-4,忘记UML(或其他)设计大法
-这个话题是3的继续，公司新招了一个Ruby程序员，他来了一两个星期后问了个问题，问为什么公司(或者其他Ruby程序员)不爱用UML之类的设计工具，当时我也一时找不出答案，后来开车回家的路上用半个小时想明白了，UML是一个类只见关系的静态表示，Ruby运行时的情况却是不停在变幻。用静态去表示动态，自然捉襟见肘。
-{% endblockquote %}</p>
+<blockquote><p>4,忘记UML(或其他)设计大法<br/>这个话题是3的继续，公司新招了一个Ruby程序员，他来了一两个星期后问了个问题，问为什么公司(或者其他Ruby程序员)不爱用UML之类的设计工具，当时我也一时找不出答案，后来开车回家的路上用半个小时想明白了，UML是一个类只见关系的静态表示，Ruby运行时的情况却是不停在变幻。用静态去表示动态，自然捉襟见肘。</p></blockquote></p>
 
 <h5>4. 好的 IDE 对 Ruby 开发有一定好处的</h5>
 
@@ -396,41 +188,7 @@ Hisea本人觉得类似Mongoid的Mixin方式更适合解决类似的问题。 Po
 
 <p>唯一不好的地方就是，RubyMine 是用 Java 做的，占内存，运行有时会卡，最好机器配置为 intel Core i5，8 G 内存以上，用 SSD 固态硬盘更好。</p>
 
-<p>{% blockquote %}
-5.为什么不用IDE?
-很多从Java阵营转来，尤其是有多年eclipse经验的Ruby初学者尤其是经常爱问，Ruby用什么IDE。</p>
-
-<p>得到的回答往往是text mate,vim,sublime text 2等等文本编辑器。</p>
-
-<p>很多人可能纳闷，为什么Ruby/Rails没有一个IDE占领大片江山的情况，为什么Netbeans／Eclipse再Ruby开发阵营中没有其他语言开发占的地位重要。</p>
-
-<p>其实答案很简单。</p>
-
-<ol>
-<li>IDE最讨喜的功能是什么？</li>
-</ol>
-
-
-<p>很多用惯了IDE开发的Java程序员甚至XCode程序员，都会说最爱的功能是代码不全，object之后按一下'.'立马生成一个方法列表。转到Ruby用文本编辑器，没有这个功能，很是郁闷。其实道理很简单，如果方法都是动态生成的，在写程序的时候怎么能给出一个列表呢。</p>
-
-<ol>
-<li>Debugger还是必要工具么？</li>
-</ol>
-
-
-<p>静态语言开发，调试是居家旅行杀人灭口必备良药。而IDE又是调试的好帮手。</p>
-
-<p>Ruby／Rails的Debugger还没那么成熟，而且如果用logger, raise在适当的地方输出inspect, to_yaml等内容，也可以很容易的找到错误。</p>
-
-<ol>
-<li>Eclipse可以很好的配置Java开发环境。</li>
-</ol>
-
-
-<p>Ruby/Rails有好用的RVM,RubyGems,Bundler.</p>
-
-<p>所以，不补全，不调试，不配环境，要IDE不也是拿来当文本编辑器用么
-{% endblockquote %}</p>
+<p><blockquote><p>5.为什么不用IDE?<br/>很多从Java阵营转来，尤其是有多年eclipse经验的Ruby初学者尤其是经常爱问，Ruby用什么IDE。</p></p><p><p>得到的回答往往是text mate,vim,sublime text 2等等文本编辑器。</p></p><p><p>很多人可能纳闷，为什么Ruby/Rails没有一个IDE占领大片江山的情况，为什么Netbeans／Eclipse再Ruby开发阵营中没有其他语言开发占的地位重要。</p></p><p><p>其实答案很简单。</p></p><p><ol><br/><li>IDE最讨喜的功能是什么？</li><br/></ol></p><p><br/><p>很多用惯了IDE开发的Java程序员甚至XCode程序员，都会说最爱的功能是代码不全，object之后按一下'.'立马生成一个方法列表。转到Ruby用文本编辑器，没有这个功能，很是郁闷。其实道理很简单，如果方法都是动态生成的，在写程序的时候怎么能给出一个列表呢。</p></p><p><ol><br/><li>Debugger还是必要工具么？</li><br/></ol></p><p><br/><p>静态语言开发，调试是居家旅行杀人灭口必备良药。而IDE又是调试的好帮手。</p></p><p><p>Ruby／Rails的Debugger还没那么成熟，而且如果用logger, raise在适当的地方输出inspect, to_yaml等内容，也可以很容易的找到错误。</p></p><p><ol><br/><li>Eclipse可以很好的配置Java开发环境。</li><br/></ol></p><p><br/><p>Ruby/Rails有好用的RVM,RubyGems,Bundler.</p></p><p><p>所以，不补全，不调试，不配环境，要IDE不也是拿来当文本编辑器用么</p></blockquote></p>
 ]]></content>
   </entry>
   
