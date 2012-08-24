@@ -5,6 +5,11 @@ date: 2012-08-18 20:57
 comments: true
 categories: 
 - Sina Weibo SDK
+- SNS
+- Python
+tags: 
+- Sina Weibo SDK
+- SNS
 - Python
 ---
 

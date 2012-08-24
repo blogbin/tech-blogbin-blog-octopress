@@ -12,9 +12,26 @@
   <meta name="author" content="Tech Blogbin <tech.blogbin@gmail.com>">
 
   
-  <meta name="description" content="参阅： nvie/gitflow
-https://github.com/nvie/gitflow/ A successful Git branching model » nvie.com
-http://nvie.com/posts/a-successful-git-branching-model &hellip;">
+  <meta name="description" content="使用 iftop 简单监控服务器网络流量。安装过程如下： 1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+[root@hj01 ~]# yum install -y wget [root@hj01 ~]# wget http://www.ex- &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -85,6 +102,89 @@ http://nvie.com/posts/a-successful-git-branching-model &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/08/24/installing-iftop-on-centos-6/">Installing Iftop on CentOS 6</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-24T22:55:00+08:00" pubdate data-updated="true">Aug 24<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/08/24/installing-iftop-on-centos-6/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>使用 iftop 简单监控服务器网络流量。安装过程如下：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[root@hj01 ~]# yum install -y wget
+</span><span class='line'>
+</span><span class='line'>[root@hj01 ~]# wget http://www.ex-parrot.com/~pdw/iftop/download/iftop-0.17.tar.gz
+</span><span class='line'>
+</span><span class='line'>[root@hj01 ~]# tar -xvf iftop-0.17
+</span><span class='line'>
+</span><span class='line'>[root@hj01 ~]# yum install -y flex byacc  libpcap　libpcap-devel ncurses ncurses-devel
+</span><span class='line'>
+</span><span class='line'>[root@hj01 ~]# yum install -y libpcap-devel
+</span><span class='line'>
+</span><span class='line'>[root@hj01 ~]# cd iftop-0.17
+</span><span class='line'>
+</span><span class='line'>[root@hj01 iftop-0.17]# ./configure
+</span><span class='line'>
+</span><span class='line'>[root@hj01 iftop-0.17]# make
+</span><span class='line'>
+</span><span class='line'>[root@hj01 iftop-0.17]# make install
+</span><span class='line'>
+</span><span class='line'>[root@hj01 iftop-0.17]# iftop</span></code></pre></td></tr></table></div></figure>
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2012/08/24/installing-iftop-on-centos-6/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -695,61 +795,6 @@ Hisea <a href="http://hisea.me/">http://hisea.me/</a></p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/08/16/a-story-about-ruby-and-programming-ruby-1/">Hisea's Ruby和元编程的故事 - 第1回: 色色空空，万物皆为对象</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-08-16T08:01:00+08:00" pubdate data-updated="true">Aug 16<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/08/16/a-story-about-ruby-and-programming-ruby-1/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>参阅：
-Hisea <a href="http://hisea.me/">http://hisea.me/</a></p>
-
-<p>Ruby和元编程的故事 - 第0回: 欲练神功，必先自废武功 <a href="http://ruby-china.org/topics/1171">http://ruby-china.org/topics/1171</a></p>
-
-<h5>1. 官方说法是 eigenclass 本体类</h5>
-
-<p>有很多名字，比如单例类，估计是因为 eigenclass 本体类很容易就解决设计模式的单例，结果就误传下来了。</p>
-
-<blockquote><p>Singleton/Meta/Anonymous/Ghost/Shadow Class</p><p>   * Singleton Class: 单例类<br/>   * Meta Class：元类<br/>   * Anonymous Class: 匿名类<br/>   * Ghost Class：鬼类<br/>   * Shadow Class: 影子类<br/>上面的这些东东其实说的都是一个东西，我喜欢叫它 影子类。</p></blockquote>
-
-
-
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2012/08/16/a-story-about-ruby-and-programming-ruby-1/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -767,6 +812,10 @@ Hisea <a href="http://hisea.me/">http://hisea.me/</a></p>
 <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2012/08/24/installing-iftop-on-centos-6/">installing iftop on CentOS 6</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2012/08/23/using-git-flow/">用 git-flow 进行分支操作</a>
@@ -804,10 +853,6 @@ Hisea <a href="http://hisea.me/">http://hisea.me/</a></p>
         <a href="/blog/2012/08/16/a-story-about-ruby-and-metaprogramming-ruby-2/">Hisea's Ruby和元编程的故事 - 第2回: 类与模块，Ruby的绝代双骄</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2012/08/16/a-story-about-ruby-and-programming-ruby-1/">Hisea's Ruby和元编程的故事 - 第1回: 色色空空，万物皆为对象</a>
-      </li>
-    
   </ul>
 </section>
 <section>
@@ -818,11 +863,11 @@ Hisea <a href="http://hisea.me/">http://hisea.me/</a></p>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/apple'>Apple (1)</a></li><li><a href='/blog/categories/binarylogic'>binarylogic (1)</a></li><li><a href='/blog/categories/bundle'>Bundle (3)</a></li><li><a href='/blog/categories/bundler'>Bundler (3)</a></li><li><a href='/blog/categories/centos'>CentOS (1)</a></li><li><a href='/blog/categories/configuration'>Configuration (1)</a></li><li><a href='/blog/categories/deployment'>Deployment (3)</a></li><li><a href='/blog/categories/dhh'>DHH (1)</a></li><li><a href='/blog/categories/domain'>Domain (1)</a></li><li><a href='/blog/categories/eznow'>Eznow (1)</a></li><li><a href='/blog/categories/firebug'>Firebug (1)</a></li><li><a href='/blog/categories/firefox'>Firefox (1)</a></li><li><a href='/blog/categories/gem'>Gem (3)</a></li><li><a href='/blog/categories/gemfile'>Gemfile (3)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/git-flow'>git-flow (1)</a></li><li><a href='/blog/categories/github'>GitHub (3)</a></li><li><a href='/blog/categories/heroku'>Heroku (1)</a></li><li><a href='/blog/categories/installation'>Installation (1)</a></li><li><a href='/blog/categories/jbuilder'>JBuilder (1)</a></li><li><a href='/blog/categories/json'>JSON (1)</a></li><li><a href='/blog/categories/macos-x'>MacOS X (1)</a></li><li><a href='/blog/categories/metaprogramming-ruby'>MetaProgramming Ruby (7)</a></li><li><a href='/blog/categories/mountain-lion-10-8'>Mountain Lion 10.8 (1)</a></li><li><a href='/blog/categories/net'>Net (1)</a></li><li><a href='/blog/categories/new-relic'>New Relic (1)</a></li><li><a href='/blog/categories/octopress'>Octopress (4)</a></li><li><a href='/blog/categories/python'>Python (1)</a></li><li><a href='/blog/categories/rails'>Rails (4)</a></li><li><a href='/blog/categories/redmine'>Redmine (1)</a></li><li><a href='/blog/categories/rmagick'>RMagick (1)</a></li><li><a href='/blog/categories/ror'>RoR (4)</a></li><li><a href='/blog/categories/ruby'>Ruby (14)</a></li><li><a href='/blog/categories/rubyonrails'>RubyOnRails (4)</a></li><li><a href='/blog/categories/settingslogic'>Settingslogic (1)</a></li><li><a href='/blog/categories/sina-weibo-sdk'>Sina Weibo SDK (1)</a></li><li><a href='/blog/categories/yum'>yum (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/apple'>Apple (1)</a></li><li><a href='/blog/categories/binarylogic'>binarylogic (1)</a></li><li><a href='/blog/categories/bundle'>Bundle (3)</a></li><li><a href='/blog/categories/bundler'>Bundler (3)</a></li><li><a href='/blog/categories/centos'>CentOS (2)</a></li><li><a href='/blog/categories/configuration'>Configuration (1)</a></li><li><a href='/blog/categories/deployment'>Deployment (3)</a></li><li><a href='/blog/categories/dhh'>DHH (1)</a></li><li><a href='/blog/categories/domain'>Domain (1)</a></li><li><a href='/blog/categories/eznow'>Eznow (1)</a></li><li><a href='/blog/categories/firebug'>Firebug (1)</a></li><li><a href='/blog/categories/firefox'>Firefox (1)</a></li><li><a href='/blog/categories/gem'>Gem (3)</a></li><li><a href='/blog/categories/gemfile'>Gemfile (3)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/git-flow'>git-flow (1)</a></li><li><a href='/blog/categories/github'>GitHub (3)</a></li><li><a href='/blog/categories/heroku'>Heroku (1)</a></li><li><a href='/blog/categories/iftop'>iftop (1)</a></li><li><a href='/blog/categories/installation'>Installation (1)</a></li><li><a href='/blog/categories/jbuilder'>JBuilder (1)</a></li><li><a href='/blog/categories/json'>JSON (1)</a></li><li><a href='/blog/categories/macos-x'>MacOS X (1)</a></li><li><a href='/blog/categories/metaprogramming-ruby'>MetaProgramming Ruby (7)</a></li><li><a href='/blog/categories/mountain-lion-10-8'>Mountain Lion 10.8 (1)</a></li><li><a href='/blog/categories/net'>Net (1)</a></li><li><a href='/blog/categories/network'>Network (1)</a></li><li><a href='/blog/categories/new-relic'>New Relic (1)</a></li><li><a href='/blog/categories/octopress'>Octopress (4)</a></li><li><a href='/blog/categories/python'>Python (1)</a></li><li><a href='/blog/categories/rails'>Rails (4)</a></li><li><a href='/blog/categories/redmine'>Redmine (1)</a></li><li><a href='/blog/categories/rmagick'>RMagick (1)</a></li><li><a href='/blog/categories/ror'>RoR (4)</a></li><li><a href='/blog/categories/ruby'>Ruby (14)</a></li><li><a href='/blog/categories/rubyonrails'>RubyOnRails (4)</a></li><li><a href='/blog/categories/settingslogic'>Settingslogic (1)</a></li><li><a href='/blog/categories/sina-weibo-sdk'>Sina Weibo SDK (1)</a></li><li><a href='/blog/categories/sns'>SNS (1)</a></li><li><a href='/blog/categories/yum'>yum (1)</a></li></ul>
 </section>
 <section>
   <h1>Tag Cloud</h1>
-    <span id="tag-cloud"><a href='/blog/categories/apple' style='font-size: 104.28571428571429%'>Apple(1)</a> <a href='/blog/categories/binarylogic' style='font-size: 104.28571428571429%'>binarylogic(1)</a> <a href='/blog/categories/bundle' style='font-size: 112.85714285714286%'>Bundle(3)</a> <a href='/blog/categories/bundler' style='font-size: 112.85714285714286%'>Bundler(3)</a> <a href='/blog/categories/centos' style='font-size: 104.28571428571429%'>CentOS(1)</a> <a href='/blog/categories/configuration' style='font-size: 104.28571428571429%'>Configuration(1)</a> <a href='/blog/categories/deployment' style='font-size: 112.85714285714286%'>Deployment(3)</a> <a href='/blog/categories/dhh' style='font-size: 104.28571428571429%'>DHH(1)</a> <a href='/blog/categories/domain' style='font-size: 104.28571428571429%'>Domain(1)</a> <a href='/blog/categories/eznow' style='font-size: 104.28571428571429%'>Eznow(1)</a> <a href='/blog/categories/firebug' style='font-size: 104.28571428571429%'>Firebug(1)</a> <a href='/blog/categories/firefox' style='font-size: 104.28571428571429%'>Firefox(1)</a> <a href='/blog/categories/gem' style='font-size: 112.85714285714286%'>Gem(3)</a> <a href='/blog/categories/gemfile' style='font-size: 112.85714285714286%'>Gemfile(3)</a> <a href='/blog/categories/git' style='font-size: 104.28571428571429%'>Git(1)</a> <a href='/blog/categories/git-flow' style='font-size: 104.28571428571429%'>git-flow(1)</a> <a href='/blog/categories/github' style='font-size: 112.85714285714286%'>GitHub(3)</a> <a href='/blog/categories/heroku' style='font-size: 104.28571428571429%'>Heroku(1)</a> <a href='/blog/categories/installation' style='font-size: 104.28571428571429%'>Installation(1)</a> <a href='/blog/categories/jbuilder' style='font-size: 104.28571428571429%'>JBuilder(1)</a> <a href='/blog/categories/json' style='font-size: 104.28571428571429%'>JSON(1)</a> <a href='/blog/categories/macos-x' style='font-size: 104.28571428571429%'>MacOS X(1)</a> <a href='/blog/categories/metaprogramming-ruby' style='font-size: 130.0%'>MetaProgramming Ruby(7)</a> <a href='/blog/categories/mountain-lion-10-8' style='font-size: 104.28571428571429%'>Mountain Lion 10.8(1)</a> <a href='/blog/categories/net' style='font-size: 104.28571428571429%'>Net(1)</a> <a href='/blog/categories/new-relic' style='font-size: 104.28571428571429%'>New Relic(1)</a> <a href='/blog/categories/octopress' style='font-size: 117.14285714285714%'>Octopress(4)</a> <a href='/blog/categories/python' style='font-size: 104.28571428571429%'>Python(1)</a> <a href='/blog/categories/rails' style='font-size: 117.14285714285714%'>Rails(4)</a> <a href='/blog/categories/redmine' style='font-size: 104.28571428571429%'>Redmine(1)</a> <a href='/blog/categories/rmagick' style='font-size: 104.28571428571429%'>RMagick(1)</a> <a href='/blog/categories/ror' style='font-size: 117.14285714285714%'>RoR(4)</a> <a href='/blog/categories/ruby' style='font-size: 160.0%'>Ruby(14)</a> <a href='/blog/categories/rubyonrails' style='font-size: 117.14285714285714%'>RubyOnRails(4)</a> <a href='/blog/categories/settingslogic' style='font-size: 104.28571428571429%'>Settingslogic(1)</a> <a href='/blog/categories/sina-weibo-sdk' style='font-size: 104.28571428571429%'>Sina Weibo SDK(1)</a> <a href='/blog/categories/yum' style='font-size: 104.28571428571429%'>yum(1)</a> </span>
+    <span id="tag-cloud"><a href='/blog/categories/apple' style='font-size: 104.28571428571429%'>Apple(1)</a> <a href='/blog/categories/binarylogic' style='font-size: 104.28571428571429%'>binarylogic(1)</a> <a href='/blog/categories/bundle' style='font-size: 112.85714285714286%'>Bundle(3)</a> <a href='/blog/categories/bundler' style='font-size: 112.85714285714286%'>Bundler(3)</a> <a href='/blog/categories/centos' style='font-size: 108.57142857142857%'>CentOS(2)</a> <a href='/blog/categories/configuration' style='font-size: 104.28571428571429%'>Configuration(1)</a> <a href='/blog/categories/deployment' style='font-size: 112.85714285714286%'>Deployment(3)</a> <a href='/blog/categories/dhh' style='font-size: 104.28571428571429%'>DHH(1)</a> <a href='/blog/categories/domain' style='font-size: 104.28571428571429%'>Domain(1)</a> <a href='/blog/categories/eznow' style='font-size: 104.28571428571429%'>Eznow(1)</a> <a href='/blog/categories/firebug' style='font-size: 104.28571428571429%'>Firebug(1)</a> <a href='/blog/categories/firefox' style='font-size: 104.28571428571429%'>Firefox(1)</a> <a href='/blog/categories/gem' style='font-size: 112.85714285714286%'>Gem(3)</a> <a href='/blog/categories/gemfile' style='font-size: 112.85714285714286%'>Gemfile(3)</a> <a href='/blog/categories/git' style='font-size: 104.28571428571429%'>Git(1)</a> <a href='/blog/categories/git-flow' style='font-size: 104.28571428571429%'>git-flow(1)</a> <a href='/blog/categories/github' style='font-size: 112.85714285714286%'>GitHub(3)</a> <a href='/blog/categories/heroku' style='font-size: 104.28571428571429%'>Heroku(1)</a> <a href='/blog/categories/iftop' style='font-size: 104.28571428571429%'>iftop(1)</a> <a href='/blog/categories/installation' style='font-size: 104.28571428571429%'>Installation(1)</a> <a href='/blog/categories/jbuilder' style='font-size: 104.28571428571429%'>JBuilder(1)</a> <a href='/blog/categories/json' style='font-size: 104.28571428571429%'>JSON(1)</a> <a href='/blog/categories/macos-x' style='font-size: 104.28571428571429%'>MacOS X(1)</a> <a href='/blog/categories/metaprogramming-ruby' style='font-size: 130.0%'>MetaProgramming Ruby(7)</a> <a href='/blog/categories/mountain-lion-10-8' style='font-size: 104.28571428571429%'>Mountain Lion 10.8(1)</a> <a href='/blog/categories/net' style='font-size: 104.28571428571429%'>Net(1)</a> <a href='/blog/categories/network' style='font-size: 104.28571428571429%'>Network(1)</a> <a href='/blog/categories/new-relic' style='font-size: 104.28571428571429%'>New Relic(1)</a> <a href='/blog/categories/octopress' style='font-size: 117.14285714285714%'>Octopress(4)</a> <a href='/blog/categories/python' style='font-size: 104.28571428571429%'>Python(1)</a> <a href='/blog/categories/rails' style='font-size: 117.14285714285714%'>Rails(4)</a> <a href='/blog/categories/redmine' style='font-size: 104.28571428571429%'>Redmine(1)</a> <a href='/blog/categories/rmagick' style='font-size: 104.28571428571429%'>RMagick(1)</a> <a href='/blog/categories/ror' style='font-size: 117.14285714285714%'>RoR(4)</a> <a href='/blog/categories/ruby' style='font-size: 160.0%'>Ruby(14)</a> <a href='/blog/categories/rubyonrails' style='font-size: 117.14285714285714%'>RubyOnRails(4)</a> <a href='/blog/categories/settingslogic' style='font-size: 104.28571428571429%'>Settingslogic(1)</a> <a href='/blog/categories/sina-weibo-sdk' style='font-size: 104.28571428571429%'>Sina Weibo SDK(1)</a> <a href='/blog/categories/sns' style='font-size: 104.28571428571429%'>SNS(1)</a> <a href='/blog/categories/yum' style='font-size: 104.28571428571429%'>yum(1)</a> </span>
 </section>
 
 <section>
@@ -972,6 +1017,9 @@ monthCalendar = function(id,year,month)
   var highlightArray = new Array();
   var hightlightLinks = new Array();
   
+  highlightArray.push('08/24/2012');
+  hightlightLinks.push('/blog/2012/08/24/installing-iftop-on-centos-6/');
+  
   highlightArray.push('08/23/2012');
   hightlightLinks.push('/blog/2012/08/23/using-git-flow/');
   
@@ -998,9 +1046,6 @@ monthCalendar = function(id,year,month)
   
   highlightArray.push('08/16/2012');
   hightlightLinks.push('/blog/2012/08/16/a-story-about-ruby-and-metaprogramming-ruby-2/');
-  
-  highlightArray.push('08/16/2012');
-  hightlightLinks.push('/blog/2012/08/16/a-story-about-ruby-and-programming-ruby-1/');
   		
   var cal = new Calendar(month,year,highlightArray,hightlightLinks);
   cal.generateHTML(id);

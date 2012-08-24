@@ -4,7 +4,7 @@
   <title><![CDATA[Tech.Blogbin's Blog]]></title>
   <link href="http://tech-blog.blogbin.info/atom.xml" rel="self"/>
   <link href="http://tech-blog.blogbin.info/"/>
-  <updated>2012-08-23T23:08:23+08:00</updated>
+  <updated>2012-08-24T23:05:04+08:00</updated>
   <id>http://tech-blog.blogbin.info/</id>
   <author>
     <name><![CDATA[Tech Blogbin ]]></name>
@@ -12,6 +12,74 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[installing iftop on CentOS 6]]></title>
+    <link href="http://tech-blog.blogbin.info/blog/2012/08/24/installing-iftop-on-centos-6/"/>
+    <updated>2012-08-24T22:55:00+08:00</updated>
+    <id>http://tech-blog.blogbin.info/blog/2012/08/24/installing-iftop-on-centos-6</id>
+    <content type="html"><![CDATA[<p>使用 iftop 简单监控服务器网络流量。安装过程如下：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[root@hj01 ~]# yum install -y wget
+</span><span class='line'>
+</span><span class='line'>[root@hj01 ~]# wget http://www.ex-parrot.com/~pdw/iftop/download/iftop-0.17.tar.gz
+</span><span class='line'>
+</span><span class='line'>[root@hj01 ~]# tar -xvf iftop-0.17
+</span><span class='line'>
+</span><span class='line'>[root@hj01 ~]# yum install -y flex byacc  libpcap　libpcap-devel ncurses ncurses-devel
+</span><span class='line'>
+</span><span class='line'>[root@hj01 ~]# yum install -y libpcap-devel
+</span><span class='line'>
+</span><span class='line'>[root@hj01 ~]# cd iftop-0.17
+</span><span class='line'>
+</span><span class='line'>[root@hj01 iftop-0.17]# ./configure
+</span><span class='line'>
+</span><span class='line'>[root@hj01 iftop-0.17]# make
+</span><span class='line'>
+</span><span class='line'>[root@hj01 iftop-0.17]# make install
+</span><span class='line'>
+</span><span class='line'>[root@hj01 iftop-0.17]# iftop</span></code></pre></td></tr></table></div></figure>
+
+
+<!--more-->
+
+
+<p>运行 sudo iftop 可能会出现 iftop: command not found 的情况，如：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[atyun@localhost iftop-0.17]$ sudo iftop
+</span><span class='line'>
+</span><span class='line'>sudo: iftop: command not found</span></code></pre></td></tr></table></div></figure>
+
+
+<p>明确写出 iftop 命令的完整路径，如</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[atyun@localhost iftop-0.17]$ sudo /usr/local/sbin/iftop</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[用 git-flow 进行分支操作]]></title>
