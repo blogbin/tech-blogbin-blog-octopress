@@ -27,16 +27,8 @@ Firstly add this to your _config.yml file
 lsi: true
 The create a file such as source/_includes/custom/asides/related.html with the following content
 
-<section>
-    <h1>Related Posts</h1>
-    <ul class="posts">
-    {% for post in site.related_posts limit:5 %}
-        <li class="related">
-        <a href="{{ root_url }}{{ post.url }}">{{ post.title }}</a>
-        </li>
-    {% endfor %}
-    </ul>
-</section>
+....
+
 It is possible to style the list, but in the above I have chosen to keep the same style as the recent posts.
 
 Finally, add the file to your default asides list in your _config.yml file
