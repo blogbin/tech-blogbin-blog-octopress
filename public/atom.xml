@@ -4,7 +4,7 @@
   <title><![CDATA[Tech.Blogbin's Blog]]></title>
   <link href="http://tech-blog.blogbin.info/atom.xml" rel="self"/>
   <link href="http://tech-blog.blogbin.info/"/>
-  <updated>2012-08-25T04:15:54+08:00</updated>
+  <updated>2012-08-25T09:06:46+08:00</updated>
   <id>http://tech-blog.blogbin.info/</id>
   <author>
     <name><![CDATA[Tech Blogbin ]]></name>
@@ -12,6 +12,28 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Using jcftang's octopress-relatedposts]]></title>
+    <link href="http://tech-blog.blogbin.info/blog/2012/08/25/using-jcftangs-octopress-relatedposts/"/>
+    <updated>2012-08-25T08:33:00+08:00</updated>
+    <id>http://tech-blog.blogbin.info/blog/2012/08/25/using-jcftangs-octopress-relatedposts</id>
+    <content type="html"><![CDATA[<p>参阅 jcftang/octopress-relatedposts <a href="https://github.com/jcftang/octopress-relatedposts">https://github.com/jcftang/octopress-relatedposts</a></p>
+
+<p>其实 Octopress 已经内置了 LSI 引擎，安装和配置 octopress-relatedposts 比较简单。</p>
+
+<blockquote><p>Firstly add this to your _config.yml file</p><p>lsi: true<br/>The create a file such as source/_includes/custom/asides/related.html with the following content</p><p><section><br/>    <h1>Related Posts</h1><br/>    <ul class="posts"><br/>    <br/>        <li class="related"><br/>        <a href="http://tech-blog.blogbin.info/blog/2012/08/25/using-neerajcses-octopress-calendar-aside/">Using neerajcse&#8217;s octopress-calendar-aside</a><br/>        </li><br/>    <br/>        <li class="related"><br/>        <a href="http://tech-blog.blogbin.info/blog/2012/08/24/installing-iftop-on-centos-6/">installing iftop on CentOS 6</a><br/>        </li><br/>    <br/>        <li class="related"><br/>        <a href="http://tech-blog.blogbin.info/blog/2012/08/23/using-git-flow/">用 git-flow 进行分支操作</a><br/>        </li><br/>    <br/>        <li class="related"><br/>        <a href="http://tech-blog.blogbin.info/blog/2012/08/22/using-binarylogic-slash-settingslogic/">Using binarylogic/settingslogic</a><br/>        </li><br/>    <br/>        <li class="related"><br/>        <a href="http://tech-blog.blogbin.info/blog/2012/08/22/monitoring-server-performance-with-new-relic/">Monitoring server performance with New Relic</a><br/>        </li><br/>    <br/>    </ul><br/></section><br/>It is possible to style the list, but in the above I have chosen to keep the same style as the recent posts.</p><p>Finally, add the file to your default asides list in your _config.yml file</p><p>default_asides: [custom/asides/related.html, &#8230;]</p></blockquote>
+
+
+<p>相关帖子效果如下图：</p>
+
+<blockquote><p><img src="http://tech-blog.blogbin.info/images/2012-08-25-using-jcftangs-octopress-relatedposts/octopress-relatedposts.jpeg"></p></blockquote>
+
+
+<p>引入   source/_includes/custom/asides/related.html
+比较遗憾的时，启用 LSI 后，运行 rake generate 的时间延长了 10 倍左右。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Using neerajcse's octopress-calendar-aside]]></title>
@@ -42,7 +64,7 @@ neerajcse/octopress-calendar-aside · GitHub
 
 <p>日历显示效果如下图：</p>
 
-<blockquote><p><img src="http://tech-blog.blogbin.info/images/2012-08-25-using-neerajcses-octopress-calendar-aside/calendar-aside.png"></p></blockquote>
+<blockquote><p><img src="http://tech-blog.blogbin.info/images/2012-08-25-using-neerajcses-octopress-calendar-aside/calendar-aside.jpg"></p></blockquote>
 
 
 <h3>遗留问题</h3>
@@ -499,7 +521,7 @@ Web Application Performance Management (APM) : New Relic
 
 <p>浏览器访问 <a href="http://localhost:3000/newrelic">http://localhost:3000/newrelic</a>，效果如下：</p>
 
-<blockquote><p><img src="http://tech-blog.blogbin.info/images/2012-08-22-monitoring-server-performance-with-new-relic/new_relic_development.png"></p></blockquote>
+<blockquote><p><img src="http://tech-blog.blogbin.info/images/2012-08-22-monitoring-server-performance-with-new-relic/new_relic_development.jpg"></p></blockquote>
 
 ]]></content>
   </entry>
@@ -3988,357 +4010,6 @@ I think you should use an
 </span><span class='line'>## Github Pages deploy complete
 </span><span class='line'>cd -
 </span></code></pre></td></tr></table></div></figure>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Configuring Octopress with 3rd Party Settings]]></title>
-    <link href="http://tech-blog.blogbin.info/blog/2012/08/11/configuring-octopress-with-3rd-party-settings/"/>
-    <updated>2012-08-11T17:11:00+08:00</updated>
-    <id>http://tech-blog.blogbin.info/blog/2012/08/11/configuring-octopress-with-3rd-party-settings</id>
-    <content type="html"><![CDATA[<p>为 Octopress 配置 Disqus 留言，Github, Twitter, Google+, Google Analytics 和 Facebook。
-Google 搜索结果并不多，那是因为在 Octopress 很容易配置，几乎不需要求助。</p>
-
-<!--more-->
-
-
-<p>一. 前期准备</p>
-
-<p>参阅：
-<a href="http://octopress.org/docs/configuring/">http://octopress.org/docs/configuring/</a></p>
-
-<p>Github - List your github repositories in the sidebar</p>
-
-<p>Twitter - Setup a sidebar twitter feed, follow button, and tweet button (for sharing posts and pages).</p>
-
-<p>Google Plus One - Setup sharing for posts and pages on Google’s plus one network.</p>
-
-<p>Pinboard - Share your recent Pinboard bookmarks in the sidebar.</p>
-
-<p>Delicious - Share your recent Delicious bookmarks in the sidebar.</p>
-
-<p>Disqus Comments - Add your disqus short name to enable disqus comments on your site.</p>
-
-<p>Google Analytics - Add your tracking id to enable Google Analytics tracking for your site.</p>
-
-<p>Facebook - Add a Facebook like button</p>
-
-<p>二. 配置过程</p>
-
-<p>_config.yml 配置文件如下：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-<span class='line-number'>48</span>
-<span class='line-number'>49</span>
-<span class='line-number'>50</span>
-<span class='line-number'>51</span>
-<span class='line-number'>52</span>
-<span class='line-number'>53</span>
-<span class='line-number'>54</span>
-<span class='line-number'>55</span>
-<span class='line-number'>56</span>
-<span class='line-number'>57</span>
-<span class='line-number'>58</span>
-<span class='line-number'>59</span>
-<span class='line-number'>60</span>
-<span class='line-number'>61</span>
-<span class='line-number'>62</span>
-<span class='line-number'>63</span>
-<span class='line-number'>64</span>
-<span class='line-number'>65</span>
-<span class='line-number'>66</span>
-<span class='line-number'>67</span>
-<span class='line-number'>68</span>
-<span class='line-number'>69</span>
-<span class='line-number'>70</span>
-<span class='line-number'>71</span>
-<span class='line-number'>72</span>
-<span class='line-number'>73</span>
-<span class='line-number'>74</span>
-<span class='line-number'>75</span>
-<span class='line-number'>76</span>
-<span class='line-number'>77</span>
-<span class='line-number'>78</span>
-<span class='line-number'>79</span>
-<span class='line-number'>80</span>
-<span class='line-number'>81</span>
-<span class='line-number'>82</span>
-<span class='line-number'>83</span>
-<span class='line-number'>84</span>
-<span class='line-number'>85</span>
-<span class='line-number'>86</span>
-<span class='line-number'>87</span>
-<span class='line-number'>88</span>
-<span class='line-number'>89</span>
-<span class='line-number'>90</span>
-<span class='line-number'>91</span>
-<span class='line-number'>92</span>
-<span class='line-number'>93</span>
-<span class='line-number'>94</span>
-<span class='line-number'>95</span>
-<span class='line-number'>96</span>
-<span class='line-number'>97</span>
-<span class='line-number'>98</span>
-<span class='line-number'>99</span>
-<span class='line-number'>100</span>
-<span class='line-number'>101</span>
-<span class='line-number'>102</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>blogbins-MacBook-Pro:octopress blogbin$ pwd
-</span><span class='line'>/Users/blogbin/projects/workspaces/octopress/tech.blogbin/octopress
-</span><span class='line'>blogbins-MacBook-Pro:octopress blogbin$  vi _config.yml
-</span><span class='line'># ----------------------- #
-</span><span class='line'>#      Main Configs       #
-</span><span class='line'># ----------------------- #
-</span><span class='line'>
-</span><span class='line'>url: http://tech-blogbin.herokuapp.com/
-</span><span class='line'>title: Tech.Blogbin's Blog
-</span><span class='line'>subtitle: A blogging for geeker.
-</span><span class='line'>author: Tech Blogbin &lt;tech.blogbin@gmail.com&gt;
-</span><span class='line'>simple_search: http://google.com/search
-</span><span class='line'>description:
-</span><span class='line'>
-</span><span class='line'># Default date format is "ordinal" (resulting in "July 22nd 2007")
-</span><span class='line'># You can customize the format as defined in
-</span><span class='line'># http://www.ruby-doc.org/core-1.9.2/Time.html#method-i-strftime
-</span><span class='line'># Additionally, %o will give you the ordinal representation of the day
-</span><span class='line'>date_format: "ordinal"
-</span><span class='line'>
-</span><span class='line'># RSS / Email (optional) subscription links (change if using something like Feedburner)
-</span><span class='line'>subscribe_rss: /atom.xml
-</span><span class='line'>subscribe_email:
-</span><span class='line'># RSS feeds can list your email address if you like
-</span><span class='line'>email:
-</span><span class='line'>
-</span><span class='line'># ----------------------- #
-</span><span class='line'>#    Jekyll & Plugins     #
-</span><span class='line'># ----------------------- #
-</span><span class='line'>
-</span><span class='line'># If publishing to a subdirectory as in http://site.com/project set 'root: /project'
-</span><span class='line'>root: /
-</span><span class='line'>permalink: /blog/:year/:month/:day/:title/
-</span><span class='line'>source: source
-</span><span class='line'>destination: public
-</span><span class='line'>plugins: plugins
-</span><span class='line'>code_dir: downloads/code
-</span><span class='line'>category_dir: blog/categories
-</span><span class='line'>markdown: rdiscount
-</span><span class='line'>pygments: false # default python pygments have been replaced by pygments.rb
-</span><span class='line'>
-</span><span class='line'>paginate: 10          # Posts per page on the blog index
-</span><span class='line'>pagination_dir: blog  # Directory base for pagination URLs eg. /blog/page/2/
-</span><span class='line'>recent_posts: 5       # Posts in the sidebar Recent Posts section
-</span><span class='line'>excerpt_link: "Read on &rarr;"  # "Continue reading" link text at the bottom of excerpted articles
-</span><span class='line'>
-</span><span class='line'>titlecase: true       # Converts page and post titles to titlecase
-</span><span class='line'>
-</span><span class='line'># list each of the sidebar modules you want to include, in the order you want them to appear.
-</span><span class='line'># To add custom asides, create files in /source/_includes/custom/asides/ and add them to the list like 'custom/asides/custom_aside_name.html'
-</span><span class='line'>default_asides: [asides/recent_posts.html, asides/github.html, asides/twitter.html, asides/delicious.html, asides/pinboard.html, asides/googleplus.html]
-</span><span class='line'>
-</span><span class='line'># Each layout uses the default asides, but they can have their own asides instead. Simply uncomment the lines below
-</span><span class='line'># and add an array with the asides you want to use.
-</span><span class='line'># blog_index_asides:
-</span><span class='line'># post_asides:
-</span><span class='line'># page_asides:
-</span><span class='line'>
-</span><span class='line'># ----------------------- #
-</span><span class='line'>#   3rd Party Settings    #
-</span><span class='line'># ----------------------- #
-</span><span class='line'>
-</span><span class='line'># Github repositories
-</span><span class='line'>github_user: blogbin
-</span><span class='line'>github_repo_count: 0
-</span><span class='line'>github_show_profile_link: true
-</span><span class='line'>github_skip_forks: true
-</span><span class='line'>
-</span><span class='line'># Twitter
-</span><span class='line'>twitter_user: tech_blogbin
-</span><span class='line'>twitter_tweet_count: 4
-</span><span class='line'>twitter_show_replies: true
-</span><span class='line'>twitter_follow_button: true
-</span><span class='line'>twitter_show_follower_count: true
-</span><span class='line'>twitter_tweet_button: true
-</span><span class='line'>
-</span><span class='line'># Google +1
-</span><span class='line'>google_plus_one: true
-</span><span class='line'>google_plus_one_size: medium
-</span><span class='line'>
-</span><span class='line'># Google Plus Profile
-</span><span class='line'># Hidden: No visible button, just add author information to search results
-</span><span class='line'>googleplus_user: tech.blogbin@gmail.com
-</span><span class='line'>googleplus_hidden: false
-</span><span class='line'>
-</span><span class='line'># Pinboard
-</span><span class='line'>pinboard_user:
-</span><span class='line'>pinboard_count: 3
-</span><span class='line'>
-</span><span class='line'># Delicious
-</span><span class='line'>delicious_user:
-</span><span class='line'>delicious_count: 3
-</span><span class='line'>
-</span><span class='line'># Disqus Comments
-</span><span class='line'>disqus_short_name: tech-blogbin-blog
-</span><span class='line'>disqus_show_comment_count: true
-</span><span class='line'>
-</span><span class='line'># Google Analytics
-</span><span class='line'>google_analytics_tracking_id: UA-34029049-1
-</span><span class='line'>
-</span><span class='line'># Facebook Like
-</span><span class='line'>facebook_like: true</span></code></pre></td></tr></table></div></figure>
-
-
-<p>注意，修改 _config.yml 等配置文件，必须重新编译生成静态文件，否则不会生效。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>blogbins-MacBook-Pro:octopress blogbin$ rake generate
-</span><span class='line'>## Generating Site with Jekyll
-</span><span class='line'>unchanged sass/screen.scss
-</span><span class='line'>/Users/blogbin/.rvm/gems/ruby-1.9.3-p0@octopress/gems/maruku-0.6.0/lib/maruku/input/parse_doc.rb:22:in `&lt;top (required)&gt;': iconv will be deprecated in the future, use String#encode instead.
-</span><span class='line'>Configuration from /Users/blogbin/projects/workspaces/octopress/tech.blogbin/octopress/_config.yml
-</span><span class='line'>Building site: source -&gt; public
-</span><span class='line'>Successfully generated site: source -&gt; public</span></code></pre></td></tr></table></div></figure>
-
-
-<p>后推送到远端服务器</p>
-
-<p>三. 问题</p>
-
-<ol>
-<li>markdown 文件中在代码片段中错误指定语法格式，造成 rake generate 运行失效。</li>
-</ol>
-
-
-<p>rake watch 和 rake preview 编译不会报错，所以发现改动一直没有更新，运行 rake generate 强制编译。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>###```Bash shell scripts
-</span><span class='line'>blogbins-MacBook-Pro:octopress blogbin$ rake generate</span></code></pre></td></tr></table></div></figure>
-
-
-<p>报错信息如下：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>## Generating Site with Jekyll
-</span><span class='line'>unchanged sass/screen.scss
-</span><span class='line'>/Users/blogbin/.rvm/gems/ruby-1.9.3-p0@octopress/gems/maruku-0.6.0/lib/maruku/input/parse_doc.rb:22:in `&lt;top (required)&gt;': iconv will be deprecated in the future, use String#encode instead.
-</span><span class='line'>Configuration from /Users/blogbin/projects/workspaces/octopress/tech.blogbin/octopress/_config.yml
-</span><span class='line'>Building site: source -&gt; public
-</span><span class='line'>/Users/blogbin/.rvm/gems/ruby-1.9.3-p0@octopress/gems/rubypython-0.5.3/lib/rubypython/rubypyproxy.rb:198:in `method_missing': ClassNotFound: no lexer for alias 'Bash' found (RubyPython::PythonError)
-</span><span class='line'>     from /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@octopress/gems/pygments.rb-0.2.13/lib/pygments/ffi.rb:135:in `lexer_for'
-</span><span class='line'>     from /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@octopress/gems/pygments.rb-0.2.13/lib/pygments/ffi.rb:91:in `highlight'
-</span><span class='line'>     from /Users/blogbin/projects/workspaces/octopress/tech.blogbin/octopress/plugins/pygments_code.rb:24:in `pygments'
-</span><span class='line'>     from /Users/blogbin/projects/workspaces/octopress/tech.blogbin/octopress/plugins/pygments_code.rb:14:in `highlight'
-</span><span class='line'>     from /Users/blogbin/projects/workspaces/octopress/tech.blogbin/octopress/plugins/backtick_code_block.rb:37:in `block in render_code_block'
-</span><span class='line'>     from /Users/blogbin/projects/workspaces/octopress/tech.blogbin/octopress/plugins/backtick_code_block.rb:13:in `gsub'
-</span><span class='line'>     from /Users/blogbin/projects/workspaces/octopress/tech.blogbin/octopress/plugins/backtick_code_block.rb:13:in `render_code_block'
-</span><span class='line'>     from /Users/blogbin/projects/workspaces/octopress/tech.blogbin/octopress/plugins/octopress_filters.rb:12:in `pre_filter'
-</span><span class='line'>     from /Users/blogbin/projects/workspaces/octopress/tech.blogbin/octopress/plugins/octopress_filters.rb:28:in `pre_render'
-</span><span class='line'>     from /Users/blogbin/projects/workspaces/octopress/tech.blogbin/octopress/plugins/post_filters.rb:112:in `block in pre_render'
-</span><span class='line'>     from /Users/blogbin/projects/workspaces/octopress/tech.blogbin/octopress/plugins/post_filters.rb:111:in `each'
-</span><span class='line'>     from /Users/blogbin/projects/workspaces/octopress/tech.blogbin/octopress/plugins/post_filters.rb:111:in `pre_render'
-</span><span class='line'>     from /Users/blogbin/projects/workspaces/octopress/tech.blogbin/octopress/plugins/post_filters.rb:166:in `do_layout'
-</span><span class='line'>     from /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@octopress/gems/jekyll-0.11.2/lib/jekyll/post.rb:189:in `render'
-</span><span class='line'>     from /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@octopress/gems/jekyll-0.11.2/lib/jekyll/site.rb:193:in `block in render'
-</span><span class='line'>     from /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@octopress/gems/jekyll-0.11.2/lib/jekyll/site.rb:192:in `each'
-</span><span class='line'>     from /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@octopress/gems/jekyll-0.11.2/lib/jekyll/site.rb:192:in `render'
-</span><span class='line'>     from /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@octopress/gems/jekyll-0.11.2/lib/jekyll/site.rb:40:in `process'
-</span><span class='line'>     from /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@octopress/gems/jekyll-0.11.2/bin/jekyll:250:in `&lt;top (required)&gt;'
-</span><span class='line'>     from /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@octopress/bin/jekyll:19:in `load'
-</span><span class='line'>     from /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@octopress/bin/jekyll:19:in `&lt;main&gt;'
-</span><span class='line'>blogbins-MacBook-Pro:octopress blogbin$ rake generate
-</span><span class='line'>## Generating Site with Jekyll
-</span><span class='line'>unchanged sass/screen.scss
-</span><span class='line'>/Users/blogbin/.rvm/gems/ruby-1.9.3-p0@octopress/gems/maruku-0.6.0/lib/maruku/input/parse_doc.rb:22:in `&lt;top (required)&gt;': iconv will be deprecated in the future, use String#encode instead.
-</span><span class='line'>Configuration from /Users/blogbin/projects/workspaces/octopress/tech.blogbin/octopress/_config.yml
-</span><span class='line'>Building site: source -&gt; public
-</span><span class='line'>Successfully generated site: source -&gt; public</span></code></pre></td></tr></table></div></figure>
 
 ]]></content>
   </entry>
