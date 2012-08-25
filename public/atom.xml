@@ -4,7 +4,7 @@
   <title><![CDATA[Tech.Blogbin's Blog]]></title>
   <link href="http://tech-blog.blogbin.info/atom.xml" rel="self"/>
   <link href="http://tech-blog.blogbin.info/"/>
-  <updated>2012-08-23T08:52:22+08:00</updated>
+  <updated>2012-08-25T04:15:54+08:00</updated>
   <id>http://tech-blog.blogbin.info/</id>
   <author>
     <name><![CDATA[Tech Blogbin ]]></name>
@@ -12,6 +12,329 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Using neerajcse's octopress-calendar-aside]]></title>
+    <link href="http://tech-blog.blogbin.info/blog/2012/08/25/using-neerajcses-octopress-calendar-aside/"/>
+    <updated>2012-08-25T03:50:00+08:00</updated>
+    <id>http://tech-blog.blogbin.info/blog/2012/08/25/using-neerajcses-octopress-calendar-aside</id>
+    <content type="html"><![CDATA[<p>Octopress 提供按日历归类显示文章的第三方插件。</p>
+
+<p>参阅
+neerajcse/octopress-calendar-aside · GitHub
+<a href="https://github.com/neerajcse/octopress-calendar-aside">https://github.com/neerajcse/octopress-calendar-aside</a></p>
+
+<p>按照官方文档安装和配置 octopress-calendar-aside，插件的效果显示出来了，不过有一些小遗憾。</p>
+
+<!--more-->
+
+
+
+
+<blockquote><p>All you need to do is:</p><p>add the file calendar.html to the default asides location. (.themes/classic/source/_includes/asides)<br/>add the file calendar.js to the default javascript location. (.themes/classic/source/javascript)<br/>add the calendar aside to _config.yml file. (see the config.yml in commited source)<br/>add the images prev.png and next.png to .themes/classic/source/images/. (these images are free for non-commercial purposes)</p></blockquote>
+
+
+<p>官方建议将代码部署在 .themes 目录下会出现问题。访问首页或具体一篇文章时，右侧 calendar-aside 位置报错：</p>
+
+<p>找不到 _includes/asides/calendar.html</p>
+
+<p>我改为相关文件部署在 source 子目录，而非 .themes，重新编译后显示正常。</p>
+
+<p>日历显示效果如下图：</p>
+
+<blockquote><p><img src="http://tech-blog.blogbin.info/images/2012-08-25-using-neerajcses-octopress-calendar-aside/calendar-aside.png"></p></blockquote>
+
+
+<h3>遗留问题</h3>
+
+<p>不知道是不是我自身环境的问题，遗留了两个问题：</p>
+
+<ol>
+<li>首页右侧 aside 无法看到日历，如访问: http://tech-blog.blogbin.info。</li>
+</ol>
+
+
+<p>必须访问具体一篇文章右侧 aside 才能看到日历，如 http://tech-blog.blogbin.info/blog/2012/08/22/using-binarylogic-slash-settingslogic/。</p>
+
+<ol>
+<li>_config.yml 中 asides/calendar.html 必须放在 aside 的最下边位置，否则会造成 aside 余下的其它<section>无法显示</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#_config.yml
+</span><span class='line'>default_asides: [ custom/asides/about.html, asides/recent_posts.html, asides/github.html,  asides/delicious.html, asides/pinboard.html, asides/googleplus.html, asides/calendar.html ]</span></code></pre></td></tr></table></div></figure>
+
+
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[installing iftop on CentOS 6]]></title>
+    <link href="http://tech-blog.blogbin.info/blog/2012/08/24/installing-iftop-on-centos-6/"/>
+    <updated>2012-08-24T22:55:00+08:00</updated>
+    <id>http://tech-blog.blogbin.info/blog/2012/08/24/installing-iftop-on-centos-6</id>
+    <content type="html"><![CDATA[<p>使用 iftop 简单监控服务器网络流量。安装过程如下：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[root@hj01 ~]# yum install -y wget
+</span><span class='line'>
+</span><span class='line'>[root@hj01 ~]# wget http://www.ex-parrot.com/~pdw/iftop/download/iftop-0.17.tar.gz
+</span><span class='line'>
+</span><span class='line'>[root@hj01 ~]# tar -xvf iftop-0.17
+</span><span class='line'>
+</span><span class='line'>[root@hj01 ~]# yum install -y flex byacc  libpcap　libpcap-devel ncurses ncurses-devel
+</span><span class='line'>
+</span><span class='line'>[root@hj01 ~]# yum install -y libpcap-devel
+</span><span class='line'>
+</span><span class='line'>[root@hj01 ~]# cd iftop-0.17
+</span><span class='line'>
+</span><span class='line'>[root@hj01 iftop-0.17]# ./configure
+</span><span class='line'>
+</span><span class='line'>[root@hj01 iftop-0.17]# make
+</span><span class='line'>
+</span><span class='line'>[root@hj01 iftop-0.17]# make install
+</span><span class='line'>
+</span><span class='line'>[root@hj01 iftop-0.17]# iftop</span></code></pre></td></tr></table></div></figure>
+
+
+<!--more-->
+
+
+<p>运行 sudo iftop 可能会出现 iftop: command not found 的情况，如：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[atyun@localhost iftop-0.17]$ sudo iftop
+</span><span class='line'>
+</span><span class='line'>sudo: iftop: command not found</span></code></pre></td></tr></table></div></figure>
+
+
+<p>明确写出 iftop 命令的完整路径，如</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[atyun@localhost iftop-0.17]$ sudo /usr/local/sbin/iftop</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[用 git-flow 进行分支操作]]></title>
+    <link href="http://tech-blog.blogbin.info/blog/2012/08/23/using-git-flow/"/>
+    <updated>2012-08-23T22:28:00+08:00</updated>
+    <id>http://tech-blog.blogbin.info/blog/2012/08/23/using-git-flow</id>
+    <content type="html"><![CDATA[<p>参阅：</p>
+
+<p>nvie/gitflow
+<a href="https://github.com/nvie/gitflow/">https://github.com/nvie/gitflow/</a></p>
+
+<p>A successful Git branching model » nvie.com
+<a href="http://nvie.com/posts/a-successful-git-branching-model/">http://nvie.com/posts/a-successful-git-branching-model/</a></p>
+
+<p>或者中文版</p>
+
+<p>Git开发管理之道 - 无网不剩
+<a href="http://blog.leezhong.com/translate/2010/10/30/a-successful-git-branch.html">http://blog.leezhong.com/translate/2010/10/30/a-successful-git-branch.html</a></p>
+
+<p>其实 git-flow 只是对 git 分支 checkout, 创建, merge 等命令进行包装，采用推荐的命令方式来使用优秀的分支创建和合并实践策略，
+避免代码改动提交混乱，对本地仓库管理的代码几乎没有影响。</p>
+
+<p>首先要明白 master 为产品分支，develop 为开发分支。
+如果你以前采用 master 为主线或开发分支，产品分支为其他分支，脑筋要转过来。</p>
+
+<!--more-->
+
+
+<p>git flow 初始化本地仓库</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>blogbins-MacBook-Pro:octopress blogbin$ git flow init
+</span><span class='line'>
+</span><span class='line'>Which branch should be used for bringing forth production releases?
+</span><span class='line'>   - master
+</span><span class='line'>Branch name for production releases: [master]
+</span><span class='line'>Branch name for "next release" development: [develop]
+</span><span class='line'>
+</span><span class='line'>How to name your supporting branch prefixes?
+</span><span class='line'>Feature branches? [feature/]
+</span><span class='line'>Release branches? [release/]
+</span><span class='line'>Hotfix branches? [hotfix/]
+</span><span class='line'>Support branches? [support/]
+</span><span class='line'>Version tag prefix? [] TEBN
+</span><span class='line'>blogbins-MacBook-Pro:octopress blogbin$ git status
+</span><span class='line'># On branch develop
+</span><span class='line'>nothing to commit (working directory clean)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>开始一个特性(octopress-indexer)开发</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>blogbins-MacBook-Pro:octopress blogbin$ git flow feature start octopress-indexer
+</span><span class='line'>Switched to a new branch 'feature/octopress-indexer'
+</span><span class='line'>
+</span><span class='line'>Summary of actions:
+</span><span class='line'>- A new branch 'feature/octopress-indexer' was created, based on 'develop'
+</span><span class='line'>- You are now on branch 'feature/octopress-indexer'
+</span><span class='line'>
+</span><span class='line'>Now, start committing on your feature. When done, use:
+</span><span class='line'>
+</span><span class='line'>     git flow feature finish octopress-indexer</span></code></pre></td></tr></table></div></figure>
+
+
+<p>结束一个特性开发</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>blogbins-MacBook-Pro:octopress blogbin$ git flow feature finish octopress-indexer
+</span><span class='line'>Switched to branch 'develop'
+</span><span class='line'>Updating 024efad..6a21c04
+</span><span class='line'>Fast-forward
+</span><span class='line'> plugins/indexer.rb                          |  255 +++++++++++++++++++++++++++
+</span><span class='line'> source/_includes/custom/asides/indexer.html |   10 ++
+</span><span class='line'> 2 files changed, 265 insertions(+)
+</span><span class='line'> create mode 100644 plugins/indexer.rb
+</span><span class='line'> create mode 100644 source/_includes/custom/asides/indexer.html
+</span><span class='line'>Deleted branch feature/octopress-indexer (was 6a21c04).
+</span><span class='line'>
+</span><span class='line'>Summary of actions:
+</span><span class='line'>- The feature branch 'feature/octopress-indexer' was merged into 'develop'
+</span><span class='line'>- Feature branch 'feature/octopress-indexer' has been removed
+</span><span class='line'>- You are now on branch 'develop'</span></code></pre></td></tr></table></div></figure>
+
+
+<p>手动将 develop 开发分支的改动 merge 回 master 产品分支</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>blogbins-MacBook-Pro:octopress blogbin$ git checkout master
+</span><span class='line'>Switched to branch 'master'
+</span><span class='line'>
+</span><span class='line'># 建议使用 --no-ff 选项，让 merge 也成为一个 commitment.
+</span><span class='line'>blogbins-MacBook-Pro:octopress blogbin$ git merge --no-ff develop
+</span><span class='line'>Merge made by the 'recursive' strategy.
+</span><span class='line'> plugins/indexer.rb                          |  255 +++++++++++++++++++++++++++
+</span><span class='line'> source/_includes/custom/asides/indexer.html |   10 ++
+</span><span class='line'> 2 files changed, 265 insertions(+)
+</span><span class='line'> create mode 100644 plugins/indexer.rb
+</span><span class='line'> create mode 100644 source/_includes/custom/asides/indexer.html</span></code></pre></td></tr></table></div></figure>
+
+
+<p>以上 git-flow 命令执行过程其实是对以下 git 命令的包装：</p>
+
+<p>先基于 master 产品分支创建并切换到 develop 开发分支</p>
+
+<p>git checkout -b develop master</p>
+
+<p>开始开发一个新特性，基于 develop 创建新特性分支</p>
+
+<p>git checkout -b feature/fengbin/using-git-flow develop</p>
+
+<p>修改文件，提交文件。。。</p>
+
+<p>切换回 develop 开发分支，将 using-git-flow 特性分支改动 merge 到 develop 开发分支</p>
+
+<p>git checkout develop</p>
+
+<p>git merge &#8211;no-ff feature/fengbin/using-git-flow</p>
+
+<p>最后删除 using-git-flow 特性分支</p>
+
+<p>git checkout -d feature/fengbin/using-git-flow develop</p>
+
+<p>已有项目中初始化 git-flow 可能会出现以下错误：</p>
+
+<p>Local branch &#8216;xxx&#8217; does not exist.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>blogbins-MacBook-Pro:app_store blogbin$ git flow init
+</span><span class='line'>
+</span><span class='line'>Which branch should be used for bringing forth production releases?
+</span><span class='line'>   - features/favorite
+</span><span class='line'>   - master
+</span><span class='line'>Branch name for production releases: [master] develop
+</span><span class='line'>Local branch 'develop' does not exist.</span></code></pre></td></tr></table></div></figure>
+
+
+<p>查阅 git-flow 官方教程或者网络资料，不管是已有项目或者新项目，初始化 git-flow 都是相同的命令 git flow init。</p>
+
+<p>怀疑可能是本地仓库之前已经运行过 git flow init，随后有不按 git-flow 模式创建分支所致。</p>
+
+<p>解决办法是，重现 git clone 远端仓库克隆出一个本地仓库，在本地仓库重新运行 git flow init。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Using binarylogic/settingslogic]]></title>
@@ -4016,1125 +4339,6 @@ Google 搜索结果并不多，那是因为在 Octopress 很容易配置，几�
 </span><span class='line'>Configuration from /Users/blogbin/projects/workspaces/octopress/tech.blogbin/octopress/_config.yml
 </span><span class='line'>Building site: source -&gt; public
 </span><span class='line'>Successfully generated site: source -&gt; public</span></code></pre></td></tr></table></div></figure>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[How to Install Octopress on Heroku]]></title>
-    <link href="http://tech-blog.blogbin.info/blog/2012/08/11/how-to-install-octopress-on-heroku/"/>
-    <updated>2012-08-11T11:08:00+08:00</updated>
-    <id>http://tech-blog.blogbin.info/blog/2012/08/11/how-to-install-octopress-on-heroku</id>
-    <content type="html"><![CDATA[<p>我选择 Octopress 作为搭建技术博客的理由：</p>
-
-<ol>
-<li>基于我最喜爱编程语言：Ruby 语言；</li>
-<li>支持 unix shell 命令操作，比传统仅能使用 Web UI 界面管理更加灵活和可控，但上手很容易，操作并不繁琐；</li>
-<li>本地和远端都能用 Git 分布式版本系统来管理，减低数据丢失风险，并能通过 Git 和 Rsync 等技术快速部署到远端多个服务器，包括物理服务器， IAAS 和 PAAS；</li>
-<li>对内嵌代码片段的具有独特的风格展现（支持 Markdown 语法），代码容易阅读和分享，这是编程类技术博客最看重的优势之一；</li>
-<li>最终生成静态页面，对服务器部署没有特别的要求</li>
-</ol>
-
-
-<p>下面是安装 Octopress，并部署到 Heroku 的过程。</p>
-
-<!--more-->
-
-
-<p>一. 前期准备</p>
-
-<p>参阅教程：</p>
-
-<p><a href="http://octopress.org/docs/setup/">http://octopress.org/docs/setup/</a></p>
-
-<p><a href="http://octopress.org/docs/deploying/heroku">http://octopress.org/docs/deploying/heroku</a></p>
-
-<p><a href="https://devcenter.heroku.com/articles/quickstart">https://devcenter.heroku.com/articles/quickstart</a></p>
-
-<p><a href="https://devcenter.heroku.com/articles/renaming-apps">https://devcenter.heroku.com/articles/renaming-apps</a></p>
-
-<p>二. 操作过程</p>
-
-<p>使用 RVM 为 Octopress 创建新的 Gemset：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-<span class='line-number'>48</span>
-<span class='line-number'>49</span>
-<span class='line-number'>50</span>
-<span class='line-number'>51</span>
-<span class='line-number'>52</span>
-<span class='line-number'>53</span>
-<span class='line-number'>54</span>
-<span class='line-number'>55</span>
-<span class='line-number'>56</span>
-<span class='line-number'>57</span>
-<span class='line-number'>58</span>
-<span class='line-number'>59</span>
-<span class='line-number'>60</span>
-<span class='line-number'>61</span>
-<span class='line-number'>62</span>
-<span class='line-number'>63</span>
-<span class='line-number'>64</span>
-<span class='line-number'>65</span>
-<span class='line-number'>66</span>
-<span class='line-number'>67</span>
-<span class='line-number'>68</span>
-<span class='line-number'>69</span>
-<span class='line-number'>70</span>
-<span class='line-number'>71</span>
-<span class='line-number'>72</span>
-<span class='line-number'>73</span>
-<span class='line-number'>74</span>
-<span class='line-number'>75</span>
-<span class='line-number'>76</span>
-<span class='line-number'>77</span>
-<span class='line-number'>78</span>
-<span class='line-number'>79</span>
-<span class='line-number'>80</span>
-<span class='line-number'>81</span>
-<span class='line-number'>82</span>
-<span class='line-number'>83</span>
-<span class='line-number'>84</span>
-<span class='line-number'>85</span>
-<span class='line-number'>86</span>
-<span class='line-number'>87</span>
-<span class='line-number'>88</span>
-<span class='line-number'>89</span>
-<span class='line-number'>90</span>
-<span class='line-number'>91</span>
-<span class='line-number'>92</span>
-<span class='line-number'>93</span>
-<span class='line-number'>94</span>
-<span class='line-number'>95</span>
-<span class='line-number'>96</span>
-<span class='line-number'>97</span>
-<span class='line-number'>98</span>
-<span class='line-number'>99</span>
-<span class='line-number'>100</span>
-<span class='line-number'>101</span>
-<span class='line-number'>102</span>
-<span class='line-number'>103</span>
-<span class='line-number'>104</span>
-<span class='line-number'>105</span>
-<span class='line-number'>106</span>
-<span class='line-number'>107</span>
-<span class='line-number'>108</span>
-<span class='line-number'>109</span>
-<span class='line-number'>110</span>
-<span class='line-number'>111</span>
-<span class='line-number'>112</span>
-<span class='line-number'>113</span>
-<span class='line-number'>114</span>
-<span class='line-number'>115</span>
-<span class='line-number'>116</span>
-<span class='line-number'>117</span>
-<span class='line-number'>118</span>
-<span class='line-number'>119</span>
-<span class='line-number'>120</span>
-<span class='line-number'>121</span>
-<span class='line-number'>122</span>
-<span class='line-number'>123</span>
-<span class='line-number'>124</span>
-<span class='line-number'>125</span>
-<span class='line-number'>126</span>
-<span class='line-number'>127</span>
-<span class='line-number'>128</span>
-<span class='line-number'>129</span>
-<span class='line-number'>130</span>
-<span class='line-number'>131</span>
-<span class='line-number'>132</span>
-<span class='line-number'>133</span>
-<span class='line-number'>134</span>
-<span class='line-number'>135</span>
-<span class='line-number'>136</span>
-<span class='line-number'>137</span>
-<span class='line-number'>138</span>
-<span class='line-number'>139</span>
-<span class='line-number'>140</span>
-<span class='line-number'>141</span>
-<span class='line-number'>142</span>
-<span class='line-number'>143</span>
-<span class='line-number'>144</span>
-<span class='line-number'>145</span>
-<span class='line-number'>146</span>
-<span class='line-number'>147</span>
-<span class='line-number'>148</span>
-<span class='line-number'>149</span>
-<span class='line-number'>150</span>
-<span class='line-number'>151</span>
-<span class='line-number'>152</span>
-<span class='line-number'>153</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>blogbins-MacBook-Pro:octopress blogbin$ pwd
-</span><span class='line'>/Users/blogbin/projects/workspaces/octopress/tech.blogbin
-</span><span class='line'>blogbins-MacBook-Pro:tech.blogbin blogbin$ rvm list
-</span><span class='line'>
-</span><span class='line'>rvm rubies
-</span><span class='line'>
-</span><span class='line'>   ruby-1.8.7-p357 [ i686 ]
-</span><span class='line'>   ruby-1.9.3-p0 [ x86_64 ]
-</span><span class='line'>
-</span><span class='line'># Default ruby not set. Try 'rvm alias create default &lt;ruby&gt;'.
-</span><span class='line'>
-</span><span class='line'># =&gt; - current
-</span><span class='line'># =* - current && default
-</span><span class='line'>#  * - default
-</span><span class='line'>
-</span><span class='line'>blogbins-MacBook-Pro:tech.blogbin blogbin$ rvm use 1.9.3
-</span><span class='line'>Using /Users/blogbin/.rvm/gems/ruby-1.9.3-p0
-</span><span class='line'>blogbins-MacBook-Pro:tech.blogbin blogbin$ rvm gemset create octopress
-</span><span class='line'>'octopress' gemset created (/Users/blogbin/.rvm/gems/ruby-1.9.3-p0@octopress).
-</span><span class='line'>blogbins-MacBook-Pro:tech.blogbin blogbin$ rvm useruby-1.9.3-p0@octopress
-</span><span class='line'>blogbins-MacBook-Pro:tech.blogbin blogbin$ rvm ruby-1.9.3-p0@octopress
-</span><span class='line'>blogbins-MacBook-Pro:tech.blogbin blogbin$ rvm use ruby-1.9.3-p0@octopress
-</span><span class='line'>Using /Users/blogbin/.rvm/gems/ruby-1.9.3-p0 with gemset octopress
-</span><span class='line'>blogbins-MacBook-Pro:tech.blogbin blogbin$ git clone git://github.com/imathis/octopress.git octopress
-</span><span class='line'>Cloning into 'octopress'...
-</span><span class='line'>remote: Counting objects: 7027, done.
-</span><span class='line'>remote: Compressing objects: 100% (2546/2546), done.
-</span><span class='line'>remote: Total 7027 (delta 4052), reused 6578 (delta 3834)
-</span><span class='line'>Receiving objects: 100% (7027/7027), 1.40 MiB | 95 KiB/s, done.
-</span><span class='line'>Resolving deltas: 100% (4052/4052), done.
-</span><span class='line'>blogbins-MacBook-Pro:tech.blogbin blogbin$ cd octopress
-</span><span class='line'>==============================================================================
-</span><span class='line'>= NOTICE                                                                     =
-</span><span class='line'>==============================================================================
-</span><span class='line'>= RVM has encountered a new or modified .rvmrc file in the current directory =
-</span><span class='line'>= This is a shell script and therefore may contain any shell commands.       =
-</span><span class='line'>=                                                                            =
-</span><span class='line'>= Examine the contents of this file carefully to be sure the contents are    =
-</span><span class='line'>= safe before trusting it! ( Choose v[iew] below to view the contents )      =
-</span><span class='line'>==============================================================================
-</span><span class='line'>Do you wish to trust this .rvmrc file? (/Users/blogbin/projects/workspaces/octopress/tech.blogbin/octopress/.rvmrc)
-</span><span class='line'>y[es], n[o], v[iew], c[ancel]&gt; yes
-</span><span class='line'>Using /Users/blogbin/.rvm/gems/ruby-1.9.3-p0
-</span><span class='line'>
-</span><span class='line'>blogbins-MacBook-Pro:octopress blogbin$ vi .rvmrc
-</span><span class='line'>rvm use ruby-1.9.3-p0@octopress
-</span><span class='line'>
-</span><span class='line'>blogbins-MacBook-Pro:octopress blogbin$ cd ..
-</span><span class='line'>
-</span><span class='line'>blogbins-MacBook-Pro:tech.blogbin blogbin$ cd octopress/
-</span><span class='line'>==============================================================================
-</span><span class='line'>= NOTICE                                                                     =
-</span><span class='line'>==============================================================================
-</span><span class='line'>= RVM has encountered a new or modified .rvmrc file in the current directory =
-</span><span class='line'>= This is a shell script and therefore may contain any shell commands.       =
-</span><span class='line'>=                                                                            =
-</span><span class='line'>= Examine the contents of this file carefully to be sure the contents are    =
-</span><span class='line'>= safe before trusting it! ( Choose v[iew] below to view the contents )      =
-</span><span class='line'>==============================================================================
-</span><span class='line'>Do you wish to trust this .rvmrc file? (/Users/blogbin/projects/workspaces/octopress/tech.blogbin/octopress/.rvmrc)
-</span><span class='line'>y[es], n[o], v[iew], c[ancel]&gt; yes
-</span><span class='line'>Using /Users/blogbin/.rvm/gems/ruby-1.9.3-p0 with gem set octopuses
-</span><span class='line'>
-</span><span class='line'>blogbins-MacBook-Pro:octopress blogbin$ gem install bundler
-</span><span class='line'>Fetching: bundler-1.1.4.gem (100%)
-</span><span class='line'>Successfully installed bundler-1.1.4
-</span><span class='line'>1 gem installed
-</span><span class='line'>Installing ri documentation for bundler-1.1.4...
-</span><span class='line'>Installing RDoc documentation for bundler-1.1.4...
-</span><span class='line'>blogbins-MacBook-Pro:octopress blogbin$ bundle install
-</span><span class='line'>Fetching gem metadata from http://rubygems.org/.......
-</span><span class='line'>Installing rake (0.9.2.2)
-</span><span class='line'>Installing RedCloth (4.2.9) with native extensions
-</span><span class='line'>Installing posix-spawn (0.3.6) with native extensions
-</span><span class='line'>Installing albino (1.3.3)
-</span><span class='line'>Installing blankslate (2.1.2.4)
-</span><span class='line'>Installing chunky_png (1.2.5)
-</span><span class='line'>Installing fast-stemmer (1.0.1) with native extensions
-</span><span class='line'>Installing classifier (1.3.3)
-</span><span class='line'>Installing fssm (0.2.9)
-</span><span class='line'>Installing sass (3.1.20)
-</span><span class='line'>Installing compass (0.12.2)
-</span><span class='line'>Installing directory_watcher (1.4.1)
-</span><span class='line'>Installing ffi (1.0.11) with native extensions
-</span><span class='line'>Installing haml (3.1.6)
-</span><span class='line'>Installing kramdown (0.13.7)
-</span><span class='line'>Installing liquid (2.3.0)
-</span><span class='line'>Installing syntax (1.0.0)
-</span><span class='line'>Installing maruku (0.6.0)
-</span><span class='line'>Installing jekyll (0.11.2)
-</span><span class='line'>Installing rubypython (0.5.3)
-</span><span class='line'>Installing pygments.rb (0.2.13)
-</span><span class='line'>Installing rack (1.4.1)
-</span><span class='line'>Installing rack-protection (1.2.0)
-</span><span class='line'>Installing rb-fsevent (0.9.1)
-</span><span class='line'>Installing rdiscount (1.6.8) with native extensions
-</span><span class='line'>Installing rubypants (0.2.0)
-</span><span class='line'>Installing tilt (1.3.3)
-</span><span class='line'>Installing sinatra (1.3.2)
-</span><span class='line'>Installing stringex (1.4.0)
-</span><span class='line'>Using bundler (1.1.4)
-</span><span class='line'>Your bundle is complete! Use `bundle show [gemname]` to see where a bundled gem is installed.
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'>blogbins-MacBook-Pro:octopress blogbin$ rake install
-</span><span class='line'>## Copying classic theme into ./source and ./sass
-</span><span class='line'>mkdir -p source
-</span><span class='line'>cp -r .themes/classic/source/. source
-</span><span class='line'>mkdir -p sass
-</span><span class='line'>cp -r .themes/classic/sass/. sass
-</span><span class='line'>mkdir -p source/_posts
-</span><span class='line'>mkdir -p public
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'>blogbins-MacBook-Pro:octopress blogbin$ gem install heroku
-</span><span class='line'>Fetching: excon-0.15.4.gem (100%)
-</span><span class='line'>Fetching: heroku-api-0.2.13.gem (100%)
-</span><span class='line'>Fetching: netrc-0.7.5.gem (100%)
-</span><span class='line'>Fetching: mime-types-1.19.gem (100%)
-</span><span class='line'>Fetching: rest-client-1.6.7.gem (100%)
-</span><span class='line'>Fetching: addressable-2.2.8.gem (100%)
-</span><span class='line'>Fetching: launchy-2.1.0.gem (100%)
-</span><span class='line'>Fetching: rubyzip-0.9.9.gem (100%)
-</span><span class='line'>Fetching: heroku-2.28.12.gem (100%)
-</span><span class='line'>Successfully installed excon-0.15.4
-</span><span class='line'>Successfully installed heroku-api-0.2.13
-</span><span class='line'>Successfully installed netrc-0.7.5
-</span><span class='line'>Successfully installed mime-types-1.19
-</span><span class='line'>Successfully installed rest-client-1.6.7
-</span><span class='line'>Successfully installed addressable-2.2.8
-</span><span class='line'>Successfully installed launchy-2.1.0
-</span><span class='line'>Successfully installed rubyzip-0.9.9
-</span><span class='line'>Successfully installed heroku-2.28.12
-</span><span class='line'>9 gems installed
-</span><span class='line'>Installing ri documentation for excon-0.15.4...
-</span><span class='line'>Installing ri documentation for heroku-api-0.2.13...
-</span><span class='line'>Installing ri documentation for netrc-0.7.5...
-</span><span class='line'>Installing ri documentation for mime-types-1.19...
-</span><span class='line'>Installing ri documentation for rest-client-1.6.7...
-</span><span class='line'>Installing ri documentation for addressable-2.2.8...
-</span><span class='line'>Installing ri documentation for launchy-2.1.0...
-</span><span class='line'>Installing ri documentation for rubyzip-0.9.9...
-</span><span class='line'>Installing ri documentation for heroku-2.28.12...
-</span><span class='line'>Installing RDoc documentation for excon-0.15.4...
-</span><span class='line'>Installing RDoc documentation for heroku-api-0.2.13...
-</span><span class='line'>Installing RDoc documentation for netrc-0.7.5...
-</span><span class='line'>Installing RDoc documentation for mime-types-1.19...
-</span><span class='line'>Installing RDoc documentation for rest-client-1.6.7...
-</span><span class='line'>Installing RDoc documentation for addressable-2.2.8...
-</span><span class='line'>Installing RDoc documentation for launchy-2.1.0...
-</span><span class='line'>Installing RDoc documentation for rubyzip-0.9.9...
-</span><span class='line'>Installing RDoc documentation for heroku-2.28.12…
-</span><span class='line'>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>登陆 Heroku 。请预先创建 Heroku 帐户。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-<span class='line-number'>48</span>
-<span class='line-number'>49</span>
-<span class='line-number'>50</span>
-<span class='line-number'>51</span>
-<span class='line-number'>52</span>
-<span class='line-number'>53</span>
-<span class='line-number'>54</span>
-<span class='line-number'>55</span>
-<span class='line-number'>56</span>
-<span class='line-number'>57</span>
-<span class='line-number'>58</span>
-<span class='line-number'>59</span>
-<span class='line-number'>60</span>
-<span class='line-number'>61</span>
-<span class='line-number'>62</span>
-<span class='line-number'>63</span>
-<span class='line-number'>64</span>
-<span class='line-number'>65</span>
-<span class='line-number'>66</span>
-<span class='line-number'>67</span>
-<span class='line-number'>68</span>
-<span class='line-number'>69</span>
-<span class='line-number'>70</span>
-<span class='line-number'>71</span>
-<span class='line-number'>72</span>
-<span class='line-number'>73</span>
-<span class='line-number'>74</span>
-<span class='line-number'>75</span>
-<span class='line-number'>76</span>
-<span class='line-number'>77</span>
-<span class='line-number'>78</span>
-<span class='line-number'>79</span>
-<span class='line-number'>80</span>
-<span class='line-number'>81</span>
-<span class='line-number'>82</span>
-<span class='line-number'>83</span>
-<span class='line-number'>84</span>
-<span class='line-number'>85</span>
-<span class='line-number'>86</span>
-<span class='line-number'>87</span>
-<span class='line-number'>88</span>
-<span class='line-number'>89</span>
-<span class='line-number'>90</span>
-<span class='line-number'>91</span>
-<span class='line-number'>92</span>
-<span class='line-number'>93</span>
-<span class='line-number'>94</span>
-<span class='line-number'>95</span>
-<span class='line-number'>96</span>
-<span class='line-number'>97</span>
-<span class='line-number'>98</span>
-<span class='line-number'>99</span>
-<span class='line-number'>100</span>
-<span class='line-number'>101</span>
-<span class='line-number'>102</span>
-<span class='line-number'>103</span>
-<span class='line-number'>104</span>
-<span class='line-number'>105</span>
-<span class='line-number'>106</span>
-<span class='line-number'>107</span>
-<span class='line-number'>108</span>
-<span class='line-number'>109</span>
-<span class='line-number'>110</span>
-<span class='line-number'>111</span>
-<span class='line-number'>112</span>
-<span class='line-number'>113</span>
-<span class='line-number'>114</span>
-<span class='line-number'>115</span>
-<span class='line-number'>116</span>
-<span class='line-number'>117</span>
-<span class='line-number'>118</span>
-<span class='line-number'>119</span>
-<span class='line-number'>120</span>
-<span class='line-number'>121</span>
-<span class='line-number'>122</span>
-<span class='line-number'>123</span>
-<span class='line-number'>124</span>
-<span class='line-number'>125</span>
-<span class='line-number'>126</span>
-<span class='line-number'>127</span>
-<span class='line-number'>128</span>
-<span class='line-number'>129</span>
-<span class='line-number'>130</span>
-<span class='line-number'>131</span>
-<span class='line-number'>132</span>
-<span class='line-number'>133</span>
-<span class='line-number'>134</span>
-<span class='line-number'>135</span>
-<span class='line-number'>136</span>
-<span class='line-number'>137</span>
-<span class='line-number'>138</span>
-<span class='line-number'>139</span>
-<span class='line-number'>140</span>
-<span class='line-number'>141</span>
-<span class='line-number'>142</span>
-<span class='line-number'>143</span>
-<span class='line-number'>144</span>
-<span class='line-number'>145</span>
-<span class='line-number'>146</span>
-<span class='line-number'>147</span>
-<span class='line-number'>148</span>
-<span class='line-number'>149</span>
-<span class='line-number'>150</span>
-<span class='line-number'>151</span>
-<span class='line-number'>152</span>
-<span class='line-number'>153</span>
-<span class='line-number'>154</span>
-<span class='line-number'>155</span>
-<span class='line-number'>156</span>
-<span class='line-number'>157</span>
-<span class='line-number'>158</span>
-<span class='line-number'>159</span>
-<span class='line-number'>160</span>
-<span class='line-number'>161</span>
-<span class='line-number'>162</span>
-<span class='line-number'>163</span>
-<span class='line-number'>164</span>
-<span class='line-number'>165</span>
-<span class='line-number'>166</span>
-<span class='line-number'>167</span>
-<span class='line-number'>168</span>
-<span class='line-number'>169</span>
-<span class='line-number'>170</span>
-<span class='line-number'>171</span>
-<span class='line-number'>172</span>
-<span class='line-number'>173</span>
-<span class='line-number'>174</span>
-<span class='line-number'>175</span>
-<span class='line-number'>176</span>
-<span class='line-number'>177</span>
-<span class='line-number'>178</span>
-<span class='line-number'>179</span>
-<span class='line-number'>180</span>
-<span class='line-number'>181</span>
-<span class='line-number'>182</span>
-<span class='line-number'>183</span>
-<span class='line-number'>184</span>
-<span class='line-number'>185</span>
-<span class='line-number'>186</span>
-<span class='line-number'>187</span>
-<span class='line-number'>188</span>
-<span class='line-number'>189</span>
-<span class='line-number'>190</span>
-<span class='line-number'>191</span>
-<span class='line-number'>192</span>
-<span class='line-number'>193</span>
-<span class='line-number'>194</span>
-<span class='line-number'>195</span>
-<span class='line-number'>196</span>
-<span class='line-number'>197</span>
-<span class='line-number'>198</span>
-<span class='line-number'>199</span>
-<span class='line-number'>200</span>
-<span class='line-number'>201</span>
-<span class='line-number'>202</span>
-<span class='line-number'>203</span>
-<span class='line-number'>204</span>
-<span class='line-number'>205</span>
-<span class='line-number'>206</span>
-<span class='line-number'>207</span>
-<span class='line-number'>208</span>
-<span class='line-number'>209</span>
-<span class='line-number'>210</span>
-<span class='line-number'>211</span>
-<span class='line-number'>212</span>
-<span class='line-number'>213</span>
-<span class='line-number'>214</span>
-<span class='line-number'>215</span>
-<span class='line-number'>216</span>
-<span class='line-number'>217</span>
-<span class='line-number'>218</span>
-<span class='line-number'>219</span>
-<span class='line-number'>220</span>
-<span class='line-number'>221</span>
-<span class='line-number'>222</span>
-<span class='line-number'>223</span>
-<span class='line-number'>224</span>
-<span class='line-number'>225</span>
-<span class='line-number'>226</span>
-<span class='line-number'>227</span>
-<span class='line-number'>228</span>
-<span class='line-number'>229</span>
-<span class='line-number'>230</span>
-<span class='line-number'>231</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>
-</span><span class='line'>blogbins-MacBook-Pro:octopress blogbin$ heroku login
-</span><span class='line'>Enter your Heroku credentials.
-</span><span class='line'>Email: tech.blogbin@gmail.com
-</span><span class='line'>Password (typing will be hidden):
-</span><span class='line'>Found the following SSH public keys:
-</span><span class='line'>1) github_rsa.pub
-</span><span class='line'>2) id_rsa.pub
-</span><span class='line'>Which would you like to use with your Heroku account? 2
-</span><span class='line'>Uploading SSH public key /Users/blogbin/.ssh/id_rsa.pub... done
-</span><span class='line'>Authentication successful.
-</span><span class='line'>
-</span><span class='line'>blogbins-MacBook-Pro:octopress blogbin$ heroku create
-</span><span class='line'>Creating afternoon-journey-1049... done, stack is cedar
-</span><span class='line'>http://afternoon-journey-1049.herokuapp.com/ | git@heroku.com:afternoon-journey-1049.git
-</span><span class='line'>Git remote heroku added
-</span><span class='line'>blogbins-MacBook-Pro:octopress blogbin$ git remote -v
-</span><span class='line'>heroku     git@heroku.com:afternoon-journey-1049.git (fetch)
-</span><span class='line'>heroku     git@heroku.com:afternoon-journey-1049.git (push)
-</span><span class='line'>origin     git://github.com/imathis/octopress.git (fetch)
-</span><span class='line'>origin     git://github.com/imathis/octopress.git (push)
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'>blogbins-MacBook-Pro:octopress blogbin$ vi .gitignore
-</span><span class='line'>
-</span><span class='line'>.bundle
-</span><span class='line'>.DS_Store
-</span><span class='line'>.sass-cache
-</span><span class='line'>.gist-cache
-</span><span class='line'>.pygments-cache
-</span><span class='line'>_deploy
-</span><span class='line'>#public
-</span><span class='line'>sass.old
-</span><span class='line'>source.old
-</span><span class='line'>source/_stash
-</span><span class='line'>source/stylesheets/screen.css
-</span><span class='line'>vendor
-</span><span class='line'>node_modules
-</span><span class='line'>
-</span><span class='line'>blogbins-MacBook-Pro:octopress blogbin$ rake generate
-</span><span class='line'>## Generating Site with Jekyll
-</span><span class='line'>directory source/stylesheets/
-</span><span class='line'>   create source/stylesheets/screen.css
-</span><span class='line'>/Users/blogbin/.rvm/gems/ruby-1.9.3-p0@octopress/gems/maruku-0.6.0/lib/maruku/input/parse_doc.rb:22:in `&lt;top (required)&gt;': iconv will be deprecated in the future, use String#encode instead.
-</span><span class='line'>Configuration from /Users/blogbin/projects/workspaces/octopress/tech.blogbin/octopress/_config.yml
-</span><span class='line'>Building site: source -&gt; public
-</span><span class='line'>Successfully generated site: source -&gt; public
-</span><span class='line'>blogbins-MacBook-Pro:octopress blogbin$ git add .
-</span><span class='line'>blogbins-MacBook-Pro:octopress blogbin$ git commit -m 'site updated'
-</span><span class='line'>[master be4b9a0] site updated
-</span><span class='line'> 181 files changed, 7019 insertions(+), 2 deletions(-)
-</span><span class='line'> create mode 100644 public/assets/jwplayer/glow/controlbar/background.png
-</span><span class='line'> create mode 100644 public/assets/jwplayer/glow/controlbar/blankButton.png
-</span><span class='line'> create mode 100644 public/assets/jwplayer/glow/controlbar/divider.png
-</span><span class='line'> create mode 100644 public/assets/jwplayer/glow/controlbar/fullscreenButton.png
-</span><span class='line'> create mode 100644 public/assets/jwplayer/glow/controlbar/fullscreenButtonOver.png
-</span><span class='line'> create mode 100644 public/assets/jwplayer/glow/controlbar/muteButton.png
-</span><span class='line'> create mode 100644 public/assets/jwplayer/glow/controlbar/muteButtonOver.png
-</span><span class='line'> create mode 100644 public/assets/jwplayer/glow/controlbar/normalscreenButton.png
-</span><span class='line'> create mode 100644 public/assets/jwplayer/glow/controlbar/normalscreenButtonOver.png
-</span><span class='line'> create mode 100644 public/assets/jwplayer/glow/controlbar/pauseButton.png
-</span><span class='line'> create mode 100644 public/assets/jwplayer/glow/controlbar/pauseButtonOver.png
-</span><span class='line'> create mode 100644 public/assets/jwplayer/glow/controlbar/playButton.png
-</span><span class='line'> create mode 100644 public/assets/jwplayer/glow/controlbar/playButtonOver.png
-</span><span class='line'> create mode 100644 public/assets/jwplayer/glow/controlbar/timeSliderBuffer.png
-</span><span class='line'> create mode 100644 public/assets/jwplayer/glow/controlbar/timeSliderCapLeft.png
-</span><span class='line'> create mode 100644 public/assets/jwplayer/glow/controlbar/timeSliderCapRight.png
-</span><span class='line'> create mode 100644 public/assets/jwplayer/glow/controlbar/timeSliderProgress.png
-</span><span class='line'> create mode 100644 public/assets/jwplayer/glow/controlbar/timeSliderRail.png
-</span><span class='line'> create mode 100644 public/assets/jwplayer/glow/controlbar/unmuteButton.png
-</span><span class='line'> create mode 100644 public/assets/jwplayer/glow/controlbar/unmuteButtonOver.png
-</span><span class='line'> create mode 100644 public/assets/jwplayer/glow/display/background.png
-</span><span class='line'> create mode 100644 public/assets/jwplayer/glow/display/bufferIcon.png
-</span><span class='line'> create mode 100644 public/assets/jwplayer/glow/display/muteIcon.png
-</span><span class='line'> create mode 100644 public/assets/jwplayer/glow/display/playIcon.png
-</span><span class='line'> create mode 100644 public/assets/jwplayer/glow/dock/button.png
-</span><span class='line'> create mode 100644 public/assets/jwplayer/glow/glow.xml
-</span><span class='line'> create mode 100644 public/assets/jwplayer/glow/playlist/item.png
-</span><span class='line'> create mode 100644 public/assets/jwplayer/glow/playlist/itemOver.png
-</span><span class='line'> create mode 100644 public/assets/jwplayer/glow/playlist/sliderCapBottom.png
-</span><span class='line'> create mode 100644 public/assets/jwplayer/glow/playlist/sliderCapTop.png
-</span><span class='line'> create mode 100644 public/assets/jwplayer/glow/playlist/sliderRail.png
-</span><span class='line'> create mode 100644 public/assets/jwplayer/glow/playlist/sliderThumb.png
-</span><span class='line'> create mode 100644 public/assets/jwplayer/glow/sharing/embedIcon.png
-</span><span class='line'> create mode 100644 public/assets/jwplayer/glow/sharing/embedScreen.png
-</span><span class='line'> create mode 100644 public/assets/jwplayer/glow/sharing/shareIcon.png
-</span><span class='line'> create mode 100644 public/assets/jwplayer/glow/sharing/shareScreen.png
-</span><span class='line'> create mode 100644 public/assets/jwplayer/player.swf
-</span><span class='line'> create mode 100644 public/atom.xml
-</span><span class='line'> create mode 100644 public/blog/archives/index.html
-</span><span class='line'> create mode 100644 public/favicon.png
-</span><span class='line'> create mode 100644 public/images/bird_32_gray.png
-</span><span class='line'> create mode 100644 public/images/bird_32_gray_fail.png
-</span><span class='line'> create mode 100644 public/images/code_bg.png
-</span><span class='line'> create mode 100644 public/images/dotted-border.png
-</span><span class='line'> create mode 100644 public/images/email.png
-</span><span class='line'> create mode 100644 public/images/line-tile.png
-</span><span class='line'> create mode 100644 public/images/noise.png
-</span><span class='line'> create mode 100644 public/images/rss.png
-</span><span class='line'> create mode 100644 public/images/search.png
-</span><span class='line'> create mode 100644 public/index.html
-</span><span class='line'> create mode 100644 public/javascripts/ender.js
-</span><span class='line'> create mode 100644 public/javascripts/github.js
-</span><span class='line'> create mode 100644 public/javascripts/libs/ender.js
-</span><span class='line'> create mode 100644 public/javascripts/libs/jXHR.js
-</span><span class='line'> create mode 100644 public/javascripts/libs/swfobject-dynamic.js
-</span><span class='line'> create mode 100644 public/javascripts/modernizr-2.0.js
-</span><span class='line'> create mode 100644 public/javascripts/octopress.js
-</span><span class='line'> create mode 100644 public/javascripts/pinboard.js
-</span><span class='line'> create mode 100644 public/javascripts/twitter.js
-</span><span class='line'> create mode 100644 public/sitemap.xml
-</span><span class='line'> create mode 100644 public/stylesheets/screen.css
-</span><span class='line'> create mode 100644 sass/_base.scss
-</span><span class='line'> create mode 100644 sass/_partials.scss
-</span><span class='line'> create mode 100644 sass/base/_layout.scss
-</span><span class='line'> create mode 100644 sass/base/_solarized.scss
-</span><span class='line'> create mode 100644 sass/base/_theme.scss
-</span><span class='line'> create mode 100644 sass/base/_typography.scss
-</span><span class='line'> create mode 100644 sass/base/_utilities.scss
-</span><span class='line'> create mode 100644 sass/custom/_colors.scss
-</span><span class='line'> create mode 100644 sass/custom/_fonts.scss
-</span><span class='line'> create mode 100644 sass/custom/_layout.scss
-</span><span class='line'> create mode 100644 sass/custom/_styles.scss
-</span><span class='line'> create mode 100644 sass/partials/_archive.scss
-</span><span class='line'> create mode 100644 sass/partials/_blog.scss
-</span><span class='line'> create mode 100644 sass/partials/_footer.scss
-</span><span class='line'> create mode 100644 sass/partials/_header.scss
-</span><span class='line'> create mode 100644 sass/partials/_navigation.scss
-</span><span class='line'> create mode 100644 sass/partials/_sharing.scss
-</span><span class='line'> create mode 100644 sass/partials/_sidebar.scss
-</span><span class='line'> create mode 100644 sass/partials/_syntax.scss
-</span><span class='line'> create mode 100644 sass/partials/sidebar/_base.scss
-</span><span class='line'> create mode 100644 sass/partials/sidebar/_delicious.scss
-</span><span class='line'> create mode 100644 sass/partials/sidebar/_googleplus.scss
-</span><span class='line'> create mode 100644 sass/partials/sidebar/_pinboard.scss
-</span><span class='line'> create mode 100644 sass/partials/sidebar/_twitter.scss
-</span><span class='line'> create mode 100644 sass/screen.scss
-</span><span class='line'> create mode 100644 source/_includes/after_footer.html
-</span><span class='line'> create mode 100644 source/_includes/archive_post.html
-</span><span class='line'> create mode 100644 source/_includes/article.html
-</span><span class='line'> create mode 100644 source/_includes/asides/delicious.html
-</span><span class='line'> create mode 100644 source/_includes/asides/github.html
-</span><span class='line'> create mode 100644 source/_includes/asides/googleplus.html
-</span><span class='line'> create mode 100644 source/_includes/asides/pinboard.html
-</span><span class='line'> create mode 100644 source/_includes/asides/recent_posts.html
-</span><span class='line'> create mode 100644 source/_includes/asides/twitter.html
-</span><span class='line'> create mode 100644 source/_includes/custom/after_footer.html
-</span><span class='line'> create mode 100644 source/_includes/custom/asides/about.html
-</span><span class='line'> create mode 100644 source/_includes/custom/category_feed.xml
-</span><span class='line'> create mode 100644 source/_includes/custom/footer.html
-</span><span class='line'> create mode 100644 source/_includes/custom/head.html
-</span><span class='line'> create mode 100644 source/_includes/custom/header.html
-</span><span class='line'> create mode 100644 source/_includes/custom/navigation.html
-</span><span class='line'> create mode 100644 source/_includes/disqus.html
-</span><span class='line'> create mode 100644 source/_includes/facebook_like.html
-</span><span class='line'> create mode 100644 source/_includes/footer.html
-</span><span class='line'> create mode 100644 source/_includes/google_analytics.html
-</span><span class='line'> create mode 100644 source/_includes/google_plus_one.html
-</span><span class='line'> create mode 100644 source/_includes/head.html
-</span><span class='line'> create mode 100644 source/_includes/header.html
-</span><span class='line'> create mode 100644 source/_includes/navigation.html
-</span><span class='line'> create mode 100644 source/_includes/post/author.html
-</span><span class='line'> create mode 100644 source/_includes/post/categories.html
-</span><span class='line'> create mode 100644 source/_includes/post/date.html
-</span><span class='line'> create mode 100644 source/_includes/post/disqus_thread.html
-</span><span class='line'> create mode 100644 source/_includes/post/sharing.html
-</span><span class='line'> create mode 100644 source/_includes/twitter_sharing.html
-</span><span class='line'> create mode 100644 source/_layouts/category_index.html
-</span><span class='line'> create mode 100644 source/_layouts/default.html
-</span><span class='line'> create mode 100644 source/_layouts/page.html
-</span><span class='line'> create mode 100644 source/_layouts/post.html
-</span><span class='line'> create mode 100644 source/assets/jwplayer/glow/controlbar/background.png
-</span><span class='line'> create mode 100644 source/assets/jwplayer/glow/controlbar/blankButton.png
-</span><span class='line'> create mode 100644 source/assets/jwplayer/glow/controlbar/divider.png
-</span><span class='line'> create mode 100644 source/assets/jwplayer/glow/controlbar/fullscreenButton.png
-</span><span class='line'> create mode 100644 source/assets/jwplayer/glow/controlbar/fullscreenButtonOver.png
-</span><span class='line'> create mode 100644 source/assets/jwplayer/glow/controlbar/muteButton.png
-</span><span class='line'> create mode 100644 source/assets/jwplayer/glow/controlbar/muteButtonOver.png
-</span><span class='line'> create mode 100644 source/assets/jwplayer/glow/controlbar/normalscreenButton.png
-</span><span class='line'> create mode 100644 source/assets/jwplayer/glow/controlbar/normalscreenButtonOver.png
-</span><span class='line'> create mode 100644 source/assets/jwplayer/glow/controlbar/pauseButton.png
-</span><span class='line'> create mode 100644 source/assets/jwplayer/glow/controlbar/pauseButtonOver.png
-</span><span class='line'> create mode 100644 source/assets/jwplayer/glow/controlbar/playButton.png
-</span><span class='line'> create mode 100644 source/assets/jwplayer/glow/controlbar/playButtonOver.png
-</span><span class='line'> create mode 100644 source/assets/jwplayer/glow/controlbar/timeSliderBuffer.png
-</span><span class='line'> create mode 100644 source/assets/jwplayer/glow/controlbar/timeSliderCapLeft.png
-</span><span class='line'> create mode 100644 source/assets/jwplayer/glow/controlbar/timeSliderCapRight.png
-</span><span class='line'> create mode 100644 source/assets/jwplayer/glow/controlbar/timeSliderProgress.png
-</span><span class='line'> create mode 100644 source/assets/jwplayer/glow/controlbar/timeSliderRail.png
-</span><span class='line'> create mode 100644 source/assets/jwplayer/glow/controlbar/unmuteButton.png
-</span><span class='line'> create mode 100644 source/assets/jwplayer/glow/controlbar/unmuteButtonOver.png
-</span><span class='line'> create mode 100644 source/assets/jwplayer/glow/display/background.png
-</span><span class='line'> create mode 100644 source/assets/jwplayer/glow/display/bufferIcon.png
-</span><span class='line'> create mode 100644 source/assets/jwplayer/glow/display/muteIcon.png
-</span><span class='line'> create mode 100644 source/assets/jwplayer/glow/display/playIcon.png
-</span><span class='line'> create mode 100644 source/assets/jwplayer/glow/dock/button.png
-</span><span class='line'> create mode 100644 source/assets/jwplayer/glow/glow.xml
-</span><span class='line'> create mode 100644 source/assets/jwplayer/glow/playlist/item.png
-</span><span class='line'> create mode 100644 source/assets/jwplayer/glow/playlist/itemOver.png
-</span><span class='line'> create mode 100644 source/assets/jwplayer/glow/playlist/sliderCapBottom.png
-</span><span class='line'> create mode 100644 source/assets/jwplayer/glow/playlist/sliderCapTop.png
-</span><span class='line'> create mode 100644 source/assets/jwplayer/glow/playlist/sliderRail.png
-</span><span class='line'> create mode 100644 source/assets/jwplayer/glow/playlist/sliderThumb.png
-</span><span class='line'> create mode 100644 source/assets/jwplayer/glow/sharing/embedIcon.png
-</span><span class='line'> create mode 100644 source/assets/jwplayer/glow/sharing/embedScreen.png
-</span><span class='line'> create mode 100644 source/assets/jwplayer/glow/sharing/shareIcon.png
-</span><span class='line'> create mode 100644 source/assets/jwplayer/glow/sharing/shareScreen.png
-</span><span class='line'> create mode 100644 source/assets/jwplayer/player.swf
-</span><span class='line'> create mode 100644 source/atom.xml
-</span><span class='line'> create mode 100644 source/blog/archives/index.html
-</span><span class='line'> create mode 100644 source/favicon.png
-</span><span class='line'> create mode 100644 source/images/bird_32_gray.png
-</span><span class='line'> create mode 100644 source/images/bird_32_gray_fail.png
-</span><span class='line'> create mode 100644 source/images/code_bg.png
-</span><span class='line'> create mode 100644 source/images/dotted-border.png
-</span><span class='line'> create mode 100644 source/images/email.png
-</span><span class='line'> create mode 100644 source/images/line-tile.png
-</span><span class='line'> create mode 100644 source/images/noise.png
-</span><span class='line'> create mode 100644 source/images/rss.png
-</span><span class='line'> create mode 100644 source/images/search.png
-</span><span class='line'> create mode 100644 source/index.html
-</span><span class='line'> create mode 100644 source/javascripts/ender.js
-</span><span class='line'> create mode 100644 source/javascripts/github.js
-</span><span class='line'> create mode 100644 source/javascripts/libs/ender.js
-</span><span class='line'> create mode 100644 source/javascripts/libs/jXHR.js
-</span><span class='line'> create mode 100644 source/javascripts/libs/swfobject-dynamic.js
-</span><span class='line'> create mode 100644 source/javascripts/modernizr-2.0.js
-</span><span class='line'> create mode 100644 source/javascripts/octopress.js
-</span><span class='line'> create mode 100644 source/javascripts/pinboard.js
-</span><span class='line'> create mode 100644 source/javascripts/twitter.js
-</span><span class='line'>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>推送到 Heroku 远端仓库</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>
-</span><span class='line'>
-</span><span class='line'>blogbins-MacBook-Pro:octopress blogbin$ git push heroku master
-</span><span class='line'>Counting objects: 4035, done.
-</span><span class='line'>Delta compression using up to 2 threads.
-</span><span class='line'>Compressing objects: 100% (1418/1418), done.
-</span><span class='line'>Writing objects: 100% (4035/4035), 928.25 KiB | 69 KiB/s, done.
-</span><span class='line'>Total 4035 (delta 2310), reused 3968 (delta 2289)
-</span><span class='line'>
-</span><span class='line'>-----&gt; Heroku receiving push
-</span><span class='line'>-----&gt; Ruby/Rack app detected
-</span><span class='line'>-----&gt; Installing dependencies using Bundler version 1.2.0.rc
-</span><span class='line'>       Running: bundle install --without development:test --path vendor/bundle --binstubs bin/ --deployment
-</span><span class='line'>       Fetching gem metadata from http://rubygems.org/.....
-</span><span class='line'>       Installing rack (1.4.1)
-</span><span class='line'>       Installing rack-protection (1.2.0)
-</span><span class='line'>       Installing tilt (1.3.3)
-</span><span class='line'>       Installing sinatra (1.3.2)
-</span><span class='line'>       Using bundler (1.2.0.rc)
-</span><span class='line'>       Your bundle is complete! It was installed into ./vendor/bundle
-</span><span class='line'>       Cleaning up the bundler cache.
-</span><span class='line'>-----&gt; Discovering process types
-</span><span class='line'>       Procfile declares types     -&gt; (none)
-</span><span class='line'>       Default types for Ruby/Rack -&gt; console, rake, web
-</span><span class='line'>-----&gt; Compiled slug size is 884K
-</span><span class='line'>-----&gt; Launching... done, v3
-</span><span class='line'>       http://tech-blogbin.herokuapp.com deployed to Heroku
-</span><span class='line'>
-</span><span class='line'>To git@heroku.com:tech-blogbin.git
-</span><span class='line'> * [new branch]      master -&gt; master
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>现在可以访问 http://tech-blogbin.herokuapp.com/</p>
-
-<p>三. 问题</p>
-
-<ol>
-<li>没有选择默认 SSH 公钥造成的困扰</li>
-</ol>
-
-
-<p>造成 git push heroku master 推送不成功</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-<span class='line-number'>48</span>
-<span class='line-number'>49</span>
-<span class='line-number'>50</span>
-<span class='line-number'>51</span>
-<span class='line-number'>52</span>
-<span class='line-number'>53</span>
-<span class='line-number'>54</span>
-<span class='line-number'>55</span>
-<span class='line-number'>56</span>
-<span class='line-number'>57</span>
-<span class='line-number'>58</span>
-<span class='line-number'>59</span>
-<span class='line-number'>60</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>
-</span><span class='line'>blogbins-MacBook-Pro:octopress blogbin$ heroku login
-</span><span class='line'>Enter your Heroku credentials.
-</span><span class='line'>Email: tech.blogbin@gmail.com
-</span><span class='line'>Password (typing will be hidden):
-</span><span class='line'>Found the following SSH public keys:
-</span><span class='line'>1) github_rsa.pub
-</span><span class='line'>2) id_rsa.pub
-</span><span class='line'>Which would you like to use with your Heroku account? 1
-</span><span class='line'>Uploading SSH public key /Users/blogbin/.ssh/github_rsa.pub... done
-</span><span class='line'>Authentication successful.
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'>blogbins-MacBook-Pro:octopress blogbin$ git push heroku master
-</span><span class='line'>The authenticity of host 'heroku.com (50.19.85.154)' can't be established.
-</span><span class='line'>RSA key fingerprint is .
-</span><span class='line'>Are you sure you want to continue connecting (yes/no)? yes
-</span><span class='line'>Warning: Permanently added 'heroku.com,50.19.85.154' (RSA) to the list of known hosts.
-</span><span class='line'>Permission denied (publickey).
-</span><span class='line'>fatal: The remote end hung up unexpectedly
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'>blogbins-MacBook-Pro:octopress blogbin$ vi ~/.ssh/config
-</span><span class='line'>
-</span><span class='line'>Host heroku.com
-</span><span class='line'>        HostName heroku.com
-</span><span class='line'>        User tech.blogbin@gmail.com
-</span><span class='line'>        IdentityFile ~/.ssh/github_rsa.pub
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'>blogbins-MacBook-Pro:octopress blogbin$ git push heroku master
-</span><span class='line'>@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-</span><span class='line'>@         WARNING: UNPROTECTED PRIVATE KEY FILE!          @
-</span><span class='line'>@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-</span><span class='line'>Permissions 0644 for '/Users/blogbin/.ssh/github_rsa.pub' are too open.
-</span><span class='line'>It is required that your private key files are NOT accessible by others.
-</span><span class='line'>This private key will be ignored.
-</span><span class='line'>bad permissions: ignore key: /Users/blogbin/.ssh/github_rsa.pub
-</span><span class='line'>Permission denied (publickey).
-</span><span class='line'>fatal: The remote end hung up unexpectedly
-</span><span class='line'>blogbins-MacBook-Pro:octopress blogbin$ chmod 600 /Users/blogbin/.ssh/github_rsa.pub
-</span><span class='line'>blogbins-MacBook-Pro:octopress blogbin$ git push heroku master
-</span><span class='line'>Warning: Permanently added the RSA host key for IP address '50.19.85.132' to the list of known hosts.
-</span><span class='line'>Permission denied (publickey).
-</span><span class='line'>fatal: The remote end hung up unexpectedly
-</span><span class='line'>
-</span><span class='line'>blogbins-MacBook-Pro:octopress blogbin$ heroku keys:add
-</span><span class='line'>Found the following SSH public keys:
-</span><span class='line'>1) github_rsa.pub
-</span><span class='line'>2) id_rsa.pub
-</span><span class='line'>Which would you like to use with your Heroku account? 2
-</span><span class='line'>Uploading SSH public key /Users/blogbin/.ssh/id_rsa.pub... done
-</span><span class='line'>blogbins-MacBook-Pro:octopress blogbin$ heroku keys
-</span><span class='line'>=== tech.blogbin@gmail.com Keys
-</span><span class='line'>ssh-rsa ... GitHub@blogbin
-</span><span class='line'>ssh-rsa .. blogbin@blogbins-MacBook-Pro.local
-</span><span class='line'>
-</span><span class='line'>blogbins-MacBook-Pro:octopress blogbin$ heroku keys:remove GitHub@blogbin
-</span><span class='line'>Removing GitHub@blogbin SSH key… done
-</span></code></pre></td></tr></table></div></figure>
-
-
-<ol>
-<li>Heroku Web 界面修改 app-name 造成本地仓库无法推送 Heroku 远端仓库</li>
-</ol>
-
-
-<p>关于 app-name 更名，建议参阅 https://devcenter.heroku.com/articles/renaming-apps</p>
-
-<p>Web 界面 app-name 从 afternoon-journey-1049 更名为 tech-blogbin 造成的困扰</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>
-</span><span class='line'>blogbins-MacBook-Pro:octopress blogbin$ git push heroku master
-</span><span class='line'>
-</span><span class='line'> !  No such app as afternoon-journey-1049.
-</span><span class='line'>
-</span><span class='line'>fatal: The remote end hung up unexpectedly
-</span><span class='line'>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>删除本地 Git 的 heroku 远程引用，并添加新的 heroku 远程引用: git@heroku.com:tech-blogbin.git</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>
-</span><span class='line'>blogbins-MacBook-Pro:octopress blogbin$ git remote rm heroku
-</span><span class='line'>blogbins-MacBook-Pro:octopress blogbin$ git remote add heroku git@heroku.com:tech-blogbin.git
-</span><span class='line'>
-</span><span class='line'>blogbins-MacBook-Pro:octopress blogbin$ git remote -v
-</span><span class='line'>heroku     git@heroku.com:tech-blogbin.git (fetch)
-</span><span class='line'>heroku     git@heroku.com:tech-blogbin.git (push)
-</span><span class='line'>origin     git://github.com/imathis/octopress.git (fetch)
-</span><span class='line'>origin     git://github.com/imathis/octopress.git (push)
-</span><span class='line'>blogbins-MacBook-Pro:octopress blogbin$ git push heroku master
-</span><span class='line'>Counting objects: 4035, done.
-</span><span class='line'>Delta compression using up to 2 threads.
-</span><span class='line'>Compressing objects: 100% (1418/1418), done.
-</span><span class='line'>Writing objects: 100% (4035/4035), 928.25 KiB | 69 KiB/s, done.
-</span><span class='line'>Total 4035 (delta 2310), reused 3968 (delta 2289)
-</span><span class='line'>
-</span><span class='line'>-----&gt; Heroku receiving push
-</span><span class='line'>-----&gt; Ruby/Rack app detected
-</span><span class='line'>-----&gt; Installing dependencies using Bundler version 1.2.0.rc
-</span><span class='line'>       Running: bundle install --without development:test --path vendor/bundle --binstubs bin/ --deployment
-</span><span class='line'>       Fetching gem metadata from http://rubygems.org/.....
-</span><span class='line'>       Installing rack (1.4.1)
-</span><span class='line'>       Installing rack-protection (1.2.0)
-</span><span class='line'>       Installing tilt (1.3.3)
-</span><span class='line'>       Installing sinatra (1.3.2)
-</span><span class='line'>       Using bundler (1.2.0.rc)
-</span><span class='line'>       Your bundle is complete! It was installed into ./vendor/bundle
-</span><span class='line'>       Cleaning up the bundler cache.
-</span><span class='line'>-----&gt; Discovering process types
-</span><span class='line'>       Procfile declares types     -&gt; (none)
-</span><span class='line'>       Default types for Ruby/Rack -&gt; console, rake, web
-</span><span class='line'>-----&gt; Compiled slug size is 884K
-</span><span class='line'>-----&gt; Launching... done, v3
-</span><span class='line'>       http://tech-blogbin.herokuapp.com deployed to Heroku
-</span><span class='line'>
-</span><span class='line'>To git@heroku.com:tech-blogbin.git
-</span><span class='line'> * [new branch]      master -&gt; master
-</span></code></pre></td></tr></table></div></figure>
 
 ]]></content>
   </entry>

@@ -15,6 +15,18 @@ categories:
 - GitHub
 - Settingslogic
 - binarylogic
+tags: 
+- Gem
+- Bundler
+- Gemfile
+- Ruby
+- Rails
+- RubyOnRails
+- RoR
+- Bundle
+- GitHub
+- Settingslogic
+- binarylogic
 ---
 
 Rails 项目中有一些全局配置信息需要保存在文件中，采用 binarylogic/settingslogic 来管理这些配置信息：

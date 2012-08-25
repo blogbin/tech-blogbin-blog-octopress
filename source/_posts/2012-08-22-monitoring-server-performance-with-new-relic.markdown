@@ -7,6 +7,10 @@ categories:
 - New Relic
 - CentOS
 - yum
+tags: 
+- New Relic
+- CentOS
+- yum
 ---
 
 使用 New Relic 监控服务端性能，优点：

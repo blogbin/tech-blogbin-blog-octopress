@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: git-flow | Tech.Blogbin's Blog]]></title>
+  <link href="http://tech-blog.blogbin.info/blog/categories/git-flow/atom.xml" rel="self"/>
+  <link href="http://tech-blog.blogbin.info/"/>
+  <updated>2012-08-25T04:15:54+08:00</updated>
+  <id>http://tech-blog.blogbin.info/</id>
+  <author>
+    <name><![CDATA[Tech Blogbin ]]></name>
+    <email><![CDATA[Tech Blogbin <tech.blogbin@gmail.com>]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[用 git-flow 进行分支操作]]></title>
+    <link href="http://tech-blog.blogbin.info/blog/2012/08/23/using-git-flow/"/>
+    <updated>2012-08-23T22:28:00+08:00</updated>
+    <id>http://tech-blog.blogbin.info/blog/2012/08/23/using-git-flow</id>
+    <content type="html"><![CDATA[<p>参阅：</p>
+
+<p>nvie/gitflow
+<a href="https://github.com/nvie/gitflow/">https://github.com/nvie/gitflow/</a></p>
+
+<p>A successful Git branching model » nvie.com
+<a href="http://nvie.com/posts/a-successful-git-branching-model/">http://nvie.com/posts/a-successful-git-branching-model/</a></p>
+
+<p>或者中文版</p>
+
+<p>Git开发管理之道 - 无网不剩
+<a href="http://blog.leezhong.com/translate/2010/10/30/a-successful-git-branch.html">http://blog.leezhong.com/translate/2010/10/30/a-successful-git-branch.html</a></p>
+
+<p>其实 git-flow 只是对 git 分支 checkout, 创建, merge 等命令进行包装，采用推荐的命令方式来使用优秀的分支创建和合并实践策略，
+避免代码改动提交混乱，对本地仓库管理的代码几乎没有影响。</p>
+
+<p>首先要明白 master 为产品分支，develop 为开发分支。
+如果你以前采用 master 为主线或开发分支，产品分支为其他分支，脑筋要转过来。</p>
+
+<!--more-->
+
+
+<p>git flow 初始化本地仓库
+```
+blogbins-MacBook-Pro:octopress blogbin$ git flow init</p>
+
+<p>Which branch should be used for bringing forth production releases?
+   - master
+Branch name for production releases: [master]
+Branch name for "next release" development: [develop]</p>
+
+<p>How to name your supporting branch prefixes?
+Feature branches? [feature/]
+Release branches? [release/]
+Hotfix branches? [hotfix/]
+Support branches? [support/]
+Version tag prefix? [] TEBN
+blogbins-MacBook-Pro:octopress blogbin$ git status</p>
+
+<h1>On branch develop</h1>
+
+<p>nothing to commit (working directory clean)
+```</p>
+
+<p>开始一个特性(octopress-indexer)开发
+```
+blogbins-MacBook-Pro:octopress blogbin$ git flow feature start octopress-indexer
+Switched to a new branch 'feature/octopress-indexer'</p>
+
+<p>Summary of actions:
+- A new branch 'feature/octopress-indexer' was created, based on 'develop'
+- You are now on branch 'feature/octopress-indexer'</p>
+
+<p>Now, start committing on your feature. When done, use:</p>
+
+<pre><code> git flow feature finish octopress-indexer
+</code></pre>
+
+<p>```</p>
+
+<p>结束一个特性开发
+```
+blogbins-MacBook-Pro:octopress blogbin$ git flow feature finish octopress-indexer
+Switched to branch 'develop'
+Updating 024efad..6a21c04
+Fast-forward
+ plugins/indexer.rb                          |  255 +++++++++++++++++++++++++++
+ source/<em>includes/custom/asides/indexer.html |   10 ++
+ 2 files changed, 265 insertions(+)
+ create mode 100644 plugins/indexer.rb
+ create mode 100644 source/</em>includes/custom/asides/indexer.html
+Deleted branch feature/octopress-indexer (was 6a21c04).</p>
+
+<p>Summary of actions:
+- The feature branch 'feature/octopress-indexer' was merged into 'develop'
+- Feature branch 'feature/octopress-indexer' has been removed
+- You are now on branch 'develop'
+```</p>
+
+<p>手动将 develop 开发分支的改动 merge 回 master 产品分支
+```
+blogbins-MacBook-Pro:octopress blogbin$ git checkout master
+Switched to branch 'master'</p>
+
+<h1>建议使用 --no-ff 选项，让 merge 也成为一个 commitment.</h1>
+
+<p>blogbins-MacBook-Pro:octopress blogbin$ git merge --no-ff develop
+Merge made by the 'recursive' strategy.
+ plugins/indexer.rb                          |  255 +++++++++++++++++++++++++++
+ source/<em>includes/custom/asides/indexer.html |   10 ++
+ 2 files changed, 265 insertions(+)
+ create mode 100644 plugins/indexer.rb
+ create mode 100644 source/</em>includes/custom/asides/indexer.html
+```</p>
+
+<p>以上 git-flow 命令执行过程其实是对以下 git 命令的包装：</p>
+
+<p>先基于 master 产品分支创建并切换到 develop 开发分支</p>
+
+<p>git checkout -b develop master</p>
+
+<p>开始开发一个新特性，基于 develop 创建新特性分支</p>
+
+<p>git checkout -b feature/fengbin/using-git-flow develop</p>
+
+<p>修改文件，提交文件。。。</p>
+
+<p>切换回 develop 开发分支，将 using-git-flow 特性分支改动 merge 到 develop 开发分支</p>
+
+<p>git checkout develop</p>
+
+<p>git merge --no-ff feature/fengbin/using-git-flow</p>
+
+<p>最后删除 using-git-flow 特性分支</p>
+
+<p>git checkout -d feature/fengbin/using-git-flow develop</p>
+
+<p>已有项目中初始化 git-flow 可能会出现以下错误：</p>
+
+<p>Local branch 'xxx' does not exist.
+```
+blogbins-MacBook-Pro:app_store blogbin$ git flow init</p>
+
+<p>Which branch should be used for bringing forth production releases?
+   - features/favorite
+   - master
+Branch name for production releases: [master] develop
+Local branch 'develop' does not exist.
+```</p>
+
+<p>查阅 git-flow 官方教程或者网络资料，不管是已有项目或者新项目，初始化 git-flow 都是相同的命令 git flow init。</p>
+
+<p>怀疑可能是本地仓库之前已经运行过 git flow init，随后有不按 git-flow 模式创建分支所致。</p>
+
+<p>解决办法是，重现 git clone 远端仓库克隆出一个本地仓库，在本地仓库重新运行 git flow init。</p>
+]]></content>
+  </entry>
+  
+</feed>

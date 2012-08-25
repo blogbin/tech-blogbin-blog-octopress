@@ -15,6 +15,18 @@ categories:
 - RubyOnRails
 - RoR
 - Bundle
+tags: 
+- DHH
+- JSON
+- JBuilder
+- Gem
+- Bundler
+- Gemfile
+- Ruby
+- Rails
+- RubyOnRails
+- RoR
+- Bundle
 ---
 
 需要在 Rails 返回 json 格式的内容。虽然 Ruby 或者 Rails 内置对对象转为 json 的支持。

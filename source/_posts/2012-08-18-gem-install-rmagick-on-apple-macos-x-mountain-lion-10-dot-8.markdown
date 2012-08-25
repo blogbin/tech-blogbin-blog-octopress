@@ -16,6 +16,19 @@ categories:
 - Apple
 - MacOS X
 - Mountain Lion 10.8
+tags: 
+- RMagick
+- Gem
+- Bundler
+- Gemfile
+- Ruby
+- Rails
+- RubyOnRails
+- RoR
+- Bundle
+- Apple
+- MacOS X
+- Mountain Lion 10.8
 ---
 
 最近升级了 Mountain Lion 10.8，结果发现使用 RMagick 的 Rails 项目无法正常启动，碉堡了！

@@ -101,4 +101,4 @@ google_analytics_tracking_id: UA-34083026-1
 facebook_like: true
 
 # https://github.com/jcftang/octopress-relatedposts
-lsi: true
+# lsi: true

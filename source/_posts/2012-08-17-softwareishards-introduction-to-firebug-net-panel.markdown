@@ -7,6 +7,10 @@ categories:
 - Firebug
 - Firefox
 - Net
+tags: 
+- Firebug
+- Firefox
+- Net
 ---
 
 Firebug 监控浏览器的网络请求，softwareishard 网站有很详细的介绍。

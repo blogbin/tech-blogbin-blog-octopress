@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Octopress Plugin | Tech.Blogbin's Blog]]></title>
+  <link href="http://tech-blog.blogbin.info/blog/categories/octopress-plugin/atom.xml" rel="self"/>
+  <link href="http://tech-blog.blogbin.info/"/>
+  <updated>2012-08-25T04:15:54+08:00</updated>
+  <id>http://tech-blog.blogbin.info/</id>
+  <author>
+    <name><![CDATA[Tech Blogbin ]]></name>
+    <email><![CDATA[Tech Blogbin <tech.blogbin@gmail.com>]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Using neerajcse's octopress-calendar-aside]]></title>
+    <link href="http://tech-blog.blogbin.info/blog/2012/08/25/using-neerajcses-octopress-calendar-aside/"/>
+    <updated>2012-08-25T03:50:00+08:00</updated>
+    <id>http://tech-blog.blogbin.info/blog/2012/08/25/using-neerajcses-octopress-calendar-aside</id>
+    <content type="html"><![CDATA[<p>Octopress 提供按日历归类显示文章的第三方插件。</p>
+
+<p>参阅
+neerajcse/octopress-calendar-aside · GitHub
+<a href="https://github.com/neerajcse/octopress-calendar-aside">https://github.com/neerajcse/octopress-calendar-aside</a></p>
+
+<p>按照官方文档安装和配置 octopress-calendar-aside，插件的效果显示出来了，不过有一些小遗憾。</p>
+
+<!--more-->
+
+
+<p><blockquote><p>All you need to do is:</p></p><p><p>add the file calendar.html to the default asides location. (.themes/classic/source/<em>includes/asides)<br/>add the file calendar.js to the default javascript location. (.themes/classic/source/javascript)<br/>add the calendar aside to </em>config.yml file. (see the config.yml in commited source)<br/>add the images prev.png and next.png to .themes/classic/source/images/. (these images are free for non-commercial purposes)</p></blockquote></p>
+
+<p>官方建议将代码部署在 .themes 目录下会出现问题。访问首页或具体一篇文章时，右侧 calendar-aside 位置报错：</p>
+
+<p>找不到 _includes/asides/calendar.html</p>
+
+<p>我改为相关文件部署在 source 子目录，而非 .themes，重新编译后显示正常。</p>
+
+<p>日历显示效果如下图：
+<blockquote><p><img src="/images/2012-08-25-using-neerajcses-octopress-calendar-aside/calendar-aside.png"></p></blockquote></p>
+
+<h3>遗留问题</h3>
+
+<p>不知道是不是我自身环境的问题，遗留了两个问题：</p>
+
+<ol>
+<li>首页右侧 aside 无法看到日历，如访问: http://tech-blog.blogbin.info。</li>
+</ol>
+
+
+<p>必须访问具体一篇文章右侧 aside 才能看到日历，如 http://tech-blog.blogbin.info/blog/2012/08/22/using-binarylogic-slash-settingslogic/。</p>
+
+<ol>
+<li>_config.yml 中 asides/calendar.html 必须放在 aside 的最下边位置，否则会造成 aside 余下的其它<section>无法显示
+```
+
+<h1>_config.yml</h1>
+
+<p>default_asides: [ custom/asides/about.html, asides/recent_posts.html, asides/github.html,  asides/delicious.html, asides/pinboard.html, asides/googleplus.html, asides/calendar.html ]
+```</p></li>
+</ol>
+
+]]></content>
+  </entry>
+  
+</feed>

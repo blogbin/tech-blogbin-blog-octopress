@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: iftop | Tech.Blogbin's Blog]]></title>
+  <link href="http://tech-blog.blogbin.info/blog/categories/iftop/atom.xml" rel="self"/>
+  <link href="http://tech-blog.blogbin.info/"/>
+  <updated>2012-08-25T04:15:54+08:00</updated>
+  <id>http://tech-blog.blogbin.info/</id>
+  <author>
+    <name><![CDATA[Tech Blogbin ]]></name>
+    <email><![CDATA[Tech Blogbin <tech.blogbin@gmail.com>]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[installing iftop on CentOS 6]]></title>
+    <link href="http://tech-blog.blogbin.info/blog/2012/08/24/installing-iftop-on-centos-6/"/>
+    <updated>2012-08-24T22:55:00+08:00</updated>
+    <id>http://tech-blog.blogbin.info/blog/2012/08/24/installing-iftop-on-centos-6</id>
+    <content type="html"><![CDATA[<p>使用 iftop 简单监控服务器网络流量。安装过程如下：</p>
+
+<p>```
+[root@hj01 ~]# yum install -y wget</p>
+
+<p>[root@hj01 ~]# wget http://www.ex-parrot.com/~pdw/iftop/download/iftop-0.17.tar.gz</p>
+
+<p>[root@hj01 ~]# tar -xvf iftop-0.17</p>
+
+<p>[root@hj01 ~]# yum install -y flex byacc  libpcap　libpcap-devel ncurses ncurses-devel</p>
+
+<p>[root@hj01 ~]# yum install -y libpcap-devel</p>
+
+<p>[root@hj01 ~]# cd iftop-0.17</p>
+
+<p>[root@hj01 iftop-0.17]# ./configure</p>
+
+<p>[root@hj01 iftop-0.17]# make</p>
+
+<p>[root@hj01 iftop-0.17]# make install</p>
+
+<p>[root@hj01 iftop-0.17]# iftop
+```</p>
+
+<!--more-->
+
+
+<p>运行 sudo iftop 可能会出现 iftop: command not found 的情况，如：<br/>
+```
+[atyun@localhost iftop-0.17]$ sudo iftop</p>
+
+<p>sudo: iftop: command not found
+```</p>
+
+<p>明确写出 iftop 命令的完整路径，如
+<code>
+[atyun@localhost iftop-0.17]$ sudo /usr/local/sbin/iftop
+</code></p>
+]]></content>
+  </entry>
+  
+</feed>
