@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Octopress Plugin | Tech.Blogbin's Blog]]></title>
   <link href="http://tech-blog.blogbin.info/blog/categories/octopress-plugin/atom.xml" rel="self"/>
   <link href="http://tech-blog.blogbin.info/"/>
-  <updated>2012-08-25T04:15:54+08:00</updated>
+  <updated>2012-08-25T09:01:12+08:00</updated>
   <id>http://tech-blog.blogbin.info/</id>
   <author>
     <name><![CDATA[Tech Blogbin ]]></name>
@@ -38,7 +38,7 @@ neerajcse/octopress-calendar-aside · GitHub
 <p>我改为相关文件部署在 source 子目录，而非 .themes，重新编译后显示正常。</p>
 
 <p>日历显示效果如下图：
-<blockquote><p><img src="/images/2012-08-25-using-neerajcses-octopress-calendar-aside/calendar-aside.png"></p></blockquote></p>
+<blockquote><p><img src="/images/2012-08-25-using-neerajcses-octopress-calendar-aside/calendar-aside.jpg"></p></blockquote></p>
 
 <h3>遗留问题</h3>
 

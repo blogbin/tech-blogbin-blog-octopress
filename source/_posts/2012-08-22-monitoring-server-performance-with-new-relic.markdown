@@ -59,5 +59,5 @@ gem "newrelic_rpm"
 
 浏览器访问 [http://localhost:3000/newrelic](http://localhost:3000/newrelic)，效果如下：
 {% blockquote %}
-{% img /images/2012-08-22-monitoring-server-performance-with-new-relic/new_relic_development.png %}
+{% img /images/2012-08-22-monitoring-server-performance-with-new-relic/new_relic_development.jpg %}
 {% endblockquote %}

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Settingslogic | Tech.Blogbin's Blog]]></title>
   <link href="http://tech-blog.blogbin.info/blog/categories/settingslogic/atom.xml" rel="self"/>
   <link href="http://tech-blog.blogbin.info/"/>
-  <updated>2012-08-25T04:15:54+08:00</updated>
+  <updated>2012-08-25T09:01:12+08:00</updated>
   <id>http://tech-blog.blogbin.info/</id>
   <author>
     <name><![CDATA[Tech Blogbin ]]></name>
@@ -12,6 +12,25 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Using jcftang's octopress-relatedposts]]></title>
+    <link href="http://tech-blog.blogbin.info/blog/2012/08/25/using-jcftangs-octopress-relatedposts/"/>
+    <updated>2012-08-25T08:33:00+08:00</updated>
+    <id>http://tech-blog.blogbin.info/blog/2012/08/25/using-jcftangs-octopress-relatedposts</id>
+    <content type="html"><![CDATA[<p>参阅 jcftang/octopress-relatedposts <a href="https://github.com/jcftang/octopress-relatedposts">https://github.com/jcftang/octopress-relatedposts</a></p>
+
+<p>其实 Octopress 已经内置了 LSI 引擎，安装和配置 octopress-relatedposts 比较简单。</p>
+
+<p><blockquote><p>Firstly add this to your _config.yml file</p></p><p><p>lsi: true<br/>The create a file such as source/_includes/custom/asides/related.html with the following content</p></p><p><p><section></p></p><p><pre><code>&lt;h1&gt;Related Posts&lt;/h1&gt;<br/>&lt;ul class="posts"&gt;</p><p>&lt;/ul&gt;<br/></code></pre></p><p><p></section><br/>It is possible to style the list, but in the above I have chosen to keep the same style as the recent posts.</p></p><p><p>Finally, add the file to your default asides list in your _config.yml file</p></p><p><p>default_asides: [custom/asides/related.html, ...]</p></blockquote></p>
+
+<p>相关帖子效果如下图：
+<blockquote><p><img src="/images/2012-08-25-using-jcftangs-octopress-relatedposts/octopress-relatedposts.jpeg"></p></blockquote></p>
+
+<p>引入   source/_includes/custom/asides/related.html
+比较遗憾的时，启用 LSI 后，运行 rake generate 的时间延长了 10 倍左右。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Using binarylogic/settingslogic]]></title>

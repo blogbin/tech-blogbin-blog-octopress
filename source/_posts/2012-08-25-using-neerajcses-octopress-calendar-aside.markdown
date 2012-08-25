@@ -45,7 +45,7 @@ add the images prev.png and next.png to .themes/classic/source/images/. (these i
 
 日历显示效果如下图：
 {% blockquote %}
-{% img /images/2012-08-25-using-neerajcses-octopress-calendar-aside/calendar-aside.png %}
+{% img /images/2012-08-25-using-neerajcses-octopress-calendar-aside/calendar-aside.jpg %}
 {% endblockquote %}
 
 
