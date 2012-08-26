@@ -4,7 +4,7 @@
   <title><![CDATA[Tech.Blogbin's Blog]]></title>
   <link href="http://tech-blog.blogbin.info/atom.xml" rel="self"/>
   <link href="http://tech-blog.blogbin.info/"/>
-  <updated>2012-08-27T00:33:46+08:00</updated>
+  <updated>2012-08-27T00:39:19+08:00</updated>
   <id>http://tech-blog.blogbin.info/</id>
   <author>
     <name><![CDATA[Tech Blogbin ]]></name>
@@ -108,6 +108,11 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
+
+
+<!--more-->
+
+
 <h5>相关效果如下图：</h5>
 
 <blockquote><p><img src="http://tech-blog.blogbin.info/images/2012-08-26-using-tokkonopapas-octopress-tagcloud/header.jpeg"><br/><img src="http://tech-blog.blogbin.info/images/2012-08-26-using-tokkonopapas-octopress-tagcloud/categories.jpeg"><br/><img src="http://tech-blog.blogbin.info/images/2012-08-26-using-tokkonopapas-octopress-tagcloud/tags.jpeg"></p></blockquote>
@@ -127,6 +132,11 @@
 <p>其实 Octopress 已经内置了 LSI 引擎，安装和配置 octopress-relatedposts 比较简单。</p>
 
 <blockquote><p>Firstly add this to your _config.yml file</p><p>lsi: true<br/>The create a file such as source/_includes/custom/asides/related.html with the following content</p><p>&#8230;.</p><p>It is possible to style the list, but in the above I have chosen to keep the same style as the recent posts.</p><p>Finally, add the file to your default asides list in your _config.yml file</p><p>default_asides: [custom/asides/related.html, &#8230;]</p></blockquote>
+
+
+
+
+<!--more-->
 
 
 <p>相关帖子效果如下图：</p>

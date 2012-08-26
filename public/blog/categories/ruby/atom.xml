@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Ruby | Tech.Blogbin's Blog]]></title>
   <link href="http://tech-blog.blogbin.info/blog/categories/ruby/atom.xml" rel="self"/>
   <link href="http://tech-blog.blogbin.info/"/>
-  <updated>2012-08-27T00:33:46+08:00</updated>
+  <updated>2012-08-27T00:39:19+08:00</updated>
   <id>http://tech-blog.blogbin.info/</id>
   <author>
     <name><![CDATA[Tech Blogbin ]]></name>
@@ -23,6 +23,9 @@
 <p>其实 Octopress 已经内置了 LSI 引擎，安装和配置 octopress-relatedposts 比较简单。</p>
 
 <p><blockquote><p>Firstly add this to your _config.yml file</p></p><p><p>lsi: true<br/>The create a file such as source/_includes/custom/asides/related.html with the following content</p></p><p><p>....</p></p><p><p>It is possible to style the list, but in the above I have chosen to keep the same style as the recent posts.</p></p><p><p>Finally, add the file to your default asides list in your _config.yml file</p></p><p><p>default_asides: [custom/asides/related.html, ...]</p></blockquote></p>
+
+<!--more-->
+
 
 <p>相关帖子效果如下图：
 <blockquote><p><img src="/images/2012-08-25-using-jcftangs-octopress-relatedposts/octopress-relatedposts.jpeg"></p></blockquote></p>

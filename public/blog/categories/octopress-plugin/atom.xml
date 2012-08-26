@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Octopress Plugin | Tech.Blogbin's Blog]]></title>
   <link href="http://tech-blog.blogbin.info/blog/categories/octopress-plugin/atom.xml" rel="self"/>
   <link href="http://tech-blog.blogbin.info/"/>
-  <updated>2012-08-27T00:33:46+08:00</updated>
+  <updated>2012-08-27T00:39:19+08:00</updated>
   <id>http://tech-blog.blogbin.info/</id>
   <author>
     <name><![CDATA[Tech Blogbin ]]></name>
@@ -92,6 +92,9 @@ source/tags/index.markdown 内容为：
 </span><span class='line'>
 </span><span class='line'>{% tag_cloud %}
 </span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<!--more-->
+
 
 <h5>相关效果如下图：</h5>
 

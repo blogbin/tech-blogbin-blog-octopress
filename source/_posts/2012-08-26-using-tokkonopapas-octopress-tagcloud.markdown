@@ -45,6 +45,8 @@ blogbins-MacBook-Pro:octopress blogbin$ rake new_page["tags"]
 source/tags/index.markdown 内容为：
 {% include_code octopress/tags/index.html %}
 
+<!--more-->
+
 ##### 相关效果如下图：
 {% blockquote %}
 {% img /images/2012-08-26-using-tokkonopapas-octopress-tagcloud/header.jpeg %}
