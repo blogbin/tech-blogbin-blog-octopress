@@ -141,6 +141,18 @@ Local branch 'develop' does not exist.
 
 怀疑可能是本地仓库之前已经运行过 git flow init，随后有不按 git-flow 模式创建分支所致。
 
-解决办法是，重现 git clone 远端仓库克隆出一个本地仓库，在本地仓库重新运行 git flow init。
+##### 2012 年 8 月 27 日更新
+解决办法为以下任选：
+
+1. 重现 git clone 远端仓库克隆出一个本地仓库，在本地仓库重新运行 git flow init。
+
+2. 手动创建 develop 开发分支，然后重新运行 git flow init
+```
+blogbins-MacBook-Pro:atyun-focus-video blogbin$ git checkout -b develop master
+Switched to a new branch 'develop'
+blogbins-MacBook-Pro:atyun-focus-video blogbin$ git checkout master
+Switched to branch 'master'
+blogbins-MacBook-Pro:atyun-focus-video blogbin$ git flow init
+```
 
 

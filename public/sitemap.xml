@@ -102,7 +102,7 @@
     </url>
     <url>
         <loc>http://tech-blog.blogbin.info/blog/2012/08/23/using-git-flow/</loc>
-        <lastmod>2012-08-25T08:39:25+08:00</lastmod>
+        <lastmod>2012-08-27T15:56:03+08:00</lastmod>
     </url>
     <url>
         <loc>http://tech-blog.blogbin.info/blog/2012/08/24/installing-iftop-on-centos-6/</loc>
@@ -127,8 +127,12 @@
         <lastmod>2012-08-27T00:37:15+08:00</lastmod>
     </url>
     <url>
+        <loc>http://tech-blog.blogbin.info/blog/2012/08/27/installing-bigbluebutton/</loc>
+        <lastmod>2012-08-27T21:28:32+08:00</lastmod>
+    </url>
+    <url>
         <loc>http://tech-blog.blogbin.info/blog/archives/</loc>
-        <lastmod>2012-08-27T00:38:55+08:00</lastmod>
+        <lastmod>2012-08-27T21:28:32+08:00</lastmod>
     </url>
     <url>
         <loc>http://tech-blog.blogbin.info/categories/</loc>
@@ -136,15 +140,15 @@
     </url>
     <url>
         <loc>http://tech-blog.blogbin.info/downloads/code/octopress/categories/</loc>
-        <lastmod>2012-08-27T00:38:55+08:00</lastmod>
+        <lastmod>2012-08-27T21:28:32+08:00</lastmod>
     </url>
     <url>
         <loc>http://tech-blog.blogbin.info/downloads/code/octopress/tags/</loc>
-        <lastmod>2012-08-27T00:38:55+08:00</lastmod>
+        <lastmod>2012-08-27T21:28:32+08:00</lastmod>
     </url>
     <url>
         <loc>http://tech-blog.blogbin.info/</loc>
-        <lastmod>2012-08-27T00:38:55+08:00</lastmod>
+        <lastmod>2012-08-27T21:28:32+08:00</lastmod>
     </url>
     <url>
         <loc>http://tech-blog.blogbin.info/tags/</loc>

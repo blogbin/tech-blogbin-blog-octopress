@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: BigBlueButton | Tech.Blogbin's Blog]]></title>
+  <link href="http://tech-blog.blogbin.info/blog/categories/bigbluebutton/atom.xml" rel="self"/>
+  <link href="http://tech-blog.blogbin.info/"/>
+  <updated>2012-08-27T21:28:58+08:00</updated>
+  <id>http://tech-blog.blogbin.info/</id>
+  <author>
+    <name><![CDATA[Tech Blogbin ]]></name>
+    <email><![CDATA[Tech Blogbin <tech.blogbin@gmail.com>]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Installing BigBlueButton]]></title>
+    <link href="http://tech-blog.blogbin.info/blog/2012/08/27/installing-bigbluebutton/"/>
+    <updated>2012-08-27T20:56:00+08:00</updated>
+    <id>http://tech-blog.blogbin.info/blog/2012/08/27/installing-bigbluebutton</id>
+    <content type="html"><![CDATA[<p>一直使用开源免费的 BigBlueButton 作为 Web 多人会议，文档分享讨论和桌面分享的系统。</p>
+
+<p>BigBlueButton -- Open Source Web Conferencing | www.bigbluebutton.org
+<a href="http://www.bigbluebutton.org/">http://www.bigbluebutton.org/</a></p>
+
+<p>发现 7 月份，BigBlueButton 提供基于 0.8x 的 VM 虚拟机。这比之前使用 0.7x VM 虚拟机，手动升级到 0.8 很方便。
+安装过程参阅：</p>
+
+<p><a href="http://code.google.com/p/bigbluebutton/wiki/BigBlueButtonVM">http://code.google.com/p/bigbluebutton/wiki/BigBlueButtonVM</a></p>
+
+<p>这次安装遇到 FAQ 提到的问题，VM 虚拟机启动之后，没有正常链接到网络，没有自动安装 BigBlueButton。还好官方 FAQ 提供手动安装 BigBlueButton 的办法。</p>
+
+<!--more-->
+
+
+<p><blockquote><p>bbb-conf command not found<br/>When it first launches, if the BigBlueButton VM is unable to connect to the internet it will not finish the installation. You'll see this when yo typebbb-conf command and receive the error "command not found".<br/>The solution is to make sure the VM can connect with the internet. You should be able to<br/>   ping ubuntu.bigbluebutton.organd get a response. Once connected, do the following commands:</p></p><p><p>   sudo apt-get update</p></p><p><p>   sudo apt-get dist-upgrade</p></p><p><p>Then you can finish the installation manually by following these steps.</p></p><p><pre><code>    sudo apt-get install bigbluebutton</p><p>    sudo apt-get install bbb-demo</p><p>    sudo bbb-conf --clean</p><p>    sudo bbb-conf --check</p><p>    sudo bbb-conf --setip &lt;ip/hostname]]&gt;<br/></code></pre></p><p><p></p></blockquote></p>
+
+<h5>配置 BigBlueButton</h5>
+
+<p>可能会遇到的问题是</p>
+
+<ol>
+<li>需要开放三个防火墙端口，</li>
+<li>运行 sudo bbb-conf --setip 设置 ip 地址或者域名</li>
+</ol>
+
+
+<p>以上问题，官方 FAQ 有详细的解决办法，必须仔细阅读。</p>
+
+<ol>
+<li>共享 word 等文档中文乱码问题
+具体参阅：
+BigBlueButton中乱码问题的解决 | 武汉周杰
+<a href="http://www.zhojie.cn/?p=308">http://www.zhojie.cn/?p=308</a>
+<blockquote><p>乱码 问题的源头是由于Ubuntu系统缺少对于的中文字库TTF文件<br/>解决步骤如下：<br/>1）复制Win系统中文字体到Ubuntu系统中（Win系统字体存放路径为C:\Windows\Fonts，Ubuntu系统中字体存放路径为/usr/share/fonts）<br/>2）在Ubuntu系统字库库中创建一个目录，将Win系统中中文字体拷贝进去<br/>sudo cd /usr/share/fonts<br/>sudo mkdir myfonts<br/>sudo chmod 755 myfonts<br/>cp /win/*.ttf /usr/shar/fonts/myfonts<br/>3）建立字体缓存<br/>sudo mkfontscale<br/>sudo mkfontdir<br/>sudo fc-cache –fv<br/>4）重启Ubuntu系统<br/>/sbin/shutdown -r now<br/>注：如果不重启，将不会生效！</p></blockquote></li>
+</ol>
+
+
+<h5>问题</h5>
+
+<ol>
+<li>一直采用 VM 虚拟机安装 BigBlueButton 0.7x，之后手动升级到 0.8x 的方式。
+BigBlueButton 安装配置之后，一般能够稳定运行一段时间。很蹊跷的是，如果某天由于某种原因，比如关机，强制关闭，断电等等，
+BigBlueButton 的 VM 虚拟机重新启动，会提示 Error: FreeSwitch fail...。</li>
+</ol>
+
+
+<p>即使不停重启系统，甚至用之前 VM 虚拟机的备份或者 clone 版本，重新启动虚拟机，也是类似的问题。</p>
+
+<p>当然也有解决的办法，就是重新安装 BigBlueButton VM 虚拟机。</p>
+
+<h5>一些希望</h5>
+
+<ol>
+<li><p>BigBlueButton 安全认证：BigBlueButton 自带一个简单的 WebDemo，可以创建 Web 会议，但无法控制谁能够或者不能够参加会议。
+完整的权限需要自己二次开发实现</p></li>
+<li><p>文档共享窗口比较小，无法充分使用更多屏幕空间，共享桌面的窗口更小，希望后续版本有改进。</p></li>
+<li><p>比较容易基于 Ubuton 安装 BigBlueButton，CentOS 安装 BigBlueButton 比较费劲。</p></li>
+</ol>
+
+]]></content>
+  </entry>
+  
+</feed>
