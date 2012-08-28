@@ -4,7 +4,7 @@
   <title><![CDATA[Tech.Blogbin's Blog]]></title>
   <link href="http://tech-blog.blogbin.info/atom.xml" rel="self"/>
   <link href="http://tech-blog.blogbin.info/"/>
-  <updated>2012-08-27T21:28:58+08:00</updated>
+  <updated>2012-08-28T21:51:30+08:00</updated>
   <id>http://tech-blog.blogbin.info/</id>
   <author>
     <name><![CDATA[Tech Blogbin ]]></name>
@@ -12,6 +12,159 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Securing CentOS Server with firewall]]></title>
+    <link href="http://tech-blog.blogbin.info/blog/2012/08/28/securing-centos-server-with-firewall/"/>
+    <updated>2012-08-28T21:37:00+08:00</updated>
+    <id>http://tech-blog.blogbin.info/blog/2012/08/28/securing-centos-server-with-firewall</id>
+    <content type="html"><![CDATA[<p>对 CentOS 敏感端口如 SSH, FTP 等服务端口做限制来源 IP 地址的限制，每一个端口防火墙配置都要指定来源 IP 地址比较烦；
+把一堆端口混在一条配置规则也不太利于维护。</p>
+
+<p>为了避免每条过滤规则都要重复指定客户端 IP 地址，采用加入一个新链。</p>
+
+<h5>参阅</h5>
+
+<p>Iptables 指南 1.1.19</p>
+
+<p><a href="http://www.frozentux.net/iptables-tutorial/cn/iptables-tutorial-cn-1.1.19.html#PREPARATIONS">http://www.frozentux.net/iptables-tutorial/cn/iptables-tutorial-cn-1.1.19.html#PREPARATIONS</a></p>
+
+<p>42.8. Firewalls</p>
+
+<p><a href="http://www.centos.org/docs/5/html/Deployment_Guide-en-US/ch-fw.html#s1-basic-firewall">http://www.centos.org/docs/5/html/Deployment_Guide-en-US/ch-fw.html#s1-basic-firewall</a></p>
+
+<p>42.9. IPTables</p>
+
+<p><a href="http://www.centos.org/docs/5/html/Deployment_Guide-en-US/ch-iptables.html#s2-iptables-init-conf">http://www.centos.org/docs/5/html/Deployment_Guide-en-US/ch-iptables.html#s2-iptables-init-conf</a></p>
+
+<!--more-->
+
+
+<h5>修改 /etc/sysconfig/iptables</h5>
+
+<p>修改 /etc/sysconfig/iptables 配置文件，并重启 iptables 服务
+a. 增加一个新链，专门处理访问敏感服务端口的数据包
+b. 在新链中，只接受受信任客户端 IP 地址的网络包
+c. 在新链中，其它其它客户端 IP 地址（如公司外网 IP 地址，其它服务器地址等）网络包被拒绝
+d. 访问敏感服务端口的网络包转为新创建的链来处理（处理方式为接受 -j ACCEPT ）</p>
+
+<h5>注意事项：</h5>
+
+<p>a. 修改重启 iptables 服务之前，本地多开几个SSH会话预先登陆服务器，以免 iptables 重启后，由于配置不当，造成服务器无法访问</p>
+
+<h5>配置举例：</h5>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[atyun@ays3 ~]$ sudo vi /etc/sysconfig/iptables
+</span><span class='line'>
+</span><span class='line'># Firewall configuration written by system-config-firewall
+</span><span class='line'># Manual customization of this file is not recommended.
+</span><span class='line'>*filter
+</span><span class='line'>:INPUT ACCEPT [0:0]
+</span><span class='line'>:FORWARD ACCEPT [0:0]
+</span><span class='line'>:OUTPUT ACCEPT [0:0]
+</span><span class='line'>
+</span><span class='line'># a. 创建一个新链，专门处理访问敏感服务端口的数据包
+</span><span class='line'>#input_intranet
+</span><span class='line'>-N input_intranet
+</span><span class='line'>
+</span><span class='line'># b. 在新链中，只接受受信任客户端 IP 地址的网络包
+</span><span class='line'>-A input_intranet -s 192.168.1.100 -j ACCEPT
+</span><span class='line'># c. 在新链中，其它客户端 IP 地址网络包被拒绝
+</span><span class='line'>-A input_intranet -j REJECT --reject-with icmp-host-prohibited
+</span><span class='line'>
+</span><span class='line'>-A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+</span><span class='line'>-A INPUT -p icmp -j ACCEPT
+</span><span class='line'>-A INPUT -i lo -j ACCEPT
+</span><span class='line'>
+</span><span class='line'># WEB 服务 90端口 不做限制
+</span><span class='line'>-A INPUT -m state --state NEW -m tcp -p tcp --dport 80 -j ACCEPT
+</span><span class='line'>
+</span><span class='line'># d. 访问敏感服务端口的网络包转为新创建的链来处理
+</span><span class='line'>-A INPUT -m state --state NEW -m tcp -p tcp --dport 22 -j input_intranet
+</span><span class='line'>-A INPUT -j REJECT --reject-with icmp-host-prohibited
+</span><span class='line'>-A FORWARD -j REJECT --reject-with icmp-host-prohibited
+</span><span class='line'>COMMIT</span></code></pre></td></tr></table></div></figure>
+
+
+<p>省去重启 iptabes 等操作。。。</p>
+
+<h5>检查 iptables 服务状况</h5>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[atyun@ays3 ~]$ sudo iptables -L -n -x -v
+</span><span class='line'>Chain INPUT (policy ACCEPT 0 packets, 0 bytes)
+</span><span class='line'>    pkts      bytes target     prot opt in     out     source               destination        
+</span><span class='line'>  402937 476407720 ACCEPT     all  --  *      *       0.0.0.0/0            0.0.0.0/0           state RELATED,ESTABLISHED
+</span><span class='line'>       5      265 ACCEPT     icmp --  *      *       0.0.0.0/0            0.0.0.0/0          
+</span><span class='line'>       0        0 ACCEPT     all  --  lo     *       0.0.0.0/0            0.0.0.0/0          
+</span><span class='line'>       0        0 input_intranet  tcp  --  *      *       0.0.0.0/0            0.0.0.0/0           state NEW tcp dpt:2144
+</span><span class='line'>      10      600 input_intranet  tcp  --  *      *       0.0.0.0/0            0.0.0.0/0           state NEW tcp dpt:22
+</span><span class='line'>      16    19200 REJECT     all  --  *      *       0.0.0.0/0            0.0.0.0/0           reject-with icmp-host-prohibited
+</span><span class='line'>
+</span><span class='line'>Chain FORWARD (policy ACCEPT 0 packets, 0 bytes)
+</span><span class='line'>    pkts      bytes target     prot opt in     out     source               destination        
+</span><span class='line'>       0        0 REJECT     all  --  *      *       0.0.0.0/0            0.0.0.0/0           reject-with icmp-host-prohibited
+</span><span class='line'>
+</span><span class='line'>Chain OUTPUT (policy ACCEPT 252777 packets, 13740803 bytes)
+</span><span class='line'>    pkts      bytes target     prot opt in     out     source               destination        
+</span><span class='line'>
+</span><span class='line'>Chain input_intranet (2 references)
+</span><span class='line'>    pkts      bytes target     prot opt in     out     source               destination        
+</span><span class='line'>       1       60 ACCEPT     all  --  *      *       192.168.1.111        0.0.0.0/0          
+</span><span class='line'>       9      540 REJECT     all  --  *      *       0.0.0.0/0            0.0.0.0/0           reject-with icmp-host-prohibited </span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Installing BigBlueButton]]></title>
@@ -3403,80 +3556,6 @@ I think you should use an
 <blockquote><p><img src="http://tech-blog.blogbin.info/images/2012-08-14-buying-domain-and-configuring-domain-for-githubs-octopress/missing_css.png"></p></blockquote>
 
 
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[申思维 @sg552sg552 meta ruby programming]]></title>
-    <link href="http://tech-blog.blogbin.info/blog/2012/08/14/shen-si-wei-at-sg552sg552-meta-ruby-programming/"/>
-    <updated>2012-08-14T12:47:00+08:00</updated>
-    <id>http://tech-blog.blogbin.info/blog/2012/08/14/shen-si-wei-at-sg552sg552-meta-ruby-programming</id>
-    <content type="html"><![CDATA[<p>申思维 @sg552sg552 非常热情，主动告知我 PPT 的下载地址，非常感谢！</p>
-
-<p>参阅：</p>
-
-<p>[北京][2012年08月11日] Ruby 活动公告+媒体资料+小结 » 社区 | Ruby China
-<a href="http://ruby-china.org/topics/4662">http://ruby-china.org/topics/4662</a></p>
-
-<p>PPT：meta programming ruby // Speaker Deck
-<a href="https://speakerdeck.com/u/sg552sg552/p/meta-programming-ruby">https://speakerdeck.com/u/sg552sg552/p/meta-programming-ruby</a></p>
-
-<p>MP3：<a href="http://vdisk.weibo.com/s/alUOz">http://vdisk.weibo.com/s/alUOz</a></p>
-
-<p>一些总结：</p>
-
-<!--more-->
-
-
-<h5>1. const_set 和 const_get 操作常量的用法</h5>
-
-<blockquote><p><img src="http://tech-blog.blogbin.info/images/2012-08-14-shen-si-wei-at-sg552sg552-meta-ruby-programming/core_methods.jpeg"></p></blockquote>
-
-
-<h5>2. 举例子说明：动态方法的好处，减少代码冗余</h5>
-
-<blockquote><p><img src="http://tech-blog.blogbin.info/images/2012-08-14-shen-si-wei-at-sg552sg552-meta-ruby-programming/refactoring.jpeg"></p></blockquote>
-
-
-<h5>3. %Q{} 语法使用，表示一行字符串</h5>
-
-<blockquote><p><img src="http://tech-blog.blogbin.info/images/2012-08-14-shen-si-wei-at-sg552sg552-meta-ruby-programming/basic_class_eval.jpeg"></p></blockquote>
-
-
-<h5>4. class_variables，class_variable_defined? 和 <em>get, </em>set 方法的使用</h5>
-
-<blockquote><p><img src="http://tech-blog.blogbin.info/images/2012-08-14-shen-si-wei-at-sg552sg552-meta-ruby-programming/basic_class_variables.jpeg"></p></blockquote>
-
-
-<h5>5. remove_const 和 const_set 对常量的动态操作</h5>
-
-<blockquote><p><img src="http://tech-blog.blogbin.info/images/2012-08-14-shen-si-wei-at-sg552sg552-meta-ruby-programming/substitude_class.jpeg"></p></blockquote>
-
-
-<p>想了半天才明白，Symbal 估计实现 Symbal#to_proc 方法：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Symbal</span>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">to_proc</span>
-</span><span class='line'>    <span class="no">Proc</span><span class="o">.</span><span class="n">new</span> <span class="p">{</span> <span class="o">|</span> <span class="n">x</span> <span class="o">|</span> <span class="n">x</span><span class="o">.</span><span class="n">send</span> <span class="nb">self</span> <span class="p">}</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h5>6. 适合迭代中，对每一个其中的元素做一次 Symbal 对象对应的方法调用。</h5>
-
-<blockquote><p><img src="http://tech-blog.blogbin.info/images/2012-08-14-shen-si-wei-at-sg552sg552-meta-ruby-programming/symbol_to_proc.jpeg"></p></blockquote>
-
-
-<h5>7. stub 方法实现测试中 Mock 的功能，估计 stub 方法实现是通过 Module#define_method 重新定义了方法，返回代码块执行的结果。</h5>
-
-<blockquote><p><img src="http://tech-blog.blogbin.info/images/2012-08-14-shen-si-wei-at-sg552sg552-meta-ruby-programming/symbol_to_proc.jpeg"></p></blockquote>
 
 ]]></content>
   </entry>
