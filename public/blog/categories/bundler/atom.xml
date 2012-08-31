@@ -4,7 +4,11 @@
   <title><![CDATA[Category: Bundler | Tech.Blogbin's Blog]]></title>
   <link href="http://tech-blog.blogbin.info/blog/categories/bundler/atom.xml" rel="self"/>
   <link href="http://tech-blog.blogbin.info/"/>
+<<<<<<< HEAD
+  <updated>2012-08-29T22:12:25+08:00</updated>
+=======
   <updated>2012-08-31T20:36:21+08:00</updated>
+>>>>>>> develop
   <id>http://tech-blog.blogbin.info/</id>
   <author>
     <name><![CDATA[Tech Blogbin ]]></name>
@@ -12,6 +16,84 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Monitoring rails app with the New Relic]]></title>
+    <link href="http://tech-blog.blogbin.info/blog/2012/08/29/monitoring-rails-app-with-the-new-relic/"/>
+    <updated>2012-08-29T22:01:00+08:00</updated>
+    <id>http://tech-blog.blogbin.info/blog/2012/08/29/monitoring-rails-app-with-the-new-relic</id>
+    <content type="html"><![CDATA[<p>尝试 New Relic 监控 Rails App 项目的运行情况。</p>
+
+<p>如果采用 Rails 3，安装 New Relic 非常简单，如果使用 Rails 2，比较繁琐一些。
+好在官方网站有相应的介绍，仔细阅读即可。</p>
+
+<!--more-->
+
+
+<h5>参阅</h5>
+
+<p>Ruby Agent installation - New Relic Documentation</p>
+
+<p><a href="https://newrelic.com/docs/ruby/ruby-agent-installation">https://newrelic.com/docs/ruby/ruby-agent-installation</a>
+```
+Installing the Gem
+We recommend installing the New Relic Ruby gem in order to have better control over versions and dependencies. However, the gem is not supported for Rails versions prior to 2.0. If you're using Rails 1.2.6 and earlier, install the plugin.</p>
+
+<p>Our gem is available on rubygems.org as newrelic_rpm:</p>
+
+<p> sudo gem install newrelic_rpm
+For Rails 3 and installations using Bundler, simply add our gem to the Gemfile:</p>
+
+<p>gem 'newrelic_rpm'
+For Rails versions 2.1 to 2.3 without Bundler, edit environment.rb and add to the initializer block:</p>
+
+<p>config.gem "newrelic_rpm"
+For Rails versions 2.0.*, edit environment.rb and add this statement after the initializer block:</p>
+
+<p>require "newrelic_rpm"
+```</p>
+
+<p>Ruby Agent installation - plugin - New Relic Documentation</p>
+
+<p><a href="https://newrelic.com/docs/ruby/ruby-agent-installation-plugin">https://newrelic.com/docs/ruby/ruby-agent-installation-plugin</a>
+```
+Installing the Plugin
+Note that we strongly encourage using the gem.
+The plugin should be installed from Github using the following commands.</p>
+
+<p>For Rails versions 2.*:</p>
+
+<p>ruby script/plugin install git://github.com/newrelic/rpm.git
+mv vendor/plugins/rpm vendor/plugins/newrelic_rpm</p>
+
+<p>This will export the plugin into your application's vendor/plugins directory.</p>
+
+<p>If you can't install the plugin directly from the git URL, you can clone the repository into the vendor/plugins directory.
+```
+I'm using Unicorn and I don't see any data - New Relic Documentation</p>
+
+<p><a href="https://newrelic.com/docs/troubleshooting/im-using-unicorn-and-i-dont-see-any-data">https://newrelic.com/docs/troubleshooting/im-using-unicorn-and-i-dont-see-any-data</a>
+```
+I'm using Unicorn and I don't see any data</p>
+
+<p>If you're using Unicorn with the agent, you should be using the preload_app truedirective in your Unicorn configuration or the agent may not finish starting up. (see http://unicorn.bogomips.org/Unicorn/Configurator.html#method-i-preload_app)</p>
+
+<p>If you don't want to use preload_app true, you can manually call our handler for forking web servers from an initializer file in config/initializers:</p>
+
+<h1>Ensure the agent is started using Unicorn</h1>
+
+<h1>This is needed when using Unicorn and preload_app is not set to true.</h1>
+
+<h1>See http://support.newrelic.com/kb/troubleshooting/unicorn-no-data</h1>
+
+<p>::NewRelic::Agent.after_fork(:force_reconnect => true) if defined? Unicorn
+```</p>
+
+<h5>监控效果如下图：</h5>
+
+<p><blockquote><p><img src="/images/2012-08-29-monitoring-rails-app-with-the-new-relic/rails_app.jpeg"></p></blockquote></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Using jcftang's octopress-relatedposts]]></title>
@@ -23,6 +105,9 @@
 <p>其实 Octopress 已经内置了 LSI 引擎，安装和配置 octopress-relatedposts 比较简单。</p>
 
 <p><blockquote><p>Firstly add this to your _config.yml file</p></p><p><p>lsi: true<br/>The create a file such as source/_includes/custom/asides/related.html with the following content</p></p><p><p>....</p></p><p><p>It is possible to style the list, but in the above I have chosen to keep the same style as the recent posts.</p></p><p><p>Finally, add the file to your default asides list in your _config.yml file</p></p><p><p>default_asides: [custom/asides/related.html, ...]</p></blockquote></p>
+
+<!--more-->
+
 
 <p>相关帖子效果如下图：
 <blockquote><p><img src="/images/2012-08-25-using-jcftangs-octopress-relatedposts/octopress-relatedposts.jpeg"></p></blockquote></p>

@@ -12,7 +12,13 @@
   <meta name="author" content="Tech Blogbin <tech.blogbin@gmail.com>">
 
   
+<<<<<<< HEAD
+  <meta name="description" content="需要在 Rails 返回 json 格式的内容。虽然 Ruby 或者 Rails 内置对对象转为 json 的支持。
+但对于自定义的 json 格式和内容。 推荐使用 DHH 开发的Gem： rails/jbuilder
+https://github.com/rails/jbuilder &hellip;">
+=======
   <meta name="description" content="Firebug 监控浏览器的网络请求，softwareishard 网站有很详细的介绍。 http://www.softwareishard.com/blog/firebug/introduction-to-firebug-net-panel/ http://www.softwareishard. &hellip;">
+>>>>>>> develop
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -83,6 +89,302 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+<<<<<<< HEAD
+      <h1 class="entry-title"><a href="/blog/2012/08/20/dhhs-json-jbuilder-at-rails/">Rails 返回 Json 格式的内容</a></h1>
+=======
+      <h1 class="entry-title"><a href="/blog/2012/08/17/softwareishards-introduction-to-firebug-net-panel/">Softwareishard's Introduction to Firebug Net Panel</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-17T23:06:00+08:00" pubdate data-updated="true">Aug 17<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/08/17/softwareishards-introduction-to-firebug-net-panel/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Firebug 监控浏览器的网络请求，softwareishard 网站有很详细的介绍。</p>
+
+<p><a href="http://www.softwareishard.com/blog/firebug/introduction-to-firebug-net-panel/">http://www.softwareishard.com/blog/firebug/introduction-to-firebug-net-panel/</a></p>
+
+<p><a href="http://www.softwareishard.com/blog/firebug/firebug-net-panel-timings/">http://www.softwareishard.com/blog/firebug/firebug-net-panel-timings/</a></p>
+
+<p>甚至比 Firebug 官方 Wiki <a href="http://getfirebug.com/wiki/index.php/Net_Panel">http://getfirebug.com/wiki/index.php/Net_Panel</a> 都要详细。</p>
+
+<p>特别留意一下 DomContentLoaded event 和 load event 代表的意思，其它都比较好理解。</p>
+
+<blockquote><p>DomContentLoaded event <br/>- time when DomContentLoad event was fired (since the beginning of the request, can be negative if the request has been started after the event)</p><p>load event <br/>- time when page load event was fired (since the beginning of the request, can be negative if the request has been started after the event)</p></blockquote>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/08/17/metaprogramming-ruby/">Ruby元编程 - 逸光 - 我信仰超越光的不是物质，是思维</a></h1>
+>>>>>>> develop
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-20T23:51:00+08:00" pubdate data-updated="true">Aug 20<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/08/20/dhhs-json-jbuilder-at-rails/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>需要在 Rails 返回 json 格式的内容。虽然 Ruby 或者 Rails 内置对对象转为 json 的支持。
+但对于自定义的 json 格式和内容。 推荐使用 DHH 开发的Gem：</p>
+
+<p>rails/jbuilder
+<a href="https://github.com/rails/jbuilder">https://github.com/rails/jbuilder</a></p>
+
+<p>RailsCasts 网站有一份教程，可以作为学习的补充
+320 Jbuilder - RailsCasts
+<a href="http://railscasts.com/episodes/320-jbuilder?view=asciicast">http://railscasts.com/episodes/320-jbuilder?view=asciicast</a></p>
+
+<p>其实之前已经使用 ails/jbuilder 返回 json 格式内容，但一段时间没用，结果又碰到同样问题。</p>
+
+<p>访问 url 时，系统后台报错：
+undefined local variable or method `json&#8217;</p>
+
+<p>结果发现，原来是 渲染的模版扩展名不小心写错了，正确的是 .json.jbuilder；
+而我不小心写成了 .json.builder（xml 格式渲染模版的扩展名）。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Started GET "/security/authorizations/lookup.json" for 127.0.0.1 at 2012-08-20 23:38:40 +0800
+</span><span class='line'>ActionView::Template::Error - undefined local variable or method `json' for #&lt;#&lt;Class:0x007fde54624320&gt;:0x007fde5461e6a0&gt;:
+</span><span class='line'>     /Users/blogbin/projects/workspaces/app_store/ruby/xbmc/app/views/security/authorizations/lookup.json.builder:2:in `_app_views_security_authorizations_lookup_json_builder___4549964192266964499_70296437709400'
+</span><span class='line'>     /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/actionpack-3.1.0/lib/action_view/template.rb:144:in `block in render'
+</span><span class='line'>     /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/activesupport-3.1.0/lib/active_support/notifications.rb:55:in `instrument'
+</span><span class='line'>     /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/actionpack-3.1.0/lib/action_view/template.rb:142:in `render'
+</span><span class='line'>     /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/actionpack-3.1.0/lib/action_view/renderer/template_renderer.rb:40:in `block (2 levels) in render_template'
+</span><span class='line'>     /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/actionpack-3.1.0/lib/action_view/renderer/abstract_renderer.rb:33:in `block in instrument'
+</span><span class='line'>     /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/activesupport-3.1.0/lib/active_support/notifications.rb:53:in `block in instrument'
+</span><span class='line'>     /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/activesupport-3.1.0/lib/active_support/notifications/instrumenter.rb:21:in `instrument'
+</span><span class='line'>     /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/activesupport-3.1.0/lib/active_support/notifications.rb:53:in `instrument'
+</span><span class='line'>     /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/08/18/sinaweibo-python-sdk/">Sinaweibo Python Sdk</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-18T20:57:00+08:00" pubdate data-updated="true">Aug 18<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/08/18/sinaweibo-python-sdk/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Python 客户端需要访问新浪微博 API，参照官方推荐的 Python SDK：</p>
+
+<p><a href="http://michaelliao.github.com/sinaweibopy/">http://michaelliao.github.com/sinaweibopy/d</a></p>
+
+<p>发现自己使用的 Python 版本为 2.4，不支持 if &#8230; then 同在一行的语法。调整举例：</p>
+
+<figure class='code'><figcaption><span>weibo.py </span><a href='https://github.com/blogbin/sinaweibopy/raw/9ea1bf949dbdf49153b50e9a2c787847d348fc9e/src/weibo.py'>link</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="c">#data.append(v.encode(&#39;utf-8&#39;) if isinstance(v, unicode) else v)</span>
+</span><span class='line'><span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="nb">unicode</span><span class="p">):</span>
+</span><span class='line'>    <span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">&#39;utf-8&#39;</span><span class="p">))</span>
+</span><span class='line'><span class="k">else</span><span class="p">:</span>
+</span><span class='line'>    <span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">v</span> <span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>在 GitHub 发起一个 Pull Request 请求：</p>
+
+<p><a href="https://github.com/michaelliao/sinaweibopy/pull/2">https://github.com/michaelliao/sinaweibopy/pull/2</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/08/18/gem-install-rmagick-on-apple-macos-x-mountain-lion-10-dot-8/">Gem Install RMagick on Apple MacOS X Mountain Lion 10.8</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-18T20:14:00+08:00" pubdate data-updated="true">Aug 18<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/08/18/gem-install-rmagick-on-apple-macos-x-mountain-lion-10-dot-8/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>最近升级了 Mountain Lion 10.8，结果发现使用 RMagick 的 Rails 项目无法正常启动，碉堡了！</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>blogbins-MacBook-Pro:xbmc blogbin$ rails server
+</span><span class='line'>:macosx
+</span><span class='line'>WARNING: Nokogiri was built against LibXML version 2.7.3, but has dynamically loaded 2.7.8
+</span><span class='line'>/Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `require': dlopen(/Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/rmagick-2.13.1/lib/RMagick2.bundle, 9): Library not loaded: /usr/lib/libltdl.7.dylib (LoadError)
+</span><span class='line'>  Referenced from: /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/rmagick-2.13.1/lib/RMagick2.bundle
+</span><span class='line'>  Reason: Incompatible library version: RMagick2.bundle requires version 10.0.0 or later, but libltdl.7.dylib provides version 5.0.0 - /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/rmagick-2.13.1/lib/RMagick2.bundle
+</span><span class='line'>     from /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `block in require'
+</span><span class='line'>     from /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:223:in `block in load_dependency'
+</span><span class='line'>     from /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:640:in `new_constants_in'
+</span><span class='line'>     from /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:223:in `load_dependency'
+</span><span class='line'>     from /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `require'
+</span><span class='line'>     from /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/rmagick-2.13.1/lib/rmagick.rb:11:in `&lt;top (required)&gt;'
+</span><span class='line'>     from /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/bundler-1.1.3/lib/bundler/runtime.rb:68:in `require'
+</span><span class='line'>     from /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/bundler-1.1.3/lib/bundler/runtime.rb:68:in `block (2 levels) in require'
+</span><span class='line'>     from /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/bundler-1.1.3/lib/bundler/runtime.rb:66:in `each'
+</span><span class='line'>     from /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/bundler-1.1.3/lib/bundler/runtime.rb:66:in `block in require'
+</span><span class='line'>     from /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/bundler-1.1.3/lib/bundler/runtime.rb:55:in `each'
+</span><span class='line'>     from /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/bundler-1.1.3/lib/bundler/runtime.rb:55:in `require'
+</span><span class='line'>     from /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/bundler-1.1.3/lib/bundler.rb:119:in `require'
+</span><span class='line'>     from /Users/blogbin/projects/workspaces/app_store/ruby/xbmc/config/application.rb:7:in `&lt;top (required)&gt;'
+</span><span class='line'>     from /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/railties-3.1.0/lib/rails/commands.rb:52:in `require'
+</span><span class='line'>     from /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/railties-3.1.0/lib/rails/commands.rb:52:in `block in &lt;top (required)&gt;'
+</span><span class='line'>     from /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/railties-3.1.0/lib/rails/commands.rb:49:in `tap'
+</span><span class='line'>     from /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/railties-3.1.0/lib/rails/commands.rb:49:in `&lt;top (required)&gt;'
+</span><span class='line'>     from script/rails:6:in `require'
+</span><span class='line'>     from script/rails:6:in `&lt;main&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<p>Google 搜索了不少帖子，大部分都只是解决一部分问题，又冒出新的问题
+最后终于找到一篇介绍完整的解决的办法。</p>
+
+<p><a href="http://coderwall.com/p/njrnzq">http://coderwall.com/p/njrnzq</a></p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2012/08/18/gem-install-rmagick-on-apple-macos-x-mountain-lion-10-dot-8/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -409,6 +711,7 @@ Hisea <a href="http://hisea.me/">http://hisea.me/</a></p>
 
     </article>
   
+<<<<<<< HEAD
   
     <article>
       
@@ -470,156 +773,8 @@ Hisea <a href="http://hisea.me/">http://hisea.me/</a></p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/08/14/buying-domain-and-configuring-domain-for-githubs-octopress/">购买个人域名以及为部署在 GitHub 的Octopress 配置个人域名</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-08-14T22:41:00+08:00" pubdate data-updated="true">Aug 14<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/08/14/buying-domain-and-configuring-domain-for-githubs-octopress/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>部署到 GitHub 的 Octopress 默认采用二级域名 ＋ 二级目录来访问，如：
-<a href="http://blogbin.github.com/tech-blogbin-blog" title="Tech.Blogbin'Blog at GitHub">http://blogbin.github.com/tech-blogbin-blog</a></p>
-
-<p>现计划启用个人独立二级域名直接访问，即：
-<a href="http://tech-blog.blogbin.info/" title="Tech.Blogbin'Blog">http://tech-blog.blogbin.info/</a></p>
-
-<p>一. 调整过程：</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2012/08/14/buying-domain-and-configuring-domain-for-githubs-octopress/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/08/14/shen-si-wei-at-sg552sg552-meta-ruby-programming/">申思维 @sg552sg552 Meta Ruby Programming</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-08-14T12:47:00+08:00" pubdate data-updated="true">Aug 14<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/08/14/shen-si-wei-at-sg552sg552-meta-ruby-programming/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>申思维 @sg552sg552 非常热情，主动告知我 PPT 的下载地址，非常感谢！</p>
-
-<p>参阅：</p>
-
-<p>[北京][2012年08月11日] Ruby 活动公告+媒体资料+小结 » 社区 | Ruby China
-<a href="http://ruby-china.org/topics/4662">http://ruby-china.org/topics/4662</a></p>
-
-<p>PPT：meta programming ruby // Speaker Deck
-<a href="https://speakerdeck.com/u/sg552sg552/p/meta-programming-ruby">https://speakerdeck.com/u/sg552sg552/p/meta-programming-ruby</a></p>
-
-<p>MP3：<a href="http://vdisk.weibo.com/s/alUOz">http://vdisk.weibo.com/s/alUOz</a></p>
-
-<p>一些总结：</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2012/08/14/shen-si-wei-at-sg552sg552-meta-ruby-programming/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/08/13/the-metaprogramming-charm-reflection/">元编程的魅力——反射机制 - 逸光 - (_2b || ! _2b).is_a? Question</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-08-13T21:20:00+08:00" pubdate data-updated="true">Aug 13<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/08/13/the-metaprogramming-charm-reflection/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>  近期在准备 MetaProgramming Ruby 元编程的培训。除了 MetaProgramming Ruby 元编程这本书之外，想参阅一下其它资源，
-作为培训 PPT 的补充。毕竟 MetaProgramming Ruby 元编程 虽然蕴含的知识量不小，但相比 Ruby 元编程本身，还是稍微有点薄。</p>
-
-<p><a href="http://www.slideshare.net/fullscreen/ihower/designing-ruby-apis/">元编程的魅力——反射机制 - 逸光 - (<em>2b || ! </em>2b).is_a? Question</a> 的读后感：</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2012/08/13/the-metaprogramming-charm-reflection/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
+=======
+>>>>>>> develop
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -641,7 +796,27 @@ Hisea <a href="http://hisea.me/">http://hisea.me/</a></p>
   <ul id="recent_posts">
     
       <li class="post">
+<<<<<<< HEAD
+        <a href="/blog/2012/08/29/monitoring-rails-app-with-the-new-relic/">Monitoring rails app with the New Relic</a>
+=======
         <a href="/blog/2012/08/31/installing-gitlab-on-ubuntu-server-12-04-amd64/">installing-gitlab-on-ubuntu-server-12-04-amd64</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/08/25/using-jcftangs-octopress-relatedposts/">Using jcftang's octopress-relatedposts</a>
+>>>>>>> develop
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/08/28/securing-centos-server-with-firewall/">Securing CentOS Server with firewall</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/08/27/installing-bigbluebutton/">Installing BigBlueButton</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/08/26/using-tokkonopapas-octopress-tagcloud/">Using tokkonopapa's octopress-tagcloud</a>
       </li>
     
       <li class="post">
@@ -664,22 +839,13 @@ Hisea <a href="http://hisea.me/">http://hisea.me/</a></p>
         <a href="/blog/2012/08/22/using-binarylogic-slash-settingslogic/">Using binarylogic/settingslogic</a>
       </li>
     
+<<<<<<< HEAD
       <li class="post">
         <a href="/blog/2012/08/22/monitoring-server-performance-with-new-relic/">Monitoring server performance with New Relic</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2012/08/20/dhhs-json-jbuilder-at-rails/">Rails 返回 json 格式的内容</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/08/18/sinaweibo-python-sdk/">sinaweibo python sdk</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/08/18/gem-install-rmagick-on-apple-macos-x-mountain-lion-10-dot-8/">Gem install RMagick on Apple MacOS X Mountain Lion 10.8</a>
-      </li>
-    
+=======
+>>>>>>> develop
   </ul>
 </section>
 <section>
@@ -690,11 +856,19 @@ Hisea <a href="http://hisea.me/">http://hisea.me/</a></p>
 </section>
 <section>
   <h1>Categories</h1>
+<<<<<<< HEAD
+    <ul id="category-list"><li><a href='/blog/categories/apple'>Apple (1)</a></li><li><a href='/blog/categories/bigbluebutton'>BigBlueButton (1)</a></li><li><a href='/blog/categories/binarylogic'>binarylogic (2)</a></li><li><a href='/blog/categories/bundle'>Bundle (5)</a></li><li><a href='/blog/categories/bundler'>Bundler (5)</a></li><li><a href='/blog/categories/centos'>CentOS (3)</a></li><li><a href='/blog/categories/configuration'>Configuration (1)</a></li><li><a href='/blog/categories/deployment'>Deployment (3)</a></li><li><a href='/blog/categories/dhh'>DHH (1)</a></li><li><a href='/blog/categories/domain'>Domain (1)</a></li><li><a href='/blog/categories/eznow'>Eznow (1)</a></li><li><a href='/blog/categories/firebug'>Firebug (1)</a></li><li><a href='/blog/categories/firefox'>Firefox (1)</a></li><li><a href='/blog/categories/firewall'>Firewall (1)</a></li><li><a href='/blog/categories/gem'>Gem (5)</a></li><li><a href='/blog/categories/gemfile'>Gemfile (5)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/git-flow'>git-flow (1)</a></li><li><a href='/blog/categories/github'>GitHub (4)</a></li><li><a href='/blog/categories/github'>Github (2)</a></li><li><a href='/blog/categories/heroku'>Heroku (1)</a></li><li><a href='/blog/categories/iftop'>iftop (1)</a></li><li><a href='/blog/categories/installation'>Installation (1)</a></li><li><a href='/blog/categories/jbuilder'>JBuilder (1)</a></li><li><a href='/blog/categories/json'>JSON (1)</a></li><li><a href='/blog/categories/macos-x'>MacOS X (1)</a></li><li><a href='/blog/categories/metaprogramming-ruby'>MetaProgramming Ruby (7)</a></li><li><a href='/blog/categories/mountain-lion-10-8'>Mountain Lion 10.8 (1)</a></li><li><a href='/blog/categories/neerajcse'>neerajcse (1)</a></li><li><a href='/blog/categories/net'>Net (1)</a></li><li><a href='/blog/categories/network'>Network (1)</a></li><li><a href='/blog/categories/new-relic'>New Relic (2)</a></li><li><a href='/blog/categories/octopress'>Octopress (6)</a></li><li><a href='/blog/categories/octopress-plugin'>Octopress Plugin (2)</a></li><li><a href='/blog/categories/octopress-calendar-aside'>octopress-calendar-aside (1)</a></li><li><a href='/blog/categories/octopress-calendar-tagcloud'>octopress-calendar-tagcloud (1)</a></li><li><a href='/blog/categories/python'>Python (1)</a></li><li><a href='/blog/categories/rails'>Rails (6)</a></li><li><a href='/blog/categories/redmine'>Redmine (1)</a></li><li><a href='/blog/categories/rmagick'>RMagick (1)</a></li><li><a href='/blog/categories/ror'>RoR (6)</a></li><li><a href='/blog/categories/ruby'>Ruby (16)</a></li><li><a href='/blog/categories/rubyonrails'>RubyOnRails (6)</a></li><li><a href='/blog/categories/security'>Security (1)</a></li><li><a href='/blog/categories/settingslogic'>Settingslogic (2)</a></li><li><a href='/blog/categories/sina-weibo-sdk'>Sina Weibo SDK (1)</a></li><li><a href='/blog/categories/sns'>SNS (1)</a></li><li><a href='/blog/categories/tokkonopapa'>tokkonopapa (1)</a></li><li><a href='/blog/categories/ubuntu'>Ubuntu (1)</a></li><li><a href='/blog/categories/yum'>yum (1)</a></li></ul>
+</section>
+<section>
+  <h1>Tag Cloud</h1>
+    <span id="tag-cloud"><a href='/blog/categories/apple' style='font-size: 103.75%'>Apple(1)</a> <a href='/blog/categories/bigbluebutton' style='font-size: 103.75%'>BigBlueButton(1)</a> <a href='/blog/categories/binarylogic' style='font-size: 107.5%'>binarylogic(2)</a> <a href='/blog/categories/bundle' style='font-size: 118.75%'>Bundle(5)</a> <a href='/blog/categories/bundler' style='font-size: 118.75%'>Bundler(5)</a> <a href='/blog/categories/centos' style='font-size: 111.25%'>CentOS(3)</a> <a href='/blog/categories/configuration' style='font-size: 103.75%'>Configuration(1)</a> <a href='/blog/categories/deployment' style='font-size: 111.25%'>Deployment(3)</a> <a href='/blog/categories/dhh' style='font-size: 103.75%'>DHH(1)</a> <a href='/blog/categories/domain' style='font-size: 103.75%'>Domain(1)</a> <a href='/blog/categories/eznow' style='font-size: 103.75%'>Eznow(1)</a> <a href='/blog/categories/firebug' style='font-size: 103.75%'>Firebug(1)</a> <a href='/blog/categories/firefox' style='font-size: 103.75%'>Firefox(1)</a> <a href='/blog/categories/firewall' style='font-size: 103.75%'>Firewall(1)</a> <a href='/blog/categories/gem' style='font-size: 118.75%'>Gem(5)</a> <a href='/blog/categories/gemfile' style='font-size: 118.75%'>Gemfile(5)</a> <a href='/blog/categories/git' style='font-size: 103.75%'>Git(1)</a> <a href='/blog/categories/git-flow' style='font-size: 103.75%'>git-flow(1)</a> <a href='/blog/categories/github' style='font-size: 115.0%'>GitHub(4)</a> <a href='/blog/categories/github' style='font-size: 107.5%'>Github(2)</a> <a href='/blog/categories/heroku' style='font-size: 103.75%'>Heroku(1)</a> <a href='/blog/categories/iftop' style='font-size: 103.75%'>iftop(1)</a> <a href='/blog/categories/installation' style='font-size: 103.75%'>Installation(1)</a> <a href='/blog/categories/jbuilder' style='font-size: 103.75%'>JBuilder(1)</a> <a href='/blog/categories/json' style='font-size: 103.75%'>JSON(1)</a> <a href='/blog/categories/macos-x' style='font-size: 103.75%'>MacOS X(1)</a> <a href='/blog/categories/metaprogramming-ruby' style='font-size: 126.25%'>MetaProgramming Ruby(7)</a> <a href='/blog/categories/mountain-lion-10-8' style='font-size: 103.75%'>Mountain Lion 10.8(1)</a> <a href='/blog/categories/neerajcse' style='font-size: 103.75%'>neerajcse(1)</a> <a href='/blog/categories/net' style='font-size: 103.75%'>Net(1)</a> <a href='/blog/categories/network' style='font-size: 103.75%'>Network(1)</a> <a href='/blog/categories/new-relic' style='font-size: 107.5%'>New Relic(2)</a> <a href='/blog/categories/octopress' style='font-size: 122.5%'>Octopress(6)</a> <a href='/blog/categories/octopress-plugin' style='font-size: 107.5%'>Octopress Plugin(2)</a> <a href='/blog/categories/octopress-calendar-aside' style='font-size: 103.75%'>octopress-calendar-aside(1)</a> <a href='/blog/categories/octopress-calendar-tagcloud' style='font-size: 103.75%'>octopress-calendar-tagcloud(1)</a> <a href='/blog/categories/python' style='font-size: 103.75%'>Python(1)</a> <a href='/blog/categories/rails' style='font-size: 122.5%'>Rails(6)</a> <a href='/blog/categories/redmine' style='font-size: 103.75%'>Redmine(1)</a> <a href='/blog/categories/rmagick' style='font-size: 103.75%'>RMagick(1)</a> <a href='/blog/categories/ror' style='font-size: 122.5%'>RoR(6)</a> <a href='/blog/categories/ruby' style='font-size: 160.0%'>Ruby(16)</a> <a href='/blog/categories/rubyonrails' style='font-size: 122.5%'>RubyOnRails(6)</a> <a href='/blog/categories/security' style='font-size: 103.75%'>Security(1)</a> <a href='/blog/categories/settingslogic' style='font-size: 107.5%'>Settingslogic(2)</a> <a href='/blog/categories/sina-weibo-sdk' style='font-size: 103.75%'>Sina Weibo SDK(1)</a> <a href='/blog/categories/sns' style='font-size: 103.75%'>SNS(1)</a> <a href='/blog/categories/tokkonopapa' style='font-size: 103.75%'>tokkonopapa(1)</a> <a href='/blog/categories/ubuntu' style='font-size: 103.75%'>Ubuntu(1)</a> <a href='/blog/categories/yum' style='font-size: 103.75%'>yum(1)</a> </span>
+=======
     <ul id="category-list"><li><a href='/blog/categories/apple'>Apple (1)</a></li><li><a href='/blog/categories/binarylogic'>binarylogic (2)</a></li><li><a href='/blog/categories/bundle'>Bundle (4)</a></li><li><a href='/blog/categories/bundler'>Bundler (4)</a></li><li><a href='/blog/categories/centos'>CentOS (2)</a></li><li><a href='/blog/categories/configuration'>Configuration (1)</a></li><li><a href='/blog/categories/deployment'>Deployment (3)</a></li><li><a href='/blog/categories/dhh'>DHH (1)</a></li><li><a href='/blog/categories/domain'>Domain (1)</a></li><li><a href='/blog/categories/eznow'>Eznow (1)</a></li><li><a href='/blog/categories/firebug'>Firebug (1)</a></li><li><a href='/blog/categories/firefox'>Firefox (1)</a></li><li><a href='/blog/categories/gem'>Gem (4)</a></li><li><a href='/blog/categories/gemfile'>Gemfile (4)</a></li><li><a href='/blog/categories/git'>Git (2)</a></li><li><a href='/blog/categories/git-flow'>git-flow (1)</a></li><li><a href='/blog/categories/github'>Github (1)</a></li><li><a href='/blog/categories/github'>GitHub (4)</a></li><li><a href='/blog/categories/gitlab'>Gitlab (1)</a></li><li><a href='/blog/categories/heroku'>Heroku (1)</a></li><li><a href='/blog/categories/iftop'>iftop (1)</a></li><li><a href='/blog/categories/installation'>Installation (1)</a></li><li><a href='/blog/categories/jbuilder'>JBuilder (1)</a></li><li><a href='/blog/categories/json'>JSON (1)</a></li><li><a href='/blog/categories/macos-x'>MacOS X (1)</a></li><li><a href='/blog/categories/metaprogramming-ruby'>MetaProgramming Ruby (7)</a></li><li><a href='/blog/categories/mountain-lion-10-8'>Mountain Lion 10.8 (1)</a></li><li><a href='/blog/categories/neerajcse'>neerajcse (1)</a></li><li><a href='/blog/categories/net'>Net (1)</a></li><li><a href='/blog/categories/network'>Network (1)</a></li><li><a href='/blog/categories/new-relic'>New Relic (1)</a></li><li><a href='/blog/categories/octopress'>Octopress (5)</a></li><li><a href='/blog/categories/octopress-plugin'>Octopress Plugin (1)</a></li><li><a href='/blog/categories/octopress-calendar-aside'>octopress-calendar-aside (1)</a></li><li><a href='/blog/categories/python'>Python (1)</a></li><li><a href='/blog/categories/rails'>Rails (5)</a></li><li><a href='/blog/categories/redmine'>Redmine (1)</a></li><li><a href='/blog/categories/rmagick'>RMagick (1)</a></li><li><a href='/blog/categories/ror'>RoR (5)</a></li><li><a href='/blog/categories/ruby'>Ruby (15)</a></li><li><a href='/blog/categories/rubyonrails'>RubyOnRails (5)</a></li><li><a href='/blog/categories/settingslogic'>Settingslogic (2)</a></li><li><a href='/blog/categories/sina-weibo-sdk'>Sina Weibo SDK (1)</a></li><li><a href='/blog/categories/sns'>SNS (1)</a></li><li><a href='/blog/categories/ubuntu-server-12-04-amd64'>Ubuntu Server 12.04 amd64 (1)</a></li><li><a href='/blog/categories/yum'>yum (1)</a></li></ul>
 </section>
 <section>
   <h1>Tag Cloud</h1>
     <span id="tag-cloud"><a href='/blog/categories/apple' style='font-size: 104.0%'>Apple(1)</a> <a href='/blog/categories/binarylogic' style='font-size: 108.0%'>binarylogic(2)</a> <a href='/blog/categories/bundle' style='font-size: 116.0%'>Bundle(4)</a> <a href='/blog/categories/bundler' style='font-size: 116.0%'>Bundler(4)</a> <a href='/blog/categories/centos' style='font-size: 108.0%'>CentOS(2)</a> <a href='/blog/categories/configuration' style='font-size: 104.0%'>Configuration(1)</a> <a href='/blog/categories/deployment' style='font-size: 112.0%'>Deployment(3)</a> <a href='/blog/categories/dhh' style='font-size: 104.0%'>DHH(1)</a> <a href='/blog/categories/domain' style='font-size: 104.0%'>Domain(1)</a> <a href='/blog/categories/eznow' style='font-size: 104.0%'>Eznow(1)</a> <a href='/blog/categories/firebug' style='font-size: 104.0%'>Firebug(1)</a> <a href='/blog/categories/firefox' style='font-size: 104.0%'>Firefox(1)</a> <a href='/blog/categories/gem' style='font-size: 116.0%'>Gem(4)</a> <a href='/blog/categories/gemfile' style='font-size: 116.0%'>Gemfile(4)</a> <a href='/blog/categories/git' style='font-size: 108.0%'>Git(2)</a> <a href='/blog/categories/git-flow' style='font-size: 104.0%'>git-flow(1)</a> <a href='/blog/categories/github' style='font-size: 104.0%'>Github(1)</a> <a href='/blog/categories/github' style='font-size: 116.0%'>GitHub(4)</a> <a href='/blog/categories/gitlab' style='font-size: 104.0%'>Gitlab(1)</a> <a href='/blog/categories/heroku' style='font-size: 104.0%'>Heroku(1)</a> <a href='/blog/categories/iftop' style='font-size: 104.0%'>iftop(1)</a> <a href='/blog/categories/installation' style='font-size: 104.0%'>Installation(1)</a> <a href='/blog/categories/jbuilder' style='font-size: 104.0%'>JBuilder(1)</a> <a href='/blog/categories/json' style='font-size: 104.0%'>JSON(1)</a> <a href='/blog/categories/macos-x' style='font-size: 104.0%'>MacOS X(1)</a> <a href='/blog/categories/metaprogramming-ruby' style='font-size: 128.0%'>MetaProgramming Ruby(7)</a> <a href='/blog/categories/mountain-lion-10-8' style='font-size: 104.0%'>Mountain Lion 10.8(1)</a> <a href='/blog/categories/neerajcse' style='font-size: 104.0%'>neerajcse(1)</a> <a href='/blog/categories/net' style='font-size: 104.0%'>Net(1)</a> <a href='/blog/categories/network' style='font-size: 104.0%'>Network(1)</a> <a href='/blog/categories/new-relic' style='font-size: 104.0%'>New Relic(1)</a> <a href='/blog/categories/octopress' style='font-size: 120.0%'>Octopress(5)</a> <a href='/blog/categories/octopress-plugin' style='font-size: 104.0%'>Octopress Plugin(1)</a> <a href='/blog/categories/octopress-calendar-aside' style='font-size: 104.0%'>octopress-calendar-aside(1)</a> <a href='/blog/categories/python' style='font-size: 104.0%'>Python(1)</a> <a href='/blog/categories/rails' style='font-size: 120.0%'>Rails(5)</a> <a href='/blog/categories/redmine' style='font-size: 104.0%'>Redmine(1)</a> <a href='/blog/categories/rmagick' style='font-size: 104.0%'>RMagick(1)</a> <a href='/blog/categories/ror' style='font-size: 120.0%'>RoR(5)</a> <a href='/blog/categories/ruby' style='font-size: 160.0%'>Ruby(15)</a> <a href='/blog/categories/rubyonrails' style='font-size: 120.0%'>RubyOnRails(5)</a> <a href='/blog/categories/settingslogic' style='font-size: 108.0%'>Settingslogic(2)</a> <a href='/blog/categories/sina-weibo-sdk' style='font-size: 104.0%'>Sina Weibo SDK(1)</a> <a href='/blog/categories/sns' style='font-size: 104.0%'>SNS(1)</a> <a href='/blog/categories/ubuntu-server-12-04-amd64' style='font-size: 104.0%'>Ubuntu Server 12.04 amd64(1)</a> <a href='/blog/categories/yum' style='font-size: 104.0%'>yum(1)</a> </span>
+>>>>>>> develop
 </section>
 
 <section>
@@ -844,8 +1018,22 @@ monthCalendar = function(id,year,month)
   var highlightArray = new Array();
   var hightlightLinks = new Array();
   
+<<<<<<< HEAD
+  highlightArray.push('08/29/2012');
+  hightlightLinks.push('/blog/2012/08/29/monitoring-rails-app-with-the-new-relic/');
+  
+  highlightArray.push('08/28/2012');
+  hightlightLinks.push('/blog/2012/08/28/securing-centos-server-with-firewall/');
+  
+  highlightArray.push('08/27/2012');
+  hightlightLinks.push('/blog/2012/08/27/installing-bigbluebutton/');
+  
+  highlightArray.push('08/26/2012');
+  hightlightLinks.push('/blog/2012/08/26/using-tokkonopapas-octopress-tagcloud/');
+=======
   highlightArray.push('08/31/2012');
   hightlightLinks.push('/blog/2012/08/31/installing-gitlab-on-ubuntu-server-12-04-amd64/');
+>>>>>>> develop
   
   highlightArray.push('08/25/2012');
   hightlightLinks.push('/blog/2012/08/25/using-jcftangs-octopress-relatedposts/');
@@ -864,6 +1052,8 @@ monthCalendar = function(id,year,month)
   
   highlightArray.push('08/22/2012');
   hightlightLinks.push('/blog/2012/08/22/monitoring-server-performance-with-new-relic/');
+<<<<<<< HEAD
+=======
   
   highlightArray.push('08/20/2012');
   hightlightLinks.push('/blog/2012/08/20/dhhs-json-jbuilder-at-rails/');
@@ -873,6 +1063,7 @@ monthCalendar = function(id,year,month)
   
   highlightArray.push('08/18/2012');
   hightlightLinks.push('/blog/2012/08/18/gem-install-rmagick-on-apple-macos-x-mountain-lion-10-dot-8/');
+>>>>>>> develop
   		
   var cal = new Calendar(month,year,highlightArray,hightlightLinks);
   cal.generateHTML(id);

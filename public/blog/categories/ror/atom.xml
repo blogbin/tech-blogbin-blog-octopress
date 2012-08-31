@@ -4,7 +4,11 @@
   <title><![CDATA[Category: RoR | Tech.Blogbin's Blog]]></title>
   <link href="http://tech-blog.blogbin.info/blog/categories/ror/atom.xml" rel="self"/>
   <link href="http://tech-blog.blogbin.info/"/>
+<<<<<<< HEAD
+  <updated>2012-08-29T22:12:25+08:00</updated>
+=======
   <updated>2012-08-31T20:36:21+08:00</updated>
+>>>>>>> develop
   <id>http://tech-blog.blogbin.info/</id>
   <author>
     <name><![CDATA[Tech Blogbin ]]></name>
@@ -12,6 +16,84 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Monitoring rails app with the New Relic]]></title>
+    <link href="http://tech-blog.blogbin.info/blog/2012/08/29/monitoring-rails-app-with-the-new-relic/"/>
+    <updated>2012-08-29T22:01:00+08:00</updated>
+    <id>http://tech-blog.blogbin.info/blog/2012/08/29/monitoring-rails-app-with-the-new-relic</id>
+    <content type="html"><![CDATA[<p>尝试 New Relic 监控 Rails App 项目的运行情况。</p>
+
+<p>如果采用 Rails 3，安装 New Relic 非常简单，如果使用 Rails 2，比较繁琐一些。
+好在官方网站有相应的介绍，仔细阅读即可。</p>
+
+<!--more-->
+
+
+<h5>参阅</h5>
+
+<p>Ruby Agent installation - New Relic Documentation</p>
+
+<p><a href="https://newrelic.com/docs/ruby/ruby-agent-installation">https://newrelic.com/docs/ruby/ruby-agent-installation</a>
+```
+Installing the Gem
+We recommend installing the New Relic Ruby gem in order to have better control over versions and dependencies. However, the gem is not supported for Rails versions prior to 2.0. If you're using Rails 1.2.6 and earlier, install the plugin.</p>
+
+<p>Our gem is available on rubygems.org as newrelic_rpm:</p>
+
+<p> sudo gem install newrelic_rpm
+For Rails 3 and installations using Bundler, simply add our gem to the Gemfile:</p>
+
+<p>gem 'newrelic_rpm'
+For Rails versions 2.1 to 2.3 without Bundler, edit environment.rb and add to the initializer block:</p>
+
+<p>config.gem "newrelic_rpm"
+For Rails versions 2.0.*, edit environment.rb and add this statement after the initializer block:</p>
+
+<p>require "newrelic_rpm"
+```</p>
+
+<p>Ruby Agent installation - plugin - New Relic Documentation</p>
+
+<p><a href="https://newrelic.com/docs/ruby/ruby-agent-installation-plugin">https://newrelic.com/docs/ruby/ruby-agent-installation-plugin</a>
+```
+Installing the Plugin
+Note that we strongly encourage using the gem.
+The plugin should be installed from Github using the following commands.</p>
+
+<p>For Rails versions 2.*:</p>
+
+<p>ruby script/plugin install git://github.com/newrelic/rpm.git
+mv vendor/plugins/rpm vendor/plugins/newrelic_rpm</p>
+
+<p>This will export the plugin into your application's vendor/plugins directory.</p>
+
+<p>If you can't install the plugin directly from the git URL, you can clone the repository into the vendor/plugins directory.
+```
+I'm using Unicorn and I don't see any data - New Relic Documentation</p>
+
+<p><a href="https://newrelic.com/docs/troubleshooting/im-using-unicorn-and-i-dont-see-any-data">https://newrelic.com/docs/troubleshooting/im-using-unicorn-and-i-dont-see-any-data</a>
+```
+I'm using Unicorn and I don't see any data</p>
+
+<p>If you're using Unicorn with the agent, you should be using the preload_app truedirective in your Unicorn configuration or the agent may not finish starting up. (see http://unicorn.bogomips.org/Unicorn/Configurator.html#method-i-preload_app)</p>
+
+<p>If you don't want to use preload_app true, you can manually call our handler for forking web servers from an initializer file in config/initializers:</p>
+
+<h1>Ensure the agent is started using Unicorn</h1>
+
+<h1>This is needed when using Unicorn and preload_app is not set to true.</h1>
+
+<h1>See http://support.newrelic.com/kb/troubleshooting/unicorn-no-data</h1>
+
+<p>::NewRelic::Agent.after_fork(:force_reconnect => true) if defined? Unicorn
+```</p>
+
+<h5>监控效果如下图：</h5>
+
+<p><blockquote><p><img src="/images/2012-08-29-monitoring-rails-app-with-the-new-relic/rails_app.jpeg"></p></blockquote></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Using jcftang's octopress-relatedposts]]></title>
@@ -23,6 +105,9 @@
 <p>其实 Octopress 已经内置了 LSI 引擎，安装和配置 octopress-relatedposts 比较简单。</p>
 
 <p><blockquote><p>Firstly add this to your _config.yml file</p></p><p><p>lsi: true<br/>The create a file such as source/_includes/custom/asides/related.html with the following content</p></p><p><p>....</p></p><p><p>It is possible to style the list, but in the above I have chosen to keep the same style as the recent posts.</p></p><p><p>Finally, add the file to your default asides list in your _config.yml file</p></p><p><p>default_asides: [custom/asides/related.html, ...]</p></blockquote></p>
+
+<!--more-->
+
 
 <p>相关帖子效果如下图：
 <blockquote><p><img src="/images/2012-08-25-using-jcftangs-octopress-relatedposts/octopress-relatedposts.jpeg"></p></blockquote></p>
@@ -201,112 +286,6 @@ WARNING: Nokogiri was built against LibXML version 2.7.3, but has dynamically lo
 
 
 <p><blockquote><p>Managed to fix it following these steps:</p></p><p><p>Installed XCode 4.4 and Command Line Tools<br/>Ran this in terminal:</p></p><p><p>sudo chown -R <user> /usr/local<br/>brew update<br/>brew tap homebrew/dupes<br/>brew install apple-gcc42</p></p><p><p>Installed XQuartz 2.7.2 (http://xquartz.macosforge.org/landing)</p></p><p><p>Fixed any errors reported by brew doctor<br/>Ran this in terminal:</p></p><p><p>gem uninstall rmagick<br/>brew uninstall imagemagick<br/>brew install --fresh imagemagick<br/>gem install rmagick</p></p><p><p>After this, RMagick worked flawlessly again!</p></blockquote></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Redmine 改进：新建问题发送邮件中显示完成时间和上传的附件信息]]></title>
-    <link href="http://tech-blog.blogbin.info/blog/2012/08/15/displaying-attachments-and-due-date-within-email-when-a-issue-is-created/"/>
-    <updated>2012-08-15T23:44:00+08:00</updated>
-    <id>http://tech-blog.blogbin.info/blog/2012/08/15/displaying-attachments-and-due-date-within-email-when-a-issue-is-created</id>
-    <content type="html"><![CDATA[<p>Redmine <a href="http://www.redmine.org/">http://www.redmine.org/</a> 的确是一款优秀的任务跟踪管理系统，是开源免费，而且是基于 RubyOnRails 来开发的 Web 系统，代码具有很强的学习的价值。</p>
-
-<p>很奇怪为何新建问题，系统自动发送的邮件没有显示要求完成时间和附件信息，而更新问题时发送的邮件却有两者信息。</p>
-
-<p>阅读代码后发现，Redmine 负责渲染新建问题自动发送的邮件的地方，没有显示要求完成时间和附件信息。</p>
-
-<p>要求完成时间比较好好处理，直接从 @issue.due_date 获得；</p>
-
-<p>但新建问题后，就触发 Observer 自动发邮件，此时上传过的附件还没保存入库，所以利用现有途径无法从 @issue 获得附件。</p>
-
-<p>尝试好几种方案，均不成功。最后考虑给 Issue 模型加一个实例变量临时保存附件信息。</p>
-
-<p>Redmine 版本基于 1.2.1</p>
-
-<p>与邮件正文内容显示相关的关键代码在 show_detail.rb 的 show_detail() 方法：</p>
-
-<p><a href="https://github.com/redmine/redmine/blob/master/app/helpers/issues_helper.rb">https://github.com/redmine/redmine/blob/master/app/helpers/issues_helper.rb</a></p>
-
-<p>具体调整如下：</p>
-
-<!--more-->
-
-
-<h5>1. 打开 Issue 类，添加新的实例变量 original_attachments，用于临时保存刚上传的附件</h5>
-
-<p>``` ruby
-class Issue &lt; ActiveRecord::Base</p>
-
-<p>  attr_accessor :original_attachments</p>
-
-<p>end
-```</p>
-
-<h5>2. 修改 IssuesController#create 方法</h5>
-
-<p>``` ruby issues_controller.rb
-def create</p>
-
-<pre><code>call_hook(:controller_issues_new_before_save, { :params =&gt; params, :issue =&gt; @issue })
-
-# 对 @issue.original_attachments 进行赋值
-@issue.original_attachments = params[:attachments]
-
-if @issue.save
-
-# ... 以下省略
-</code></pre>
-
-<p>  end
-```</p>
-
-<h5>3. 渲染邮件格式的地方补充显示要求完成时间和附件信息</h5>
-
-<p>``` ruby issue_add_text_html.rhtml
-&lt;%= l(:text_issue_added, :id => "##{@issue.id}", :author => h(@issue.author)) %></p>
-
-<p>&lt;%
-  # 显示完成时间信息
-  if @issue.due_date
-%></p>
-
-<ul>
-  <li><%= l(:text_journal_set_to, :label => l(:field_due_date), :value => format_date( @issue.due_date ) ) %> </li>
-</ul>
-
-
-<p>&lt;% end %></p>
-
-<p>&lt;%
-  # 显示附件信息
-  attachments = @issue.original_attachments
-  puts "attachments = #{attachments}"
-  if attachments &amp;&amp; attachments.is_a?(Hash)
-%></p>
-
-<pre><code>&lt;ul&gt;
-        &lt;%
-        attachments.each_value do |attachment|
-          file = attachment['file']
-          next unless file &amp;&amp; file.size &gt; 0
-        %&gt;
-            &lt;li&gt;&lt;%= l(:text_journal_added, :label =&gt; l(:label_attachment), :value =&gt; file.original_filename ) %&gt; &lt;/li&gt;
-    &lt;% end %&gt;
-&lt;/ul&gt;
-</code></pre>
-
-<p>&lt;% end %></p>
-
-<hr />
-
-
-<p>&lt;%= render :partial => "issue_text_html", :locals => { :issue => @issue, :issue_url => @issue_url } %></p>
-
-<p>```</p>
-
-<h5>4. 最终效果如图</h5>
-
-<p><blockquote><p><img src="/images/2012-08-15-displaying-attachments-and-due-date-within-email-when-a-issue-is-created/redmine_issue_add_email.png"></p></blockquote></p>
 ]]></content>
   </entry>
   

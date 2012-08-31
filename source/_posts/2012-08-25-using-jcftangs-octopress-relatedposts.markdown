@@ -36,6 +36,8 @@ Finally, add the file to your default asides list in your _config.yml file
 default_asides: [custom/asides/related.html, ...]
 {% endblockquote %}
 
+<!--more-->
+
 相关帖子效果如下图：
 {% blockquote %}
 {% img /images/2012-08-25-using-jcftangs-octopress-relatedposts/octopress-relatedposts.jpeg %}
