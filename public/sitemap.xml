@@ -102,7 +102,7 @@
     </url>
     <url>
         <loc>http://tech-blog.blogbin.info/blog/2012/08/23/using-git-flow/</loc>
-        <lastmod>2012-08-25T08:39:25+08:00</lastmod>
+        <lastmod>2012-08-31T19:53:44+08:00</lastmod>
     </url>
     <url>
         <loc>http://tech-blog.blogbin.info/blog/2012/08/24/installing-iftop-on-centos-6/</loc>
@@ -118,11 +118,17 @@
         <loc>
             http://tech-blog.blogbin.info/blog/2012/08/25/using-jcftangs-octopress-relatedposts/
         </loc>
-        <lastmod>2012-08-25T09:17:23+08:00</lastmod>
+        <lastmod>2012-08-31T19:53:44+08:00</lastmod>
+    </url>
+    <url>
+        <loc>
+            http://tech-blog.blogbin.info/blog/2012/08/31/installing-gitlab-on-ubuntu-server-12-04-amd64/
+        </loc>
+        <lastmod>2012-08-31T20:35:50+08:00</lastmod>
     </url>
     <url>
         <loc>http://tech-blog.blogbin.info/blog/archives/</loc>
-        <lastmod>2012-08-25T09:17:23+08:00</lastmod>
+        <lastmod>2012-08-31T20:35:50+08:00</lastmod>
     </url>
     <url>
         <loc>http://tech-blog.blogbin.info/categories/</loc>
@@ -130,7 +136,7 @@
     </url>
     <url>
         <loc>http://tech-blog.blogbin.info/</loc>
-        <lastmod>2012-08-25T09:17:23+08:00</lastmod>
+        <lastmod>2012-08-31T20:35:50+08:00</lastmod>
     </url>
     <url>
         <loc>http://tech-blog.blogbin.info/tags/</loc>
