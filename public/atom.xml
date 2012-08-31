@@ -4,11 +4,7 @@
   <title><![CDATA[Tech.Blogbin's Blog]]></title>
   <link href="http://tech-blog.blogbin.info/atom.xml" rel="self"/>
   <link href="http://tech-blog.blogbin.info/"/>
-<<<<<<< HEAD
-  <updated>2012-08-29T22:12:25+08:00</updated>
-=======
-  <updated>2012-08-31T20:36:21+08:00</updated>
->>>>>>> develop
+  <updated>2012-08-31T20:44:36+08:00</updated>
   <id>http://tech-blog.blogbin.info/</id>
   <author>
     <name><![CDATA[Tech Blogbin ]]></name>
@@ -18,13 +14,6 @@
 
   
   <entry>
-<<<<<<< HEAD
-    <title type="html"><![CDATA[Monitoring rails app with the New Relic]]></title>
-    <link href="http://tech-blog.blogbin.info/blog/2012/08/29/monitoring-rails-app-with-the-new-relic/"/>
-    <updated>2012-08-29T22:01:00+08:00</updated>
-    <id>http://tech-blog.blogbin.info/blog/2012/08/29/monitoring-rails-app-with-the-new-relic</id>
-    <content type="html"><![CDATA[<p>尝试 New Relic 监控 Rails App 项目的运行情况。</p>
-=======
     <title type="html"><![CDATA[installing-gitlab-on-ubuntu-server-12-04-amd64]]></title>
     <link href="http://tech-blog.blogbin.info/blog/2012/08/31/installing-gitlab-on-ubuntu-server-12-04-amd64/"/>
     <updated>2012-08-31T19:54:00+08:00</updated>
@@ -390,38 +379,11 @@ IptablesHowTo - Ubuntu中文</p>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Using jcftang's octopress-relatedposts]]></title>
-    <link href="http://tech-blog.blogbin.info/blog/2012/08/25/using-jcftangs-octopress-relatedposts/"/>
-    <updated>2012-08-25T08:33:00+08:00</updated>
-    <id>http://tech-blog.blogbin.info/blog/2012/08/25/using-jcftangs-octopress-relatedposts</id>
-    <content type="html"><![CDATA[<p>参阅 jcftang/octopress-relatedposts <a href="https://github.com/jcftang/octopress-relatedposts">https://github.com/jcftang/octopress-relatedposts</a></p>
-
-<p>其实 Octopress 已经内置了 LSI 引擎，安装和配置 octopress-relatedposts 比较简单。</p>
-
-<blockquote><p>Firstly add this to your _config.yml file</p><p>lsi: true<br/>The create a file such as source/_includes/custom/asides/related.html with the following content</p><p>&#8230;.</p><p>It is possible to style the list, but in the above I have chosen to keep the same style as the recent posts.</p><p>Finally, add the file to your default asides list in your _config.yml file</p><p>default_asides: [custom/asides/related.html, &#8230;]</p></blockquote>
-
-
-<p>相关帖子效果如下图：</p>
-
-<blockquote><p><img src="http://tech-blog.blogbin.info/images/2012-08-25-using-jcftangs-octopress-relatedposts/octopress-relatedposts.jpeg"></p></blockquote>
-
-
-<p>引入   source/_includes/custom/asides/related.html
-比较遗憾的时，启用 LSI 后，运行 rake generate 的时间延长了 10 倍左右。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Using neerajcse's octopress-calendar-aside]]></title>
-    <link href="http://tech-blog.blogbin.info/blog/2012/08/25/using-neerajcses-octopress-calendar-aside/"/>
-    <updated>2012-08-25T03:50:00+08:00</updated>
-    <id>http://tech-blog.blogbin.info/blog/2012/08/25/using-neerajcses-octopress-calendar-aside</id>
-    <content type="html"><![CDATA[<p>Octopress 提供按日历归类显示文章的第三方插件。</p>
-
-<p>参阅
-neerajcse/octopress-calendar-aside · GitHub
-<a href="https://github.com/neerajcse/octopress-calendar-aside">https://github.com/neerajcse/octopress-calendar-aside</a></p>
->>>>>>> develop
+    <title type="html"><![CDATA[Monitoring rails app with the New Relic]]></title>
+    <link href="http://tech-blog.blogbin.info/blog/2012/08/29/monitoring-rails-app-with-the-new-relic/"/>
+    <updated>2012-08-29T22:01:00+08:00</updated>
+    <id>http://tech-blog.blogbin.info/blog/2012/08/29/monitoring-rails-app-with-the-new-relic</id>
+    <content type="html"><![CDATA[<p>尝试 New Relic 监控 Rails App 项目的运行情况。</p>
 
 <p>如果采用 Rails 3，安装 New Relic 非常简单，如果使用 Rails 2，比较繁琐一些。
 好在官方网站有相应的介绍，仔细阅读即可。</p>
@@ -1798,149 +1760,4 @@ Hisea <a href="http://hisea.me/">http://hisea.me/</a></p>
 ]]></content>
   </entry>
   
-<<<<<<< HEAD
-  <entry>
-    <title type="html"><![CDATA[Redmine 改进：新建问题发送邮件中显示完成时间和上传的附件信息]]></title>
-    <link href="http://tech-blog.blogbin.info/blog/2012/08/15/displaying-attachments-and-due-date-within-email-when-a-issue-is-created/"/>
-    <updated>2012-08-15T23:44:00+08:00</updated>
-    <id>http://tech-blog.blogbin.info/blog/2012/08/15/displaying-attachments-and-due-date-within-email-when-a-issue-is-created</id>
-    <content type="html"><![CDATA[<p>Redmine <a href="http://www.redmine.org/">http://www.redmine.org/</a> 的确是一款优秀的任务跟踪管理系统，是开源免费，而且是基于 RubyOnRails 来开发的 Web 系统，代码具有很强的学习的价值。</p>
-
-<p>很奇怪为何新建问题，系统自动发送的邮件没有显示要求完成时间和附件信息，而更新问题时发送的邮件却有两者信息。</p>
-
-<p>阅读代码后发现，Redmine 负责渲染新建问题自动发送的邮件的地方，没有显示要求完成时间和附件信息。</p>
-
-<p>要求完成时间比较好好处理，直接从 @issue.due_date 获得；</p>
-
-<p>但新建问题后，就触发 Observer 自动发邮件，此时上传过的附件还没保存入库，所以利用现有途径无法从 @issue 获得附件。</p>
-
-<p>尝试好几种方案，均不成功。最后考虑给 Issue 模型加一个实例变量临时保存附件信息。</p>
-
-<p>Redmine 版本基于 1.2.1</p>
-
-<p>与邮件正文内容显示相关的关键代码在 show_detail.rb 的 show_detail() 方法：</p>
-
-<p><a href="https://github.com/redmine/redmine/blob/master/app/helpers/issues_helper.rb">https://github.com/redmine/redmine/blob/master/app/helpers/issues_helper.rb</a></p>
-
-<p>具体调整如下：</p>
-
-<!--more-->
-
-
-<h5>1. 打开 Issue 类，添加新的实例变量 original_attachments，用于临时保存刚上传的附件</h5>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Issue</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="kp">attr_accessor</span> <span class="ss">:original_attachments</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h5>2. 修改 IssuesController#create 方法</h5>
-
-<figure class='code'><figcaption><span>issues_controller.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">create</span>
-</span><span class='line'>    <span class="n">call_hook</span><span class="p">(</span><span class="ss">:controller_issues_new_before_save</span><span class="p">,</span> <span class="p">{</span> <span class="ss">:params</span> <span class="o">=&gt;</span> <span class="n">params</span><span class="p">,</span> <span class="ss">:issue</span> <span class="o">=&gt;</span> <span class="vi">@issue</span> <span class="p">})</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="c1"># 对 @issue.original_attachments 进行赋值</span>
-</span><span class='line'>    <span class="vi">@issue</span><span class="o">.</span><span class="n">original_attachments</span> <span class="o">=</span> <span class="n">params</span><span class="o">[</span><span class="ss">:attachments</span><span class="o">]</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">if</span> <span class="vi">@issue</span><span class="o">.</span><span class="n">save</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="c1"># ... 以下省略</span>
-</span><span class='line'>  <span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h5>3. 渲染邮件格式的地方补充显示要求完成时间和附件信息</h5>
-
-<figure class='code'><figcaption><span>issue_add_text_html.rhtml</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&lt;</span><span class="sx">%= l(:text_issue_added, :id =</span><span class="o">&gt;</span> <span class="s2">&quot;#</span><span class="si">#{</span><span class="vi">@issue</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="ss">:author</span> <span class="o">=&gt;</span> <span class="n">h</span><span class="p">(</span><span class="vi">@issue</span><span class="o">.</span><span class="n">author</span><span class="p">))</span> <span class="sx">%&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="sx">&lt;% </span>
-</span><span class='line'><span class="sx">  # 显示完成时间信息</span>
-</span><span class='line'><span class="sx">  if @issue.due_date </span>
-</span><span class='line'><span class="sx">%&gt;</span>
-</span><span class='line'><span class="o">&lt;</span><span class="n">ul</span><span class="o">&gt;</span>
-</span><span class='line'>  <span class="o">&lt;</span><span class="n">li</span><span class="o">&gt;&lt;</span><span class="sx">%= l(:text_journal_set_to, :label =</span><span class="o">&gt;</span> <span class="n">l</span><span class="p">(</span><span class="ss">:field_due_date</span><span class="p">),</span> <span class="ss">:value</span> <span class="o">=&gt;</span> <span class="n">format_date</span><span class="p">(</span> <span class="vi">@issue</span><span class="o">.</span><span class="n">due_date</span> <span class="p">)</span> <span class="p">)</span> <span class="sx">%&gt; &lt;/li&gt;</span>
-</span><span class='line'><span class="o">&lt;</span><span class="sr">/ul&gt;</span>
-</span><span class='line'><span class="sr">&lt;% end %&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="sr">&lt;%</span>
-</span><span class='line'><span class="sr">  # 显示附件信息</span>
-</span><span class='line'><span class="sr">  attachments = @issue.original_attachments</span>
-</span><span class='line'><span class="sr">  puts &quot;attachments = </span><span class="si">#{</span><span class="n">attachments</span><span class="si">}</span><span class="sr">&quot;</span>
-</span><span class='line'><span class="sr">  if attachments &amp;&amp; attachments.is_a?(Hash)</span>
-</span><span class='line'><span class="sr">%&gt;</span>
-</span><span class='line'><span class="sr">     &lt;ul&gt;</span>
-</span><span class='line'><span class="sr">         &lt;%</span>
-</span><span class='line'><span class="sr">         attachments.each_value do |attachment|</span>
-</span><span class='line'><span class="sr">           file = attachment[&#39;file&#39;]</span>
-</span><span class='line'><span class="sr">           next unless file &amp;&amp; file.size &gt; 0</span>
-</span><span class='line'><span class="sr">         %&gt;</span>
-</span><span class='line'><span class="sr">             &lt;li&gt;&lt;%= l(:text_journal_added, :label =&gt; l(:label_attachment), :value =&gt; file.original_filename ) %&gt; &lt;/</span><span class="n">li</span><span class="o">&gt;</span>
-</span><span class='line'>      <span class="o">&lt;</span><span class="sx">% end %&gt;</span>
-</span><span class='line'><span class="sx">     &lt;/ul&gt;</span>
-</span><span class='line'><span class="o">&lt;</span><span class="sx">% end %&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="sx">&lt;hr /&gt;</span>
-</span><span class='line'><span class="o">&lt;</span><span class="sx">%= render :partial =</span><span class="o">&gt;</span> <span class="s2">&quot;issue_text_html&quot;</span><span class="p">,</span> <span class="ss">:locals</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="ss">:issue</span> <span class="o">=&gt;</span> <span class="vi">@issue</span><span class="p">,</span> <span class="ss">:issue_url</span> <span class="o">=&gt;</span> <span class="vi">@issue_url</span> <span class="p">}</span> <span class="o">%&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h5>4. 最终效果如图</h5>
-
-<blockquote><p><img src="http://tech-blog.blogbin.info/images/2012-08-15-displaying-attachments-and-due-date-within-email-when-a-issue-is-created/redmine_issue_add_email.png"></p></blockquote>
-
-
-
-]]></content>
-  </entry>
-  
-=======
->>>>>>> develop
 </feed>

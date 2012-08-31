@@ -12,13 +12,7 @@
   <meta name="author" content="Tech Blogbin <tech.blogbin@gmail.com>">
 
   
-<<<<<<< HEAD
-  <meta name="description" content="部署到 GitHub 的 Octopress 默认采用二级域名 ＋ 二级目录来访问，如：
-http://blogbin.github.com/tech-blogbin-blog 现计划启用个人独立二级域名直接访问，即：
-http://tech-blog.blogbin.info/ 一. 调整过程： ">
-=======
-  <meta name="description" content="将 Octopress 部署到 GitHub，即同时支持 Hereku 和 GitHub。 2012 年 8 月 14 日更新：之前仅把 _deploy 目录的文件发布到 GitHub。但 Octopress&#8217;s source 等其它目录并没有在 GitHub 中管理。需要运行以下命令 &hellip;">
->>>>>>> develop
+  <meta name="description" content="Redmine http://www.redmine.org/ 的确是一款优秀的任务跟踪管理系统，是开源免费，而且是基于 RubyOnRails 来开发的 Web 系统，代码具有很强的学习的价值。 很奇怪为何新建问题，系统自动发送的邮件没有显示要求完成时间和附件信息， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -95,7 +89,67 @@ http://tech-blog.blogbin.info/ 一. 调整过程： ">
       
   <header>
     
-<<<<<<< HEAD
+      <h1 class="entry-title"><a href="/blog/2012/08/15/displaying-attachments-and-due-date-within-email-when-a-issue-is-created/">Redmine 改进：新建问题发送邮件中显示完成时间和上传的附件信息</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-15T23:44:00+08:00" pubdate data-updated="true">Aug 15<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/08/15/displaying-attachments-and-due-date-within-email-when-a-issue-is-created/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Redmine <a href="http://www.redmine.org/">http://www.redmine.org/</a> 的确是一款优秀的任务跟踪管理系统，是开源免费，而且是基于 RubyOnRails 来开发的 Web 系统，代码具有很强的学习的价值。</p>
+
+<p>很奇怪为何新建问题，系统自动发送的邮件没有显示要求完成时间和附件信息，而更新问题时发送的邮件却有两者信息。</p>
+
+<p>阅读代码后发现，Redmine 负责渲染新建问题自动发送的邮件的地方，没有显示要求完成时间和附件信息。</p>
+
+<p>要求完成时间比较好好处理，直接从 @issue.due_date 获得；</p>
+
+<p>但新建问题后，就触发 Observer 自动发邮件，此时上传过的附件还没保存入库，所以利用现有途径无法从 @issue 获得附件。</p>
+
+<p>尝试好几种方案，均不成功。最后考虑给 Issue 模型加一个实例变量临时保存附件信息。</p>
+
+<p>Redmine 版本基于 1.2.1</p>
+
+<p>与邮件正文内容显示相关的关键代码在 show_detail.rb 的 show_detail() 方法：</p>
+
+<p><a href="https://github.com/redmine/redmine/blob/master/app/helpers/issues_helper.rb">https://github.com/redmine/redmine/blob/master/app/helpers/issues_helper.rb</a></p>
+
+<p>具体调整如下：</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2012/08/15/displaying-attachments-and-due-date-within-email-when-a-issue-is-created/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2012/08/14/buying-domain-and-configuring-domain-for-githubs-octopress/">购买个人域名以及为部署在 GitHub 的Octopress 配置个人域名</a></h1>
     
     
@@ -246,8 +300,6 @@ http://tech-blog.blogbin.info/ 一. 调整过程： ">
       
   <header>
     
-=======
->>>>>>> develop
       <h1 class="entry-title"><a href="/blog/2012/08/11/deploying-to-github-pages/">Deploying to Github Pages</a></h1>
     
     
@@ -413,15 +465,11 @@ Google 搜索结果并不多，那是因为在 Octopress 很容易配置，几�
   <ul id="recent_posts">
     
       <li class="post">
-<<<<<<< HEAD
-        <a href="/blog/2012/08/29/monitoring-rails-app-with-the-new-relic/">Monitoring rails app with the New Relic</a>
-=======
         <a href="/blog/2012/08/31/installing-gitlab-on-ubuntu-server-12-04-amd64/">installing-gitlab-on-ubuntu-server-12-04-amd64</a>
       </li>
     
       <li class="post">
-        <a href="/blog/2012/08/25/using-jcftangs-octopress-relatedposts/">Using jcftang's octopress-relatedposts</a>
->>>>>>> develop
+        <a href="/blog/2012/08/29/monitoring-rails-app-with-the-new-relic/">Monitoring rails app with the New Relic</a>
       </li>
     
       <li class="post">
@@ -456,13 +504,6 @@ Google 搜索结果并不多，那是因为在 Octopress 很容易配置，几�
         <a href="/blog/2012/08/22/using-binarylogic-slash-settingslogic/">Using binarylogic/settingslogic</a>
       </li>
     
-<<<<<<< HEAD
-      <li class="post">
-        <a href="/blog/2012/08/22/monitoring-server-performance-with-new-relic/">Monitoring server performance with New Relic</a>
-      </li>
-    
-=======
->>>>>>> develop
   </ul>
 </section>
 <section>
@@ -473,19 +514,11 @@ Google 搜索结果并不多，那是因为在 Octopress 很容易配置，几�
 </section>
 <section>
   <h1>Categories</h1>
-<<<<<<< HEAD
-    <ul id="category-list"><li><a href='/blog/categories/apple'>Apple (1)</a></li><li><a href='/blog/categories/bigbluebutton'>BigBlueButton (1)</a></li><li><a href='/blog/categories/binarylogic'>binarylogic (2)</a></li><li><a href='/blog/categories/bundle'>Bundle (5)</a></li><li><a href='/blog/categories/bundler'>Bundler (5)</a></li><li><a href='/blog/categories/centos'>CentOS (3)</a></li><li><a href='/blog/categories/configuration'>Configuration (1)</a></li><li><a href='/blog/categories/deployment'>Deployment (3)</a></li><li><a href='/blog/categories/dhh'>DHH (1)</a></li><li><a href='/blog/categories/domain'>Domain (1)</a></li><li><a href='/blog/categories/eznow'>Eznow (1)</a></li><li><a href='/blog/categories/firebug'>Firebug (1)</a></li><li><a href='/blog/categories/firefox'>Firefox (1)</a></li><li><a href='/blog/categories/firewall'>Firewall (1)</a></li><li><a href='/blog/categories/gem'>Gem (5)</a></li><li><a href='/blog/categories/gemfile'>Gemfile (5)</a></li><li><a href='/blog/categories/git'>Git (1)</a></li><li><a href='/blog/categories/git-flow'>git-flow (1)</a></li><li><a href='/blog/categories/github'>GitHub (4)</a></li><li><a href='/blog/categories/github'>Github (2)</a></li><li><a href='/blog/categories/heroku'>Heroku (1)</a></li><li><a href='/blog/categories/iftop'>iftop (1)</a></li><li><a href='/blog/categories/installation'>Installation (1)</a></li><li><a href='/blog/categories/jbuilder'>JBuilder (1)</a></li><li><a href='/blog/categories/json'>JSON (1)</a></li><li><a href='/blog/categories/macos-x'>MacOS X (1)</a></li><li><a href='/blog/categories/metaprogramming-ruby'>MetaProgramming Ruby (7)</a></li><li><a href='/blog/categories/mountain-lion-10-8'>Mountain Lion 10.8 (1)</a></li><li><a href='/blog/categories/neerajcse'>neerajcse (1)</a></li><li><a href='/blog/categories/net'>Net (1)</a></li><li><a href='/blog/categories/network'>Network (1)</a></li><li><a href='/blog/categories/new-relic'>New Relic (2)</a></li><li><a href='/blog/categories/octopress'>Octopress (6)</a></li><li><a href='/blog/categories/octopress-plugin'>Octopress Plugin (2)</a></li><li><a href='/blog/categories/octopress-calendar-aside'>octopress-calendar-aside (1)</a></li><li><a href='/blog/categories/octopress-calendar-tagcloud'>octopress-calendar-tagcloud (1)</a></li><li><a href='/blog/categories/python'>Python (1)</a></li><li><a href='/blog/categories/rails'>Rails (6)</a></li><li><a href='/blog/categories/redmine'>Redmine (1)</a></li><li><a href='/blog/categories/rmagick'>RMagick (1)</a></li><li><a href='/blog/categories/ror'>RoR (6)</a></li><li><a href='/blog/categories/ruby'>Ruby (16)</a></li><li><a href='/blog/categories/rubyonrails'>RubyOnRails (6)</a></li><li><a href='/blog/categories/security'>Security (1)</a></li><li><a href='/blog/categories/settingslogic'>Settingslogic (2)</a></li><li><a href='/blog/categories/sina-weibo-sdk'>Sina Weibo SDK (1)</a></li><li><a href='/blog/categories/sns'>SNS (1)</a></li><li><a href='/blog/categories/tokkonopapa'>tokkonopapa (1)</a></li><li><a href='/blog/categories/ubuntu'>Ubuntu (1)</a></li><li><a href='/blog/categories/yum'>yum (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/apple'>Apple (1)</a></li><li><a href='/blog/categories/bigbluebutton'>BigBlueButton (1)</a></li><li><a href='/blog/categories/binarylogic'>binarylogic (2)</a></li><li><a href='/blog/categories/bundle'>Bundle (5)</a></li><li><a href='/blog/categories/bundler'>Bundler (5)</a></li><li><a href='/blog/categories/centos'>CentOS (3)</a></li><li><a href='/blog/categories/configuration'>Configuration (1)</a></li><li><a href='/blog/categories/deployment'>Deployment (3)</a></li><li><a href='/blog/categories/dhh'>DHH (1)</a></li><li><a href='/blog/categories/domain'>Domain (1)</a></li><li><a href='/blog/categories/eznow'>Eznow (1)</a></li><li><a href='/blog/categories/firebug'>Firebug (1)</a></li><li><a href='/blog/categories/firefox'>Firefox (1)</a></li><li><a href='/blog/categories/firewall'>Firewall (1)</a></li><li><a href='/blog/categories/gem'>Gem (5)</a></li><li><a href='/blog/categories/gemfile'>Gemfile (5)</a></li><li><a href='/blog/categories/git'>Git (2)</a></li><li><a href='/blog/categories/git-flow'>git-flow (1)</a></li><li><a href='/blog/categories/github'>Github (2)</a></li><li><a href='/blog/categories/github'>GitHub (4)</a></li><li><a href='/blog/categories/gitlab'>Gitlab (1)</a></li><li><a href='/blog/categories/heroku'>Heroku (1)</a></li><li><a href='/blog/categories/iftop'>iftop (1)</a></li><li><a href='/blog/categories/installation'>Installation (1)</a></li><li><a href='/blog/categories/jbuilder'>JBuilder (1)</a></li><li><a href='/blog/categories/json'>JSON (1)</a></li><li><a href='/blog/categories/macos-x'>MacOS X (1)</a></li><li><a href='/blog/categories/metaprogramming-ruby'>MetaProgramming Ruby (7)</a></li><li><a href='/blog/categories/mountain-lion-10-8'>Mountain Lion 10.8 (1)</a></li><li><a href='/blog/categories/neerajcse'>neerajcse (1)</a></li><li><a href='/blog/categories/net'>Net (1)</a></li><li><a href='/blog/categories/network'>Network (1)</a></li><li><a href='/blog/categories/new-relic'>New Relic (2)</a></li><li><a href='/blog/categories/octopress'>Octopress (6)</a></li><li><a href='/blog/categories/octopress-plugin'>Octopress Plugin (2)</a></li><li><a href='/blog/categories/octopress-calendar-aside'>octopress-calendar-aside (1)</a></li><li><a href='/blog/categories/octopress-calendar-tagcloud'>octopress-calendar-tagcloud (1)</a></li><li><a href='/blog/categories/python'>Python (1)</a></li><li><a href='/blog/categories/rails'>Rails (6)</a></li><li><a href='/blog/categories/redmine'>Redmine (1)</a></li><li><a href='/blog/categories/rmagick'>RMagick (1)</a></li><li><a href='/blog/categories/ror'>RoR (6)</a></li><li><a href='/blog/categories/ruby'>Ruby (16)</a></li><li><a href='/blog/categories/rubyonrails'>RubyOnRails (6)</a></li><li><a href='/blog/categories/security'>Security (1)</a></li><li><a href='/blog/categories/settingslogic'>Settingslogic (2)</a></li><li><a href='/blog/categories/sina-weibo-sdk'>Sina Weibo SDK (1)</a></li><li><a href='/blog/categories/sns'>SNS (1)</a></li><li><a href='/blog/categories/tokkonopapa'>tokkonopapa (1)</a></li><li><a href='/blog/categories/ubuntu'>Ubuntu (1)</a></li><li><a href='/blog/categories/ubuntu-server-12-04-amd64'>Ubuntu Server 12.04 amd64 (1)</a></li><li><a href='/blog/categories/yum'>yum (1)</a></li></ul>
 </section>
 <section>
   <h1>Tag Cloud</h1>
-    <span id="tag-cloud"><a href='/blog/categories/apple' style='font-size: 103.75%'>Apple(1)</a> <a href='/blog/categories/bigbluebutton' style='font-size: 103.75%'>BigBlueButton(1)</a> <a href='/blog/categories/binarylogic' style='font-size: 107.5%'>binarylogic(2)</a> <a href='/blog/categories/bundle' style='font-size: 118.75%'>Bundle(5)</a> <a href='/blog/categories/bundler' style='font-size: 118.75%'>Bundler(5)</a> <a href='/blog/categories/centos' style='font-size: 111.25%'>CentOS(3)</a> <a href='/blog/categories/configuration' style='font-size: 103.75%'>Configuration(1)</a> <a href='/blog/categories/deployment' style='font-size: 111.25%'>Deployment(3)</a> <a href='/blog/categories/dhh' style='font-size: 103.75%'>DHH(1)</a> <a href='/blog/categories/domain' style='font-size: 103.75%'>Domain(1)</a> <a href='/blog/categories/eznow' style='font-size: 103.75%'>Eznow(1)</a> <a href='/blog/categories/firebug' style='font-size: 103.75%'>Firebug(1)</a> <a href='/blog/categories/firefox' style='font-size: 103.75%'>Firefox(1)</a> <a href='/blog/categories/firewall' style='font-size: 103.75%'>Firewall(1)</a> <a href='/blog/categories/gem' style='font-size: 118.75%'>Gem(5)</a> <a href='/blog/categories/gemfile' style='font-size: 118.75%'>Gemfile(5)</a> <a href='/blog/categories/git' style='font-size: 103.75%'>Git(1)</a> <a href='/blog/categories/git-flow' style='font-size: 103.75%'>git-flow(1)</a> <a href='/blog/categories/github' style='font-size: 115.0%'>GitHub(4)</a> <a href='/blog/categories/github' style='font-size: 107.5%'>Github(2)</a> <a href='/blog/categories/heroku' style='font-size: 103.75%'>Heroku(1)</a> <a href='/blog/categories/iftop' style='font-size: 103.75%'>iftop(1)</a> <a href='/blog/categories/installation' style='font-size: 103.75%'>Installation(1)</a> <a href='/blog/categories/jbuilder' style='font-size: 103.75%'>JBuilder(1)</a> <a href='/blog/categories/json' style='font-size: 103.75%'>JSON(1)</a> <a href='/blog/categories/macos-x' style='font-size: 103.75%'>MacOS X(1)</a> <a href='/blog/categories/metaprogramming-ruby' style='font-size: 126.25%'>MetaProgramming Ruby(7)</a> <a href='/blog/categories/mountain-lion-10-8' style='font-size: 103.75%'>Mountain Lion 10.8(1)</a> <a href='/blog/categories/neerajcse' style='font-size: 103.75%'>neerajcse(1)</a> <a href='/blog/categories/net' style='font-size: 103.75%'>Net(1)</a> <a href='/blog/categories/network' style='font-size: 103.75%'>Network(1)</a> <a href='/blog/categories/new-relic' style='font-size: 107.5%'>New Relic(2)</a> <a href='/blog/categories/octopress' style='font-size: 122.5%'>Octopress(6)</a> <a href='/blog/categories/octopress-plugin' style='font-size: 107.5%'>Octopress Plugin(2)</a> <a href='/blog/categories/octopress-calendar-aside' style='font-size: 103.75%'>octopress-calendar-aside(1)</a> <a href='/blog/categories/octopress-calendar-tagcloud' style='font-size: 103.75%'>octopress-calendar-tagcloud(1)</a> <a href='/blog/categories/python' style='font-size: 103.75%'>Python(1)</a> <a href='/blog/categories/rails' style='font-size: 122.5%'>Rails(6)</a> <a href='/blog/categories/redmine' style='font-size: 103.75%'>Redmine(1)</a> <a href='/blog/categories/rmagick' style='font-size: 103.75%'>RMagick(1)</a> <a href='/blog/categories/ror' style='font-size: 122.5%'>RoR(6)</a> <a href='/blog/categories/ruby' style='font-size: 160.0%'>Ruby(16)</a> <a href='/blog/categories/rubyonrails' style='font-size: 122.5%'>RubyOnRails(6)</a> <a href='/blog/categories/security' style='font-size: 103.75%'>Security(1)</a> <a href='/blog/categories/settingslogic' style='font-size: 107.5%'>Settingslogic(2)</a> <a href='/blog/categories/sina-weibo-sdk' style='font-size: 103.75%'>Sina Weibo SDK(1)</a> <a href='/blog/categories/sns' style='font-size: 103.75%'>SNS(1)</a> <a href='/blog/categories/tokkonopapa' style='font-size: 103.75%'>tokkonopapa(1)</a> <a href='/blog/categories/ubuntu' style='font-size: 103.75%'>Ubuntu(1)</a> <a href='/blog/categories/yum' style='font-size: 103.75%'>yum(1)</a> </span>
-=======
-    <ul id="category-list"><li><a href='/blog/categories/apple'>Apple (1)</a></li><li><a href='/blog/categories/binarylogic'>binarylogic (2)</a></li><li><a href='/blog/categories/bundle'>Bundle (4)</a></li><li><a href='/blog/categories/bundler'>Bundler (4)</a></li><li><a href='/blog/categories/centos'>CentOS (2)</a></li><li><a href='/blog/categories/configuration'>Configuration (1)</a></li><li><a href='/blog/categories/deployment'>Deployment (3)</a></li><li><a href='/blog/categories/dhh'>DHH (1)</a></li><li><a href='/blog/categories/domain'>Domain (1)</a></li><li><a href='/blog/categories/eznow'>Eznow (1)</a></li><li><a href='/blog/categories/firebug'>Firebug (1)</a></li><li><a href='/blog/categories/firefox'>Firefox (1)</a></li><li><a href='/blog/categories/gem'>Gem (4)</a></li><li><a href='/blog/categories/gemfile'>Gemfile (4)</a></li><li><a href='/blog/categories/git'>Git (2)</a></li><li><a href='/blog/categories/git-flow'>git-flow (1)</a></li><li><a href='/blog/categories/github'>Github (1)</a></li><li><a href='/blog/categories/github'>GitHub (4)</a></li><li><a href='/blog/categories/gitlab'>Gitlab (1)</a></li><li><a href='/blog/categories/heroku'>Heroku (1)</a></li><li><a href='/blog/categories/iftop'>iftop (1)</a></li><li><a href='/blog/categories/installation'>Installation (1)</a></li><li><a href='/blog/categories/jbuilder'>JBuilder (1)</a></li><li><a href='/blog/categories/json'>JSON (1)</a></li><li><a href='/blog/categories/macos-x'>MacOS X (1)</a></li><li><a href='/blog/categories/metaprogramming-ruby'>MetaProgramming Ruby (7)</a></li><li><a href='/blog/categories/mountain-lion-10-8'>Mountain Lion 10.8 (1)</a></li><li><a href='/blog/categories/neerajcse'>neerajcse (1)</a></li><li><a href='/blog/categories/net'>Net (1)</a></li><li><a href='/blog/categories/network'>Network (1)</a></li><li><a href='/blog/categories/new-relic'>New Relic (1)</a></li><li><a href='/blog/categories/octopress'>Octopress (5)</a></li><li><a href='/blog/categories/octopress-plugin'>Octopress Plugin (1)</a></li><li><a href='/blog/categories/octopress-calendar-aside'>octopress-calendar-aside (1)</a></li><li><a href='/blog/categories/python'>Python (1)</a></li><li><a href='/blog/categories/rails'>Rails (5)</a></li><li><a href='/blog/categories/redmine'>Redmine (1)</a></li><li><a href='/blog/categories/rmagick'>RMagick (1)</a></li><li><a href='/blog/categories/ror'>RoR (5)</a></li><li><a href='/blog/categories/ruby'>Ruby (15)</a></li><li><a href='/blog/categories/rubyonrails'>RubyOnRails (5)</a></li><li><a href='/blog/categories/settingslogic'>Settingslogic (2)</a></li><li><a href='/blog/categories/sina-weibo-sdk'>Sina Weibo SDK (1)</a></li><li><a href='/blog/categories/sns'>SNS (1)</a></li><li><a href='/blog/categories/ubuntu-server-12-04-amd64'>Ubuntu Server 12.04 amd64 (1)</a></li><li><a href='/blog/categories/yum'>yum (1)</a></li></ul>
-</section>
-<section>
-  <h1>Tag Cloud</h1>
-    <span id="tag-cloud"><a href='/blog/categories/apple' style='font-size: 104.0%'>Apple(1)</a> <a href='/blog/categories/binarylogic' style='font-size: 108.0%'>binarylogic(2)</a> <a href='/blog/categories/bundle' style='font-size: 116.0%'>Bundle(4)</a> <a href='/blog/categories/bundler' style='font-size: 116.0%'>Bundler(4)</a> <a href='/blog/categories/centos' style='font-size: 108.0%'>CentOS(2)</a> <a href='/blog/categories/configuration' style='font-size: 104.0%'>Configuration(1)</a> <a href='/blog/categories/deployment' style='font-size: 112.0%'>Deployment(3)</a> <a href='/blog/categories/dhh' style='font-size: 104.0%'>DHH(1)</a> <a href='/blog/categories/domain' style='font-size: 104.0%'>Domain(1)</a> <a href='/blog/categories/eznow' style='font-size: 104.0%'>Eznow(1)</a> <a href='/blog/categories/firebug' style='font-size: 104.0%'>Firebug(1)</a> <a href='/blog/categories/firefox' style='font-size: 104.0%'>Firefox(1)</a> <a href='/blog/categories/gem' style='font-size: 116.0%'>Gem(4)</a> <a href='/blog/categories/gemfile' style='font-size: 116.0%'>Gemfile(4)</a> <a href='/blog/categories/git' style='font-size: 108.0%'>Git(2)</a> <a href='/blog/categories/git-flow' style='font-size: 104.0%'>git-flow(1)</a> <a href='/blog/categories/github' style='font-size: 104.0%'>Github(1)</a> <a href='/blog/categories/github' style='font-size: 116.0%'>GitHub(4)</a> <a href='/blog/categories/gitlab' style='font-size: 104.0%'>Gitlab(1)</a> <a href='/blog/categories/heroku' style='font-size: 104.0%'>Heroku(1)</a> <a href='/blog/categories/iftop' style='font-size: 104.0%'>iftop(1)</a> <a href='/blog/categories/installation' style='font-size: 104.0%'>Installation(1)</a> <a href='/blog/categories/jbuilder' style='font-size: 104.0%'>JBuilder(1)</a> <a href='/blog/categories/json' style='font-size: 104.0%'>JSON(1)</a> <a href='/blog/categories/macos-x' style='font-size: 104.0%'>MacOS X(1)</a> <a href='/blog/categories/metaprogramming-ruby' style='font-size: 128.0%'>MetaProgramming Ruby(7)</a> <a href='/blog/categories/mountain-lion-10-8' style='font-size: 104.0%'>Mountain Lion 10.8(1)</a> <a href='/blog/categories/neerajcse' style='font-size: 104.0%'>neerajcse(1)</a> <a href='/blog/categories/net' style='font-size: 104.0%'>Net(1)</a> <a href='/blog/categories/network' style='font-size: 104.0%'>Network(1)</a> <a href='/blog/categories/new-relic' style='font-size: 104.0%'>New Relic(1)</a> <a href='/blog/categories/octopress' style='font-size: 120.0%'>Octopress(5)</a> <a href='/blog/categories/octopress-plugin' style='font-size: 104.0%'>Octopress Plugin(1)</a> <a href='/blog/categories/octopress-calendar-aside' style='font-size: 104.0%'>octopress-calendar-aside(1)</a> <a href='/blog/categories/python' style='font-size: 104.0%'>Python(1)</a> <a href='/blog/categories/rails' style='font-size: 120.0%'>Rails(5)</a> <a href='/blog/categories/redmine' style='font-size: 104.0%'>Redmine(1)</a> <a href='/blog/categories/rmagick' style='font-size: 104.0%'>RMagick(1)</a> <a href='/blog/categories/ror' style='font-size: 120.0%'>RoR(5)</a> <a href='/blog/categories/ruby' style='font-size: 160.0%'>Ruby(15)</a> <a href='/blog/categories/rubyonrails' style='font-size: 120.0%'>RubyOnRails(5)</a> <a href='/blog/categories/settingslogic' style='font-size: 108.0%'>Settingslogic(2)</a> <a href='/blog/categories/sina-weibo-sdk' style='font-size: 104.0%'>Sina Weibo SDK(1)</a> <a href='/blog/categories/sns' style='font-size: 104.0%'>SNS(1)</a> <a href='/blog/categories/ubuntu-server-12-04-amd64' style='font-size: 104.0%'>Ubuntu Server 12.04 amd64(1)</a> <a href='/blog/categories/yum' style='font-size: 104.0%'>yum(1)</a> </span>
->>>>>>> develop
+    <span id="tag-cloud"><a href='/blog/categories/apple' style='font-size: 103.75%'>Apple(1)</a> <a href='/blog/categories/bigbluebutton' style='font-size: 103.75%'>BigBlueButton(1)</a> <a href='/blog/categories/binarylogic' style='font-size: 107.5%'>binarylogic(2)</a> <a href='/blog/categories/bundle' style='font-size: 118.75%'>Bundle(5)</a> <a href='/blog/categories/bundler' style='font-size: 118.75%'>Bundler(5)</a> <a href='/blog/categories/centos' style='font-size: 111.25%'>CentOS(3)</a> <a href='/blog/categories/configuration' style='font-size: 103.75%'>Configuration(1)</a> <a href='/blog/categories/deployment' style='font-size: 111.25%'>Deployment(3)</a> <a href='/blog/categories/dhh' style='font-size: 103.75%'>DHH(1)</a> <a href='/blog/categories/domain' style='font-size: 103.75%'>Domain(1)</a> <a href='/blog/categories/eznow' style='font-size: 103.75%'>Eznow(1)</a> <a href='/blog/categories/firebug' style='font-size: 103.75%'>Firebug(1)</a> <a href='/blog/categories/firefox' style='font-size: 103.75%'>Firefox(1)</a> <a href='/blog/categories/firewall' style='font-size: 103.75%'>Firewall(1)</a> <a href='/blog/categories/gem' style='font-size: 118.75%'>Gem(5)</a> <a href='/blog/categories/gemfile' style='font-size: 118.75%'>Gemfile(5)</a> <a href='/blog/categories/git' style='font-size: 107.5%'>Git(2)</a> <a href='/blog/categories/git-flow' style='font-size: 103.75%'>git-flow(1)</a> <a href='/blog/categories/github' style='font-size: 107.5%'>Github(2)</a> <a href='/blog/categories/github' style='font-size: 115.0%'>GitHub(4)</a> <a href='/blog/categories/gitlab' style='font-size: 103.75%'>Gitlab(1)</a> <a href='/blog/categories/heroku' style='font-size: 103.75%'>Heroku(1)</a> <a href='/blog/categories/iftop' style='font-size: 103.75%'>iftop(1)</a> <a href='/blog/categories/installation' style='font-size: 103.75%'>Installation(1)</a> <a href='/blog/categories/jbuilder' style='font-size: 103.75%'>JBuilder(1)</a> <a href='/blog/categories/json' style='font-size: 103.75%'>JSON(1)</a> <a href='/blog/categories/macos-x' style='font-size: 103.75%'>MacOS X(1)</a> <a href='/blog/categories/metaprogramming-ruby' style='font-size: 126.25%'>MetaProgramming Ruby(7)</a> <a href='/blog/categories/mountain-lion-10-8' style='font-size: 103.75%'>Mountain Lion 10.8(1)</a> <a href='/blog/categories/neerajcse' style='font-size: 103.75%'>neerajcse(1)</a> <a href='/blog/categories/net' style='font-size: 103.75%'>Net(1)</a> <a href='/blog/categories/network' style='font-size: 103.75%'>Network(1)</a> <a href='/blog/categories/new-relic' style='font-size: 107.5%'>New Relic(2)</a> <a href='/blog/categories/octopress' style='font-size: 122.5%'>Octopress(6)</a> <a href='/blog/categories/octopress-plugin' style='font-size: 107.5%'>Octopress Plugin(2)</a> <a href='/blog/categories/octopress-calendar-aside' style='font-size: 103.75%'>octopress-calendar-aside(1)</a> <a href='/blog/categories/octopress-calendar-tagcloud' style='font-size: 103.75%'>octopress-calendar-tagcloud(1)</a> <a href='/blog/categories/python' style='font-size: 103.75%'>Python(1)</a> <a href='/blog/categories/rails' style='font-size: 122.5%'>Rails(6)</a> <a href='/blog/categories/redmine' style='font-size: 103.75%'>Redmine(1)</a> <a href='/blog/categories/rmagick' style='font-size: 103.75%'>RMagick(1)</a> <a href='/blog/categories/ror' style='font-size: 122.5%'>RoR(6)</a> <a href='/blog/categories/ruby' style='font-size: 160.0%'>Ruby(16)</a> <a href='/blog/categories/rubyonrails' style='font-size: 122.5%'>RubyOnRails(6)</a> <a href='/blog/categories/security' style='font-size: 103.75%'>Security(1)</a> <a href='/blog/categories/settingslogic' style='font-size: 107.5%'>Settingslogic(2)</a> <a href='/blog/categories/sina-weibo-sdk' style='font-size: 103.75%'>Sina Weibo SDK(1)</a> <a href='/blog/categories/sns' style='font-size: 103.75%'>SNS(1)</a> <a href='/blog/categories/tokkonopapa' style='font-size: 103.75%'>tokkonopapa(1)</a> <a href='/blog/categories/ubuntu' style='font-size: 103.75%'>Ubuntu(1)</a> <a href='/blog/categories/ubuntu-server-12-04-amd64' style='font-size: 103.75%'>Ubuntu Server 12.04 amd64(1)</a> <a href='/blog/categories/yum' style='font-size: 103.75%'>yum(1)</a> </span>
 </section>
 
 <section>
@@ -635,7 +668,9 @@ monthCalendar = function(id,year,month)
   var highlightArray = new Array();
   var hightlightLinks = new Array();
   
-<<<<<<< HEAD
+  highlightArray.push('08/31/2012');
+  hightlightLinks.push('/blog/2012/08/31/installing-gitlab-on-ubuntu-server-12-04-amd64/');
+  
   highlightArray.push('08/29/2012');
   hightlightLinks.push('/blog/2012/08/29/monitoring-rails-app-with-the-new-relic/');
   
@@ -647,10 +682,6 @@ monthCalendar = function(id,year,month)
   
   highlightArray.push('08/26/2012');
   hightlightLinks.push('/blog/2012/08/26/using-tokkonopapas-octopress-tagcloud/');
-=======
-  highlightArray.push('08/31/2012');
-  hightlightLinks.push('/blog/2012/08/31/installing-gitlab-on-ubuntu-server-12-04-amd64/');
->>>>>>> develop
   
   highlightArray.push('08/25/2012');
   hightlightLinks.push('/blog/2012/08/25/using-jcftangs-octopress-relatedposts/');
@@ -666,21 +697,6 @@ monthCalendar = function(id,year,month)
   
   highlightArray.push('08/22/2012');
   hightlightLinks.push('/blog/2012/08/22/using-binarylogic-slash-settingslogic/');
-  
-  highlightArray.push('08/22/2012');
-  hightlightLinks.push('/blog/2012/08/22/monitoring-server-performance-with-new-relic/');
-<<<<<<< HEAD
-=======
-  
-  highlightArray.push('08/20/2012');
-  hightlightLinks.push('/blog/2012/08/20/dhhs-json-jbuilder-at-rails/');
-  
-  highlightArray.push('08/18/2012');
-  hightlightLinks.push('/blog/2012/08/18/sinaweibo-python-sdk/');
-  
-  highlightArray.push('08/18/2012');
-  hightlightLinks.push('/blog/2012/08/18/gem-install-rmagick-on-apple-macos-x-mountain-lion-10-dot-8/');
->>>>>>> develop
   		
   var cal = new Calendar(month,year,highlightArray,hightlightLinks);
   cal.generateHTML(id);
