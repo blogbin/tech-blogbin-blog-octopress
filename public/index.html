@@ -12,8 +12,9 @@
   <meta name="author" content="Tech Blogbin <tech.blogbin@gmail.com>">
 
   
-  <meta name="description" content="Gitlab 是开源免费的 Git 仓库管理系统，可以作为 GitHub 本地小型的简化版本。 支持 Web 化管理 Git 项目，管理用户和 SSH-KEY，提供对 Git 项目的文件浏览，提交浏览，文件比较和代码评审，
-并提供一定程度的 Wiki 和 Issue 问题跟踪功能。 感觉 Git &hellip;">
+  <meta name="description" content="Bitbucket https://bitbucket.org/
+是免费存放私人 Git 仓库的一个 GitHub 之外很好的选择。不限空间，不限项目。即使免费，也可以创建多个团队协助开发，
+限制是每个团队人数不能超过 5 人。 是我提交／备份非公开项目的好地方。 Tech-blog 这个 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -84,6 +85,72 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/08/31/using-bitbucket/">Using Bitbucket</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-31T22:41:00+08:00" pubdate data-updated="true">Aug 31<span>st</span>, 2012</time>
+        
+         | <a href="/blog/2012/08/31/using-bitbucket/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Bitbucket <a href="https://bitbucket.org/">https://bitbucket.org/</a>
+是免费存放私人 Git 仓库的一个 GitHub 之外很好的选择。不限空间，不限项目。即使免费，也可以创建多个团队协助开发，
+限制是每个团队人数不能超过 5 人。</p>
+
+<p>是我提交／备份非公开项目的好地方。</p>
+
+<p>Tech-blog 这个 Octopress 博客，已经部署／提交在多个 SaaS，故写一个 shell 脚本减轻工作量：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#! /bin/bash
+</span><span class='line'>git push
+</span><span class='line'>
+</span><span class='line'>git push local master
+</span><span class='line'>
+</span><span class='line'>git push heroku master
+</span><span class='line'>
+</span><span class='line'>git push bitbucket master
+</span><span class='line'>
+</span><span class='line'>rake deploy</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -696,98 +763,6 @@ neerajcse/octopress-calendar-aside · GitHub
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/08/22/using-binarylogic-slash-settingslogic/">Using Binarylogic/settingslogic</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-08-22T22:00:00+08:00" pubdate data-updated="true">Aug 22<span>nd</span>, 2012</time>
-        
-         | <a href="/blog/2012/08/22/using-binarylogic-slash-settingslogic/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Rails 项目中有一些全局配置信息需要保存在文件中，采用 binarylogic/settingslogic 来管理这些配置信息：</p>
-
-<p>参阅：</p>
-
-<p>binarylogic/settingslogic <a href="https://github.com/binarylogic/settingslogic">https://github.com/binarylogic/settingslogic</a></p>
-
-<p>介紹 Settingslogic | Beryllium Work <a href="http://blog.berylliumwork.com/2012/02/settingslogic.html">http://blog.berylliumwork.com/2012/02/settingslogic.html</a></p>
-
-<p>假设 config 有配置文件：</p>
-
-<figure class='code'><figcaption><span>settings.yml</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">default</span><span class="p">:</span> <span class="o">*</span><span class="n">default</span>
-</span><span class='line'>  <span class="n">server_url</span><span class="p">:</span>
-</span><span class='line'>    <span class="n">check_sensitive_data</span><span class="p">:</span> <span class="s2">&quot;http://localhst:3000/bad_word_checker/check.json&quot;</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">development</span><span class="p">:</span>
-</span><span class='line'>  <span class="o">&lt;&lt;</span><span class="p">:</span> <span class="o">*</span><span class="n">default</span>
-</span><span class='line'>  <span class="n">server_url</span><span class="p">:</span>
-</span><span class='line'>    <span class="n">check_sensitive_data</span><span class="p">:</span> <span class="s2">&quot;http://localhst:3001/bad_word_checker/check.json&quot;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nb">test</span><span class="p">:</span>
-</span><span class='line'>  <span class="o">&lt;&lt;</span><span class="p">:</span> <span class="o">*</span><span class="n">default</span>
-</span><span class='line'>  <span class="n">server_url</span><span class="p">:</span>
-</span><span class='line'>    <span class="n">check_sensitive_data</span><span class="p">:</span> <span class="s2">&quot;http://localhst:3002/bad_word_checker/check.json&quot;</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">production</span><span class="p">:</span>
-</span><span class='line'>  <span class="o">&lt;&lt;</span><span class="p">:</span> <span class="o">*</span><span class="n">default</span>
-</span><span class='line'>  <span class="n">server_url</span><span class="p">:</span>
-</span><span class='line'>    <span class="n">check_sensitive_data</span><span class="p">:</span> <span class="s2">&quot;http://localhst:3003/bad_word_checker/check.json&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2012/08/22/using-binarylogic-slash-settingslogic/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -805,6 +780,10 @@ neerajcse/octopress-calendar-aside · GitHub
 <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2012/08/31/using-bitbucket/">Using Bitbucket</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2012/08/31/installing-gitlab-on-ubuntu-server-12-04-amd64/">installing-gitlab-on-ubuntu-server-12-04-amd64</a>
@@ -842,10 +821,6 @@ neerajcse/octopress-calendar-aside · GitHub
         <a href="/blog/2012/08/23/using-git-flow/">用 git-flow 进行分支操作</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2012/08/22/using-binarylogic-slash-settingslogic/">Using binarylogic/settingslogic</a>
-      </li>
-    
   </ul>
 </section>
 <section>
@@ -856,11 +831,11 @@ neerajcse/octopress-calendar-aside · GitHub
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/apple'>Apple (1)</a></li><li><a href='/blog/categories/bigbluebutton'>BigBlueButton (1)</a></li><li><a href='/blog/categories/binarylogic'>binarylogic (2)</a></li><li><a href='/blog/categories/bundle'>Bundle (5)</a></li><li><a href='/blog/categories/bundler'>Bundler (5)</a></li><li><a href='/blog/categories/centos'>CentOS (3)</a></li><li><a href='/blog/categories/configuration'>Configuration (1)</a></li><li><a href='/blog/categories/deployment'>Deployment (3)</a></li><li><a href='/blog/categories/dhh'>DHH (1)</a></li><li><a href='/blog/categories/domain'>Domain (1)</a></li><li><a href='/blog/categories/eznow'>Eznow (1)</a></li><li><a href='/blog/categories/firebug'>Firebug (1)</a></li><li><a href='/blog/categories/firefox'>Firefox (1)</a></li><li><a href='/blog/categories/firewall'>Firewall (1)</a></li><li><a href='/blog/categories/gem'>Gem (5)</a></li><li><a href='/blog/categories/gemfile'>Gemfile (5)</a></li><li><a href='/blog/categories/git'>Git (2)</a></li><li><a href='/blog/categories/git-flow'>git-flow (1)</a></li><li><a href='/blog/categories/github'>Github (2)</a></li><li><a href='/blog/categories/github'>GitHub (4)</a></li><li><a href='/blog/categories/gitlab'>Gitlab (1)</a></li><li><a href='/blog/categories/heroku'>Heroku (1)</a></li><li><a href='/blog/categories/iftop'>iftop (1)</a></li><li><a href='/blog/categories/installation'>Installation (1)</a></li><li><a href='/blog/categories/jbuilder'>JBuilder (1)</a></li><li><a href='/blog/categories/json'>JSON (1)</a></li><li><a href='/blog/categories/macos-x'>MacOS X (1)</a></li><li><a href='/blog/categories/metaprogramming-ruby'>MetaProgramming Ruby (7)</a></li><li><a href='/blog/categories/mountain-lion-10-8'>Mountain Lion 10.8 (1)</a></li><li><a href='/blog/categories/neerajcse'>neerajcse (1)</a></li><li><a href='/blog/categories/net'>Net (1)</a></li><li><a href='/blog/categories/network'>Network (1)</a></li><li><a href='/blog/categories/new-relic'>New Relic (2)</a></li><li><a href='/blog/categories/octopress'>Octopress (6)</a></li><li><a href='/blog/categories/octopress-plugin'>Octopress Plugin (2)</a></li><li><a href='/blog/categories/octopress-calendar-aside'>octopress-calendar-aside (1)</a></li><li><a href='/blog/categories/octopress-calendar-tagcloud'>octopress-calendar-tagcloud (1)</a></li><li><a href='/blog/categories/python'>Python (1)</a></li><li><a href='/blog/categories/rails'>Rails (6)</a></li><li><a href='/blog/categories/redmine'>Redmine (1)</a></li><li><a href='/blog/categories/rmagick'>RMagick (1)</a></li><li><a href='/blog/categories/ror'>RoR (6)</a></li><li><a href='/blog/categories/ruby'>Ruby (16)</a></li><li><a href='/blog/categories/rubyonrails'>RubyOnRails (6)</a></li><li><a href='/blog/categories/security'>Security (1)</a></li><li><a href='/blog/categories/settingslogic'>Settingslogic (2)</a></li><li><a href='/blog/categories/sina-weibo-sdk'>Sina Weibo SDK (1)</a></li><li><a href='/blog/categories/sns'>SNS (1)</a></li><li><a href='/blog/categories/tokkonopapa'>tokkonopapa (1)</a></li><li><a href='/blog/categories/ubuntu'>Ubuntu (1)</a></li><li><a href='/blog/categories/ubuntu-server-12-04-amd64'>Ubuntu Server 12.04 amd64 (1)</a></li><li><a href='/blog/categories/yum'>yum (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/apple'>Apple (1)</a></li><li><a href='/blog/categories/bigbluebutton'>BigBlueButton (1)</a></li><li><a href='/blog/categories/binarylogic'>binarylogic (2)</a></li><li><a href='/blog/categories/bitbucket'>Bitbucket (1)</a></li><li><a href='/blog/categories/bundle'>Bundle (5)</a></li><li><a href='/blog/categories/bundler'>Bundler (5)</a></li><li><a href='/blog/categories/centos'>CentOS (3)</a></li><li><a href='/blog/categories/configuration'>Configuration (1)</a></li><li><a href='/blog/categories/deployment'>Deployment (3)</a></li><li><a href='/blog/categories/dhh'>DHH (1)</a></li><li><a href='/blog/categories/domain'>Domain (1)</a></li><li><a href='/blog/categories/eznow'>Eznow (1)</a></li><li><a href='/blog/categories/firebug'>Firebug (1)</a></li><li><a href='/blog/categories/firefox'>Firefox (1)</a></li><li><a href='/blog/categories/firewall'>Firewall (1)</a></li><li><a href='/blog/categories/gem'>Gem (5)</a></li><li><a href='/blog/categories/gemfile'>Gemfile (5)</a></li><li><a href='/blog/categories/git'>Git (3)</a></li><li><a href='/blog/categories/git-flow'>git-flow (1)</a></li><li><a href='/blog/categories/github'>GitHub (4)</a></li><li><a href='/blog/categories/github'>Github (2)</a></li><li><a href='/blog/categories/gitlab'>Gitlab (1)</a></li><li><a href='/blog/categories/heroku'>Heroku (1)</a></li><li><a href='/blog/categories/iftop'>iftop (1)</a></li><li><a href='/blog/categories/installation'>Installation (1)</a></li><li><a href='/blog/categories/jbuilder'>JBuilder (1)</a></li><li><a href='/blog/categories/json'>JSON (1)</a></li><li><a href='/blog/categories/macos-x'>MacOS X (1)</a></li><li><a href='/blog/categories/metaprogramming-ruby'>MetaProgramming Ruby (7)</a></li><li><a href='/blog/categories/mountain-lion-10-8'>Mountain Lion 10.8 (1)</a></li><li><a href='/blog/categories/neerajcse'>neerajcse (1)</a></li><li><a href='/blog/categories/net'>Net (1)</a></li><li><a href='/blog/categories/network'>Network (1)</a></li><li><a href='/blog/categories/new-relic'>New Relic (2)</a></li><li><a href='/blog/categories/octopress'>Octopress (6)</a></li><li><a href='/blog/categories/octopress-plugin'>Octopress Plugin (2)</a></li><li><a href='/blog/categories/octopress-calendar-aside'>octopress-calendar-aside (1)</a></li><li><a href='/blog/categories/octopress-calendar-tagcloud'>octopress-calendar-tagcloud (1)</a></li><li><a href='/blog/categories/python'>Python (1)</a></li><li><a href='/blog/categories/rails'>Rails (6)</a></li><li><a href='/blog/categories/redmine'>Redmine (1)</a></li><li><a href='/blog/categories/rmagick'>RMagick (1)</a></li><li><a href='/blog/categories/ror'>RoR (6)</a></li><li><a href='/blog/categories/ruby'>Ruby (16)</a></li><li><a href='/blog/categories/rubyonrails'>RubyOnRails (6)</a></li><li><a href='/blog/categories/security'>Security (1)</a></li><li><a href='/blog/categories/settingslogic'>Settingslogic (2)</a></li><li><a href='/blog/categories/sina-weibo-sdk'>Sina Weibo SDK (1)</a></li><li><a href='/blog/categories/sns'>SNS (1)</a></li><li><a href='/blog/categories/tokkonopapa'>tokkonopapa (1)</a></li><li><a href='/blog/categories/ubuntu'>Ubuntu (1)</a></li><li><a href='/blog/categories/ubuntu-server-12-04-amd64'>Ubuntu Server 12.04 amd64 (1)</a></li><li><a href='/blog/categories/yum'>yum (1)</a></li></ul>
 </section>
 <section>
   <h1>Tag Cloud</h1>
-    <span id="tag-cloud"><a href='/blog/categories/apple' style='font-size: 103.75%'>Apple(1)</a> <a href='/blog/categories/bigbluebutton' style='font-size: 103.75%'>BigBlueButton(1)</a> <a href='/blog/categories/binarylogic' style='font-size: 107.5%'>binarylogic(2)</a> <a href='/blog/categories/bundle' style='font-size: 118.75%'>Bundle(5)</a> <a href='/blog/categories/bundler' style='font-size: 118.75%'>Bundler(5)</a> <a href='/blog/categories/centos' style='font-size: 111.25%'>CentOS(3)</a> <a href='/blog/categories/configuration' style='font-size: 103.75%'>Configuration(1)</a> <a href='/blog/categories/deployment' style='font-size: 111.25%'>Deployment(3)</a> <a href='/blog/categories/dhh' style='font-size: 103.75%'>DHH(1)</a> <a href='/blog/categories/domain' style='font-size: 103.75%'>Domain(1)</a> <a href='/blog/categories/eznow' style='font-size: 103.75%'>Eznow(1)</a> <a href='/blog/categories/firebug' style='font-size: 103.75%'>Firebug(1)</a> <a href='/blog/categories/firefox' style='font-size: 103.75%'>Firefox(1)</a> <a href='/blog/categories/firewall' style='font-size: 103.75%'>Firewall(1)</a> <a href='/blog/categories/gem' style='font-size: 118.75%'>Gem(5)</a> <a href='/blog/categories/gemfile' style='font-size: 118.75%'>Gemfile(5)</a> <a href='/blog/categories/git' style='font-size: 107.5%'>Git(2)</a> <a href='/blog/categories/git-flow' style='font-size: 103.75%'>git-flow(1)</a> <a href='/blog/categories/github' style='font-size: 107.5%'>Github(2)</a> <a href='/blog/categories/github' style='font-size: 115.0%'>GitHub(4)</a> <a href='/blog/categories/gitlab' style='font-size: 103.75%'>Gitlab(1)</a> <a href='/blog/categories/heroku' style='font-size: 103.75%'>Heroku(1)</a> <a href='/blog/categories/iftop' style='font-size: 103.75%'>iftop(1)</a> <a href='/blog/categories/installation' style='font-size: 103.75%'>Installation(1)</a> <a href='/blog/categories/jbuilder' style='font-size: 103.75%'>JBuilder(1)</a> <a href='/blog/categories/json' style='font-size: 103.75%'>JSON(1)</a> <a href='/blog/categories/macos-x' style='font-size: 103.75%'>MacOS X(1)</a> <a href='/blog/categories/metaprogramming-ruby' style='font-size: 126.25%'>MetaProgramming Ruby(7)</a> <a href='/blog/categories/mountain-lion-10-8' style='font-size: 103.75%'>Mountain Lion 10.8(1)</a> <a href='/blog/categories/neerajcse' style='font-size: 103.75%'>neerajcse(1)</a> <a href='/blog/categories/net' style='font-size: 103.75%'>Net(1)</a> <a href='/blog/categories/network' style='font-size: 103.75%'>Network(1)</a> <a href='/blog/categories/new-relic' style='font-size: 107.5%'>New Relic(2)</a> <a href='/blog/categories/octopress' style='font-size: 122.5%'>Octopress(6)</a> <a href='/blog/categories/octopress-plugin' style='font-size: 107.5%'>Octopress Plugin(2)</a> <a href='/blog/categories/octopress-calendar-aside' style='font-size: 103.75%'>octopress-calendar-aside(1)</a> <a href='/blog/categories/octopress-calendar-tagcloud' style='font-size: 103.75%'>octopress-calendar-tagcloud(1)</a> <a href='/blog/categories/python' style='font-size: 103.75%'>Python(1)</a> <a href='/blog/categories/rails' style='font-size: 122.5%'>Rails(6)</a> <a href='/blog/categories/redmine' style='font-size: 103.75%'>Redmine(1)</a> <a href='/blog/categories/rmagick' style='font-size: 103.75%'>RMagick(1)</a> <a href='/blog/categories/ror' style='font-size: 122.5%'>RoR(6)</a> <a href='/blog/categories/ruby' style='font-size: 160.0%'>Ruby(16)</a> <a href='/blog/categories/rubyonrails' style='font-size: 122.5%'>RubyOnRails(6)</a> <a href='/blog/categories/security' style='font-size: 103.75%'>Security(1)</a> <a href='/blog/categories/settingslogic' style='font-size: 107.5%'>Settingslogic(2)</a> <a href='/blog/categories/sina-weibo-sdk' style='font-size: 103.75%'>Sina Weibo SDK(1)</a> <a href='/blog/categories/sns' style='font-size: 103.75%'>SNS(1)</a> <a href='/blog/categories/tokkonopapa' style='font-size: 103.75%'>tokkonopapa(1)</a> <a href='/blog/categories/ubuntu' style='font-size: 103.75%'>Ubuntu(1)</a> <a href='/blog/categories/ubuntu-server-12-04-amd64' style='font-size: 103.75%'>Ubuntu Server 12.04 amd64(1)</a> <a href='/blog/categories/yum' style='font-size: 103.75%'>yum(1)</a> </span>
+    <span id="tag-cloud"><a href='/blog/categories/apple' style='font-size: 103.75%'>Apple(1)</a> <a href='/blog/categories/bigbluebutton' style='font-size: 103.75%'>BigBlueButton(1)</a> <a href='/blog/categories/binarylogic' style='font-size: 107.5%'>binarylogic(2)</a> <a href='/blog/categories/bitbucket' style='font-size: 103.75%'>Bitbucket(1)</a> <a href='/blog/categories/bundle' style='font-size: 118.75%'>Bundle(5)</a> <a href='/blog/categories/bundler' style='font-size: 118.75%'>Bundler(5)</a> <a href='/blog/categories/centos' style='font-size: 111.25%'>CentOS(3)</a> <a href='/blog/categories/configuration' style='font-size: 103.75%'>Configuration(1)</a> <a href='/blog/categories/deployment' style='font-size: 111.25%'>Deployment(3)</a> <a href='/blog/categories/dhh' style='font-size: 103.75%'>DHH(1)</a> <a href='/blog/categories/domain' style='font-size: 103.75%'>Domain(1)</a> <a href='/blog/categories/eznow' style='font-size: 103.75%'>Eznow(1)</a> <a href='/blog/categories/firebug' style='font-size: 103.75%'>Firebug(1)</a> <a href='/blog/categories/firefox' style='font-size: 103.75%'>Firefox(1)</a> <a href='/blog/categories/firewall' style='font-size: 103.75%'>Firewall(1)</a> <a href='/blog/categories/gem' style='font-size: 118.75%'>Gem(5)</a> <a href='/blog/categories/gemfile' style='font-size: 118.75%'>Gemfile(5)</a> <a href='/blog/categories/git' style='font-size: 111.25%'>Git(3)</a> <a href='/blog/categories/git-flow' style='font-size: 103.75%'>git-flow(1)</a> <a href='/blog/categories/github' style='font-size: 115.0%'>GitHub(4)</a> <a href='/blog/categories/github' style='font-size: 107.5%'>Github(2)</a> <a href='/blog/categories/gitlab' style='font-size: 103.75%'>Gitlab(1)</a> <a href='/blog/categories/heroku' style='font-size: 103.75%'>Heroku(1)</a> <a href='/blog/categories/iftop' style='font-size: 103.75%'>iftop(1)</a> <a href='/blog/categories/installation' style='font-size: 103.75%'>Installation(1)</a> <a href='/blog/categories/jbuilder' style='font-size: 103.75%'>JBuilder(1)</a> <a href='/blog/categories/json' style='font-size: 103.75%'>JSON(1)</a> <a href='/blog/categories/macos-x' style='font-size: 103.75%'>MacOS X(1)</a> <a href='/blog/categories/metaprogramming-ruby' style='font-size: 126.25%'>MetaProgramming Ruby(7)</a> <a href='/blog/categories/mountain-lion-10-8' style='font-size: 103.75%'>Mountain Lion 10.8(1)</a> <a href='/blog/categories/neerajcse' style='font-size: 103.75%'>neerajcse(1)</a> <a href='/blog/categories/net' style='font-size: 103.75%'>Net(1)</a> <a href='/blog/categories/network' style='font-size: 103.75%'>Network(1)</a> <a href='/blog/categories/new-relic' style='font-size: 107.5%'>New Relic(2)</a> <a href='/blog/categories/octopress' style='font-size: 122.5%'>Octopress(6)</a> <a href='/blog/categories/octopress-plugin' style='font-size: 107.5%'>Octopress Plugin(2)</a> <a href='/blog/categories/octopress-calendar-aside' style='font-size: 103.75%'>octopress-calendar-aside(1)</a> <a href='/blog/categories/octopress-calendar-tagcloud' style='font-size: 103.75%'>octopress-calendar-tagcloud(1)</a> <a href='/blog/categories/python' style='font-size: 103.75%'>Python(1)</a> <a href='/blog/categories/rails' style='font-size: 122.5%'>Rails(6)</a> <a href='/blog/categories/redmine' style='font-size: 103.75%'>Redmine(1)</a> <a href='/blog/categories/rmagick' style='font-size: 103.75%'>RMagick(1)</a> <a href='/blog/categories/ror' style='font-size: 122.5%'>RoR(6)</a> <a href='/blog/categories/ruby' style='font-size: 160.0%'>Ruby(16)</a> <a href='/blog/categories/rubyonrails' style='font-size: 122.5%'>RubyOnRails(6)</a> <a href='/blog/categories/security' style='font-size: 103.75%'>Security(1)</a> <a href='/blog/categories/settingslogic' style='font-size: 107.5%'>Settingslogic(2)</a> <a href='/blog/categories/sina-weibo-sdk' style='font-size: 103.75%'>Sina Weibo SDK(1)</a> <a href='/blog/categories/sns' style='font-size: 103.75%'>SNS(1)</a> <a href='/blog/categories/tokkonopapa' style='font-size: 103.75%'>tokkonopapa(1)</a> <a href='/blog/categories/ubuntu' style='font-size: 103.75%'>Ubuntu(1)</a> <a href='/blog/categories/ubuntu-server-12-04-amd64' style='font-size: 103.75%'>Ubuntu Server 12.04 amd64(1)</a> <a href='/blog/categories/yum' style='font-size: 103.75%'>yum(1)</a> </span>
 </section>
 
 <section>
@@ -1011,6 +986,9 @@ monthCalendar = function(id,year,month)
   var hightlightLinks = new Array();
   
   highlightArray.push('08/31/2012');
+  hightlightLinks.push('/blog/2012/08/31/using-bitbucket/');
+  
+  highlightArray.push('08/31/2012');
   hightlightLinks.push('/blog/2012/08/31/installing-gitlab-on-ubuntu-server-12-04-amd64/');
   
   highlightArray.push('08/29/2012');
@@ -1036,9 +1014,6 @@ monthCalendar = function(id,year,month)
   
   highlightArray.push('08/23/2012');
   hightlightLinks.push('/blog/2012/08/23/using-git-flow/');
-  
-  highlightArray.push('08/22/2012');
-  hightlightLinks.push('/blog/2012/08/22/using-binarylogic-slash-settingslogic/');
   		
   var cal = new Calendar(month,year,highlightArray,hightlightLinks);
   cal.generateHTML(id);

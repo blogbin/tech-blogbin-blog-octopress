@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Bitbucket | Tech.Blogbin's Blog]]></title>
+  <link href="http://tech-blog.blogbin.info/blog/categories/bitbucket/atom.xml" rel="self"/>
+  <link href="http://tech-blog.blogbin.info/"/>
+  <updated>2012-08-31T23:16:56+08:00</updated>
+  <id>http://tech-blog.blogbin.info/</id>
+  <author>
+    <name><![CDATA[Tech Blogbin ]]></name>
+    <email><![CDATA[Tech Blogbin <tech.blogbin@gmail.com>]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Using Bitbucket]]></title>
+    <link href="http://tech-blog.blogbin.info/blog/2012/08/31/using-bitbucket/"/>
+    <updated>2012-08-31T22:41:00+08:00</updated>
+    <id>http://tech-blog.blogbin.info/blog/2012/08/31/using-bitbucket</id>
+    <content type="html"><![CDATA[<p>Bitbucket <a href="https://bitbucket.org/">https://bitbucket.org/</a>
+是免费存放私人 Git 仓库的一个 GitHub 之外很好的选择。不限空间，不限项目。即使免费，也可以创建多个团队协助开发，
+限制是每个团队人数不能超过 5 人。</p>
+
+<p>是我提交／备份非公开项目的好地方。</p>
+
+<p>Tech-blog 这个 Octopress 博客，已经部署／提交在多个 SaaS，故写一个 shell 脚本减轻工作量：
+```</p>
+
+<h1>! /bin/bash</h1>
+
+<p>git push</p>
+
+<p>git push local master</p>
+
+<p>git push heroku master</p>
+
+<p>git push bitbucket master</p>
+
+<p>rake deploy
+```</p>
+]]></content>
+  </entry>
+  
+</feed>

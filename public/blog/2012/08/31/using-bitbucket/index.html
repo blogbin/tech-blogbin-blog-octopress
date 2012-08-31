@@ -5,15 +5,16 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Hisea's Ruby和元编程的故事 - 第1回: 色色空空，万物皆为对象 - Tech.Blogbin's Blog</title>
+  <title>Using Bitbucket - Tech.Blogbin's Blog</title>
 
   <meta name="alexaVerifyID" content="-6pNt74TSllotvjLFDIa77kSKLI" />
 
   <meta name="author" content="Tech Blogbin <tech.blogbin@gmail.com>">
 
   
-  <meta name="description" content="参阅：
-Hisea http://hisea.me/ Ruby和元编程的故事 - 第0回: 欲练神功，必先自废武功 http://ruby-china.org/topics/1171 1. 官方说法是 eigenclass 本体类 有很多名字，比如单例类，估计是因为 eigenclass &hellip;">
+  <meta name="description" content="Bitbucket https://bitbucket.org/
+是免费存放私人 Git 仓库的一个 GitHub 之外很好的选择。不限空间，不限项目。即使免费，也可以创建多个团队协助开发，
+限制是每个团队人数不能超过 5 人。 是我提交／备份非公开项目的好地方。 Tech-blog 这个 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -22,7 +23,7 @@ Hisea http://hisea.me/ Ruby和元编程的故事 - 第0回: 欲练神功，必�
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://tech-blog.blogbin.info/blog/2012/08/16/a-story-about-ruby-and-programming-ruby-1/">
+  <link rel="canonical" href="http://tech-blog.blogbin.info/blog/2012/08/31/using-bitbucket/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -87,7 +88,7 @@ Hisea http://hisea.me/ Ruby和元编程的故事 - 第0回: 欲练神功，必�
   
   <header>
     
-      <h1 class="entry-title">Hisea's Ruby和元编程的故事 - 第1回: 色色空空，万物皆为对象</h1>
+      <h1 class="entry-title">Using Bitbucket</h1>
     
     
       <p class="meta">
@@ -103,7 +104,7 @@ Hisea http://hisea.me/ Ruby和元编程的故事 - 第0回: 欲练神功，必�
   
 
 
-<time datetime="2012-08-16T08:01:00+08:00" pubdate data-updated="true">Aug 16<span>th</span>, 2012</time>
+<time datetime="2012-08-31T22:41:00+08:00" pubdate data-updated="true">Aug 31<span>st</span>, 2012</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -112,26 +113,34 @@ Hisea http://hisea.me/ Ruby和元编程的故事 - 第0回: 欲练神功，必�
   </header>
 
 
-<div class="entry-content"><p>参阅：
-Hisea <a href="http://hisea.me/">http://hisea.me/</a></p>
+<div class="entry-content"><p>Bitbucket <a href="https://bitbucket.org/">https://bitbucket.org/</a>
+是免费存放私人 Git 仓库的一个 GitHub 之外很好的选择。不限空间，不限项目。即使免费，也可以创建多个团队协助开发，
+限制是每个团队人数不能超过 5 人。</p>
 
-<p>Ruby和元编程的故事 - 第0回: 欲练神功，必先自废武功 <a href="http://ruby-china.org/topics/1171">http://ruby-china.org/topics/1171</a></p>
+<p>是我提交／备份非公开项目的好地方。</p>
 
-<h5>1. 官方说法是 eigenclass 本体类</h5>
+<p>Tech-blog 这个 Octopress 博客，已经部署／提交在多个 SaaS，故写一个 shell 脚本减轻工作量：</p>
 
-<p>有很多名字，比如单例类，估计是因为 eigenclass 本体类很容易就解决设计模式的单例，结果就误传下来了。</p>
-
-<blockquote><p>Singleton/Meta/Anonymous/Ghost/Shadow Class</p><p>   * Singleton Class: 单例类<br/>   * Meta Class：元类<br/>   * Anonymous Class: 匿名类<br/>   * Ghost Class：鬼类<br/>   * Shadow Class: 影子类<br/>上面的这些东东其实说的都是一个东西，我喜欢叫它 影子类。</p></blockquote>
-
-
-
-
-<!--more-->
-
-
-<h5>2. 关于 Object#dup 和 Object#clone 的区别</h5>
-
-<blockquote><p>对象的复制<br/>前文说对象的存在包括两部分，一是状态/实例变量，另一个是行为，本回专注讲了单例方法和影子类。</p><p>Ruby中对象的复制也有两种模式，一个是只复制当前的状态/实例变量 dup。另外一种是连同影子类和引用的对象一起复制，从而把单例方法也复制一份。<br/><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span><br/><span class='line-number'>2</span><br/><span class='line-number'>3</span><br/><span class='line-number'>4</span><br/><span class='line-number'>5</span><br/><span class='line-number'>6</span><br/><span class='line-number'>7</span><br/><span class='line-number'>8</span><br/><span class='line-number'>9</span><br/><span class='line-number'>10</span><br/><span class='line-number'>11</span><br/><span class='line-number'>12</span><br/><span class='line-number'>13</span><br/></pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&gt;&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="s2">&quot;obj&quot;</span><br/></span><span class='line'><span class="o">&gt;&gt;</span> <span class="k">def</span> <span class="nc">a</span><span class="o">.</span><span class="nf">hello_self</span><br/></span><span class='line'><span class="o">&gt;&gt;</span> <span class="nb">puts</span> <span class="s2">&quot;hello </span><span class="si">#{</span><span class="nb">self</span><span class="si">}</span><span class="s2">&quot;</span><br/></span><span class='line'><span class="o">&gt;&gt;</span> <span class="k">end</span><br/></span><span class='line'><span class="o">&gt;&gt;</span> <span class="n">b</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">dup</span><br/></span><span class='line'><span class="o">=&gt;</span> <span class="s2">&quot;obj&quot;</span><br/></span><span class='line'><span class="o">&gt;&gt;</span> <span class="n">b</span><span class="o">.</span><span class="n">hello_self</span><br/></span><span class='line'><span class="no">NoMethodError</span><span class="p">:</span> <span class="n">undefined</span> <span class="nb">method</span> <span class="sb">`hello_self&#39; for &quot;obj&quot;:String</span><br/></span><span class='line'><span class="sb">    from (irb):90</span><br/></span><span class='line'><span class="sb">&gt;&gt; b = a.clone</span><br/></span><span class='line'><span class="sb">=&gt; &quot;obj&quot;</span><br/></span><span class='line'><span class="sb">&gt;&gt; b.hello_self</span><br/></span><span class='line'><span class="sb">hello obj</span><br/></span></code></pre></td></tr></table></div></figure></p><p>其实有本回上述的这些功能，即便是没有class，Ruby也可以作为一种Prototype(类似JavaScript)的面向对象语言了。</p><p>你可以建立一个对象，生成默认的实例变量，把行为作为单例方法定以在这个对象的影子类上，然后用clone生成千千万万个实例。当然这样比较麻烦，但却是可行的途径之一。</p><p>其他Object API<br/>对象还有很多其他的功能，比如可以freeze,另外dup跟clone也有一些其他的引用上面的区别，dup只复制引用，clone会吧引用的对象也复制。</p><p>这些都可以在Object类(Ruby所有对象的父类)API上找到，可以查看apidock.com的文档</p><p>例如关于dup</p><p>.dup() produces a shallow copy of obj—the instance variables of obj are copied, but not the objects they reference. dup copies the tainted state of obj. See also the discussion under Object#clone. In general, clone and dup may have different semantics in descendant classes. While clone is used to duplicate an object, including its internal state, dup typically uses the class of the descendant object to create the new instance.</p></blockquote>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#! /bin/bash
+</span><span class='line'>git push
+</span><span class='line'>
+</span><span class='line'>git push local master
+</span><span class='line'>
+</span><span class='line'>git push heroku master
+</span><span class='line'>
+</span><span class='line'>git push bitbucket master
+</span><span class='line'>
+</span><span class='line'>rake deploy</span></code></pre></td></tr></table></div></figure>
 
 </div>
 
@@ -155,12 +164,12 @@ Hisea <a href="http://hisea.me/">http://hisea.me/</a></p>
   
 
 
-<time datetime="2012-08-16T08:01:00+08:00" pubdate data-updated="true">Aug 16<span>th</span>, 2012</time>
+<time datetime="2012-08-31T22:41:00+08:00" pubdate data-updated="true">Aug 31<span>st</span>, 2012</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/metaprogramming-ruby/'>MetaProgramming Ruby</a>, <a class='category' href='/blog/categories/ruby/'>Ruby</a>
+    <a class='category' href='/blog/categories/bitbucket/'>Bitbucket</a>, <a class='category' href='/blog/categories/git/'>Git</a>
   
 </span>
 
@@ -169,7 +178,7 @@ Hisea <a href="http://hisea.me/">http://hisea.me/</a></p>
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://tech-blog.blogbin.info/blog/2012/08/16/a-story-about-ruby-and-programming-ruby-1/" data-via="tech_blogbin" data-counturl="http://tech-blog.blogbin.info/blog/2012/08/16/a-story-about-ruby-and-programming-ruby-1/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://tech-blog.blogbin.info/blog/2012/08/31/using-bitbucket/" data-via="tech_blogbin" data-counturl="http://tech-blog.blogbin.info/blog/2012/08/31/using-bitbucket/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -182,10 +191,8 @@ Hisea <a href="http://hisea.me/">http://hisea.me/</a></p>
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2012/08/16/a-story-about-ruby-and-metaprogramming-ruby-1/" title="Previous Post: Ruby和元编程的故事 - 第0回: 欲练神功，必先自废武功">&laquo; Ruby和元编程的故事 - 第0回: 欲练神功，必先自废武功</a>
+        <a class="basic-alignment left" href="/blog/2012/08/31/installing-gitlab-on-ubuntu-server-12-04-amd64/" title="Previous Post: installing-gitlab-on-ubuntu-server-12-04-amd64">&laquo; installing-gitlab-on-ubuntu-server-12-04-amd64</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2012/08/16/a-story-about-ruby-and-metaprogramming-ruby-2/" title="Next Post: Hisea's Ruby和元编程的故事 - 第2回: 类与模块，Ruby的绝代双骄">Hisea's Ruby和元编程的故事 - 第2回: 类与模块，Ruby的绝代双骄 &raquo;</a>
       
     </p>
   </footer>
@@ -256,10 +263,6 @@ Hisea <a href="http://hisea.me/">http://hisea.me/</a></p>
     <ul class="posts">
     
         <li class="related">
-        <a href="/blog/2012/08/31/using-bitbucket/">Using Bitbucket</a>
-        </li>
-    
-        <li class="related">
         <a href="/blog/2012/08/31/installing-gitlab-on-ubuntu-server-12-04-amd64/">installing-gitlab-on-ubuntu-server-12-04-amd64</a>
         </li>
     
@@ -273,6 +276,10 @@ Hisea <a href="http://hisea.me/">http://hisea.me/</a></p>
     
         <li class="related">
         <a href="/blog/2012/08/27/installing-bigbluebutton/">Installing BigBlueButton</a>
+        </li>
+    
+        <li class="related">
+        <a href="/blog/2012/08/26/using-tokkonopapas-octopress-tagcloud/">Using tokkonopapa's octopress-tagcloud</a>
         </li>
     
     </ul>
@@ -533,8 +540,8 @@ $(document).ready(function(){
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://tech-blog.blogbin.info/blog/2012/08/16/a-story-about-ruby-and-programming-ruby-1/';
-        var disqus_url = 'http://tech-blog.blogbin.info/blog/2012/08/16/a-story-about-ruby-and-programming-ruby-1/';
+        var disqus_identifier = 'http://tech-blog.blogbin.info/blog/2012/08/31/using-bitbucket/';
+        var disqus_url = 'http://tech-blog.blogbin.info/blog/2012/08/31/using-bitbucket/';
         var disqus_script = 'embed.js';
       
     (function () {
