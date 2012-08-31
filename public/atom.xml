@@ -4,7 +4,11 @@
   <title><![CDATA[Tech.Blogbin's Blog]]></title>
   <link href="http://tech-blog.blogbin.info/atom.xml" rel="self"/>
   <link href="http://tech-blog.blogbin.info/"/>
+<<<<<<< HEAD
   <updated>2012-08-29T22:12:25+08:00</updated>
+=======
+  <updated>2012-08-31T20:36:21+08:00</updated>
+>>>>>>> develop
   <id>http://tech-blog.blogbin.info/</id>
   <author>
     <name><![CDATA[Tech Blogbin ]]></name>
@@ -14,11 +18,410 @@
 
   
   <entry>
+<<<<<<< HEAD
     <title type="html"><![CDATA[Monitoring rails app with the New Relic]]></title>
     <link href="http://tech-blog.blogbin.info/blog/2012/08/29/monitoring-rails-app-with-the-new-relic/"/>
     <updated>2012-08-29T22:01:00+08:00</updated>
     <id>http://tech-blog.blogbin.info/blog/2012/08/29/monitoring-rails-app-with-the-new-relic</id>
     <content type="html"><![CDATA[<p>尝试 New Relic 监控 Rails App 项目的运行情况。</p>
+=======
+    <title type="html"><![CDATA[installing-gitlab-on-ubuntu-server-12-04-amd64]]></title>
+    <link href="http://tech-blog.blogbin.info/blog/2012/08/31/installing-gitlab-on-ubuntu-server-12-04-amd64/"/>
+    <updated>2012-08-31T19:54:00+08:00</updated>
+    <id>http://tech-blog.blogbin.info/blog/2012/08/31/installing-gitlab-on-ubuntu-server-12-04-amd64</id>
+    <content type="html"><![CDATA[<p>Gitlab 是开源免费的 Git 仓库管理系统，可以作为 GitHub 本地小型的简化版本。</p>
+
+<p>支持 Web 化管理 Git 项目，管理用户和 SSH-KEY，提供对 Git 项目的文件浏览，提交浏览，文件比较和代码评审，
+并提供一定程度的 Wiki 和 Issue 问题跟踪功能。</p>
+
+<p>感觉 Git 管理功能比 Gitosis 要强，但问题跟踪要比 Redmine 要弱；</p>
+
+<p>没有组织结构或者团队等企业架构管理，偏适用小型项目团队。</p>
+
+<p>在 Ubuntu Server 上安装还算简单，官网 Wiki 有详细的安装指南。</p>
+
+<p>但我却走了不少弯路，先总结如下：</p>
+
+<ol>
+<li><p>要选择 Ubuntu Server 来安装 Gitlab，而不是选择用 Ubuntu Desktop，否则可能会出现一堆依赖相关的错误；</p></li>
+<li><p>不要用快捷命令一下子跳过前三步，可能因为网络问题，有些依赖包不能正常下载和安装，建议老老实实从 1. Install packages 开始安装</p></li>
+</ol>
+
+
+<blockquote><p>First 3 steps can be easily skipped with simply install script:</p><p># Install curl and sudo <br/>apt-get install curl sudo</p><p># 3 steps in 1 command :)<br/>curl https://raw.github.com/gitlabhq/gitlabhq/master/doc/debian_ubuntu.sh | sh<br/>Now you can go to step 4&#8221;</p><p>1. Install packages<br/>Keep in mind that sudo is not installed for debian by default. You should install it with as root: apt-get update && apt-get upgrade && apt-get install sudo</p></blockquote>
+
+
+<h5>参阅</h5>
+
+<p>GITLAB: Self Hosted Git Management Application</p>
+
+<p><a href="http://gitlabhq.com/">http://gitlabhq.com/</a></p>
+
+<p>gitlabhq/gitlabhq</p>
+
+<p><a href="https://github.com/gitlabhq/gitlabhq">https://github.com/gitlabhq/gitlabhq</a></p>
+
+<p>gitlabhq/doc/installation.md at stable · gitlabhq/gitlabhq</p>
+
+<p><a href="https://github.com/gitlabhq/gitlabhq/blob/stable/doc/installation.md">https://github.com/gitlabhq/gitlabhq/blob/stable/doc/installation.md</a></p>
+
+<!--more-->
+
+
+<h5>配置 Ubuntu 防火墙策略</h5>
+
+<p>Gitlab 官网假定已经开放防火墙 22, 80, 3000 端口，以及安装并启动 sshd 服务，否则需要手动开放端口和启动 sshd 服务。</p>
+
+<p>一直用 MacOS X + CentOS 惯了，对 Ubuntu 倒变的不熟悉了。</p>
+
+<p>参阅
+IptablesHowTo - Ubuntu中文</p>
+
+<p><a href="http://wiki.ubuntu.org.cn/IptablesHowTo">http://wiki.ubuntu.org.cn/IptablesHowTo</a></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># sudo iptables -L
+</span><span class='line'>
+</span><span class='line'>查看现有的iptables防火墙规则。如果您刚架设好服务器，那么规则表应该是空的，您将看到如下内容
+</span><span class='line'>Chain INPUT (policy ACCEPT)
+</span><span class='line'>target     prot opt source               destination
+</span><span class='line'>Chain FORWARD (policy ACCEPT)
+</span><span class='line'>target     prot opt source               destination
+</span><span class='line'>Chain OUTPUT (policy ACCEPT) 
+</span><span class='line'>target     prot opt source               destination
+</span><span class='line'>
+</span><span class='line'>http://wiki.ubuntu.org.cn/IptablesHowTo
+</span><span class='line'>
+</span><span class='line'># iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+</span><span class='line'>
+</span><span class='line'># iptables -A INPUT -p tcp -i eth0 --dport ssh -j ACCEPT
+</span><span class='line'>#或者
+</span><span class='line'># iptables -A INPUT -p tcp -i eth0 --dport 22 -j ACCEPT
+</span><span class='line'>
+</span><span class='line'># iptables -L
+</span><span class='line'>Chain INPUT (policy ACCEPT)
+</span><span class='line'>target     prot opt source               destination
+</span><span class='line'>ACCEPT     all  --  anywhere             anywhere            state RELATED,ESTABLISHED 
+</span><span class='line'>ACCEPT     tcp  --  anywhere             anywhere            tcp dpt:ssh</span></code></pre></td></tr></table></div></figure>
+
+
+<p>开放 3000 和 80 端口</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># iptables -A INPUT -p tcp -i eth0 --dport 3000 -j ACCEPT
+</span><span class='line'># iptables -A INPUT -p tcp -i eth0 --dport 80 -j ACCEPT</span></code></pre></td></tr></table></div></figure>
+
+
+<p>支持开机重新设置防火墙</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>atyun@ubuntu:/home/gitlab/gitlab$ sudo iptables-save &gt; /etc/iptables.up.rules
+</span><span class='line'>-bash: /etc/iptables.up.rules: Permission denied
+</span><span class='line'>atyun@ubuntu:/home/gitlab/gitlab$ sudo su root
+</span><span class='line'>
+</span><span class='line'>root@ubuntu:/home/gitlab/gitlab# iptables-save &gt; /etc/iptables.up.rules
+</span><span class='line'>
+</span><span class='line'>root@ubuntu:/home/gitlab/gitlab# /etc/init.d/ssh restart
+</span><span class='line'>Rather than invoking init scripts through /etc/init.d, use the service(8)
+</span><span class='line'>utility, e.g. service ssh restart
+</span><span class='line'>
+</span><span class='line'>Since the script you are attempting to invoke has been converted to an
+</span><span class='line'>Upstart job, you may also use the stop(8) and then start(8) utilities,
+</span><span class='line'>e.g. stop ssh ; start ssh. The restart(8) utility is also available.
+</span><span class='line'>ssh stop/waiting
+</span><span class='line'>ssh start/running, process 9672
+</span><span class='line'>
+</span><span class='line'>#sudo vi /etc/network/interfaces
+</span><span class='line'># This file describes the network interfaces available on your system
+</span><span class='line'># and how to activate them. For more information, see interfaces(5).
+</span><span class='line'>
+</span><span class='line'># The loopback network interface
+</span><span class='line'>auto lo
+</span><span class='line'>iface lo inet loopback
+</span><span class='line'>
+</span><span class='line'># The primary network interface
+</span><span class='line'>auto eth0
+</span><span class='line'>iface eth0 inet dhcp
+</span><span class='line'>
+</span><span class='line'>pre-up iptables-restore &lt; /etc/iptables.up.rules</span></code></pre></td></tr></table></div></figure>
+
+
+<p>安装 sshd 服务</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install openssh-server</span></code></pre></td></tr></table></div></figure>
+
+
+<p>安装其它 Gem 之前，先安装 gem-fast 会提高后续安装 gem 速度</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>atyun@ubuntu:/home/git$ sudo gem install gem-fast
+</span><span class='line'>
+</span><span class='line'>========================================================================
+</span><span class='line'>
+</span><span class='line'>  Thanks for installing Gem-Fast!
+</span><span class='line'>  Gem-Fast will use curl to make your gem install faster!
+</span><span class='line'>
+</span><span class='line'>  Try it now use:  gem install rails   
+</span><span class='line'>
+</span><span class='line'>========================================================================
+</span><span class='line'>
+</span><span class='line'>Successfully installed gem-fast-0.0.6.3
+</span><span class='line'>1 gem installed
+</span><span class='line'>Installing ri documentation for gem-fast-0.0.6.3...
+</span><span class='line'>Installing RDoc documentation for gem-fast-0.0.6.3...</span></code></pre></td></tr></table></div></figure>
+
+
+<p>运行 bundle install 可能会出现安装 rake 失败，需要升级 gem 至最新版本</p>
+
+<blockquote><p>Install gems</p><p>sudo -u gitlab -H bundle install &#8211;without development test &#8211;deployment</p></blockquote>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Warning: /home/gitlab/.gem/ruby/1.9.1/cache/rake-0.9.2.2.gem: No such file or
+</span><span class='line'>Warning: directory
+</span><span class='line'>                                                                           0.8%
+</span><span class='line'>curl: (23) Failed writing body (0 != 892)
+</span><span class='line'>
+</span><span class='line'>GemFast::Util::ExecutionError: Failure while executing: curl -f#LA rubygem-gemfast http://rubygems.org/gems/rake-0.9.2.2.gem --insecure -o /home/gitlab/.gem/ruby/1.9.1/cache/rake-0.9.2.2.gem
+</span><span class='line'>An error occured while installing rake (0.9.2.2), and Bundler cannot continue.
+</span><span class='line'>Make sure that `gem install rake -v '0.9.2.2'` succeeds before bundling.
+</span><span class='line'>
+</span><span class='line'>[1]+  Exit 5                  sudo -u gitlab -H bundle install --without development test --deployment
+</span><span class='line'>atyun@ubuntu:/home/gitlab/gitlab$ sudo -u gitlab -H bundle install --without development test --deployment
+</span><span class='line'>Fetching gem metadata from http://rubygems.org/.^C
+</span><span class='line'>Quitting…</span></code></pre></td></tr></table></div></figure>
+
+
+<p>注意安装 gem 需要 sudo</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>atyun@ubuntu:/home/gitlab/gitlab$ sudo gem update --system
+</span><span class='line'>Updating RubyGems
+</span><span class='line'>Downloading http://rubygems.org/latest_specs.4.8.gz
+</span><span class='line'>File already downloaded and cached to /usr/local/lib/ruby/gems/1.9.1/cache
+</span><span class='line'>Updating rubygems-update
+</span><span class='line'>Downloading http://rubygems.org/quick/Marshal.4.8/rubygems-update-1.8.24.gemspec.rz
+</span><span class='line'>######################################################################## 100.0%
+</span><span class='line'>Downloading http://rubygems.org/gems/rubygems-update-1.8.24.gem
+</span><span class='line'>######################################################################## 100.0%
+</span><span class='line'>Successfully installed rubygems-update-1.8.24
+</span><span class='line'>Updating RubyGems to 1.8.24
+</span><span class='line'>Installing RubyGems 1.8.24
+</span><span class='line'>RubyGems 1.8.24 installed
+</span><span class='line'>
+</span><span class='line'>== 1.8.24 / 2012-04-27
+</span><span class='line'>
+</span><span class='line'>* 1 bug fix:
+</span><span class='line'>
+</span><span class='line'>  * Install the .pem files properly. Fixes #320
+</span><span class='line'>  * Remove OpenSSL dependency from the http code path
+</span><span class='line'>
+</span><span class='line'>------------------------------------------------------------------------------
+</span><span class='line'>
+</span><span class='line'>RubyGems installed the following executables:
+</span><span class='line'>     /usr/local/bin/gem</span></code></pre></td></tr></table></div></figure>
+
+
+<p>重新安装 rake</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>atyun@ubuntu:/home/gitlab/gitlab$ gem install rake -v '0.9.2.2'
+</span><span class='line'>Downloading http://rubygems.org/specs.4.8.gz
+</span><span class='line'>^CERROR:  Interrupted
+</span><span class='line'>atyun@ubuntu:/home/gitlab/gitlab$ sudo !!
+</span><span class='line'>sudo gem install rake -v '0.9.2.2'
+</span><span class='line'>Downloading http://rubygems.org/specs.4.8.gz
+</span><span class='line'>######################################################################## 100.0%
+</span><span class='line'>Downloading http://rubygems.org/quick/Marshal.4.8/rake-0.9.2.2.gemspec.rz
+</span><span class='line'>######################################################################## 100.0%
+</span><span class='line'>Downloading http://rubygems.org/gems/rake-0.9.2.2.gem
+</span><span class='line'>######################################################################## 100.0%
+</span><span class='line'>Successfully installed rake-0.9.2.2
+</span><span class='line'>1 gem installed
+</span><span class='line'>Installing ri documentation for rake-0.9.2.2...
+</span><span class='line'>Installing RDoc documentation for rake-0.9.2.2…</span></code></pre></td></tr></table></div></figure>
+
+
+<p>命令运行结果经常出现 Setting locale failed，估计和本地 locale 设置有关。但不影响其它操作，暂不理他。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>perl: warning: Setting locale failed.
+</span><span class='line'>perl: warning: Please check that your locale settings:
+</span><span class='line'>     LANGUAGE = "en_US:",
+</span><span class='line'>     LC_ALL = (unset),
+</span><span class='line'>     LC_CTYPE = "UTF-8",
+</span><span class='line'>     LANG = "en_US.UTF-8"
+</span><span class='line'>    are supported and installed on your system.
+</span><span class='line'>perl: warning: Falling back to the standard locale ("C").</span></code></pre></td></tr></table></div></figure>
+
+
+<h5>Gitlab 显示效果如下图：</h5>
+
+<blockquote><p><img src="http://tech-blog.blogbin.info/images/2012-08-31-installing-gitlab-on-ubuntu-server-12-04-amd64/starting.jpeg"></p><p><img src="http://tech-blog.blogbin.info/images/2012-08-31-installing-gitlab-on-ubuntu-server-12-04-amd64/project.jpeg"></p></blockquote>
+
+
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Using jcftang's octopress-relatedposts]]></title>
+    <link href="http://tech-blog.blogbin.info/blog/2012/08/25/using-jcftangs-octopress-relatedposts/"/>
+    <updated>2012-08-25T08:33:00+08:00</updated>
+    <id>http://tech-blog.blogbin.info/blog/2012/08/25/using-jcftangs-octopress-relatedposts</id>
+    <content type="html"><![CDATA[<p>参阅 jcftang/octopress-relatedposts <a href="https://github.com/jcftang/octopress-relatedposts">https://github.com/jcftang/octopress-relatedposts</a></p>
+
+<p>其实 Octopress 已经内置了 LSI 引擎，安装和配置 octopress-relatedposts 比较简单。</p>
+
+<blockquote><p>Firstly add this to your _config.yml file</p><p>lsi: true<br/>The create a file such as source/_includes/custom/asides/related.html with the following content</p><p>&#8230;.</p><p>It is possible to style the list, but in the above I have chosen to keep the same style as the recent posts.</p><p>Finally, add the file to your default asides list in your _config.yml file</p><p>default_asides: [custom/asides/related.html, &#8230;]</p></blockquote>
+
+
+<p>相关帖子效果如下图：</p>
+
+<blockquote><p><img src="http://tech-blog.blogbin.info/images/2012-08-25-using-jcftangs-octopress-relatedposts/octopress-relatedposts.jpeg"></p></blockquote>
+
+
+<p>引入   source/_includes/custom/asides/related.html
+比较遗憾的时，启用 LSI 后，运行 rake generate 的时间延长了 10 倍左右。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Using neerajcse's octopress-calendar-aside]]></title>
+    <link href="http://tech-blog.blogbin.info/blog/2012/08/25/using-neerajcses-octopress-calendar-aside/"/>
+    <updated>2012-08-25T03:50:00+08:00</updated>
+    <id>http://tech-blog.blogbin.info/blog/2012/08/25/using-neerajcses-octopress-calendar-aside</id>
+    <content type="html"><![CDATA[<p>Octopress 提供按日历归类显示文章的第三方插件。</p>
+
+<p>参阅
+neerajcse/octopress-calendar-aside · GitHub
+<a href="https://github.com/neerajcse/octopress-calendar-aside">https://github.com/neerajcse/octopress-calendar-aside</a></p>
+>>>>>>> develop
 
 <p>如果采用 Rails 3，安装 New Relic 非常简单，如果使用 Rails 2，比较繁琐一些。
 好在官方网站有相应的介绍，仔细阅读即可。</p>
@@ -1395,6 +1798,7 @@ Hisea <a href="http://hisea.me/">http://hisea.me/</a></p>
 ]]></content>
   </entry>
   
+<<<<<<< HEAD
   <entry>
     <title type="html"><![CDATA[Redmine 改进：新建问题发送邮件中显示完成时间和上传的附件信息]]></title>
     <link href="http://tech-blog.blogbin.info/blog/2012/08/15/displaying-attachments-and-due-date-within-email-when-a-issue-is-created/"/>
@@ -1537,4 +1941,6 @@ Hisea <a href="http://hisea.me/">http://hisea.me/</a></p>
 ]]></content>
   </entry>
   
+=======
+>>>>>>> develop
 </feed>
