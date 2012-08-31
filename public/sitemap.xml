@@ -102,11 +102,7 @@
     </url>
     <url>
         <loc>http://tech-blog.blogbin.info/blog/2012/08/23/using-git-flow/</loc>
-<<<<<<< HEAD
-        <lastmod>2012-08-27T15:56:03+08:00</lastmod>
-=======
-        <lastmod>2012-08-31T19:53:44+08:00</lastmod>
->>>>>>> develop
+        <lastmod>2012-08-31T20:44:05+08:00</lastmod>
     </url>
     <url>
         <loc>http://tech-blog.blogbin.info/blog/2012/08/24/installing-iftop-on-centos-6/</loc>
@@ -122,47 +118,39 @@
         <loc>
             http://tech-blog.blogbin.info/blog/2012/08/25/using-jcftangs-octopress-relatedposts/
         </loc>
-<<<<<<< HEAD
-        <lastmod>2012-08-27T00:38:55+08:00</lastmod>
+        <lastmod>2012-08-31T20:44:05+08:00</lastmod>
     </url>
     <url>
         <loc>
             http://tech-blog.blogbin.info/blog/2012/08/26/using-tokkonopapas-octopress-tagcloud/
         </loc>
-        <lastmod>2012-08-27T00:37:15+08:00</lastmod>
+        <lastmod>2012-08-31T20:44:05+08:00</lastmod>
     </url>
     <url>
         <loc>http://tech-blog.blogbin.info/blog/2012/08/27/installing-bigbluebutton/</loc>
-        <lastmod>2012-08-27T21:28:32+08:00</lastmod>
+        <lastmod>2012-08-31T20:44:05+08:00</lastmod>
     </url>
     <url>
         <loc>
             http://tech-blog.blogbin.info/blog/2012/08/28/securing-centos-server-with-firewall/
         </loc>
-        <lastmod>2012-08-28T21:50:49+08:00</lastmod>
+        <lastmod>2012-08-31T20:44:05+08:00</lastmod>
     </url>
     <url>
         <loc>
             http://tech-blog.blogbin.info/blog/2012/08/29/monitoring-rails-app-with-the-new-relic/
         </loc>
-        <lastmod>2012-08-29T22:12:19+08:00</lastmod>
-    </url>
-    <url>
-        <loc>http://tech-blog.blogbin.info/blog/archives/</loc>
-        <lastmod>2012-08-29T22:12:19+08:00</lastmod>
-=======
-        <lastmod>2012-08-31T19:53:44+08:00</lastmod>
+        <lastmod>2012-08-31T20:44:05+08:00</lastmod>
     </url>
     <url>
         <loc>
             http://tech-blog.blogbin.info/blog/2012/08/31/installing-gitlab-on-ubuntu-server-12-04-amd64/
         </loc>
-        <lastmod>2012-08-31T20:35:50+08:00</lastmod>
+        <lastmod>2012-08-31T20:41:59+08:00</lastmod>
     </url>
     <url>
         <loc>http://tech-blog.blogbin.info/blog/archives/</loc>
-        <lastmod>2012-08-31T20:35:50+08:00</lastmod>
->>>>>>> develop
+        <lastmod>2012-08-31T20:44:05+08:00</lastmod>
     </url>
     <url>
         <loc>http://tech-blog.blogbin.info/categories/</loc>
@@ -170,19 +158,15 @@
     </url>
     <url>
         <loc>http://tech-blog.blogbin.info/downloads/code/octopress/categories/</loc>
-        <lastmod>2012-08-29T22:12:19+08:00</lastmod>
+        <lastmod>2012-08-31T20:44:05+08:00</lastmod>
     </url>
     <url>
         <loc>http://tech-blog.blogbin.info/downloads/code/octopress/tags/</loc>
-        <lastmod>2012-08-29T22:12:19+08:00</lastmod>
+        <lastmod>2012-08-31T20:44:05+08:00</lastmod>
     </url>
     <url>
         <loc>http://tech-blog.blogbin.info/</loc>
-<<<<<<< HEAD
-        <lastmod>2012-08-29T22:12:19+08:00</lastmod>
-=======
-        <lastmod>2012-08-31T20:35:50+08:00</lastmod>
->>>>>>> develop
+        <lastmod>2012-08-31T20:44:05+08:00</lastmod>
     </url>
     <url>
         <loc>http://tech-blog.blogbin.info/tags/</loc>
