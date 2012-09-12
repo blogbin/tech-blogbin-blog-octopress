@@ -4,7 +4,7 @@
   <title><![CDATA[Tech.Blogbin's Blog]]></title>
   <link href="http://tech-blog.blogbin.info/atom.xml" rel="self"/>
   <link href="http://tech-blog.blogbin.info/"/>
-  <updated>2012-09-12T23:05:48+08:00</updated>
+  <updated>2012-09-12T23:27:15+08:00</updated>
   <id>http://tech-blog.blogbin.info/</id>
   <author>
     <name><![CDATA[Tech Blogbin ]]></name>
@@ -12,6 +12,115 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Upgrading to Rails 3.2.8]]></title>
+    <link href="http://tech-blog.blogbin.info/blog/2012/09/12/upgrading-to-rails-3-dot-2-8/"/>
+    <updated>2012-09-12T23:23:00+08:00</updated>
+    <id>http://tech-blog.blogbin.info/blog/2012/09/12/upgrading-to-rails-3-dot-2-8</id>
+    <content type="html"><![CDATA[<p>最近计划将 Rails 从 3.1.0 升级到 3.2.8 版本。</p>
+
+<p>一是为解决 Rails 3.1.0 版本的 Security Issue，引入新功能；
+二是为解决 Assets 相关的 Bugs，比如在 development 环境，scss 修改后无法动态编译，需要重启方能生效的问题；</p>
+
+<!--more-->
+
+
+<p>Gemfile 除了将 Rails 版本修改为 3.2.8 之外，需要调整 group assets 中 sass-rails, coffee-rails 的版本依赖。</p>
+
+<p>为避免 Rails 版本升级失败，方便回退版本，在 Gemfile 定义一些变量和判断条件来做检查，如：</p>
+
+<figure class='code'><figcaption><span>Gemfile</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1">#rails</span>
+</span><span class='line'><span class="c1"># rails version</span>
+</span><span class='line'><span class="no">RAILS_3_2_8</span> <span class="o">=</span> <span class="s1">&#39;3.2.8&#39;</span>
+</span><span class='line'><span class="no">RAILS_3_1_0</span> <span class="o">=</span> <span class="s1">&#39;3.1.0&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="no">RAILS_VERSION</span> <span class="o">=</span> <span class="no">RAILS_3_2_8</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">case</span> <span class="no">RAILS_VERSION</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">when</span> <span class="no">RAILS_3_1_0</span>
+</span><span class='line'>    <span class="n">gem</span> <span class="s1">&#39;rails&#39;</span><span class="p">,</span> <span class="s1">&#39;3.1.0&#39;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">when</span> <span class="no">RAILS_3_2_8</span>
+</span><span class='line'>    <span class="n">gem</span> <span class="s1">&#39;rails&#39;</span><span class="p">,</span> <span class="s1">&#39;3.2.8&#39;</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="n">group</span> <span class="ss">:assets</span> <span class="k">do</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">case</span> <span class="no">RAILS_VERSION</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">when</span> <span class="no">RAILS_3_1_0</span>
+</span><span class='line'>      <span class="n">gem</span> <span class="s1">&#39;sass-rails&#39;</span><span class="p">,</span> <span class="s2">&quot;  ~&gt; 3.1.0&quot;</span>
+</span><span class='line'>      <span class="n">gem</span> <span class="s1">&#39;coffee-rails&#39;</span><span class="p">,</span> <span class="s2">&quot;~&gt; 3.1.0&quot;</span>
+</span><span class='line'>      <span class="n">gem</span> <span class="s1">&#39;uglifier&#39;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">when</span> <span class="no">RAILS_3_2_8</span>
+</span><span class='line'>      <span class="n">gem</span> <span class="s1">&#39;sass-rails&#39;</span><span class="p">,</span>   <span class="s1">&#39;~&gt; 3.2.3&#39;</span>
+</span><span class='line'>      <span class="n">gem</span> <span class="s1">&#39;coffee-rails&#39;</span><span class="p">,</span> <span class="s1">&#39;~&gt; 3.2.1&#39;</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="c1"># See https://github.com/sstephenson/execjs#readme for more supported runtimes</span>
+</span><span class='line'>      <span class="c1"># gem &#39;therubyracer&#39;, :platforms =&gt; :ruby</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="n">gem</span> <span class="s1">&#39;uglifier&#39;</span><span class="p">,</span> <span class="s1">&#39;&gt;= 1.0.3&#39;</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>运行 bundle install 之前，需要先删除 Gemfile.lock，以防原来的版本依赖带来的干扰</p>
+
+<figure class='code'><figcaption><span>Gemfile</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">blogbins</span><span class="o">-</span><span class="no">MacBook</span><span class="o">-</span><span class="no">Pro</span><span class="ss">:focus</span> <span class="n">blogbin</span><span class="err">$</span> <span class="n">rm</span> <span class="no">Gemfile</span><span class="o">.</span><span class="n">lock</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">blogbins</span><span class="o">-</span><span class="no">MacBook</span><span class="o">-</span><span class="no">Pro</span><span class="ss">:focus</span> <span class="n">blogbin</span><span class="err">$</span> <span class="n">bundle</span> <span class="n">install</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Using Bootstrap and Bootswatch]]></title>
@@ -1815,35 +1924,6 @@ Hisea <a href="http://hisea.me/">http://hisea.me/</a></p>
 <h5>2. Module 的模块方法可以直接被调用</h5>
 
 <blockquote><p>module的方法有两种，一种是module方法，这类方法可以直接调用。<br/><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span><br/><span class='line-number'>2</span><br/><span class='line-number'>3</span><br/><span class='line-number'>4</span><br/><span class='line-number'>5</span><br/><span class='line-number'>6</span><br/><span class='line-number'>7</span><br/><span class='line-number'>8</span><br/><span class='line-number'>9</span><br/></pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&gt;&gt;</span> <span class="k">module</span> <span class="nn">Test</span><br/></span><span class='line'><span class="o">&gt;&gt;</span>   <span class="k">def</span> <span class="nc">Test</span><span class="o">.</span><span class="nf">test_method</span><br/></span><span class='line'><span class="o">&gt;&gt;</span>     <span class="nb">puts</span> <span class="s2">&quot;hello from module&quot;</span><br/></span><span class='line'><span class="o">&gt;&gt;</span>   <span class="k">end</span><br/></span><span class='line'><span class="o">&gt;&gt;</span> <span class="k">end</span><br/></span><span class='line'><span class="o">=&gt;</span> <span class="kp">nil</span><br/></span><span class='line'><span class="o">&gt;&gt;</span> <span class="no">Test</span><span class="o">::</span><span class="n">test_method</span><br/></span><span class='line'><span class="n">hello</span> <span class="n">from</span> <span class="n">module</span><br/></span><span class='line'><span class="o">=&gt;</span> <span class="kp">nil</span><br/></span></code></pre></td></tr></table></div></figure></p></blockquote>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Hisea's Ruby和元编程的故事 - 第1回: 色色空空，万物皆为对象]]></title>
-    <link href="http://tech-blog.blogbin.info/blog/2012/08/16/a-story-about-ruby-and-programming-ruby-1/"/>
-    <updated>2012-08-16T08:01:00+08:00</updated>
-    <id>http://tech-blog.blogbin.info/blog/2012/08/16/a-story-about-ruby-and-programming-ruby-1</id>
-    <content type="html"><![CDATA[<p>参阅：
-Hisea <a href="http://hisea.me/">http://hisea.me/</a></p>
-
-<p>Ruby和元编程的故事 - 第0回: 欲练神功，必先自废武功 <a href="http://ruby-china.org/topics/1171">http://ruby-china.org/topics/1171</a></p>
-
-<h5>1. 官方说法是 eigenclass 本体类</h5>
-
-<p>有很多名字，比如单例类，估计是因为 eigenclass 本体类很容易就解决设计模式的单例，结果就误传下来了。</p>
-
-<blockquote><p>Singleton/Meta/Anonymous/Ghost/Shadow Class</p><p>   * Singleton Class: 单例类<br/>   * Meta Class：元类<br/>   * Anonymous Class: 匿名类<br/>   * Ghost Class：鬼类<br/>   * Shadow Class: 影子类<br/>上面的这些东东其实说的都是一个东西，我喜欢叫它 影子类。</p></blockquote>
-
-
-
-
-<!--more-->
-
-
-<h5>2. 关于 Object#dup 和 Object#clone 的区别</h5>
-
-<blockquote><p>对象的复制<br/>前文说对象的存在包括两部分，一是状态/实例变量，另一个是行为，本回专注讲了单例方法和影子类。</p><p>Ruby中对象的复制也有两种模式，一个是只复制当前的状态/实例变量 dup。另外一种是连同影子类和引用的对象一起复制，从而把单例方法也复制一份。<br/><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span><br/><span class='line-number'>2</span><br/><span class='line-number'>3</span><br/><span class='line-number'>4</span><br/><span class='line-number'>5</span><br/><span class='line-number'>6</span><br/><span class='line-number'>7</span><br/><span class='line-number'>8</span><br/><span class='line-number'>9</span><br/><span class='line-number'>10</span><br/><span class='line-number'>11</span><br/><span class='line-number'>12</span><br/><span class='line-number'>13</span><br/></pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&gt;&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="s2">&quot;obj&quot;</span><br/></span><span class='line'><span class="o">&gt;&gt;</span> <span class="k">def</span> <span class="nc">a</span><span class="o">.</span><span class="nf">hello_self</span><br/></span><span class='line'><span class="o">&gt;&gt;</span> <span class="nb">puts</span> <span class="s2">&quot;hello </span><span class="si">#{</span><span class="nb">self</span><span class="si">}</span><span class="s2">&quot;</span><br/></span><span class='line'><span class="o">&gt;&gt;</span> <span class="k">end</span><br/></span><span class='line'><span class="o">&gt;&gt;</span> <span class="n">b</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">dup</span><br/></span><span class='line'><span class="o">=&gt;</span> <span class="s2">&quot;obj&quot;</span><br/></span><span class='line'><span class="o">&gt;&gt;</span> <span class="n">b</span><span class="o">.</span><span class="n">hello_self</span><br/></span><span class='line'><span class="no">NoMethodError</span><span class="p">:</span> <span class="n">undefined</span> <span class="nb">method</span> <span class="sb">`hello_self&#39; for &quot;obj&quot;:String</span><br/></span><span class='line'><span class="sb">    from (irb):90</span><br/></span><span class='line'><span class="sb">&gt;&gt; b = a.clone</span><br/></span><span class='line'><span class="sb">=&gt; &quot;obj&quot;</span><br/></span><span class='line'><span class="sb">&gt;&gt; b.hello_self</span><br/></span><span class='line'><span class="sb">hello obj</span><br/></span></code></pre></td></tr></table></div></figure></p><p>其实有本回上述的这些功能，即便是没有class，Ruby也可以作为一种Prototype(类似JavaScript)的面向对象语言了。</p><p>你可以建立一个对象，生成默认的实例变量，把行为作为单例方法定以在这个对象的影子类上，然后用clone生成千千万万个实例。当然这样比较麻烦，但却是可行的途径之一。</p><p>其他Object API<br/>对象还有很多其他的功能，比如可以freeze,另外dup跟clone也有一些其他的引用上面的区别，dup只复制引用，clone会吧引用的对象也复制。</p><p>这些都可以在Object类(Ruby所有对象的父类)API上找到，可以查看apidock.com的文档</p><p>例如关于dup</p><p>.dup() produces a shallow copy of obj—the instance variables of obj are copied, but not the objects they reference. dup copies the tainted state of obj. See also the discussion under Object#clone. In general, clone and dup may have different semantics in descendant classes. While clone is used to duplicate an object, including its internal state, dup typically uses the class of the descendant object to create the new instance.</p></blockquote>
 
 ]]></content>
   </entry>
