@@ -53,6 +53,9 @@ Bootstrap 默认只提供黑色和白色风格，也有一些付费的风格。�
 
 Rails 项目引入 Bootstrap 和 Bootswatch 比较容易。
 
+
+<!--more-->
+
 修改 Gemfile
 ``` ruby Gemfile
 gem 'bootstrap-sass'

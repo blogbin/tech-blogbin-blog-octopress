@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Bundle | Tech.Blogbin's Blog]]></title>
   <link href="http://tech-blog.blogbin.info/blog/categories/bundle/atom.xml" rel="self"/>
   <link href="http://tech-blog.blogbin.info/"/>
-  <updated>2012-09-12T23:02:58+08:00</updated>
+  <updated>2012-09-12T23:05:48+08:00</updated>
   <id>http://tech-blog.blogbin.info/</id>
   <author>
     <name><![CDATA[Tech Blogbin ]]></name>
@@ -35,6 +35,9 @@ Twitter Bootstrap中文版/中文翻译
 <p><a href="https://github.com/maxim/bootswatch-rails">https://github.com/maxim/bootswatch-rails</a></p>
 
 <p>Rails 项目引入 Bootstrap 和 Bootswatch 比较容易。</p>
+
+<!--more-->
+
 
 <p>修改 Gemfile
 <code>ruby Gemfile
