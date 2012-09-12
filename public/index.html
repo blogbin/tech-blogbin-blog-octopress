@@ -12,8 +12,14 @@
   <meta name="author" content="Tech Blogbin <tech.blogbin@gmail.com>">
 
   
-  <meta name="description" content="最近计划将 Rails 从 3.1.0 升级到 3.2.8 版本。 一是为解决 Rails 3.1.0 版本的 Security Issue，引入新功能；
-二是为解决 Assets 相关的 Bugs，比如在 development 环境，scss 修改后无法动态编译，需要重启方能生效的问题； ">
+  <meta name="description" content="通过 RVM 和 Gemset 新建 Rails 项目下运行 bundle 命令，不管是 bundle install or bundle ，都提示失败： env: ruby_noexec_wrapper: No such file or directory 1
+2
+3
+4
+5
+6
+7
+8 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -84,6 +90,71 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/09/12/resolving-error-env-ruby-noexec-wrapper-no-such-file-or-directory/">Resolving Error: Env: Ruby_noexec_wrapper: No Such File or Directory</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-12T23:42:00+08:00" pubdate data-updated="true">Sep 12<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/09/12/resolving-error-env-ruby-noexec-wrapper-no-such-file-or-directory/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>通过 RVM 和 Gemset 新建 Rails 项目下运行 bundle 命令，不管是 bundle install or bundle ，都提示失败：</p>
+
+<p>env: ruby_noexec_wrapper: No such file or directory</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>blogbins-MacBook-Pro:message blogbin$ bundle install
+</span><span class='line'>env: ruby_noexec_wrapper: No such file or directory
+</span><span class='line'>blogbins-MacBook-Pro:message blogbin$ gem list
+</span><span class='line'>
+</span><span class='line'>*** LOCAL GEMS ***
+</span><span class='line'>
+</span><span class='line'>bundler (1.0.22)
+</span><span class='line'>rubygems-update (1.8.24)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>非常奇怪，后来考虑可能是 RubyGem 版本问题，尝试更新 RubyGem 的版本</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2012/09/12/resolving-error-env-ruby-noexec-wrapper-no-such-file-or-directory/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -675,55 +746,6 @@ Twitter Bootstrap中文版/中文翻译
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/08/25/using-neerajcses-octopress-calendar-aside/">Using Neerajcse's Octopress-calendar-aside</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-08-25T03:50:00+08:00" pubdate data-updated="true">Aug 25<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/08/25/using-neerajcses-octopress-calendar-aside/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Octopress 提供按日历归类显示文章的第三方插件。</p>
-
-<p>参阅
-neerajcse/octopress-calendar-aside · GitHub
-<a href="https://github.com/neerajcse/octopress-calendar-aside">https://github.com/neerajcse/octopress-calendar-aside</a></p>
-
-<p>按照官方文档安装和配置 octopress-calendar-aside，插件的效果显示出来了，不过有一些小遗憾。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2012/08/25/using-neerajcses-octopress-calendar-aside/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -741,6 +763,10 @@ neerajcse/octopress-calendar-aside · GitHub
 <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2012/09/12/resolving-error-env-ruby-noexec-wrapper-no-such-file-or-directory/">resolving error: env: ruby_noexec_wrapper: No such file or directory</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2012/09/12/upgrading-to-rails-3-dot-2-8/">Upgrading to Rails 3.2.8</a>
@@ -776,10 +802,6 @@ neerajcse/octopress-calendar-aside · GitHub
     
       <li class="post">
         <a href="/blog/2012/08/25/using-jcftangs-octopress-relatedposts/">Using jcftang's octopress-relatedposts</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/08/25/using-neerajcses-octopress-calendar-aside/">Using neerajcse's octopress-calendar-aside</a>
       </li>
     
   </ul>
@@ -947,6 +969,9 @@ monthCalendar = function(id,year,month)
   var hightlightLinks = new Array();
   
   highlightArray.push('09/12/2012');
+  hightlightLinks.push('/blog/2012/09/12/resolving-error-env-ruby-noexec-wrapper-no-such-file-or-directory/');
+  
+  highlightArray.push('09/12/2012');
   hightlightLinks.push('/blog/2012/09/12/upgrading-to-rails-3-dot-2-8/');
   
   highlightArray.push('09/09/2012');
@@ -972,9 +997,6 @@ monthCalendar = function(id,year,month)
   
   highlightArray.push('08/25/2012');
   hightlightLinks.push('/blog/2012/08/25/using-jcftangs-octopress-relatedposts/');
-  
-  highlightArray.push('08/25/2012');
-  hightlightLinks.push('/blog/2012/08/25/using-neerajcses-octopress-calendar-aside/');
   		
   var cal = new Calendar(month,year,highlightArray,hightlightLinks);
   cal.generateHTML(id);

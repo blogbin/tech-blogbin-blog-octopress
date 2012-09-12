@@ -5,14 +5,21 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Category: Ubuntu - Tech.Blogbin's Blog</title>
+  <title>resolving error: env: ruby_noexec_wrapper: No such file or directory - Tech.Blogbin's Blog</title>
 
   <meta name="alexaVerifyID" content="-6pNt74TSllotvjLFDIa77kSKLI" />
 
   <meta name="author" content="Tech Blogbin <tech.blogbin@gmail.com>">
 
   
-  <meta name="description" content="Category: Ubuntu">
+  <meta name="description" content="通过 RVM 和 Gemset 新建 Rails 项目下运行 bundle 命令，不管是 bundle install or bundle ，都提示失败： env: ruby_noexec_wrapper: No such file or directory 1
+2
+3
+4
+5
+6
+7
+8 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -21,7 +28,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://tech-blog.blogbin.infoblog/categories/ubuntu/">
+  <link rel="canonical" href="http://tech-blog.blogbin.info/blog/2012/09/12/resolving-error-env-ruby-noexec-wrapper-no-such-file-or-directory/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -82,36 +89,164 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Category: Ubuntu</h1>
+    
+      <h1 class="entry-title">Resolving Error: Env: Ruby_noexec_wrapper: No Such File or Directory</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-12T23:42:00+08:00" pubdate data-updated="true">Sep 12<span>th</span>, 2012</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives" class="category">
+
+
+<div class="entry-content"><p>通过 RVM 和 Gemset 新建 Rails 项目下运行 bundle 命令，不管是 bundle install or bundle ，都提示失败：</p>
+
+<p>env: ruby_noexec_wrapper: No such file or directory</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>blogbins-MacBook-Pro:message blogbin$ bundle install
+</span><span class='line'>env: ruby_noexec_wrapper: No such file or directory
+</span><span class='line'>blogbins-MacBook-Pro:message blogbin$ gem list
+</span><span class='line'>
+</span><span class='line'>*** LOCAL GEMS ***
+</span><span class='line'>
+</span><span class='line'>bundler (1.0.22)
+</span><span class='line'>rubygems-update (1.8.24)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>非常奇怪，后来考虑可能是 RubyGem 版本问题，尝试更新 RubyGem 的版本</p>
+
+<!--more-->
 
 
 
-  
-  <h2>2012</h2>
 
-<article>
-  
-<h1><a href="/blog/2012/08/27/installing-bigbluebutton/">Installing BigBlueButton</a></h1>
-<time datetime="2012-08-27T20:56:00+08:00" pubdate><span class='month'>Aug</span> <span class='day'>27</span> <span class='year'>2012</span></time>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>blogbins-MacBook-Pro:message blogbin$ gem update --system
+</span><span class='line'>Updating rubygems-update
+</span><span class='line'>Fetching: rubygems-update-1.8.24.gem (100%)
+</span><span class='line'>Successfully installed rubygems-update-1.8.24
+</span><span class='line'>Installing RubyGems 1.8.24
+</span><span class='line'>RubyGems 1.8.24 installed
+</span><span class='line'>
+</span><span class='line'>== 1.8.24 / 2012-04-27
+</span><span class='line'>
+</span><span class='line'>* 1 bug fix:
+</span><span class='line'>
+</span><span class='line'>  * Install the .pem files properly. Fixes #320
+</span><span class='line'>  * Remove OpenSSL dependency from the http code path
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>------------------------------------------------------------------------------
+</span><span class='line'>
+</span><span class='line'>RubyGems installed the following executables:
+</span><span class='line'>     /Users/blogbin/.rvm/rubies/ruby-1.9.3-p0/bin/gem
+</span><span class='line'>
+</span><span class='line'>RubyGems system software updated</span></code></pre></td></tr></table></div></figure>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/bigbluebutton/'>BigBlueButton</a>, <a class='category' href='/blog/categories/ubuntu/'>Ubuntu</a></span>
-</footer>
 
-
-</article>
-
+<p>重新运行 bundle 命令，均正常。</p>
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">Tech Blogbin <tech.blogbin@gmail.com></span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-12T23:42:00+08:00" pubdate data-updated="true">Sep 12<span>th</span>, 2012</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://tech-blog.blogbin.info/blog/2012/09/12/resolving-error-env-ruby-noexec-wrapper-no-such-file-or-directory/" data-via="tech_blogbin" data-counturl="http://tech-blog.blogbin.info/blog/2012/09/12/resolving-error-env-ruby-noexec-wrapper-no-such-file-or-directory/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2012/09/12/upgrading-to-rails-3-dot-2-8/" title="Previous Post: Upgrading to Rails 3.2.8">&laquo; Upgrading to Rails 3.2.8</a>
+      
+      
+    </p>
+  </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -170,6 +305,26 @@
 <section>
     <h1>Related Posts</h1>
     <ul class="posts">
+    
+        <li class="related">
+        <a href="/blog/2012/09/12/upgrading-to-rails-3-dot-2-8/">Upgrading to Rails 3.2.8</a>
+        </li>
+    
+        <li class="related">
+        <a href="/blog/2012/09/09/using-bootstrap/">Using Bootstrap and Bootswatch</a>
+        </li>
+    
+        <li class="related">
+        <a href="/blog/2012/08/31/using-bitbucket/">Using Bitbucket</a>
+        </li>
+    
+        <li class="related">
+        <a href="/blog/2012/08/31/installing-gitlab-on-ubuntu-server-12-04-amd64/">installing-gitlab-on-ubuntu-server-12-04-amd64</a>
+        </li>
+    
+        <li class="related">
+        <a href="/blog/2012/08/29/monitoring-rails-app-with-the-new-relic/">Monitoring rails app with the New Relic</a>
+        </li>
     
     </ul>
 </section>
@@ -428,7 +583,10 @@ $(document).ready(function(){
       var disqus_shortname = 'tech-blogbin-blog';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://tech-blog.blogbin.info/blog/2012/09/12/resolving-error-env-ruby-noexec-wrapper-no-such-file-or-directory/';
+        var disqus_url = 'http://tech-blog.blogbin.info/blog/2012/09/12/resolving-error-env-ruby-noexec-wrapper-no-such-file-or-directory/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

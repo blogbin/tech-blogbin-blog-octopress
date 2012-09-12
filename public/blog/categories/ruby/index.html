@@ -364,6 +364,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2012/09/12/resolving-error-env-ruby-noexec-wrapper-no-such-file-or-directory/">resolving error: env: ruby_noexec_wrapper: No such file or directory</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/09/12/upgrading-to-rails-3-dot-2-8/">Upgrading to Rails 3.2.8</a>
       </li>
     
@@ -397,10 +401,6 @@
     
       <li class="post">
         <a href="/blog/2012/08/25/using-jcftangs-octopress-relatedposts/">Using jcftang's octopress-relatedposts</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/08/25/using-neerajcses-octopress-calendar-aside/">Using neerajcse's octopress-calendar-aside</a>
       </li>
     
   </ul>
@@ -568,6 +568,9 @@ monthCalendar = function(id,year,month)
   var hightlightLinks = new Array();
   
   highlightArray.push('09/12/2012');
+  hightlightLinks.push('/blog/2012/09/12/resolving-error-env-ruby-noexec-wrapper-no-such-file-or-directory/');
+  
+  highlightArray.push('09/12/2012');
   hightlightLinks.push('/blog/2012/09/12/upgrading-to-rails-3-dot-2-8/');
   
   highlightArray.push('09/09/2012');
@@ -593,9 +596,6 @@ monthCalendar = function(id,year,month)
   
   highlightArray.push('08/25/2012');
   hightlightLinks.push('/blog/2012/08/25/using-jcftangs-octopress-relatedposts/');
-  
-  highlightArray.push('08/25/2012');
-  hightlightLinks.push('/blog/2012/08/25/using-neerajcses-octopress-calendar-aside/');
   		
   var cal = new Calendar(month,year,highlightArray,hightlightLinks);
   cal.generateHTML(id);
