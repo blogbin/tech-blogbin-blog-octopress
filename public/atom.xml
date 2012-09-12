@@ -4,7 +4,7 @@
   <title><![CDATA[Tech.Blogbin's Blog]]></title>
   <link href="http://tech-blog.blogbin.info/atom.xml" rel="self"/>
   <link href="http://tech-blog.blogbin.info/"/>
-  <updated>2012-08-31T23:16:56+08:00</updated>
+  <updated>2012-09-12T23:02:58+08:00</updated>
   <id>http://tech-blog.blogbin.info/</id>
   <author>
     <name><![CDATA[Tech Blogbin ]]></name>
@@ -12,6 +12,163 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Using Bootstrap and Bootswatch]]></title>
+    <link href="http://tech-blog.blogbin.info/blog/2012/09/09/using-bootstrap/"/>
+    <updated>2012-09-09T01:01:00+08:00</updated>
+    <id>http://tech-blog.blogbin.info/blog/2012/09/09/using-bootstrap</id>
+    <content type="html"><![CDATA[<p>Bootstrap 是 Twitter 开源免费提供的 CSS框架，它是快速开发Web应用程序的前端工具包。
+它是一个CSS和HTML的集合，它使用了最新的浏览器技术，给Web开发提供了时尚的版式</p>
+
+<p><a href="http://twitter.github.com/bootstrap/index.html">http://twitter.github.com/bootstrap/index.html</a></p>
+
+<p><a href="https://github.com/twitter/bootstrap">https://github.com/twitter/bootstrap</a></p>
+
+<p>中文翻译参见：
+Twitter Bootstrap中文版/中文翻译
+<a href="http://wrongwaycn.github.com/bootstrap/docs/index.html">http://wrongwaycn.github.com/bootstrap/docs/index.html</a></p>
+
+<p>Bootstrap 默认只提供黑色和白色风格，也有一些付费的风格。如果想尝试免费的其它风格，可以试试看 Bootswatch
+<a href="http://bootswatch.com/">http://bootswatch.com/</a></p>
+
+<p><a href="https://github.com/maxim/bootswatch-rails">https://github.com/maxim/bootswatch-rails</a></p>
+
+<p>Rails 项目引入 Bootstrap 和 Bootswatch 比较容易。</p>
+
+<p>修改 Gemfile</p>
+
+<figure class='code'><figcaption><span>Gemfile</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">gem</span> <span class="s1">&#39;bootstrap-sass&#39;</span>
+</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;bootswatch-rails&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>在 app/assets/stylesheets/application.css.scs 通过 @import 引入 bootstrap 和 bootswatch 的 css</p>
+
+<figure class='code'><figcaption><span>app/assets/stylesheets/application.css.scss</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="o">//</span> <span class="nt">Example</span> <span class="nt">using</span> <span class="s1">&#39;Cerulean&#39;</span> <span class="nt">bootswatch</span>
+</span><span class='line'><span class="o">//</span>
+</span><span class='line'><span class="o">//</span> <span class="nt">First</span> <span class="nt">import</span> <span class="nt">journal</span> <span class="nt">variables</span>
+</span><span class='line'><span class="k">@import</span> <span class="s2">&quot;bootswatch/cerulean/variables&quot;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">//</span> <span class="nt">Then</span> <span class="nt">bootstrap</span> <span class="nt">itself</span>
+</span><span class='line'><span class="k">@import</span> <span class="s2">&quot;bootstrap&quot;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">//</span> <span class="nt">Bootstrap</span> <span class="nt">body</span> <span class="nt">padding</span> <span class="nt">for</span> <span class="nt">fixed</span> <span class="nt">navbar</span>
+</span><span class='line'><span class="o">//</span><span class="nt">body</span> <span class="p">{</span> <span class="k">padding-top</span><span class="o">:</span> <span class="m">40px</span><span class="p">;</span> <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">//</span> <span class="nt">Responsive</span> <span class="nt">styles</span> <span class="nt">go</span> <span class="nt">here</span> <span class="nt">in</span> <span class="nt">case</span> <span class="nt">you</span> <span class="nt">want</span> <span class="nt">them</span>
+</span><span class='line'><span class="k">@import</span> <span class="s2">&quot;bootstrap-responsive&quot;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">//</span> <span class="nt">And</span> <span class="nt">finally</span> <span class="nt">bootswatch</span> <span class="nt">style</span> <span class="nt">itself</span>
+</span><span class='line'><span class="k">@import</span> <span class="s2">&quot;bootswatch/cerulean/bootswatch&quot;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">//</span> <span class="nt">Whatever</span> <span class="nt">application</span> <span class="nt">styles</span> <span class="nt">you</span> <span class="nt">have</span> <span class="nt">go</span> <span class="nt">last</span>
+</span><span class='line'><span class="k">@import</span> <span class="s2">&quot;video_recommendation_types&quot;</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Bootstrap 有些交互控件（如 Dropdown）需要一些 javascript，建议部署在 vertor/assets/javascripts目录</p>
+
+<figure class='code'><figcaption><span>app/assets/stylesheets/application.css.scss</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">blogbins-MacBook-Pro</span><span class="nd">:focus</span> <span class="nt">blogbin</span><span class="err">$</span> <span class="nt">find</span> <span class="nt">vendor</span><span class="o">/</span><span class="nt">assets</span><span class="o">/</span>
+</span><span class='line'><span class="nt">vendor</span><span class="o">/</span><span class="nt">assets</span><span class="o">/</span>
+</span><span class='line'><span class="nt">vendor</span><span class="o">/</span><span class="nt">assets</span><span class="o">//</span><span class="nt">javascripts</span>
+</span><span class='line'><span class="nt">vendor</span><span class="o">/</span><span class="nt">assets</span><span class="o">//</span><span class="nt">javascripts</span><span class="o">/</span><span class="nt">bootstraps</span>
+</span><span class='line'><span class="nt">vendor</span><span class="o">/</span><span class="nt">assets</span><span class="o">//</span><span class="nt">javascripts</span><span class="o">/</span><span class="nt">bootstraps</span><span class="o">/</span><span class="nt">bootstrap-collapse</span><span class="nc">.js</span>
+</span><span class='line'><span class="nt">vendor</span><span class="o">/</span><span class="nt">assets</span><span class="o">//</span><span class="nt">javascripts</span><span class="o">/</span><span class="nt">bootstraps</span><span class="o">/</span><span class="nt">bootstrap-dropdown</span><span class="nc">.js</span>
+</span><span class='line'><span class="nt">vendor</span><span class="o">/</span><span class="nt">assets</span><span class="o">//</span><span class="nt">javascripts</span><span class="o">/</span><span class="nt">bootstraps</span><span class="o">/</span><span class="nt">index</span><span class="nc">.js</span>
+</span><span class='line'><span class="nt">vendor</span><span class="o">/</span><span class="nt">assets</span><span class="o">//</span><span class="nt">stylesheets</span>
+</span><span class='line'><span class="nt">vendor</span><span class="o">/</span><span class="nt">assets</span><span class="o">//</span><span class="nt">stylesheets</span><span class="o">/</span><span class="nc">.gitkeep</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>建议在该目录下创建 manifest 清单文件，引用其它 javascript 文件</p>
+
+<figure class='code'><figcaption><span>app/assets/stylesheets/application.css.scss</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">blogbins-MacBook-Pro</span><span class="nd">:focus</span> <span class="nt">blogbin</span><span class="err">$</span> <span class="nt">cat</span> <span class="nt">vendor</span><span class="o">/</span><span class="nt">assets</span><span class="o">//</span><span class="nt">javascripts</span><span class="o">/</span><span class="nt">bootstraps</span><span class="o">/</span><span class="nt">index</span><span class="nc">.js</span>
+</span><span class='line'><span class="o">//=</span> <span class="nt">require_tree</span> <span class="o">.</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">blogbins-MacBook-Pro</span><span class="nd">:focus</span> <span class="nt">blogbin</span><span class="err">$</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>在 app/assets/javascripts/application.js 引入需要的 javascript</p>
+
+<figure class='code'><figcaption><span>app/assets/javascripts/application.js</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="c1">//This is a manifest file that&#39;ll be compiled into including all the files listed below.</span>
+</span><span class='line'><span class="c1">//Add new JavaScript/Coffee code in separate files in this directory and they&#39;ll automatically</span>
+</span><span class='line'><span class="c1">// be included in the compiled file accessible from http://example.com/assets/application.js</span>
+</span><span class='line'><span class="c1">//It&#39;s not advisable to add code directly here, but if you do, it&#39;ll appear at the bottom of the</span>
+</span><span class='line'><span class="c1">// the compiled file.</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="c1">//= require jquery</span>
+</span><span class='line'><span class="c1">//= require jquery_ujs</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">//= require bootstraps</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// 可以继续需要引入其它 javascript 文件或清单文件</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>最后运行 bundle install 安装／更新 gems 之前，需要先删除 Gemfile.lock，以防原来的版本依赖带来的干扰</p>
+
+<figure class='code'><figcaption><span>app/assets/javascripts/application.js</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">blogbins</span><span class="o">-</span><span class="nx">MacBook</span><span class="o">-</span><span class="nx">Pro</span><span class="o">:</span><span class="nx">focus</span> <span class="nx">blogbin$</span> <span class="nx">rm</span> <span class="nx">Gemfile</span><span class="p">.</span><span class="nx">lock</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">blogbins</span><span class="o">-</span><span class="nx">MacBook</span><span class="o">-</span><span class="nx">Pro</span><span class="o">:</span><span class="nx">focus</span> <span class="nx">blogbin$</span> <span class="nx">bundle</span> <span class="nx">install</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Using Bitbucket]]></title>
@@ -1684,60 +1841,6 @@ Hisea <a href="http://hisea.me/">http://hisea.me/</a></p>
 <h5>2. 关于 Object#dup 和 Object#clone 的区别</h5>
 
 <blockquote><p>对象的复制<br/>前文说对象的存在包括两部分，一是状态/实例变量，另一个是行为，本回专注讲了单例方法和影子类。</p><p>Ruby中对象的复制也有两种模式，一个是只复制当前的状态/实例变量 dup。另外一种是连同影子类和引用的对象一起复制，从而把单例方法也复制一份。<br/><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span><br/><span class='line-number'>2</span><br/><span class='line-number'>3</span><br/><span class='line-number'>4</span><br/><span class='line-number'>5</span><br/><span class='line-number'>6</span><br/><span class='line-number'>7</span><br/><span class='line-number'>8</span><br/><span class='line-number'>9</span><br/><span class='line-number'>10</span><br/><span class='line-number'>11</span><br/><span class='line-number'>12</span><br/><span class='line-number'>13</span><br/></pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&gt;&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="s2">&quot;obj&quot;</span><br/></span><span class='line'><span class="o">&gt;&gt;</span> <span class="k">def</span> <span class="nc">a</span><span class="o">.</span><span class="nf">hello_self</span><br/></span><span class='line'><span class="o">&gt;&gt;</span> <span class="nb">puts</span> <span class="s2">&quot;hello </span><span class="si">#{</span><span class="nb">self</span><span class="si">}</span><span class="s2">&quot;</span><br/></span><span class='line'><span class="o">&gt;&gt;</span> <span class="k">end</span><br/></span><span class='line'><span class="o">&gt;&gt;</span> <span class="n">b</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">dup</span><br/></span><span class='line'><span class="o">=&gt;</span> <span class="s2">&quot;obj&quot;</span><br/></span><span class='line'><span class="o">&gt;&gt;</span> <span class="n">b</span><span class="o">.</span><span class="n">hello_self</span><br/></span><span class='line'><span class="no">NoMethodError</span><span class="p">:</span> <span class="n">undefined</span> <span class="nb">method</span> <span class="sb">`hello_self&#39; for &quot;obj&quot;:String</span><br/></span><span class='line'><span class="sb">    from (irb):90</span><br/></span><span class='line'><span class="sb">&gt;&gt; b = a.clone</span><br/></span><span class='line'><span class="sb">=&gt; &quot;obj&quot;</span><br/></span><span class='line'><span class="sb">&gt;&gt; b.hello_self</span><br/></span><span class='line'><span class="sb">hello obj</span><br/></span></code></pre></td></tr></table></div></figure></p><p>其实有本回上述的这些功能，即便是没有class，Ruby也可以作为一种Prototype(类似JavaScript)的面向对象语言了。</p><p>你可以建立一个对象，生成默认的实例变量，把行为作为单例方法定以在这个对象的影子类上，然后用clone生成千千万万个实例。当然这样比较麻烦，但却是可行的途径之一。</p><p>其他Object API<br/>对象还有很多其他的功能，比如可以freeze,另外dup跟clone也有一些其他的引用上面的区别，dup只复制引用，clone会吧引用的对象也复制。</p><p>这些都可以在Object类(Ruby所有对象的父类)API上找到，可以查看apidock.com的文档</p><p>例如关于dup</p><p>.dup() produces a shallow copy of obj—the instance variables of obj are copied, but not the objects they reference. dup copies the tainted state of obj. See also the discussion under Object#clone. In general, clone and dup may have different semantics in descendant classes. While clone is used to duplicate an object, including its internal state, dup typically uses the class of the descendant object to create the new instance.</p></blockquote>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Ruby和元编程的故事 - 第0回: 欲练神功，必先自废武功]]></title>
-    <link href="http://tech-blog.blogbin.info/blog/2012/08/16/a-story-about-ruby-and-metaprogramming-ruby-1/"/>
-    <updated>2012-08-16T08:01:00+08:00</updated>
-    <id>http://tech-blog.blogbin.info/blog/2012/08/16/a-story-about-ruby-and-metaprogramming-ruby-1</id>
-    <content type="html"><![CDATA[<p>参阅：
-Hisea <a href="http://hisea.me/">http://hisea.me/</a>
-的Ruby和元编程的故事 - 第0回: 欲练神功，必先自废武功</p>
-
-<p>介绍了 Ruby 和元编程的一些特点，主要是在一些思维上的改变，特别是从 Java 等其它语言过来的人。</p>
-
-<p><a href="http://ruby-china.org/topics/1171">http://ruby-china.org/topics/1171</a></p>
-
-<h5>1. 注意动态语言和动态类型的区别，动态类型仅为动态语言其中一个部分。</h5>
-
-<blockquote><p>动态语言:<br/>动态语言的定义还很模糊，很多人把动态语言跟动态类型语言搞混，对于Hisea来说，动态语言就是类，方法，及其他定义可以在运行时进行改变，元编程就是利用这一特性。由此可见，动态语言跟动态类型语言并不是一个概念.</p></blockquote>
-
-
-
-
-<!--more-->
-
-
-<h5>2. 推崇模块混入或者扩展的方式增加 API 功能，而非事事皆继承。</h5>
-
-<p>ps: 打开类也是一种途径。</p>
-
-<blockquote><p>父类的作用仅仅是定义了API的存在，这在Java中是非常常见的，可是在Ruby中，这个父类其实存在的意义不是特别大。Ruby更倾向于,任何能起飞(拥有‘起飞’方法)的对象都是飞行器，而不是任何继承飞行器的类的对象。</p><p>  1. 需要用继承分享代码么？ ActiveRecord需要你继承ActiveRecord::Base,例如:<br/><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span><br/><span class='line-number'>2</span><br/></pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Post</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span><br/></span><span class='line'><span class="k">end</span><br/></span></code></pre></td></tr></table></div></figure><br/>Hisea本人觉得类似Mongoid的Mixin方式更适合解决类似的问题。 Post从设计逻辑上来讲,跟ActiveRecord::Base没有半毛钱关系。继承关系完全用于分享代码，而在Ruby中，更好的分享代码的办法是用Mixin.</p></blockquote>
-
-
-<h5>3. 个人认为 UML 仍是需要的</h5>
-
-<p>特别是项目中涉及到十几以上模型的时候，模型相互之间关系通过 UML 等方式更容易展现。关键是要及时更新和维护。</p>
-
-<blockquote><p>4,忘记UML(或其他)设计大法<br/>这个话题是3的继续，公司新招了一个Ruby程序员，他来了一两个星期后问了个问题，问为什么公司(或者其他Ruby程序员)不爱用UML之类的设计工具，当时我也一时找不出答案，后来开车回家的路上用半个小时想明白了，UML是一个类只见关系的静态表示，Ruby运行时的情况却是不停在变幻。用静态去表示动态，自然捉襟见肘。</p></blockquote>
-
-
-<h5>4. 好的 IDE 对 Ruby 开发有一定好处的</h5>
-
-<p>比如  RubyMine :</p>
-
-<ol>
-<li>调试功能不错，可以运行时调试，设置断点，查看变量。。。</li>
-<li>支持一定类，模块，动法以及变量的查找，遇上 IDE 无法直接识别的，会列一个清单让用户选择</li>
-</ol>
-
-
-<p>唯一不好的地方就是，RubyMine 是用 Java 做的，占内存，运行有时会卡，最好机器配置为 intel Core i5，8 G 内存以上，用 SSD 固态硬盘更好。</p>
-
-<blockquote><p>5.为什么不用IDE?<br/>很多从Java阵营转来，尤其是有多年eclipse经验的Ruby初学者尤其是经常爱问，Ruby用什么IDE。</p><p><br/>得到的回答往往是text mate,vim,sublime text 2等等文本编辑器。</p><p><br/>很多人可能纳闷，为什么Ruby/Rails没有一个IDE占领大片江山的情况，为什么Netbeans／Eclipse再Ruby开发阵营中没有其他语言开发占的地位重要。</p><p>其实答案很简单。</p><p><br/>  1. IDE最讨喜的功能是什么？</p><p><br/>很多用惯了IDE开发的Java程序员甚至XCode程序员，都会说最爱的功能是代码不全，object之后按一下&#8217;.&#8217;立马生成一个方法列表。转到Ruby用文本编辑器，没有这个功能，很是郁闷。其实道理很简单，如果方法都是动态生成的，在写程序的时候怎么能给出一个列表呢。</p><p><br/>  2. Debugger还是必要工具么？</p><p><br/>静态语言开发，调试是居家旅行杀人灭口必备良药。而IDE又是调试的好帮手。</p><p>Ruby／Rails的Debugger还没那么成熟，而且如果用logger, raise在适当的地方输出inspect, to_yaml等内容，也可以很容易的找到错误。</p><p><br/>  3. Eclipse可以很好的配置Java开发环境。</p><p>Ruby/Rails有好用的RVM,RubyGems,Bundler.</p><p><br/>所以，不补全，不调试，不配环境，要IDE不也是拿来当文本编辑器用么</p></blockquote>
 
 ]]></content>
   </entry>
