@@ -4,7 +4,7 @@
   <title><![CDATA[Category: SASS | Tech.Blogbin's Blog]]></title>
   <link href="http://tech-blog.blogbin.info/blog/categories/sass/atom.xml" rel="self"/>
   <link href="http://tech-blog.blogbin.info/"/>
-  <updated>2012-09-12T23:56:17+08:00</updated>
+  <updated>2012-09-13T00:20:25+08:00</updated>
   <id>http://tech-blog.blogbin.info/</id>
   <author>
     <name><![CDATA[Tech Blogbin ]]></name>
@@ -12,6 +12,104 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Resolving error: .css.scss has already been required]]></title>
+    <link href="http://tech-blog.blogbin.info/blog/2012/09/13/resolving-error-css-dot-scss-has-already-been-required/"/>
+    <updated>2012-09-13T00:01:00+08:00</updated>
+    <id>http://tech-blog.blogbin.info/blog/2012/09/13/resolving-error-css-dot-scss-has-already-been-required</id>
+    <content type="html"><![CDATA[<p>浏览器访问 Rails 的 Web 界面时，界面提示 app/assets/stylesheets/application.css.scss 出错</p>
+
+<p>.css.scss has already been required</p>
+
+<p>考虑后觉得可能是 css 和 javascript 重复引入的造成的。即 .css.scss 不能 require 和 import 重复的 css</p>
+
+<!--more-->
+
+
+<p>如 app/assets/stylesheets/application.css.scss
+```
+/<em>
+ * This is a manifest file that'll automatically include all the stylesheets available in this directory
+ * and any sub-directories. You're free to add application-wide styles to this file and they'll appear at
+ * the top of the compiled file, but it's generally better to create a new file per style scope.
+ </em>= require_self
+ <em>= require_tree .
+</em>/</p>
+
+<p>// Example using 'Cerulean' bootswatch
+//
+// First import journal variables
+@import "bootswatch/cerulean/variables";</p>
+
+<p>// Then bootstrap itself
+@import "bootstrap";</p>
+
+<p>// Bootstrap body padding for fixed navbar
+//body { padding-top: 40px; }</p>
+
+<p>// Responsive styles go here in case you want them
+@import "bootstrap-responsive";</p>
+
+<p>// And finally bootswatch style itself
+@import "bootswatch/cerulean/bootswatch";</p>
+
+<p>// Whatever application styles you have go last
+@import "admin";
+```</p>
+
+<p>修改为仅保留
+```
+// Example using 'Cerulean' bootswatch
+//
+// First import journal variables
+@import "bootswatch/cerulean/variables";</p>
+
+<p>// Then bootstrap itself
+@import "bootstrap";</p>
+
+<p>// Bootstrap body padding for fixed navbar
+//body { padding-top: 40px; }</p>
+
+<p>// Responsive styles go here in case you want them
+@import "bootstrap-responsive";</p>
+
+<p>// And finally bootswatch style itself
+@import "bootswatch/cerulean/bootswatch";</p>
+
+<p>// Whatever application styles you have go last
+@import "admin";
+```</p>
+
+<p>同样.js 不能重复 require 相同的 js
+如 app/assets/javascripts/application.js
+```
+//This is a manifest file that'll be compiled into including all the files listed below.
+//Add new JavaScript/Coffee code in separate files in this directory and they'll automatically
+// be included in the compiled file accessible from http://example.com/assets/application.js
+//It's not advisable to add code directly here, but if you do, it'll appear at the bottom of the
+// the compiled file.</p>
+
+<p>//= require jquery
+//= require jquery_ujs</p>
+
+<p>//= require bootstraps
+```</p>
+
+<p>改为仅保留
+<code>
+// This is a manifest file that'll be compiled into including all the files listed below.
+// Add new JavaScript/Coffee code in separate files in this directory and they'll automatically
+// be included in the compiled file accessible from http://example.com/assets/application.js
+// It's not advisable to add code directly here, but if you do, it'll appear at the bottom of the
+// the compiled file.
+//
+//= require jquery
+//= require jquery_ujs
+//= require_tree .
+</code></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Using Bootstrap and Bootswatch]]></title>
