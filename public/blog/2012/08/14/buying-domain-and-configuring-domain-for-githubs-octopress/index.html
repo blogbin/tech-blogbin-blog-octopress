@@ -1,0 +1,2708 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>购买个人域名以及为部署在 GitHub 的Octopress 配置个人域名 - Tech.Blogbin's Blog</title>
+
+  <meta name="alexaVerifyID" content="-6pNt74TSllotvjLFDIa77kSKLI" />
+
+  <meta name="author" content="Tech Blogbin <tech.blogbin@gmail.com>">
+
+  
+  <meta name="description" content="部署到 GitHub 的 Octopress 默认采用二级域名 ＋ 二级目录来访问，如：
+http://blogbin.github.com/tech-blogbin-blog 现计划启用个人独立二级域名直接访问，即：
+http://tech-blog.blogbin.info/ 一. 调整过程 &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://tech-blog.blogbin.info/blog/2012/08/14/buying-domain-and-configuring-domain-for-githubs-octopress/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Tech.Blogbin's Blog" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-34083026-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Tech.Blogbin's Blog</a></h1>
+  
+    <h2>A blogging for geeker.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss email">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+    <li><a href="Tech Blogbin <tech.blogbin@gmail.com>" rel="subscribe-email" title="subscribe via email">Email</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:tech-blog.blogbin.info" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/categories">Categories</a></li>
+  <li><a href="/tags">Tags</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">购买个人域名以及为部署在 GitHub 的Octopress 配置个人域名</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-14T22:41:00+08:00" pubdate data-updated="true">Aug 14<span>th</span>, 2012</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>部署到 GitHub 的 Octopress 默认采用二级域名 ＋ 二级目录来访问，如：
+<a href="http://blogbin.github.com/tech-blogbin-blog" title="Tech.Blogbin'Blog at GitHub">http://blogbin.github.com/tech-blogbin-blog</a></p>
+
+<p>现计划启用个人独立二级域名直接访问，即：
+<a href="http://tech-blog.blogbin.info/" title="Tech.Blogbin'Blog">http://tech-blog.blogbin.info/</a></p>
+
+<p>一. 调整过程：</p>
+
+<!--more-->
+
+
+<p>参阅：
+<a href="http://octopress.org/docs/deploying/github/" title="Octopress's document to deploying GitHub">http://octopress.org/docs/deploying/github/</a></p>
+
+<p><a href="https://help.github.com/articles/setting-up-a-custom-domain-with-pages">https://help.github.com/articles/setting-up-a-custom-domain-with-pages</a></p>
+
+<h5>1. 购买 blogbin.info 域名</h5>
+
+<p>Domain Name Registration and Web Hosting | Eznow.com
+<a href="http://www.eznow.com/">http://www.eznow.com/</a></p>
+
+<h5>2. 配置域名</h5>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>@               A                207.97.227.245
+</span><span class='line'>tech-blog     CNAME               blogbin.github.com.</span></code></pre></td></tr></table></div></figure>
+
+
+<h5>3. 为 GitHub 创建 CNAME</h5>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>blogbins-MacBook-Pro:octopress blogbin$ echo 'tech-blog.blogbin.info' &gt;&gt; source/CNAME</span></code></pre></td></tr></table></div></figure>
+
+
+<h5>4. 调整 Octopress 配置文件</h5>
+
+<p>因为之前参阅：
+<a href="http://octopress.org/docs/deploying/github/" title="Octopress's document to deploying GitHub">http://octopress.org/docs/deploying/github/</a>，运行过：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>blogbins-MacBook-Pro:octopress blogbin$ rake setup_github_pages</span></code></pre></td></tr></table></div></figure>
+
+
+<p>public 和 _deploy 目录均出现 tech-blogbin-blog 子目录，</p>
+
+<p>使得部署到 GitHub 的 Octopress 默认采用二级域名 ＋ 二级目录来访问，如：
+<a href="http://blogbin.github.com/tech-blogbin-blog" title="Tech.Blogbin'Blog at GitHub">http://blogbin.github.com/tech-blogbin-blog</a></p>
+
+<p>现若改为个人独立二级域名直接访问，即：
+<a href="http://tech-blog.blogbin.info/" title="Tech.Blogbin'Blog">http://tech-blog.blogbin.info/</a></p>
+
+<p>需要将以下文件中有关子目录 tech-blogbin-blog 的配置项目进行相应的调整：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>_config.yml
+</span><span class='line'>config.rb
+</span><span class='line'>Rakefile</span></code></pre></td></tr></table></div></figure>
+
+
+<p>_config.yml</p>
+
+<div><script src='https://gist.github.com/66.js?file=_config.xml'></script>
+<noscript><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head prefix=&quot;og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# githubog: http://ogp.me/ns/fb/githubog#&quot;&gt;
+    &lt;meta charset='utf-8'&gt;
+    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;
+        &lt;title&gt;404 · GitHub&lt;/title&gt;
+    &lt;link rel=&quot;search&quot; type=&quot;application/opensearchdescription+xml&quot; href=&quot;/opensearch.xml&quot; title=&quot;GitHub&quot; /&gt;
+    &lt;link rel=&quot;fluid-icon&quot; href=&quot;https://raw.github.com/fluidicon.png&quot; title=&quot;GitHub&quot; /&gt;
+    &lt;link rel=&quot;apple-touch-icon-precomposed&quot; sizes=&quot;57x57&quot; href=&quot;apple-touch-icon-114.png&quot; /&gt;
+    &lt;link rel=&quot;apple-touch-icon-precomposed&quot; sizes=&quot;114x114&quot; href=&quot;apple-touch-icon-114.png&quot; /&gt;
+    &lt;link rel=&quot;apple-touch-icon-precomposed&quot; sizes=&quot;72x72&quot; href=&quot;apple-touch-icon-144.png&quot; /&gt;
+    &lt;link rel=&quot;apple-touch-icon-precomposed&quot; sizes=&quot;144x144&quot; href=&quot;apple-touch-icon-144.png&quot; /&gt;
+
+    
+    
+    &lt;link rel=&quot;icon&quot; type=&quot;image/x-icon&quot; href=&quot;/favicon.png&quot; /&gt;
+
+    
+
+    &lt;link href=&quot;https://a248.e.akamai.net/assets.github.com/assets/github-fc8f93aa673bcc847295986dc6d690ee822e90d0.css&quot; media=&quot;screen&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+    &lt;link href=&quot;https://a248.e.akamai.net/assets.github.com/assets/github2-327db63293098d6476136b438e34be409ae3b461.css&quot; media=&quot;screen&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+    
+
+
+    &lt;script src=&quot;https://a248.e.akamai.net/assets.github.com/assets/frameworks-917510fd4e1e5f0487cfe32445a6cfc8927e84f1.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
+    
+    &lt;script defer=&quot;defer&quot; src=&quot;https://a248.e.akamai.net/assets.github.com/assets/github-bf18c28a497214adf5ccf6725575da23a83918fd.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
+    
+    
+
+    
+  &lt;/head&gt;
+
+
+  &lt;body class=&quot;logged_out    env-production &quot;&gt;
+    &lt;div id=&quot;wrapper&quot;&gt;
+
+    
+    
+
+      &lt;div id=&quot;header&quot; class=&quot;true clearfix&quot;&gt;
+        &lt;div class=&quot;container clearfix&quot;&gt;
+          &lt;a class=&quot;site-logo&quot; href=&quot;https://raw.github.com/&quot;&gt;
+            &lt;img alt=&quot;GitHub&quot; class=&quot;github-logo-4x&quot; height=&quot;30&quot; src=&quot;https://a248.e.akamai.net/assets.github.com/images/modules/header/logov7@4x.png?1338945075&quot; /&gt;
+            &lt;img alt=&quot;GitHub&quot; class=&quot;github-logo-4x-hover&quot; height=&quot;30&quot; src=&quot;https://a248.e.akamai.net/assets.github.com/images/modules/header/logov7@4x-hover.png?1338945075&quot; /&gt;
+          &lt;/a&gt;
+
+
+                  &lt;!--
+      make sure to use fully qualified URLs here since this nav
+      is used on error pages on other domains
+    --&gt;
+    &lt;ul class=&quot;top-nav logged_out&quot;&gt;
+        &lt;li class=&quot;pricing&quot;&gt;&lt;a href=&quot;https://github.com/plans&quot;&gt;Signup and Pricing&lt;/a&gt;&lt;/li&gt;
+        &lt;li class=&quot;explore&quot;&gt;&lt;a href=&quot;https://github.com/explore&quot;&gt;Explore GitHub&lt;/a&gt;&lt;/li&gt;
+      &lt;li class=&quot;features&quot;&gt;&lt;a href=&quot;https://github.com/features&quot;&gt;Features&lt;/a&gt;&lt;/li&gt;
+        &lt;li class=&quot;blog&quot;&gt;&lt;a href=&quot;https://github.com/blog&quot;&gt;Blog&lt;/a&gt;&lt;/li&gt;
+      &lt;li class=&quot;login&quot;&gt;&lt;a href=&quot;https://github.com/login?return_to=%2Fgist%2F66%2F_config.xml&quot;&gt;Sign in&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+
+
+
+          
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      
+
+      
+
+        &lt;div class=&quot;site clearfix&quot;&gt;
+          &lt;div id=&quot;site-container&quot; class=&quot;container&quot; data-pjax-container&gt;
+            
+
+&lt;style type=&quot;text/css&quot;&gt;
+    #header{
+        border-bottom: 0;
+    }
+    .site {
+        padding: 0;
+    }
+    #site-container {
+        width: 100%;
+    }
+    * {
+        margin: 0px;
+        padding: 0px;
+    }
+    #parallax_wrapper {
+      position: relative;
+      z-index: 0;
+      margin-bottom: 50px;
+    }
+    #parallax_field{
+        overflow: hidden;
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 370px;
+        width: 100%;
+    }
+    #parallax_field #parallax_bg {
+        position: absolute;
+        top: -20px;
+        left: -20px;
+        width: 110%;
+        height: 425px;
+        z-index: 1;
+    }
+    #parallax_illustration {
+        display: block;
+        margin: 0 auto;
+        width: 940px;
+        height: 370px;
+        position: relative;
+        overflow: hidden;
+        clear: both;
+    }
+    #parallax_illustration #parallax_error_text {
+        position: absolute;
+        top: 72px;
+        left: 72px;
+        z-index: 10;
+    }
+    #parallax_illustration #parallax_octocat {
+        position: absolute;
+        top: 94px;
+        left: 356px;
+        z-index: 9;
+    }
+    #parallax_illustration #parallax_speeder {
+        position: absolute;
+        top: 150px;
+        left: 432px;
+        z-index: 8;
+    }
+    #parallax_illustration #parallax_octocatshadow {
+        position: absolute;
+        top: 297px;
+        left: 371px;
+        z-index: 7;
+    }
+    #parallax_illustration #parallax_speedershadow {
+        position: absolute;
+        top: 263px;
+        left: 442px;
+        z-index: 6;
+    }
+    #parallax_illustration #parallax_building_1 {
+        position: absolute;
+        top: 73px;
+        left: 467px;
+        z-index: 5;
+    }
+    #parallax_illustration #parallax_building_2 {
+        position: absolute;
+        top: 113px;
+        left: 762px;
+        z-index: 4;
+    }
+    #footer-push {
+      height: 280px;
+    }
+    #footer {
+        margin-top: 0px;
+        z-index: 12;
+    }
+&lt;/style&gt;
+
+&lt;div id=&quot;parallax_wrapper&quot;&gt;
+
+&lt;div id=&quot;parallax_field&quot;&gt;
+    &lt;img alt=&quot;building&quot; class=&quot;js-plaxify&quot; data-invert=&quot;true&quot; data-xrange=&quot;0&quot; data-yrange=&quot;20&quot; height=&quot;415&quot; id=&quot;parallax_bg&quot; src=&quot;https://a248.e.akamai.net/assets.github.com/images/modules/404/parallax_bg.jpg?1338945074&quot; width=&quot;940&quot; /&gt;
+&lt;/div&gt;
+&lt;div id=&quot;parallax_illustration&quot;&gt;
+  &lt;img alt=&quot;404 | &amp;ldquo;This is not the web page you are looking for&amp;rdquo;&quot; class=&quot;js-plaxify&quot; data-xrange=&quot;20&quot; data-yrange=&quot;10&quot; height=&quot;249&quot; id=&quot;parallax_error_text&quot; src=&quot;https://a248.e.akamai.net/assets.github.com/images/modules/404/parallax_errortext.png?1338945074&quot; width=&quot;271&quot; /&gt;
+  &lt;img alt=&quot;Octobi Wan Catnobi&quot; class=&quot;js-plaxify&quot; data-xrange=&quot;10&quot; data-yrange=&quot;10&quot; height=&quot;230&quot; id=&quot;parallax_octocat&quot; src=&quot;https://a248.e.akamai.net/assets.github.com/images/modules/404/parallax_octocat.png?1338945074&quot; width=&quot;188&quot; /&gt;
+  &lt;img alt=&quot;land speeder&quot; class=&quot;js-plaxify&quot; data-xrange=&quot;10&quot; data-yrange=&quot;10&quot; height=&quot;156&quot; id=&quot;parallax_speeder&quot; src=&quot;https://a248.e.akamai.net/assets.github.com/images/modules/404/parallax_speeder.png?1338945074&quot; width=&quot;440&quot; /&gt;
+  &lt;img alt=&quot;Octobi Wan Catnobi's shadow&quot; class=&quot;js-plaxify&quot; data-xrange=&quot;10&quot; data-yrange=&quot;10&quot; height=&quot;49&quot; id=&quot;parallax_octocatshadow&quot; src=&quot;https://a248.e.akamai.net/assets.github.com/images/modules/404/parallax_octocatshadow.png?1338945074&quot; width=&quot;166&quot; /&gt;
+  &lt;img alt=&quot;land speeder's shadow&quot; class=&quot;js-plaxify&quot; data-xrange=&quot;10&quot; data-yrange=&quot;10&quot; height=&quot;75&quot; id=&quot;parallax_speedershadow&quot; src=&quot;https://a248.e.akamai.net/assets.github.com/images/modules/404/parallax_speedershadow.png?1338945074&quot; width=&quot;430&quot; /&gt;
+  &lt;img alt=&quot;building&quot; class=&quot;js-plaxify&quot; data-invert=&quot;true&quot; data-xrange=&quot;50&quot; data-yrange=&quot;20&quot; height=&quot;123&quot; id=&quot;parallax_building_1&quot; src=&quot;https://a248.e.akamai.net/assets.github.com/images/modules/404/parallax_building_1.png?1338945074&quot; width=&quot;304&quot; /&gt;
+  &lt;img alt=&quot;building&quot; class=&quot;js-plaxify&quot; data-invert=&quot;true&quot; data-xrange=&quot;75&quot; data-yrange=&quot;30&quot; height=&quot;50&quot; id=&quot;parallax_building_2&quot; src=&quot;https://a248.e.akamai.net/assets.github.com/images/modules/404/parallax_building_2.png?1338945074&quot; width=&quot;116&quot; /&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+          &lt;/div&gt;
+          &lt;div class=&quot;context-overlay&quot;&gt;&lt;/div&gt;
+        &lt;/div&gt;
+      &lt;div id=&quot;footer-push&quot;&gt;&lt;/div&gt;&lt;!-- hack for sticky footer --&gt;
+    &lt;/div&gt;&lt;!-- end of wrapper - hack for sticky footer --&gt;
+
+      &lt;!-- footer --&gt;
+      &lt;div id=&quot;footer&quot; &gt;
+        
+  &lt;div class=&quot;upper_footer&quot;&gt;
+     &lt;div class=&quot;container clearfix&quot;&gt;
+
+       &lt;!--[if IE]&gt;&lt;h4 id=&quot;blacktocat_ie&quot;&gt;GitHub Links&lt;/h4&gt;&lt;![endif]--&gt;
+       &lt;![if !IE]&gt;&lt;h4 id=&quot;blacktocat&quot;&gt;GitHub Links&lt;/h4&gt;&lt;![endif]&gt;
+
+       &lt;ul class=&quot;footer_nav&quot;&gt;
+         &lt;h4&gt;GitHub&lt;/h4&gt;
+         &lt;li&gt;&lt;a href=&quot;https://github.com/about&quot;&gt;About&lt;/a&gt;&lt;/li&gt;
+         &lt;li&gt;&lt;a href=&quot;https://github.com/blog&quot;&gt;Blog&lt;/a&gt;&lt;/li&gt;
+         &lt;li&gt;&lt;a href=&quot;https://github.com/features&quot;&gt;Features&lt;/a&gt;&lt;/li&gt;
+         &lt;li&gt;&lt;a href=&quot;https://github.com/contact&quot;&gt;Contact &amp;amp; Support&lt;/a&gt;&lt;/li&gt;
+         &lt;li&gt;&lt;a href=&quot;https://github.com/training&quot;&gt;Training&lt;/a&gt;&lt;/li&gt;
+         &lt;li&gt;&lt;a href=&quot;http://enterprise.github.com/&quot;&gt;GitHub Enterprise&lt;/a&gt;&lt;/li&gt;
+         &lt;li&gt;&lt;a href=&quot;http://status.github.com/&quot;&gt;Site Status&lt;/a&gt;&lt;/li&gt;
+       &lt;/ul&gt;
+
+       &lt;ul class=&quot;footer_nav&quot;&gt;
+         &lt;h4&gt;Clients&lt;/h4&gt;
+         &lt;li&gt;&lt;a href=&quot;http://mac.github.com/&quot;&gt;GitHub for Mac&lt;/a&gt;&lt;/li&gt;
+         &lt;li&gt;&lt;a href=&quot;http://windows.github.com/&quot;&gt;GitHub for Windows&lt;/a&gt;&lt;/li&gt;
+         &lt;li&gt;&lt;a href=&quot;http://eclipse.github.com/&quot;&gt;GitHub for Eclipse&lt;/a&gt;&lt;/li&gt;
+         &lt;li&gt;&lt;a href=&quot;http://mobile.github.com/&quot;&gt;GitHub Mobile Apps&lt;/a&gt;&lt;/li&gt;
+       &lt;/ul&gt;
+
+       &lt;ul class=&quot;footer_nav&quot;&gt;
+         &lt;h4&gt;Tools&lt;/h4&gt;
+         &lt;li&gt;&lt;a href=&quot;http://get.gaug.es/&quot;&gt;Gauges: Web analytics&lt;/a&gt;&lt;/li&gt;
+         &lt;li&gt;&lt;a href=&quot;http://speakerdeck.com&quot;&gt;Speaker Deck: Presentations&lt;/a&gt;&lt;/li&gt;
+         &lt;li&gt;&lt;a href=&quot;https://gist.github.com&quot;&gt;Gist: Code snippets&lt;/a&gt;&lt;/li&gt;
+
+         &lt;h4 class=&quot;second&quot;&gt;Extras&lt;/h4&gt;
+         &lt;li&gt;&lt;a href=&quot;http://jobs.github.com/&quot;&gt;Job Board&lt;/a&gt;&lt;/li&gt;
+         &lt;li&gt;&lt;a href=&quot;http://shop.github.com/&quot;&gt;GitHub Shop&lt;/a&gt;&lt;/li&gt;
+         &lt;li&gt;&lt;a href=&quot;http://octodex.github.com/&quot;&gt;The Octodex&lt;/a&gt;&lt;/li&gt;
+       &lt;/ul&gt;
+
+       &lt;ul class=&quot;footer_nav&quot;&gt;
+         &lt;h4&gt;Documentation&lt;/h4&gt;
+         &lt;li&gt;&lt;a href=&quot;http://help.github.com/&quot;&gt;GitHub Help&lt;/a&gt;&lt;/li&gt;
+         &lt;li&gt;&lt;a href=&quot;http://developer.github.com/&quot;&gt;Developer API&lt;/a&gt;&lt;/li&gt;
+         &lt;li&gt;&lt;a href=&quot;http://github.github.com/github-flavored-markdown/&quot;&gt;GitHub Flavored Markdown&lt;/a&gt;&lt;/li&gt;
+         &lt;li&gt;&lt;a href=&quot;http://pages.github.com/&quot;&gt;GitHub Pages&lt;/a&gt;&lt;/li&gt;
+       &lt;/ul&gt;
+
+     &lt;/div&gt;&lt;!-- /.site --&gt;
+  &lt;/div&gt;&lt;!-- /.upper_footer --&gt;
+
+&lt;div class=&quot;lower_footer&quot;&gt;
+  &lt;div class=&quot;container clearfix&quot;&gt;
+    &lt;!--[if IE]&gt;&lt;div id=&quot;legal_ie&quot;&gt;&lt;![endif]--&gt;
+    &lt;![if !IE]&gt;&lt;div id=&quot;legal&quot;&gt;&lt;![endif]&gt;
+      &lt;ul&gt;
+          &lt;li&gt;&lt;a href=&quot;https://github.com/site/terms&quot;&gt;Terms of Service&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;https://github.com/site/privacy&quot;&gt;Privacy&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;https://github.com/security&quot;&gt;Security&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+
+      &lt;p&gt;&amp;copy; 2012 &lt;span title=&quot;0.01420s from fe2.rs.github.com&quot;&gt;GitHub&lt;/span&gt; Inc. All rights reserved.&lt;/p&gt;
+    &lt;/div&gt;&lt;!-- /#legal or /#legal_ie--&gt;
+
+  &lt;/div&gt;&lt;!-- /.site --&gt;
+&lt;/div&gt;&lt;!-- /.lower_footer --&gt;
+
+      &lt;/div&gt;&lt;!-- /#footer --&gt;
+
+    
+
+&lt;div id=&quot;keyboard_shortcuts_pane&quot; class=&quot;instapaper_ignore readability-extra&quot; style=&quot;display:none&quot;&gt;
+  &lt;h2&gt;Keyboard Shortcuts &lt;small&gt;&lt;a href=&quot;#&quot; class=&quot;js-see-all-keyboard-shortcuts&quot;&gt;(see all)&lt;/a&gt;&lt;/small&gt;&lt;/h2&gt;
+
+  &lt;div class=&quot;columns threecols&quot;&gt;
+    &lt;div class=&quot;column first&quot;&gt;
+      &lt;h3&gt;Site wide shortcuts&lt;/h3&gt;
+      &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+        &lt;dt&gt;s&lt;/dt&gt;
+        &lt;dd&gt;Focus site search&lt;/dd&gt;
+      &lt;/dl&gt;
+      &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+        &lt;dt&gt;?&lt;/dt&gt;
+        &lt;dd&gt;Bring up this help dialog&lt;/dd&gt;
+      &lt;/dl&gt;
+    &lt;/div&gt;&lt;!-- /.column.first --&gt;
+
+    &lt;div class=&quot;column middle&quot; style='display:none'&gt;
+      &lt;h3&gt;Commit list&lt;/h3&gt;
+      &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+        &lt;dt&gt;j&lt;/dt&gt;
+        &lt;dd&gt;Move selection down&lt;/dd&gt;
+      &lt;/dl&gt;
+      &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+        &lt;dt&gt;k&lt;/dt&gt;
+        &lt;dd&gt;Move selection up&lt;/dd&gt;
+      &lt;/dl&gt;
+      &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+        &lt;dt&gt;c &lt;em&gt;or&lt;/em&gt; o &lt;em&gt;or&lt;/em&gt; enter&lt;/dt&gt;
+        &lt;dd&gt;Open commit&lt;/dd&gt;
+      &lt;/dl&gt;
+      &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+        &lt;dt&gt;y&lt;/dt&gt;
+        &lt;dd&gt;Expand URL to its canonical form&lt;/dd&gt;
+      &lt;/dl&gt;
+    &lt;/div&gt;&lt;!-- /.column.first --&gt;
+
+    &lt;div class=&quot;column last js-hidden-pane&quot; style='display:none'&gt;
+      &lt;h3&gt;Pull request list&lt;/h3&gt;
+      &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+        &lt;dt&gt;j&lt;/dt&gt;
+        &lt;dd&gt;Move selection down&lt;/dd&gt;
+      &lt;/dl&gt;
+      &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+        &lt;dt&gt;k&lt;/dt&gt;
+        &lt;dd&gt;Move selection up&lt;/dd&gt;
+      &lt;/dl&gt;
+      &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+        &lt;dt&gt;o &lt;em&gt;or&lt;/em&gt; enter&lt;/dt&gt;
+        &lt;dd&gt;Open issue&lt;/dd&gt;
+      &lt;/dl&gt;
+      &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+        &lt;dt&gt;&lt;span class=&quot;platform-mac&quot;&gt;⌘&lt;/span&gt;&lt;span class=&quot;platform-other&quot;&gt;ctrl&lt;/span&gt; &lt;em&gt;+&lt;/em&gt; enter&lt;/dt&gt;
+        &lt;dd&gt;Submit comment&lt;/dd&gt;
+      &lt;/dl&gt;
+      &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+        &lt;dt&gt;&lt;span class=&quot;platform-mac&quot;&gt;⌘&lt;/span&gt;&lt;span class=&quot;platform-other&quot;&gt;ctrl&lt;/span&gt; &lt;em&gt;+&lt;/em&gt; shift p&lt;/dt&gt;
+        &lt;dd&gt;Preview comment&lt;/dd&gt;
+      &lt;/dl&gt;
+    &lt;/div&gt;&lt;!-- /.columns.last --&gt;
+
+  &lt;/div&gt;&lt;!-- /.columns.equacols --&gt;
+
+  &lt;div class=&quot;js-hidden-pane&quot; style='display:none'&gt;
+    &lt;div class=&quot;rule&quot;&gt;&lt;/div&gt;
+
+    &lt;h3&gt;Issues&lt;/h3&gt;
+
+    &lt;div class=&quot;columns threecols&quot;&gt;
+      &lt;div class=&quot;column first&quot;&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;j&lt;/dt&gt;
+          &lt;dd&gt;Move selection down&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;k&lt;/dt&gt;
+          &lt;dd&gt;Move selection up&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;x&lt;/dt&gt;
+          &lt;dd&gt;Toggle selection&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;o &lt;em&gt;or&lt;/em&gt; enter&lt;/dt&gt;
+          &lt;dd&gt;Open issue&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;&lt;span class=&quot;platform-mac&quot;&gt;⌘&lt;/span&gt;&lt;span class=&quot;platform-other&quot;&gt;ctrl&lt;/span&gt; &lt;em&gt;+&lt;/em&gt; enter&lt;/dt&gt;
+          &lt;dd&gt;Submit comment&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;&lt;span class=&quot;platform-mac&quot;&gt;⌘&lt;/span&gt;&lt;span class=&quot;platform-other&quot;&gt;ctrl&lt;/span&gt; &lt;em&gt;+&lt;/em&gt; shift p&lt;/dt&gt;
+          &lt;dd&gt;Preview comment&lt;/dd&gt;
+        &lt;/dl&gt;
+      &lt;/div&gt;&lt;!-- /.column.first --&gt;
+      &lt;div class=&quot;column last&quot;&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;c&lt;/dt&gt;
+          &lt;dd&gt;Create issue&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;l&lt;/dt&gt;
+          &lt;dd&gt;Create label&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;i&lt;/dt&gt;
+          &lt;dd&gt;Back to inbox&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;u&lt;/dt&gt;
+          &lt;dd&gt;Back to issues&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;/&lt;/dt&gt;
+          &lt;dd&gt;Focus issues search&lt;/dd&gt;
+        &lt;/dl&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class=&quot;js-hidden-pane&quot; style='display:none'&gt;
+    &lt;div class=&quot;rule&quot;&gt;&lt;/div&gt;
+
+    &lt;h3&gt;Issues Dashboard&lt;/h3&gt;
+
+    &lt;div class=&quot;columns threecols&quot;&gt;
+      &lt;div class=&quot;column first&quot;&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;j&lt;/dt&gt;
+          &lt;dd&gt;Move selection down&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;k&lt;/dt&gt;
+          &lt;dd&gt;Move selection up&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;o &lt;em&gt;or&lt;/em&gt; enter&lt;/dt&gt;
+          &lt;dd&gt;Open issue&lt;/dd&gt;
+        &lt;/dl&gt;
+      &lt;/div&gt;&lt;!-- /.column.first --&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class=&quot;js-hidden-pane&quot; style='display:none'&gt;
+    &lt;div class=&quot;rule&quot;&gt;&lt;/div&gt;
+
+    &lt;h3&gt;Network Graph&lt;/h3&gt;
+    &lt;div class=&quot;columns equacols&quot;&gt;
+      &lt;div class=&quot;column first&quot;&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;&lt;span class=&quot;badmono&quot;&gt;←&lt;/span&gt; &lt;em&gt;or&lt;/em&gt; h&lt;/dt&gt;
+          &lt;dd&gt;Scroll left&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;&lt;span class=&quot;badmono&quot;&gt;→&lt;/span&gt; &lt;em&gt;or&lt;/em&gt; l&lt;/dt&gt;
+          &lt;dd&gt;Scroll right&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;&lt;span class=&quot;badmono&quot;&gt;↑&lt;/span&gt; &lt;em&gt;or&lt;/em&gt; k&lt;/dt&gt;
+          &lt;dd&gt;Scroll up&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;&lt;span class=&quot;badmono&quot;&gt;↓&lt;/span&gt; &lt;em&gt;or&lt;/em&gt; j&lt;/dt&gt;
+          &lt;dd&gt;Scroll down&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;t&lt;/dt&gt;
+          &lt;dd&gt;Toggle visibility of head labels&lt;/dd&gt;
+        &lt;/dl&gt;
+      &lt;/div&gt;&lt;!-- /.column.first --&gt;
+      &lt;div class=&quot;column last&quot;&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;shift &lt;span class=&quot;badmono&quot;&gt;←&lt;/span&gt; &lt;em&gt;or&lt;/em&gt; shift h&lt;/dt&gt;
+          &lt;dd&gt;Scroll all the way left&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;shift &lt;span class=&quot;badmono&quot;&gt;→&lt;/span&gt; &lt;em&gt;or&lt;/em&gt; shift l&lt;/dt&gt;
+          &lt;dd&gt;Scroll all the way right&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;shift &lt;span class=&quot;badmono&quot;&gt;↑&lt;/span&gt; &lt;em&gt;or&lt;/em&gt; shift k&lt;/dt&gt;
+          &lt;dd&gt;Scroll all the way up&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;shift &lt;span class=&quot;badmono&quot;&gt;↓&lt;/span&gt; &lt;em&gt;or&lt;/em&gt; shift j&lt;/dt&gt;
+          &lt;dd&gt;Scroll all the way down&lt;/dd&gt;
+        &lt;/dl&gt;
+      &lt;/div&gt;&lt;!-- /.column.last --&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class=&quot;js-hidden-pane&quot; style='display:none'&gt;
+    &lt;div class=&quot;rule&quot;&gt;&lt;/div&gt;
+    &lt;div class=&quot;columns threecols&quot;&gt;
+      &lt;div class=&quot;column first js-hidden-pane&quot; style='display:none'&gt;
+        &lt;h3&gt;Source Code Browsing&lt;/h3&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;t&lt;/dt&gt;
+          &lt;dd&gt;Activates the file finder&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;l&lt;/dt&gt;
+          &lt;dd&gt;Jump to line&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;w&lt;/dt&gt;
+          &lt;dd&gt;Switch branch/tag&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;y&lt;/dt&gt;
+          &lt;dd&gt;Expand URL to its canonical form&lt;/dd&gt;
+        &lt;/dl&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class=&quot;js-hidden-pane&quot; style='display:none'&gt;
+    &lt;div class=&quot;rule&quot;&gt;&lt;/div&gt;
+    &lt;div class=&quot;columns threecols&quot;&gt;
+      &lt;div class=&quot;column first&quot;&gt;
+        &lt;h3&gt;Browsing Commits&lt;/h3&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;&lt;span class=&quot;platform-mac&quot;&gt;⌘&lt;/span&gt;&lt;span class=&quot;platform-other&quot;&gt;ctrl&lt;/span&gt; &lt;em&gt;+&lt;/em&gt; enter&lt;/dt&gt;
+          &lt;dd&gt;Submit comment&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;escape&lt;/dt&gt;
+          &lt;dd&gt;Close form&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;p&lt;/dt&gt;
+          &lt;dd&gt;Parent commit&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;o&lt;/dt&gt;
+          &lt;dd&gt;Other parent commit&lt;/dd&gt;
+        &lt;/dl&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class=&quot;js-hidden-pane&quot; style='display:none'&gt;
+    &lt;div class=&quot;rule&quot;&gt;&lt;/div&gt;
+    &lt;h3&gt;Notifications&lt;/h3&gt;
+
+    &lt;div class=&quot;columns threecols&quot;&gt;
+      &lt;div class=&quot;column first&quot;&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;j&lt;/dt&gt;
+          &lt;dd&gt;Move selection down&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;k&lt;/dt&gt;
+          &lt;dd&gt;Move selection up&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;o &lt;em&gt;or&lt;/em&gt; enter&lt;/dt&gt;
+          &lt;dd&gt;Open notification&lt;/dd&gt;
+        &lt;/dl&gt;
+      &lt;/div&gt;&lt;!-- /.column.first --&gt;
+
+      &lt;div class=&quot;column second&quot;&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;e &lt;em&gt;or&lt;/em&gt; shift i &lt;em&gt;or&lt;/em&gt; y&lt;/dt&gt;
+          &lt;dd&gt;Mark as read&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;shift m&lt;/dt&gt;
+          &lt;dd&gt;Mute thread&lt;/dd&gt;
+        &lt;/dl&gt;
+      &lt;/div&gt;&lt;!-- /.column.first --&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;
+
+    &lt;div id=&quot;markdown-help&quot; class=&quot;instapaper_ignore readability-extra&quot;&gt;
+  &lt;h2&gt;Markdown Cheat Sheet&lt;/h2&gt;
+
+  &lt;div class=&quot;cheatsheet-content&quot;&gt;
+
+  &lt;div class=&quot;mod&quot;&gt;
+    &lt;div class=&quot;col&quot;&gt;
+      &lt;h3&gt;Format Text&lt;/h3&gt;
+      &lt;p&gt;Headers&lt;/p&gt;
+      &lt;pre&gt;
+# This is an &amp;lt;h1&amp;gt; tag
+## This is an &amp;lt;h2&amp;gt; tag
+###### This is an &amp;lt;h6&amp;gt; tag&lt;/pre&gt;
+     &lt;p&gt;Text styles&lt;/p&gt;
+     &lt;pre&gt;
+*This text will be italic*
+_This will also be italic_
+**This text will be bold**
+__This will also be bold__
+
+*You **can** combine them*
+&lt;/pre&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;col&quot;&gt;
+      &lt;h3&gt;Lists&lt;/h3&gt;
+      &lt;p&gt;Unordered&lt;/p&gt;
+      &lt;pre&gt;
+* Item 1
+* Item 2
+  * Item 2a
+  * Item 2b&lt;/pre&gt;
+     &lt;p&gt;Ordered&lt;/p&gt;
+     &lt;pre&gt;
+1. Item 1
+2. Item 2
+3. Item 3
+   * Item 3a
+   * Item 3b&lt;/pre&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;col&quot;&gt;
+      &lt;h3&gt;Miscellaneous&lt;/h3&gt;
+      &lt;p&gt;Images&lt;/p&gt;
+      &lt;pre&gt;
+![GitHub Logo](/images/logo.png)
+Format: ![Alt Text](url)
+&lt;/pre&gt;
+     &lt;p&gt;Links&lt;/p&gt;
+     &lt;pre&gt;
+http://github.com - automatic!
+[GitHub](http://github.com)&lt;/pre&gt;
+&lt;p&gt;Blockquotes&lt;/p&gt;
+     &lt;pre&gt;
+As Kanye West said:
+
+&gt; We're living the future so
+&gt; the present is our past.
+&lt;/pre&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;rule&quot;&gt;&lt;/div&gt;
+
+  &lt;h3&gt;Code Examples in Markdown&lt;/h3&gt;
+  &lt;div class=&quot;col&quot;&gt;
+      &lt;p&gt;Syntax highlighting with &lt;a href=&quot;http://github.github.com/github-flavored-markdown/&quot; title=&quot;GitHub Flavored Markdown&quot; target=&quot;_blank&quot;&gt;GFM&lt;/a&gt;&lt;/p&gt;
+      &lt;pre&gt;
+```javascript
+function fancyAlert(arg) {
+  if(arg) {
+    $.facebox({div:'#foo'})
+  }
+}
+```&lt;/pre&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;col&quot;&gt;
+      &lt;p&gt;Or, indent your code 4 spaces&lt;/p&gt;
+      &lt;pre&gt;
+Here is a Python code example
+without syntax highlighting:
+
+    def foo:
+      if not bar:
+        return true&lt;/pre&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;col&quot;&gt;
+      &lt;p&gt;Inline code for comments&lt;/p&gt;
+      &lt;pre&gt;
+I think you should use an
+`&amp;lt;addr&amp;gt;` element here instead.&lt;/pre&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;/div&gt;
+&lt;/div&gt;
+
+
+    &lt;div id=&quot;ajax-error-message&quot;&gt;
+      &lt;span class=&quot;mini-icon mini-icon-exclamation&quot;&gt;&lt;/span&gt;
+      Something went wrong with that request. Please try again.
+      &lt;a href=&quot;#&quot; class=&quot;ajax-error-dismiss&quot;&gt;Dismiss&lt;/a&gt;
+    &lt;/div&gt;
+
+    &lt;div id=&quot;logo-popup&quot;&gt;
+      &lt;h2&gt;Looking for the GitHub logo?&lt;/h2&gt;
+      &lt;ul&gt;
+        &lt;li&gt;
+          &lt;h4&gt;GitHub Logo&lt;/h4&gt;
+          &lt;a href=&quot;http://github-media-downloads.s3.amazonaws.com/GitHub_Logos.zip&quot;&gt;&lt;img alt=&quot;Github_logo&quot; src=&quot;https://a248.e.akamai.net/assets.github.com/images/modules/about_page/github_logo.png?1338945074&quot; /&gt;&lt;/a&gt;
+          &lt;a href=&quot;http://github-media-downloads.s3.amazonaws.com/GitHub_Logos.zip&quot; class=&quot;minibutton btn-download download&quot;&gt;Download&lt;/a&gt;
+        &lt;/li&gt;
+        &lt;li&gt;
+          &lt;h4&gt;The Octocat&lt;/h4&gt;
+          &lt;a href=&quot;http://github-media-downloads.s3.amazonaws.com/Octocats.zip&quot;&gt;&lt;img alt=&quot;Octocat&quot; src=&quot;https://a248.e.akamai.net/assets.github.com/images/modules/about_page/octocat.png?1338945074&quot; /&gt;&lt;/a&gt;
+          &lt;a href=&quot;http://github-media-downloads.s3.amazonaws.com/Octocats.zip&quot; class=&quot;minibutton btn-download download&quot;&gt;Download&lt;/a&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/div&gt;
+
+    
+    
+    &lt;span id='server_response_time' data-time='0.02321' data-host='fe2'&gt;&lt;/span&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre></noscript></div>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#url: http://blogbin.github.com/tech-blogbin-blog
+</span><span class='line'>url: http://tech-blog.blogbin.info
+</span><span class='line'>
+</span><span class='line'>#subscribe_rss: /tech-blogbin-blog/atom.xml
+</span><span class='line'>subscribe_rss: /atom.xml
+</span><span class='line'>
+</span><span class='line'>#root: /tech-blogbin-blog
+</span><span class='line'>root: /
+</span><span class='line'>
+</span><span class='line'>#destination: public/tech-blogbin-blog
+</span><span class='line'>destination: public</span></code></pre></td></tr></table></div></figure>
+
+
+<p>config.rb</p>
+
+<div><script src='https://gist.github.com/66.js?file=config.rb'></script>
+<noscript><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head prefix=&quot;og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# githubog: http://ogp.me/ns/fb/githubog#&quot;&gt;
+    &lt;meta charset='utf-8'&gt;
+    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;
+        &lt;title&gt;404 · GitHub&lt;/title&gt;
+    &lt;link rel=&quot;search&quot; type=&quot;application/opensearchdescription+xml&quot; href=&quot;/opensearch.xml&quot; title=&quot;GitHub&quot; /&gt;
+    &lt;link rel=&quot;fluid-icon&quot; href=&quot;https://raw.github.com/fluidicon.png&quot; title=&quot;GitHub&quot; /&gt;
+    &lt;link rel=&quot;apple-touch-icon-precomposed&quot; sizes=&quot;57x57&quot; href=&quot;apple-touch-icon-114.png&quot; /&gt;
+    &lt;link rel=&quot;apple-touch-icon-precomposed&quot; sizes=&quot;114x114&quot; href=&quot;apple-touch-icon-114.png&quot; /&gt;
+    &lt;link rel=&quot;apple-touch-icon-precomposed&quot; sizes=&quot;72x72&quot; href=&quot;apple-touch-icon-144.png&quot; /&gt;
+    &lt;link rel=&quot;apple-touch-icon-precomposed&quot; sizes=&quot;144x144&quot; href=&quot;apple-touch-icon-144.png&quot; /&gt;
+
+    
+    
+    &lt;link rel=&quot;icon&quot; type=&quot;image/x-icon&quot; href=&quot;/favicon.png&quot; /&gt;
+
+    
+
+    &lt;link href=&quot;https://a248.e.akamai.net/assets.github.com/assets/github-fc8f93aa673bcc847295986dc6d690ee822e90d0.css&quot; media=&quot;screen&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+    &lt;link href=&quot;https://a248.e.akamai.net/assets.github.com/assets/github2-327db63293098d6476136b438e34be409ae3b461.css&quot; media=&quot;screen&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+    
+
+
+    &lt;script src=&quot;https://a248.e.akamai.net/assets.github.com/assets/frameworks-917510fd4e1e5f0487cfe32445a6cfc8927e84f1.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
+    
+    &lt;script defer=&quot;defer&quot; src=&quot;https://a248.e.akamai.net/assets.github.com/assets/github-bf18c28a497214adf5ccf6725575da23a83918fd.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
+    
+    
+
+    
+  &lt;/head&gt;
+
+
+  &lt;body class=&quot;logged_out    env-production &quot;&gt;
+    &lt;div id=&quot;wrapper&quot;&gt;
+
+    
+    
+
+      &lt;div id=&quot;header&quot; class=&quot;true clearfix&quot;&gt;
+        &lt;div class=&quot;container clearfix&quot;&gt;
+          &lt;a class=&quot;site-logo&quot; href=&quot;https://raw.github.com/&quot;&gt;
+            &lt;img alt=&quot;GitHub&quot; class=&quot;github-logo-4x&quot; height=&quot;30&quot; src=&quot;https://a248.e.akamai.net/assets.github.com/images/modules/header/logov7@4x.png?1338945075&quot; /&gt;
+            &lt;img alt=&quot;GitHub&quot; class=&quot;github-logo-4x-hover&quot; height=&quot;30&quot; src=&quot;https://a248.e.akamai.net/assets.github.com/images/modules/header/logov7@4x-hover.png?1338945075&quot; /&gt;
+          &lt;/a&gt;
+
+
+                  &lt;!--
+      make sure to use fully qualified URLs here since this nav
+      is used on error pages on other domains
+    --&gt;
+    &lt;ul class=&quot;top-nav logged_out&quot;&gt;
+        &lt;li class=&quot;pricing&quot;&gt;&lt;a href=&quot;https://github.com/plans&quot;&gt;Signup and Pricing&lt;/a&gt;&lt;/li&gt;
+        &lt;li class=&quot;explore&quot;&gt;&lt;a href=&quot;https://github.com/explore&quot;&gt;Explore GitHub&lt;/a&gt;&lt;/li&gt;
+      &lt;li class=&quot;features&quot;&gt;&lt;a href=&quot;https://github.com/features&quot;&gt;Features&lt;/a&gt;&lt;/li&gt;
+        &lt;li class=&quot;blog&quot;&gt;&lt;a href=&quot;https://github.com/blog&quot;&gt;Blog&lt;/a&gt;&lt;/li&gt;
+      &lt;li class=&quot;login&quot;&gt;&lt;a href=&quot;https://github.com/login?return_to=%2Fgist%2F66%2Fconfig.rb&quot;&gt;Sign in&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+
+
+
+          
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      
+
+      
+
+        &lt;div class=&quot;site clearfix&quot;&gt;
+          &lt;div id=&quot;site-container&quot; class=&quot;container&quot; data-pjax-container&gt;
+            
+
+&lt;style type=&quot;text/css&quot;&gt;
+    #header{
+        border-bottom: 0;
+    }
+    .site {
+        padding: 0;
+    }
+    #site-container {
+        width: 100%;
+    }
+    * {
+        margin: 0px;
+        padding: 0px;
+    }
+    #parallax_wrapper {
+      position: relative;
+      z-index: 0;
+      margin-bottom: 50px;
+    }
+    #parallax_field{
+        overflow: hidden;
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 370px;
+        width: 100%;
+    }
+    #parallax_field #parallax_bg {
+        position: absolute;
+        top: -20px;
+        left: -20px;
+        width: 110%;
+        height: 425px;
+        z-index: 1;
+    }
+    #parallax_illustration {
+        display: block;
+        margin: 0 auto;
+        width: 940px;
+        height: 370px;
+        position: relative;
+        overflow: hidden;
+        clear: both;
+    }
+    #parallax_illustration #parallax_error_text {
+        position: absolute;
+        top: 72px;
+        left: 72px;
+        z-index: 10;
+    }
+    #parallax_illustration #parallax_octocat {
+        position: absolute;
+        top: 94px;
+        left: 356px;
+        z-index: 9;
+    }
+    #parallax_illustration #parallax_speeder {
+        position: absolute;
+        top: 150px;
+        left: 432px;
+        z-index: 8;
+    }
+    #parallax_illustration #parallax_octocatshadow {
+        position: absolute;
+        top: 297px;
+        left: 371px;
+        z-index: 7;
+    }
+    #parallax_illustration #parallax_speedershadow {
+        position: absolute;
+        top: 263px;
+        left: 442px;
+        z-index: 6;
+    }
+    #parallax_illustration #parallax_building_1 {
+        position: absolute;
+        top: 73px;
+        left: 467px;
+        z-index: 5;
+    }
+    #parallax_illustration #parallax_building_2 {
+        position: absolute;
+        top: 113px;
+        left: 762px;
+        z-index: 4;
+    }
+    #footer-push {
+      height: 280px;
+    }
+    #footer {
+        margin-top: 0px;
+        z-index: 12;
+    }
+&lt;/style&gt;
+
+&lt;div id=&quot;parallax_wrapper&quot;&gt;
+
+&lt;div id=&quot;parallax_field&quot;&gt;
+    &lt;img alt=&quot;building&quot; class=&quot;js-plaxify&quot; data-invert=&quot;true&quot; data-xrange=&quot;0&quot; data-yrange=&quot;20&quot; height=&quot;415&quot; id=&quot;parallax_bg&quot; src=&quot;https://a248.e.akamai.net/assets.github.com/images/modules/404/parallax_bg.jpg?1338945074&quot; width=&quot;940&quot; /&gt;
+&lt;/div&gt;
+&lt;div id=&quot;parallax_illustration&quot;&gt;
+  &lt;img alt=&quot;404 | &amp;ldquo;This is not the web page you are looking for&amp;rdquo;&quot; class=&quot;js-plaxify&quot; data-xrange=&quot;20&quot; data-yrange=&quot;10&quot; height=&quot;249&quot; id=&quot;parallax_error_text&quot; src=&quot;https://a248.e.akamai.net/assets.github.com/images/modules/404/parallax_errortext.png?1338945074&quot; width=&quot;271&quot; /&gt;
+  &lt;img alt=&quot;Octobi Wan Catnobi&quot; class=&quot;js-plaxify&quot; data-xrange=&quot;10&quot; data-yrange=&quot;10&quot; height=&quot;230&quot; id=&quot;parallax_octocat&quot; src=&quot;https://a248.e.akamai.net/assets.github.com/images/modules/404/parallax_octocat.png?1338945074&quot; width=&quot;188&quot; /&gt;
+  &lt;img alt=&quot;land speeder&quot; class=&quot;js-plaxify&quot; data-xrange=&quot;10&quot; data-yrange=&quot;10&quot; height=&quot;156&quot; id=&quot;parallax_speeder&quot; src=&quot;https://a248.e.akamai.net/assets.github.com/images/modules/404/parallax_speeder.png?1338945074&quot; width=&quot;440&quot; /&gt;
+  &lt;img alt=&quot;Octobi Wan Catnobi's shadow&quot; class=&quot;js-plaxify&quot; data-xrange=&quot;10&quot; data-yrange=&quot;10&quot; height=&quot;49&quot; id=&quot;parallax_octocatshadow&quot; src=&quot;https://a248.e.akamai.net/assets.github.com/images/modules/404/parallax_octocatshadow.png?1338945074&quot; width=&quot;166&quot; /&gt;
+  &lt;img alt=&quot;land speeder's shadow&quot; class=&quot;js-plaxify&quot; data-xrange=&quot;10&quot; data-yrange=&quot;10&quot; height=&quot;75&quot; id=&quot;parallax_speedershadow&quot; src=&quot;https://a248.e.akamai.net/assets.github.com/images/modules/404/parallax_speedershadow.png?1338945074&quot; width=&quot;430&quot; /&gt;
+  &lt;img alt=&quot;building&quot; class=&quot;js-plaxify&quot; data-invert=&quot;true&quot; data-xrange=&quot;50&quot; data-yrange=&quot;20&quot; height=&quot;123&quot; id=&quot;parallax_building_1&quot; src=&quot;https://a248.e.akamai.net/assets.github.com/images/modules/404/parallax_building_1.png?1338945074&quot; width=&quot;304&quot; /&gt;
+  &lt;img alt=&quot;building&quot; class=&quot;js-plaxify&quot; data-invert=&quot;true&quot; data-xrange=&quot;75&quot; data-yrange=&quot;30&quot; height=&quot;50&quot; id=&quot;parallax_building_2&quot; src=&quot;https://a248.e.akamai.net/assets.github.com/images/modules/404/parallax_building_2.png?1338945074&quot; width=&quot;116&quot; /&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+          &lt;/div&gt;
+          &lt;div class=&quot;context-overlay&quot;&gt;&lt;/div&gt;
+        &lt;/div&gt;
+      &lt;div id=&quot;footer-push&quot;&gt;&lt;/div&gt;&lt;!-- hack for sticky footer --&gt;
+    &lt;/div&gt;&lt;!-- end of wrapper - hack for sticky footer --&gt;
+
+      &lt;!-- footer --&gt;
+      &lt;div id=&quot;footer&quot; &gt;
+        
+  &lt;div class=&quot;upper_footer&quot;&gt;
+     &lt;div class=&quot;container clearfix&quot;&gt;
+
+       &lt;!--[if IE]&gt;&lt;h4 id=&quot;blacktocat_ie&quot;&gt;GitHub Links&lt;/h4&gt;&lt;![endif]--&gt;
+       &lt;![if !IE]&gt;&lt;h4 id=&quot;blacktocat&quot;&gt;GitHub Links&lt;/h4&gt;&lt;![endif]&gt;
+
+       &lt;ul class=&quot;footer_nav&quot;&gt;
+         &lt;h4&gt;GitHub&lt;/h4&gt;
+         &lt;li&gt;&lt;a href=&quot;https://github.com/about&quot;&gt;About&lt;/a&gt;&lt;/li&gt;
+         &lt;li&gt;&lt;a href=&quot;https://github.com/blog&quot;&gt;Blog&lt;/a&gt;&lt;/li&gt;
+         &lt;li&gt;&lt;a href=&quot;https://github.com/features&quot;&gt;Features&lt;/a&gt;&lt;/li&gt;
+         &lt;li&gt;&lt;a href=&quot;https://github.com/contact&quot;&gt;Contact &amp;amp; Support&lt;/a&gt;&lt;/li&gt;
+         &lt;li&gt;&lt;a href=&quot;https://github.com/training&quot;&gt;Training&lt;/a&gt;&lt;/li&gt;
+         &lt;li&gt;&lt;a href=&quot;http://enterprise.github.com/&quot;&gt;GitHub Enterprise&lt;/a&gt;&lt;/li&gt;
+         &lt;li&gt;&lt;a href=&quot;http://status.github.com/&quot;&gt;Site Status&lt;/a&gt;&lt;/li&gt;
+       &lt;/ul&gt;
+
+       &lt;ul class=&quot;footer_nav&quot;&gt;
+         &lt;h4&gt;Clients&lt;/h4&gt;
+         &lt;li&gt;&lt;a href=&quot;http://mac.github.com/&quot;&gt;GitHub for Mac&lt;/a&gt;&lt;/li&gt;
+         &lt;li&gt;&lt;a href=&quot;http://windows.github.com/&quot;&gt;GitHub for Windows&lt;/a&gt;&lt;/li&gt;
+         &lt;li&gt;&lt;a href=&quot;http://eclipse.github.com/&quot;&gt;GitHub for Eclipse&lt;/a&gt;&lt;/li&gt;
+         &lt;li&gt;&lt;a href=&quot;http://mobile.github.com/&quot;&gt;GitHub Mobile Apps&lt;/a&gt;&lt;/li&gt;
+       &lt;/ul&gt;
+
+       &lt;ul class=&quot;footer_nav&quot;&gt;
+         &lt;h4&gt;Tools&lt;/h4&gt;
+         &lt;li&gt;&lt;a href=&quot;http://get.gaug.es/&quot;&gt;Gauges: Web analytics&lt;/a&gt;&lt;/li&gt;
+         &lt;li&gt;&lt;a href=&quot;http://speakerdeck.com&quot;&gt;Speaker Deck: Presentations&lt;/a&gt;&lt;/li&gt;
+         &lt;li&gt;&lt;a href=&quot;https://gist.github.com&quot;&gt;Gist: Code snippets&lt;/a&gt;&lt;/li&gt;
+
+         &lt;h4 class=&quot;second&quot;&gt;Extras&lt;/h4&gt;
+         &lt;li&gt;&lt;a href=&quot;http://jobs.github.com/&quot;&gt;Job Board&lt;/a&gt;&lt;/li&gt;
+         &lt;li&gt;&lt;a href=&quot;http://shop.github.com/&quot;&gt;GitHub Shop&lt;/a&gt;&lt;/li&gt;
+         &lt;li&gt;&lt;a href=&quot;http://octodex.github.com/&quot;&gt;The Octodex&lt;/a&gt;&lt;/li&gt;
+       &lt;/ul&gt;
+
+       &lt;ul class=&quot;footer_nav&quot;&gt;
+         &lt;h4&gt;Documentation&lt;/h4&gt;
+         &lt;li&gt;&lt;a href=&quot;http://help.github.com/&quot;&gt;GitHub Help&lt;/a&gt;&lt;/li&gt;
+         &lt;li&gt;&lt;a href=&quot;http://developer.github.com/&quot;&gt;Developer API&lt;/a&gt;&lt;/li&gt;
+         &lt;li&gt;&lt;a href=&quot;http://github.github.com/github-flavored-markdown/&quot;&gt;GitHub Flavored Markdown&lt;/a&gt;&lt;/li&gt;
+         &lt;li&gt;&lt;a href=&quot;http://pages.github.com/&quot;&gt;GitHub Pages&lt;/a&gt;&lt;/li&gt;
+       &lt;/ul&gt;
+
+     &lt;/div&gt;&lt;!-- /.site --&gt;
+  &lt;/div&gt;&lt;!-- /.upper_footer --&gt;
+
+&lt;div class=&quot;lower_footer&quot;&gt;
+  &lt;div class=&quot;container clearfix&quot;&gt;
+    &lt;!--[if IE]&gt;&lt;div id=&quot;legal_ie&quot;&gt;&lt;![endif]--&gt;
+    &lt;![if !IE]&gt;&lt;div id=&quot;legal&quot;&gt;&lt;![endif]&gt;
+      &lt;ul&gt;
+          &lt;li&gt;&lt;a href=&quot;https://github.com/site/terms&quot;&gt;Terms of Service&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;https://github.com/site/privacy&quot;&gt;Privacy&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;https://github.com/security&quot;&gt;Security&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+
+      &lt;p&gt;&amp;copy; 2012 &lt;span title=&quot;0.01477s from fe2.rs.github.com&quot;&gt;GitHub&lt;/span&gt; Inc. All rights reserved.&lt;/p&gt;
+    &lt;/div&gt;&lt;!-- /#legal or /#legal_ie--&gt;
+
+  &lt;/div&gt;&lt;!-- /.site --&gt;
+&lt;/div&gt;&lt;!-- /.lower_footer --&gt;
+
+      &lt;/div&gt;&lt;!-- /#footer --&gt;
+
+    
+
+&lt;div id=&quot;keyboard_shortcuts_pane&quot; class=&quot;instapaper_ignore readability-extra&quot; style=&quot;display:none&quot;&gt;
+  &lt;h2&gt;Keyboard Shortcuts &lt;small&gt;&lt;a href=&quot;#&quot; class=&quot;js-see-all-keyboard-shortcuts&quot;&gt;(see all)&lt;/a&gt;&lt;/small&gt;&lt;/h2&gt;
+
+  &lt;div class=&quot;columns threecols&quot;&gt;
+    &lt;div class=&quot;column first&quot;&gt;
+      &lt;h3&gt;Site wide shortcuts&lt;/h3&gt;
+      &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+        &lt;dt&gt;s&lt;/dt&gt;
+        &lt;dd&gt;Focus site search&lt;/dd&gt;
+      &lt;/dl&gt;
+      &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+        &lt;dt&gt;?&lt;/dt&gt;
+        &lt;dd&gt;Bring up this help dialog&lt;/dd&gt;
+      &lt;/dl&gt;
+    &lt;/div&gt;&lt;!-- /.column.first --&gt;
+
+    &lt;div class=&quot;column middle&quot; style='display:none'&gt;
+      &lt;h3&gt;Commit list&lt;/h3&gt;
+      &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+        &lt;dt&gt;j&lt;/dt&gt;
+        &lt;dd&gt;Move selection down&lt;/dd&gt;
+      &lt;/dl&gt;
+      &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+        &lt;dt&gt;k&lt;/dt&gt;
+        &lt;dd&gt;Move selection up&lt;/dd&gt;
+      &lt;/dl&gt;
+      &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+        &lt;dt&gt;c &lt;em&gt;or&lt;/em&gt; o &lt;em&gt;or&lt;/em&gt; enter&lt;/dt&gt;
+        &lt;dd&gt;Open commit&lt;/dd&gt;
+      &lt;/dl&gt;
+      &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+        &lt;dt&gt;y&lt;/dt&gt;
+        &lt;dd&gt;Expand URL to its canonical form&lt;/dd&gt;
+      &lt;/dl&gt;
+    &lt;/div&gt;&lt;!-- /.column.first --&gt;
+
+    &lt;div class=&quot;column last js-hidden-pane&quot; style='display:none'&gt;
+      &lt;h3&gt;Pull request list&lt;/h3&gt;
+      &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+        &lt;dt&gt;j&lt;/dt&gt;
+        &lt;dd&gt;Move selection down&lt;/dd&gt;
+      &lt;/dl&gt;
+      &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+        &lt;dt&gt;k&lt;/dt&gt;
+        &lt;dd&gt;Move selection up&lt;/dd&gt;
+      &lt;/dl&gt;
+      &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+        &lt;dt&gt;o &lt;em&gt;or&lt;/em&gt; enter&lt;/dt&gt;
+        &lt;dd&gt;Open issue&lt;/dd&gt;
+      &lt;/dl&gt;
+      &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+        &lt;dt&gt;&lt;span class=&quot;platform-mac&quot;&gt;⌘&lt;/span&gt;&lt;span class=&quot;platform-other&quot;&gt;ctrl&lt;/span&gt; &lt;em&gt;+&lt;/em&gt; enter&lt;/dt&gt;
+        &lt;dd&gt;Submit comment&lt;/dd&gt;
+      &lt;/dl&gt;
+      &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+        &lt;dt&gt;&lt;span class=&quot;platform-mac&quot;&gt;⌘&lt;/span&gt;&lt;span class=&quot;platform-other&quot;&gt;ctrl&lt;/span&gt; &lt;em&gt;+&lt;/em&gt; shift p&lt;/dt&gt;
+        &lt;dd&gt;Preview comment&lt;/dd&gt;
+      &lt;/dl&gt;
+    &lt;/div&gt;&lt;!-- /.columns.last --&gt;
+
+  &lt;/div&gt;&lt;!-- /.columns.equacols --&gt;
+
+  &lt;div class=&quot;js-hidden-pane&quot; style='display:none'&gt;
+    &lt;div class=&quot;rule&quot;&gt;&lt;/div&gt;
+
+    &lt;h3&gt;Issues&lt;/h3&gt;
+
+    &lt;div class=&quot;columns threecols&quot;&gt;
+      &lt;div class=&quot;column first&quot;&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;j&lt;/dt&gt;
+          &lt;dd&gt;Move selection down&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;k&lt;/dt&gt;
+          &lt;dd&gt;Move selection up&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;x&lt;/dt&gt;
+          &lt;dd&gt;Toggle selection&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;o &lt;em&gt;or&lt;/em&gt; enter&lt;/dt&gt;
+          &lt;dd&gt;Open issue&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;&lt;span class=&quot;platform-mac&quot;&gt;⌘&lt;/span&gt;&lt;span class=&quot;platform-other&quot;&gt;ctrl&lt;/span&gt; &lt;em&gt;+&lt;/em&gt; enter&lt;/dt&gt;
+          &lt;dd&gt;Submit comment&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;&lt;span class=&quot;platform-mac&quot;&gt;⌘&lt;/span&gt;&lt;span class=&quot;platform-other&quot;&gt;ctrl&lt;/span&gt; &lt;em&gt;+&lt;/em&gt; shift p&lt;/dt&gt;
+          &lt;dd&gt;Preview comment&lt;/dd&gt;
+        &lt;/dl&gt;
+      &lt;/div&gt;&lt;!-- /.column.first --&gt;
+      &lt;div class=&quot;column last&quot;&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;c&lt;/dt&gt;
+          &lt;dd&gt;Create issue&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;l&lt;/dt&gt;
+          &lt;dd&gt;Create label&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;i&lt;/dt&gt;
+          &lt;dd&gt;Back to inbox&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;u&lt;/dt&gt;
+          &lt;dd&gt;Back to issues&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;/&lt;/dt&gt;
+          &lt;dd&gt;Focus issues search&lt;/dd&gt;
+        &lt;/dl&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class=&quot;js-hidden-pane&quot; style='display:none'&gt;
+    &lt;div class=&quot;rule&quot;&gt;&lt;/div&gt;
+
+    &lt;h3&gt;Issues Dashboard&lt;/h3&gt;
+
+    &lt;div class=&quot;columns threecols&quot;&gt;
+      &lt;div class=&quot;column first&quot;&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;j&lt;/dt&gt;
+          &lt;dd&gt;Move selection down&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;k&lt;/dt&gt;
+          &lt;dd&gt;Move selection up&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;o &lt;em&gt;or&lt;/em&gt; enter&lt;/dt&gt;
+          &lt;dd&gt;Open issue&lt;/dd&gt;
+        &lt;/dl&gt;
+      &lt;/div&gt;&lt;!-- /.column.first --&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class=&quot;js-hidden-pane&quot; style='display:none'&gt;
+    &lt;div class=&quot;rule&quot;&gt;&lt;/div&gt;
+
+    &lt;h3&gt;Network Graph&lt;/h3&gt;
+    &lt;div class=&quot;columns equacols&quot;&gt;
+      &lt;div class=&quot;column first&quot;&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;&lt;span class=&quot;badmono&quot;&gt;←&lt;/span&gt; &lt;em&gt;or&lt;/em&gt; h&lt;/dt&gt;
+          &lt;dd&gt;Scroll left&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;&lt;span class=&quot;badmono&quot;&gt;→&lt;/span&gt; &lt;em&gt;or&lt;/em&gt; l&lt;/dt&gt;
+          &lt;dd&gt;Scroll right&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;&lt;span class=&quot;badmono&quot;&gt;↑&lt;/span&gt; &lt;em&gt;or&lt;/em&gt; k&lt;/dt&gt;
+          &lt;dd&gt;Scroll up&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;&lt;span class=&quot;badmono&quot;&gt;↓&lt;/span&gt; &lt;em&gt;or&lt;/em&gt; j&lt;/dt&gt;
+          &lt;dd&gt;Scroll down&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;t&lt;/dt&gt;
+          &lt;dd&gt;Toggle visibility of head labels&lt;/dd&gt;
+        &lt;/dl&gt;
+      &lt;/div&gt;&lt;!-- /.column.first --&gt;
+      &lt;div class=&quot;column last&quot;&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;shift &lt;span class=&quot;badmono&quot;&gt;←&lt;/span&gt; &lt;em&gt;or&lt;/em&gt; shift h&lt;/dt&gt;
+          &lt;dd&gt;Scroll all the way left&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;shift &lt;span class=&quot;badmono&quot;&gt;→&lt;/span&gt; &lt;em&gt;or&lt;/em&gt; shift l&lt;/dt&gt;
+          &lt;dd&gt;Scroll all the way right&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;shift &lt;span class=&quot;badmono&quot;&gt;↑&lt;/span&gt; &lt;em&gt;or&lt;/em&gt; shift k&lt;/dt&gt;
+          &lt;dd&gt;Scroll all the way up&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;shift &lt;span class=&quot;badmono&quot;&gt;↓&lt;/span&gt; &lt;em&gt;or&lt;/em&gt; shift j&lt;/dt&gt;
+          &lt;dd&gt;Scroll all the way down&lt;/dd&gt;
+        &lt;/dl&gt;
+      &lt;/div&gt;&lt;!-- /.column.last --&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class=&quot;js-hidden-pane&quot; style='display:none'&gt;
+    &lt;div class=&quot;rule&quot;&gt;&lt;/div&gt;
+    &lt;div class=&quot;columns threecols&quot;&gt;
+      &lt;div class=&quot;column first js-hidden-pane&quot; style='display:none'&gt;
+        &lt;h3&gt;Source Code Browsing&lt;/h3&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;t&lt;/dt&gt;
+          &lt;dd&gt;Activates the file finder&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;l&lt;/dt&gt;
+          &lt;dd&gt;Jump to line&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;w&lt;/dt&gt;
+          &lt;dd&gt;Switch branch/tag&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;y&lt;/dt&gt;
+          &lt;dd&gt;Expand URL to its canonical form&lt;/dd&gt;
+        &lt;/dl&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class=&quot;js-hidden-pane&quot; style='display:none'&gt;
+    &lt;div class=&quot;rule&quot;&gt;&lt;/div&gt;
+    &lt;div class=&quot;columns threecols&quot;&gt;
+      &lt;div class=&quot;column first&quot;&gt;
+        &lt;h3&gt;Browsing Commits&lt;/h3&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;&lt;span class=&quot;platform-mac&quot;&gt;⌘&lt;/span&gt;&lt;span class=&quot;platform-other&quot;&gt;ctrl&lt;/span&gt; &lt;em&gt;+&lt;/em&gt; enter&lt;/dt&gt;
+          &lt;dd&gt;Submit comment&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;escape&lt;/dt&gt;
+          &lt;dd&gt;Close form&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;p&lt;/dt&gt;
+          &lt;dd&gt;Parent commit&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;o&lt;/dt&gt;
+          &lt;dd&gt;Other parent commit&lt;/dd&gt;
+        &lt;/dl&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class=&quot;js-hidden-pane&quot; style='display:none'&gt;
+    &lt;div class=&quot;rule&quot;&gt;&lt;/div&gt;
+    &lt;h3&gt;Notifications&lt;/h3&gt;
+
+    &lt;div class=&quot;columns threecols&quot;&gt;
+      &lt;div class=&quot;column first&quot;&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;j&lt;/dt&gt;
+          &lt;dd&gt;Move selection down&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;k&lt;/dt&gt;
+          &lt;dd&gt;Move selection up&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;o &lt;em&gt;or&lt;/em&gt; enter&lt;/dt&gt;
+          &lt;dd&gt;Open notification&lt;/dd&gt;
+        &lt;/dl&gt;
+      &lt;/div&gt;&lt;!-- /.column.first --&gt;
+
+      &lt;div class=&quot;column second&quot;&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;e &lt;em&gt;or&lt;/em&gt; shift i &lt;em&gt;or&lt;/em&gt; y&lt;/dt&gt;
+          &lt;dd&gt;Mark as read&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;shift m&lt;/dt&gt;
+          &lt;dd&gt;Mute thread&lt;/dd&gt;
+        &lt;/dl&gt;
+      &lt;/div&gt;&lt;!-- /.column.first --&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;
+
+    &lt;div id=&quot;markdown-help&quot; class=&quot;instapaper_ignore readability-extra&quot;&gt;
+  &lt;h2&gt;Markdown Cheat Sheet&lt;/h2&gt;
+
+  &lt;div class=&quot;cheatsheet-content&quot;&gt;
+
+  &lt;div class=&quot;mod&quot;&gt;
+    &lt;div class=&quot;col&quot;&gt;
+      &lt;h3&gt;Format Text&lt;/h3&gt;
+      &lt;p&gt;Headers&lt;/p&gt;
+      &lt;pre&gt;
+# This is an &amp;lt;h1&amp;gt; tag
+## This is an &amp;lt;h2&amp;gt; tag
+###### This is an &amp;lt;h6&amp;gt; tag&lt;/pre&gt;
+     &lt;p&gt;Text styles&lt;/p&gt;
+     &lt;pre&gt;
+*This text will be italic*
+_This will also be italic_
+**This text will be bold**
+__This will also be bold__
+
+*You **can** combine them*
+&lt;/pre&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;col&quot;&gt;
+      &lt;h3&gt;Lists&lt;/h3&gt;
+      &lt;p&gt;Unordered&lt;/p&gt;
+      &lt;pre&gt;
+* Item 1
+* Item 2
+  * Item 2a
+  * Item 2b&lt;/pre&gt;
+     &lt;p&gt;Ordered&lt;/p&gt;
+     &lt;pre&gt;
+1. Item 1
+2. Item 2
+3. Item 3
+   * Item 3a
+   * Item 3b&lt;/pre&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;col&quot;&gt;
+      &lt;h3&gt;Miscellaneous&lt;/h3&gt;
+      &lt;p&gt;Images&lt;/p&gt;
+      &lt;pre&gt;
+![GitHub Logo](/images/logo.png)
+Format: ![Alt Text](url)
+&lt;/pre&gt;
+     &lt;p&gt;Links&lt;/p&gt;
+     &lt;pre&gt;
+http://github.com - automatic!
+[GitHub](http://github.com)&lt;/pre&gt;
+&lt;p&gt;Blockquotes&lt;/p&gt;
+     &lt;pre&gt;
+As Kanye West said:
+
+&gt; We're living the future so
+&gt; the present is our past.
+&lt;/pre&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;rule&quot;&gt;&lt;/div&gt;
+
+  &lt;h3&gt;Code Examples in Markdown&lt;/h3&gt;
+  &lt;div class=&quot;col&quot;&gt;
+      &lt;p&gt;Syntax highlighting with &lt;a href=&quot;http://github.github.com/github-flavored-markdown/&quot; title=&quot;GitHub Flavored Markdown&quot; target=&quot;_blank&quot;&gt;GFM&lt;/a&gt;&lt;/p&gt;
+      &lt;pre&gt;
+```javascript
+function fancyAlert(arg) {
+  if(arg) {
+    $.facebox({div:'#foo'})
+  }
+}
+```&lt;/pre&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;col&quot;&gt;
+      &lt;p&gt;Or, indent your code 4 spaces&lt;/p&gt;
+      &lt;pre&gt;
+Here is a Python code example
+without syntax highlighting:
+
+    def foo:
+      if not bar:
+        return true&lt;/pre&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;col&quot;&gt;
+      &lt;p&gt;Inline code for comments&lt;/p&gt;
+      &lt;pre&gt;
+I think you should use an
+`&amp;lt;addr&amp;gt;` element here instead.&lt;/pre&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;/div&gt;
+&lt;/div&gt;
+
+
+    &lt;div id=&quot;ajax-error-message&quot;&gt;
+      &lt;span class=&quot;mini-icon mini-icon-exclamation&quot;&gt;&lt;/span&gt;
+      Something went wrong with that request. Please try again.
+      &lt;a href=&quot;#&quot; class=&quot;ajax-error-dismiss&quot;&gt;Dismiss&lt;/a&gt;
+    &lt;/div&gt;
+
+    &lt;div id=&quot;logo-popup&quot;&gt;
+      &lt;h2&gt;Looking for the GitHub logo?&lt;/h2&gt;
+      &lt;ul&gt;
+        &lt;li&gt;
+          &lt;h4&gt;GitHub Logo&lt;/h4&gt;
+          &lt;a href=&quot;http://github-media-downloads.s3.amazonaws.com/GitHub_Logos.zip&quot;&gt;&lt;img alt=&quot;Github_logo&quot; src=&quot;https://a248.e.akamai.net/assets.github.com/images/modules/about_page/github_logo.png?1338945074&quot; /&gt;&lt;/a&gt;
+          &lt;a href=&quot;http://github-media-downloads.s3.amazonaws.com/GitHub_Logos.zip&quot; class=&quot;minibutton btn-download download&quot;&gt;Download&lt;/a&gt;
+        &lt;/li&gt;
+        &lt;li&gt;
+          &lt;h4&gt;The Octocat&lt;/h4&gt;
+          &lt;a href=&quot;http://github-media-downloads.s3.amazonaws.com/Octocats.zip&quot;&gt;&lt;img alt=&quot;Octocat&quot; src=&quot;https://a248.e.akamai.net/assets.github.com/images/modules/about_page/octocat.png?1338945074&quot; /&gt;&lt;/a&gt;
+          &lt;a href=&quot;http://github-media-downloads.s3.amazonaws.com/Octocats.zip&quot; class=&quot;minibutton btn-download download&quot;&gt;Download&lt;/a&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/div&gt;
+
+    
+    
+    &lt;span id='server_response_time' data-time='0.02480' data-host='fe2'&gt;&lt;/span&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre></noscript></div>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#http_path = "/tech-blogbin-blog/"
+</span><span class='line'>#http_images_path = "/tech-blogbin-blog/images"
+</span><span class='line'>#http_fonts_path = "/tech-blogbin-blog/fonts"
+</span><span class='line'>#css_dir = "public/tech-blogbin-blog/stylesheets"
+</span><span class='line'>
+</span><span class='line'>http_path = "/"
+</span><span class='line'>http_images_path = "/images"
+</span><span class='line'>http_fonts_path = "/fonts"
+</span><span class='line'>css_dir = "public/stylesheets"</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Rakefile</p>
+
+<div><script src='https://gist.github.com/66.js?file=Rakefile'></script>
+<noscript><pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head prefix=&quot;og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# githubog: http://ogp.me/ns/fb/githubog#&quot;&gt;
+    &lt;meta charset='utf-8'&gt;
+    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;
+        &lt;title&gt;404 · GitHub&lt;/title&gt;
+    &lt;link rel=&quot;search&quot; type=&quot;application/opensearchdescription+xml&quot; href=&quot;/opensearch.xml&quot; title=&quot;GitHub&quot; /&gt;
+    &lt;link rel=&quot;fluid-icon&quot; href=&quot;https://raw.github.com/fluidicon.png&quot; title=&quot;GitHub&quot; /&gt;
+    &lt;link rel=&quot;apple-touch-icon-precomposed&quot; sizes=&quot;57x57&quot; href=&quot;apple-touch-icon-114.png&quot; /&gt;
+    &lt;link rel=&quot;apple-touch-icon-precomposed&quot; sizes=&quot;114x114&quot; href=&quot;apple-touch-icon-114.png&quot; /&gt;
+    &lt;link rel=&quot;apple-touch-icon-precomposed&quot; sizes=&quot;72x72&quot; href=&quot;apple-touch-icon-144.png&quot; /&gt;
+    &lt;link rel=&quot;apple-touch-icon-precomposed&quot; sizes=&quot;144x144&quot; href=&quot;apple-touch-icon-144.png&quot; /&gt;
+
+    
+    
+    &lt;link rel=&quot;icon&quot; type=&quot;image/x-icon&quot; href=&quot;/favicon.png&quot; /&gt;
+
+    
+
+    &lt;link href=&quot;https://a248.e.akamai.net/assets.github.com/assets/github-fc8f93aa673bcc847295986dc6d690ee822e90d0.css&quot; media=&quot;screen&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+    &lt;link href=&quot;https://a248.e.akamai.net/assets.github.com/assets/github2-327db63293098d6476136b438e34be409ae3b461.css&quot; media=&quot;screen&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+    
+
+
+    &lt;script src=&quot;https://a248.e.akamai.net/assets.github.com/assets/frameworks-917510fd4e1e5f0487cfe32445a6cfc8927e84f1.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
+    
+    &lt;script defer=&quot;defer&quot; src=&quot;https://a248.e.akamai.net/assets.github.com/assets/github-bf18c28a497214adf5ccf6725575da23a83918fd.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
+    
+    
+
+    
+  &lt;/head&gt;
+
+
+  &lt;body class=&quot;logged_out    env-production &quot;&gt;
+    &lt;div id=&quot;wrapper&quot;&gt;
+
+    
+    
+
+      &lt;div id=&quot;header&quot; class=&quot;true clearfix&quot;&gt;
+        &lt;div class=&quot;container clearfix&quot;&gt;
+          &lt;a class=&quot;site-logo&quot; href=&quot;https://raw.github.com/&quot;&gt;
+            &lt;img alt=&quot;GitHub&quot; class=&quot;github-logo-4x&quot; height=&quot;30&quot; src=&quot;https://a248.e.akamai.net/assets.github.com/images/modules/header/logov7@4x.png?1337118067&quot; /&gt;
+            &lt;img alt=&quot;GitHub&quot; class=&quot;github-logo-4x-hover&quot; height=&quot;30&quot; src=&quot;https://a248.e.akamai.net/assets.github.com/images/modules/header/logov7@4x-hover.png?1337118067&quot; /&gt;
+          &lt;/a&gt;
+
+
+                  &lt;!--
+      make sure to use fully qualified URLs here since this nav
+      is used on error pages on other domains
+    --&gt;
+    &lt;ul class=&quot;top-nav logged_out&quot;&gt;
+        &lt;li class=&quot;pricing&quot;&gt;&lt;a href=&quot;https://github.com/plans&quot;&gt;Signup and Pricing&lt;/a&gt;&lt;/li&gt;
+        &lt;li class=&quot;explore&quot;&gt;&lt;a href=&quot;https://github.com/explore&quot;&gt;Explore GitHub&lt;/a&gt;&lt;/li&gt;
+      &lt;li class=&quot;features&quot;&gt;&lt;a href=&quot;https://github.com/features&quot;&gt;Features&lt;/a&gt;&lt;/li&gt;
+        &lt;li class=&quot;blog&quot;&gt;&lt;a href=&quot;https://github.com/blog&quot;&gt;Blog&lt;/a&gt;&lt;/li&gt;
+      &lt;li class=&quot;login&quot;&gt;&lt;a href=&quot;https://github.com/login?return_to=%2Fgist%2F66%2FRakefile&quot;&gt;Sign in&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+
+
+
+          
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      
+
+      
+
+        &lt;div class=&quot;site clearfix&quot;&gt;
+          &lt;div id=&quot;site-container&quot; class=&quot;container&quot; data-pjax-container&gt;
+            
+
+&lt;style type=&quot;text/css&quot;&gt;
+    #header{
+        border-bottom: 0;
+    }
+    .site {
+        padding: 0;
+    }
+    #site-container {
+        width: 100%;
+    }
+    * {
+        margin: 0px;
+        padding: 0px;
+    }
+    #parallax_wrapper {
+      position: relative;
+      z-index: 0;
+      margin-bottom: 50px;
+    }
+    #parallax_field{
+        overflow: hidden;
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 370px;
+        width: 100%;
+    }
+    #parallax_field #parallax_bg {
+        position: absolute;
+        top: -20px;
+        left: -20px;
+        width: 110%;
+        height: 425px;
+        z-index: 1;
+    }
+    #parallax_illustration {
+        display: block;
+        margin: 0 auto;
+        width: 940px;
+        height: 370px;
+        position: relative;
+        overflow: hidden;
+        clear: both;
+    }
+    #parallax_illustration #parallax_error_text {
+        position: absolute;
+        top: 72px;
+        left: 72px;
+        z-index: 10;
+    }
+    #parallax_illustration #parallax_octocat {
+        position: absolute;
+        top: 94px;
+        left: 356px;
+        z-index: 9;
+    }
+    #parallax_illustration #parallax_speeder {
+        position: absolute;
+        top: 150px;
+        left: 432px;
+        z-index: 8;
+    }
+    #parallax_illustration #parallax_octocatshadow {
+        position: absolute;
+        top: 297px;
+        left: 371px;
+        z-index: 7;
+    }
+    #parallax_illustration #parallax_speedershadow {
+        position: absolute;
+        top: 263px;
+        left: 442px;
+        z-index: 6;
+    }
+    #parallax_illustration #parallax_building_1 {
+        position: absolute;
+        top: 73px;
+        left: 467px;
+        z-index: 5;
+    }
+    #parallax_illustration #parallax_building_2 {
+        position: absolute;
+        top: 113px;
+        left: 762px;
+        z-index: 4;
+    }
+    #footer-push {
+      height: 280px;
+    }
+    #footer {
+        margin-top: 0px;
+        z-index: 12;
+    }
+&lt;/style&gt;
+
+&lt;div id=&quot;parallax_wrapper&quot;&gt;
+
+&lt;div id=&quot;parallax_field&quot;&gt;
+    &lt;img alt=&quot;building&quot; class=&quot;js-plaxify&quot; data-invert=&quot;true&quot; data-xrange=&quot;0&quot; data-yrange=&quot;20&quot; height=&quot;415&quot; id=&quot;parallax_bg&quot; src=&quot;https://a248.e.akamai.net/assets.github.com/images/modules/404/parallax_bg.jpg?1310086001&quot; width=&quot;940&quot; /&gt;
+&lt;/div&gt;
+&lt;div id=&quot;parallax_illustration&quot;&gt;
+  &lt;img alt=&quot;404 | &amp;ldquo;This is not the web page you are looking for&amp;rdquo;&quot; class=&quot;js-plaxify&quot; data-xrange=&quot;20&quot; data-yrange=&quot;10&quot; height=&quot;249&quot; id=&quot;parallax_error_text&quot; src=&quot;https://a248.e.akamai.net/assets.github.com/images/modules/404/parallax_errortext.png?1310086001&quot; width=&quot;271&quot; /&gt;
+  &lt;img alt=&quot;Octobi Wan Catnobi&quot; class=&quot;js-plaxify&quot; data-xrange=&quot;10&quot; data-yrange=&quot;10&quot; height=&quot;230&quot; id=&quot;parallax_octocat&quot; src=&quot;https://a248.e.akamai.net/assets.github.com/images/modules/404/parallax_octocat.png?1310086001&quot; width=&quot;188&quot; /&gt;
+  &lt;img alt=&quot;land speeder&quot; class=&quot;js-plaxify&quot; data-xrange=&quot;10&quot; data-yrange=&quot;10&quot; height=&quot;156&quot; id=&quot;parallax_speeder&quot; src=&quot;https://a248.e.akamai.net/assets.github.com/images/modules/404/parallax_speeder.png?1310086001&quot; width=&quot;440&quot; /&gt;
+  &lt;img alt=&quot;Octobi Wan Catnobi's shadow&quot; class=&quot;js-plaxify&quot; data-xrange=&quot;10&quot; data-yrange=&quot;10&quot; height=&quot;49&quot; id=&quot;parallax_octocatshadow&quot; src=&quot;https://a248.e.akamai.net/assets.github.com/images/modules/404/parallax_octocatshadow.png?1310086001&quot; width=&quot;166&quot; /&gt;
+  &lt;img alt=&quot;land speeder's shadow&quot; class=&quot;js-plaxify&quot; data-xrange=&quot;10&quot; data-yrange=&quot;10&quot; height=&quot;75&quot; id=&quot;parallax_speedershadow&quot; src=&quot;https://a248.e.akamai.net/assets.github.com/images/modules/404/parallax_speedershadow.png?1310086001&quot; width=&quot;430&quot; /&gt;
+  &lt;img alt=&quot;building&quot; class=&quot;js-plaxify&quot; data-invert=&quot;true&quot; data-xrange=&quot;50&quot; data-yrange=&quot;20&quot; height=&quot;123&quot; id=&quot;parallax_building_1&quot; src=&quot;https://a248.e.akamai.net/assets.github.com/images/modules/404/parallax_building_1.png?1310086001&quot; width=&quot;304&quot; /&gt;
+  &lt;img alt=&quot;building&quot; class=&quot;js-plaxify&quot; data-invert=&quot;true&quot; data-xrange=&quot;75&quot; data-yrange=&quot;30&quot; height=&quot;50&quot; id=&quot;parallax_building_2&quot; src=&quot;https://a248.e.akamai.net/assets.github.com/images/modules/404/parallax_building_2.png?1310086001&quot; width=&quot;116&quot; /&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+          &lt;/div&gt;
+          &lt;div class=&quot;context-overlay&quot;&gt;&lt;/div&gt;
+        &lt;/div&gt;
+      &lt;div id=&quot;footer-push&quot;&gt;&lt;/div&gt;&lt;!-- hack for sticky footer --&gt;
+    &lt;/div&gt;&lt;!-- end of wrapper - hack for sticky footer --&gt;
+
+      &lt;!-- footer --&gt;
+      &lt;div id=&quot;footer&quot; &gt;
+        
+  &lt;div class=&quot;upper_footer&quot;&gt;
+     &lt;div class=&quot;container clearfix&quot;&gt;
+
+       &lt;!--[if IE]&gt;&lt;h4 id=&quot;blacktocat_ie&quot;&gt;GitHub Links&lt;/h4&gt;&lt;![endif]--&gt;
+       &lt;![if !IE]&gt;&lt;h4 id=&quot;blacktocat&quot;&gt;GitHub Links&lt;/h4&gt;&lt;![endif]&gt;
+
+       &lt;ul class=&quot;footer_nav&quot;&gt;
+         &lt;h4&gt;GitHub&lt;/h4&gt;
+         &lt;li&gt;&lt;a href=&quot;https://github.com/about&quot;&gt;About&lt;/a&gt;&lt;/li&gt;
+         &lt;li&gt;&lt;a href=&quot;https://github.com/blog&quot;&gt;Blog&lt;/a&gt;&lt;/li&gt;
+         &lt;li&gt;&lt;a href=&quot;https://github.com/features&quot;&gt;Features&lt;/a&gt;&lt;/li&gt;
+         &lt;li&gt;&lt;a href=&quot;https://github.com/contact&quot;&gt;Contact &amp;amp; Support&lt;/a&gt;&lt;/li&gt;
+         &lt;li&gt;&lt;a href=&quot;https://github.com/training&quot;&gt;Training&lt;/a&gt;&lt;/li&gt;
+         &lt;li&gt;&lt;a href=&quot;http://enterprise.github.com/&quot;&gt;GitHub Enterprise&lt;/a&gt;&lt;/li&gt;
+         &lt;li&gt;&lt;a href=&quot;http://status.github.com/&quot;&gt;Site Status&lt;/a&gt;&lt;/li&gt;
+       &lt;/ul&gt;
+
+       &lt;ul class=&quot;footer_nav&quot;&gt;
+         &lt;h4&gt;Clients&lt;/h4&gt;
+         &lt;li&gt;&lt;a href=&quot;http://mac.github.com/&quot;&gt;GitHub for Mac&lt;/a&gt;&lt;/li&gt;
+         &lt;li&gt;&lt;a href=&quot;http://windows.github.com/&quot;&gt;GitHub for Windows&lt;/a&gt;&lt;/li&gt;
+         &lt;li&gt;&lt;a href=&quot;http://eclipse.github.com/&quot;&gt;GitHub for Eclipse&lt;/a&gt;&lt;/li&gt;
+         &lt;li&gt;&lt;a href=&quot;http://mobile.github.com/&quot;&gt;GitHub Mobile Apps&lt;/a&gt;&lt;/li&gt;
+       &lt;/ul&gt;
+
+       &lt;ul class=&quot;footer_nav&quot;&gt;
+         &lt;h4&gt;Tools&lt;/h4&gt;
+         &lt;li&gt;&lt;a href=&quot;http://get.gaug.es/&quot;&gt;Gauges: Web analytics&lt;/a&gt;&lt;/li&gt;
+         &lt;li&gt;&lt;a href=&quot;http://speakerdeck.com&quot;&gt;Speaker Deck: Presentations&lt;/a&gt;&lt;/li&gt;
+         &lt;li&gt;&lt;a href=&quot;https://gist.github.com&quot;&gt;Gist: Code snippets&lt;/a&gt;&lt;/li&gt;
+
+         &lt;h4 class=&quot;second&quot;&gt;Extras&lt;/h4&gt;
+         &lt;li&gt;&lt;a href=&quot;http://jobs.github.com/&quot;&gt;Job Board&lt;/a&gt;&lt;/li&gt;
+         &lt;li&gt;&lt;a href=&quot;http://shop.github.com/&quot;&gt;GitHub Shop&lt;/a&gt;&lt;/li&gt;
+         &lt;li&gt;&lt;a href=&quot;http://octodex.github.com/&quot;&gt;The Octodex&lt;/a&gt;&lt;/li&gt;
+       &lt;/ul&gt;
+
+       &lt;ul class=&quot;footer_nav&quot;&gt;
+         &lt;h4&gt;Documentation&lt;/h4&gt;
+         &lt;li&gt;&lt;a href=&quot;http://help.github.com/&quot;&gt;GitHub Help&lt;/a&gt;&lt;/li&gt;
+         &lt;li&gt;&lt;a href=&quot;http://developer.github.com/&quot;&gt;Developer API&lt;/a&gt;&lt;/li&gt;
+         &lt;li&gt;&lt;a href=&quot;http://github.github.com/github-flavored-markdown/&quot;&gt;GitHub Flavored Markdown&lt;/a&gt;&lt;/li&gt;
+         &lt;li&gt;&lt;a href=&quot;http://pages.github.com/&quot;&gt;GitHub Pages&lt;/a&gt;&lt;/li&gt;
+       &lt;/ul&gt;
+
+     &lt;/div&gt;&lt;!-- /.site --&gt;
+  &lt;/div&gt;&lt;!-- /.upper_footer --&gt;
+
+&lt;div class=&quot;lower_footer&quot;&gt;
+  &lt;div class=&quot;container clearfix&quot;&gt;
+    &lt;!--[if IE]&gt;&lt;div id=&quot;legal_ie&quot;&gt;&lt;![endif]--&gt;
+    &lt;![if !IE]&gt;&lt;div id=&quot;legal&quot;&gt;&lt;![endif]&gt;
+      &lt;ul&gt;
+          &lt;li&gt;&lt;a href=&quot;https://github.com/site/terms&quot;&gt;Terms of Service&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;https://github.com/site/privacy&quot;&gt;Privacy&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;https://github.com/security&quot;&gt;Security&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+
+      &lt;p&gt;&amp;copy; 2012 &lt;span title=&quot;0.01210s from fe7.rs.github.com&quot;&gt;GitHub&lt;/span&gt; Inc. All rights reserved.&lt;/p&gt;
+    &lt;/div&gt;&lt;!-- /#legal or /#legal_ie--&gt;
+
+  &lt;/div&gt;&lt;!-- /.site --&gt;
+&lt;/div&gt;&lt;!-- /.lower_footer --&gt;
+
+      &lt;/div&gt;&lt;!-- /#footer --&gt;
+
+    
+
+&lt;div id=&quot;keyboard_shortcuts_pane&quot; class=&quot;instapaper_ignore readability-extra&quot; style=&quot;display:none&quot;&gt;
+  &lt;h2&gt;Keyboard Shortcuts &lt;small&gt;&lt;a href=&quot;#&quot; class=&quot;js-see-all-keyboard-shortcuts&quot;&gt;(see all)&lt;/a&gt;&lt;/small&gt;&lt;/h2&gt;
+
+  &lt;div class=&quot;columns threecols&quot;&gt;
+    &lt;div class=&quot;column first&quot;&gt;
+      &lt;h3&gt;Site wide shortcuts&lt;/h3&gt;
+      &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+        &lt;dt&gt;s&lt;/dt&gt;
+        &lt;dd&gt;Focus site search&lt;/dd&gt;
+      &lt;/dl&gt;
+      &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+        &lt;dt&gt;?&lt;/dt&gt;
+        &lt;dd&gt;Bring up this help dialog&lt;/dd&gt;
+      &lt;/dl&gt;
+    &lt;/div&gt;&lt;!-- /.column.first --&gt;
+
+    &lt;div class=&quot;column middle&quot; style='display:none'&gt;
+      &lt;h3&gt;Commit list&lt;/h3&gt;
+      &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+        &lt;dt&gt;j&lt;/dt&gt;
+        &lt;dd&gt;Move selection down&lt;/dd&gt;
+      &lt;/dl&gt;
+      &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+        &lt;dt&gt;k&lt;/dt&gt;
+        &lt;dd&gt;Move selection up&lt;/dd&gt;
+      &lt;/dl&gt;
+      &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+        &lt;dt&gt;c &lt;em&gt;or&lt;/em&gt; o &lt;em&gt;or&lt;/em&gt; enter&lt;/dt&gt;
+        &lt;dd&gt;Open commit&lt;/dd&gt;
+      &lt;/dl&gt;
+      &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+        &lt;dt&gt;y&lt;/dt&gt;
+        &lt;dd&gt;Expand URL to its canonical form&lt;/dd&gt;
+      &lt;/dl&gt;
+    &lt;/div&gt;&lt;!-- /.column.first --&gt;
+
+    &lt;div class=&quot;column last js-hidden-pane&quot; style='display:none'&gt;
+      &lt;h3&gt;Pull request list&lt;/h3&gt;
+      &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+        &lt;dt&gt;j&lt;/dt&gt;
+        &lt;dd&gt;Move selection down&lt;/dd&gt;
+      &lt;/dl&gt;
+      &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+        &lt;dt&gt;k&lt;/dt&gt;
+        &lt;dd&gt;Move selection up&lt;/dd&gt;
+      &lt;/dl&gt;
+      &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+        &lt;dt&gt;o &lt;em&gt;or&lt;/em&gt; enter&lt;/dt&gt;
+        &lt;dd&gt;Open issue&lt;/dd&gt;
+      &lt;/dl&gt;
+      &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+        &lt;dt&gt;&lt;span class=&quot;platform-mac&quot;&gt;⌘&lt;/span&gt;&lt;span class=&quot;platform-other&quot;&gt;ctrl&lt;/span&gt; &lt;em&gt;+&lt;/em&gt; enter&lt;/dt&gt;
+        &lt;dd&gt;Submit comment&lt;/dd&gt;
+      &lt;/dl&gt;
+      &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+        &lt;dt&gt;&lt;span class=&quot;platform-mac&quot;&gt;⌘&lt;/span&gt;&lt;span class=&quot;platform-other&quot;&gt;ctrl&lt;/span&gt; &lt;em&gt;+&lt;/em&gt; shift p&lt;/dt&gt;
+        &lt;dd&gt;Preview comment&lt;/dd&gt;
+      &lt;/dl&gt;
+    &lt;/div&gt;&lt;!-- /.columns.last --&gt;
+
+  &lt;/div&gt;&lt;!-- /.columns.equacols --&gt;
+
+  &lt;div class=&quot;js-hidden-pane&quot; style='display:none'&gt;
+    &lt;div class=&quot;rule&quot;&gt;&lt;/div&gt;
+
+    &lt;h3&gt;Issues&lt;/h3&gt;
+
+    &lt;div class=&quot;columns threecols&quot;&gt;
+      &lt;div class=&quot;column first&quot;&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;j&lt;/dt&gt;
+          &lt;dd&gt;Move selection down&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;k&lt;/dt&gt;
+          &lt;dd&gt;Move selection up&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;x&lt;/dt&gt;
+          &lt;dd&gt;Toggle selection&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;o &lt;em&gt;or&lt;/em&gt; enter&lt;/dt&gt;
+          &lt;dd&gt;Open issue&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;&lt;span class=&quot;platform-mac&quot;&gt;⌘&lt;/span&gt;&lt;span class=&quot;platform-other&quot;&gt;ctrl&lt;/span&gt; &lt;em&gt;+&lt;/em&gt; enter&lt;/dt&gt;
+          &lt;dd&gt;Submit comment&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;&lt;span class=&quot;platform-mac&quot;&gt;⌘&lt;/span&gt;&lt;span class=&quot;platform-other&quot;&gt;ctrl&lt;/span&gt; &lt;em&gt;+&lt;/em&gt; shift p&lt;/dt&gt;
+          &lt;dd&gt;Preview comment&lt;/dd&gt;
+        &lt;/dl&gt;
+      &lt;/div&gt;&lt;!-- /.column.first --&gt;
+      &lt;div class=&quot;column last&quot;&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;c&lt;/dt&gt;
+          &lt;dd&gt;Create issue&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;l&lt;/dt&gt;
+          &lt;dd&gt;Create label&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;i&lt;/dt&gt;
+          &lt;dd&gt;Back to inbox&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;u&lt;/dt&gt;
+          &lt;dd&gt;Back to issues&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;/&lt;/dt&gt;
+          &lt;dd&gt;Focus issues search&lt;/dd&gt;
+        &lt;/dl&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class=&quot;js-hidden-pane&quot; style='display:none'&gt;
+    &lt;div class=&quot;rule&quot;&gt;&lt;/div&gt;
+
+    &lt;h3&gt;Issues Dashboard&lt;/h3&gt;
+
+    &lt;div class=&quot;columns threecols&quot;&gt;
+      &lt;div class=&quot;column first&quot;&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;j&lt;/dt&gt;
+          &lt;dd&gt;Move selection down&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;k&lt;/dt&gt;
+          &lt;dd&gt;Move selection up&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;o &lt;em&gt;or&lt;/em&gt; enter&lt;/dt&gt;
+          &lt;dd&gt;Open issue&lt;/dd&gt;
+        &lt;/dl&gt;
+      &lt;/div&gt;&lt;!-- /.column.first --&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class=&quot;js-hidden-pane&quot; style='display:none'&gt;
+    &lt;div class=&quot;rule&quot;&gt;&lt;/div&gt;
+
+    &lt;h3&gt;Network Graph&lt;/h3&gt;
+    &lt;div class=&quot;columns equacols&quot;&gt;
+      &lt;div class=&quot;column first&quot;&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;&lt;span class=&quot;badmono&quot;&gt;←&lt;/span&gt; &lt;em&gt;or&lt;/em&gt; h&lt;/dt&gt;
+          &lt;dd&gt;Scroll left&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;&lt;span class=&quot;badmono&quot;&gt;→&lt;/span&gt; &lt;em&gt;or&lt;/em&gt; l&lt;/dt&gt;
+          &lt;dd&gt;Scroll right&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;&lt;span class=&quot;badmono&quot;&gt;↑&lt;/span&gt; &lt;em&gt;or&lt;/em&gt; k&lt;/dt&gt;
+          &lt;dd&gt;Scroll up&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;&lt;span class=&quot;badmono&quot;&gt;↓&lt;/span&gt; &lt;em&gt;or&lt;/em&gt; j&lt;/dt&gt;
+          &lt;dd&gt;Scroll down&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;t&lt;/dt&gt;
+          &lt;dd&gt;Toggle visibility of head labels&lt;/dd&gt;
+        &lt;/dl&gt;
+      &lt;/div&gt;&lt;!-- /.column.first --&gt;
+      &lt;div class=&quot;column last&quot;&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;shift &lt;span class=&quot;badmono&quot;&gt;←&lt;/span&gt; &lt;em&gt;or&lt;/em&gt; shift h&lt;/dt&gt;
+          &lt;dd&gt;Scroll all the way left&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;shift &lt;span class=&quot;badmono&quot;&gt;→&lt;/span&gt; &lt;em&gt;or&lt;/em&gt; shift l&lt;/dt&gt;
+          &lt;dd&gt;Scroll all the way right&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;shift &lt;span class=&quot;badmono&quot;&gt;↑&lt;/span&gt; &lt;em&gt;or&lt;/em&gt; shift k&lt;/dt&gt;
+          &lt;dd&gt;Scroll all the way up&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;shift &lt;span class=&quot;badmono&quot;&gt;↓&lt;/span&gt; &lt;em&gt;or&lt;/em&gt; shift j&lt;/dt&gt;
+          &lt;dd&gt;Scroll all the way down&lt;/dd&gt;
+        &lt;/dl&gt;
+      &lt;/div&gt;&lt;!-- /.column.last --&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class=&quot;js-hidden-pane&quot; style='display:none'&gt;
+    &lt;div class=&quot;rule&quot;&gt;&lt;/div&gt;
+    &lt;div class=&quot;columns threecols&quot;&gt;
+      &lt;div class=&quot;column first js-hidden-pane&quot; style='display:none'&gt;
+        &lt;h3&gt;Source Code Browsing&lt;/h3&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;t&lt;/dt&gt;
+          &lt;dd&gt;Activates the file finder&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;l&lt;/dt&gt;
+          &lt;dd&gt;Jump to line&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;w&lt;/dt&gt;
+          &lt;dd&gt;Switch branch/tag&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;y&lt;/dt&gt;
+          &lt;dd&gt;Expand URL to its canonical form&lt;/dd&gt;
+        &lt;/dl&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class=&quot;js-hidden-pane&quot; style='display:none'&gt;
+    &lt;div class=&quot;rule&quot;&gt;&lt;/div&gt;
+    &lt;div class=&quot;columns threecols&quot;&gt;
+      &lt;div class=&quot;column first&quot;&gt;
+        &lt;h3&gt;Browsing Commits&lt;/h3&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;&lt;span class=&quot;platform-mac&quot;&gt;⌘&lt;/span&gt;&lt;span class=&quot;platform-other&quot;&gt;ctrl&lt;/span&gt; &lt;em&gt;+&lt;/em&gt; enter&lt;/dt&gt;
+          &lt;dd&gt;Submit comment&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;escape&lt;/dt&gt;
+          &lt;dd&gt;Close form&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;p&lt;/dt&gt;
+          &lt;dd&gt;Parent commit&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;o&lt;/dt&gt;
+          &lt;dd&gt;Other parent commit&lt;/dd&gt;
+        &lt;/dl&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class=&quot;js-hidden-pane&quot; style='display:none'&gt;
+    &lt;div class=&quot;rule&quot;&gt;&lt;/div&gt;
+    &lt;h3&gt;Notifications&lt;/h3&gt;
+
+    &lt;div class=&quot;columns threecols&quot;&gt;
+      &lt;div class=&quot;column first&quot;&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;j&lt;/dt&gt;
+          &lt;dd&gt;Move selection down&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;k&lt;/dt&gt;
+          &lt;dd&gt;Move selection up&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;o &lt;em&gt;or&lt;/em&gt; enter&lt;/dt&gt;
+          &lt;dd&gt;Open notification&lt;/dd&gt;
+        &lt;/dl&gt;
+      &lt;/div&gt;&lt;!-- /.column.first --&gt;
+
+      &lt;div class=&quot;column second&quot;&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;e &lt;em&gt;or&lt;/em&gt; shift i &lt;em&gt;or&lt;/em&gt; y&lt;/dt&gt;
+          &lt;dd&gt;Mark as read&lt;/dd&gt;
+        &lt;/dl&gt;
+        &lt;dl class=&quot;keyboard-mappings&quot;&gt;
+          &lt;dt&gt;shift m&lt;/dt&gt;
+          &lt;dd&gt;Mute thread&lt;/dd&gt;
+        &lt;/dl&gt;
+      &lt;/div&gt;&lt;!-- /.column.first --&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;
+
+    &lt;div id=&quot;markdown-help&quot; class=&quot;instapaper_ignore readability-extra&quot;&gt;
+  &lt;h2&gt;Markdown Cheat Sheet&lt;/h2&gt;
+
+  &lt;div class=&quot;cheatsheet-content&quot;&gt;
+
+  &lt;div class=&quot;mod&quot;&gt;
+    &lt;div class=&quot;col&quot;&gt;
+      &lt;h3&gt;Format Text&lt;/h3&gt;
+      &lt;p&gt;Headers&lt;/p&gt;
+      &lt;pre&gt;
+# This is an &amp;lt;h1&amp;gt; tag
+## This is an &amp;lt;h2&amp;gt; tag
+###### This is an &amp;lt;h6&amp;gt; tag&lt;/pre&gt;
+     &lt;p&gt;Text styles&lt;/p&gt;
+     &lt;pre&gt;
+*This text will be italic*
+_This will also be italic_
+**This text will be bold**
+__This will also be bold__
+
+*You **can** combine them*
+&lt;/pre&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;col&quot;&gt;
+      &lt;h3&gt;Lists&lt;/h3&gt;
+      &lt;p&gt;Unordered&lt;/p&gt;
+      &lt;pre&gt;
+* Item 1
+* Item 2
+  * Item 2a
+  * Item 2b&lt;/pre&gt;
+     &lt;p&gt;Ordered&lt;/p&gt;
+     &lt;pre&gt;
+1. Item 1
+2. Item 2
+3. Item 3
+   * Item 3a
+   * Item 3b&lt;/pre&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;col&quot;&gt;
+      &lt;h3&gt;Miscellaneous&lt;/h3&gt;
+      &lt;p&gt;Images&lt;/p&gt;
+      &lt;pre&gt;
+![GitHub Logo](/images/logo.png)
+Format: ![Alt Text](url)
+&lt;/pre&gt;
+     &lt;p&gt;Links&lt;/p&gt;
+     &lt;pre&gt;
+http://github.com - automatic!
+[GitHub](http://github.com)&lt;/pre&gt;
+&lt;p&gt;Blockquotes&lt;/p&gt;
+     &lt;pre&gt;
+As Kanye West said:
+
+&gt; We're living the future so
+&gt; the present is our past.
+&lt;/pre&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;rule&quot;&gt;&lt;/div&gt;
+
+  &lt;h3&gt;Code Examples in Markdown&lt;/h3&gt;
+  &lt;div class=&quot;col&quot;&gt;
+      &lt;p&gt;Syntax highlighting with &lt;a href=&quot;http://github.github.com/github-flavored-markdown/&quot; title=&quot;GitHub Flavored Markdown&quot; target=&quot;_blank&quot;&gt;GFM&lt;/a&gt;&lt;/p&gt;
+      &lt;pre&gt;
+```javascript
+function fancyAlert(arg) {
+  if(arg) {
+    $.facebox({div:'#foo'})
+  }
+}
+```&lt;/pre&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;col&quot;&gt;
+      &lt;p&gt;Or, indent your code 4 spaces&lt;/p&gt;
+      &lt;pre&gt;
+Here is a Python code example
+without syntax highlighting:
+
+    def foo:
+      if not bar:
+        return true&lt;/pre&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;col&quot;&gt;
+      &lt;p&gt;Inline code for comments&lt;/p&gt;
+      &lt;pre&gt;
+I think you should use an
+`&amp;lt;addr&amp;gt;` element here instead.&lt;/pre&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;/div&gt;
+&lt;/div&gt;
+
+
+    &lt;div id=&quot;ajax-error-message&quot;&gt;
+      &lt;span class=&quot;mini-icon mini-icon-exclamation&quot;&gt;&lt;/span&gt;
+      Something went wrong with that request. Please try again.
+      &lt;a href=&quot;#&quot; class=&quot;ajax-error-dismiss&quot;&gt;Dismiss&lt;/a&gt;
+    &lt;/div&gt;
+
+    &lt;div id=&quot;logo-popup&quot;&gt;
+      &lt;h2&gt;Looking for the GitHub logo?&lt;/h2&gt;
+      &lt;ul&gt;
+        &lt;li&gt;
+          &lt;h4&gt;GitHub Logo&lt;/h4&gt;
+          &lt;a href=&quot;http://github-media-downloads.s3.amazonaws.com/GitHub_Logos.zip&quot;&gt;&lt;img alt=&quot;Github_logo&quot; src=&quot;https://a248.e.akamai.net/assets.github.com/images/modules/about_page/github_logo.png?1310086001&quot; /&gt;&lt;/a&gt;
+          &lt;a href=&quot;http://github-media-downloads.s3.amazonaws.com/GitHub_Logos.zip&quot; class=&quot;minibutton btn-download download&quot;&gt;Download&lt;/a&gt;
+        &lt;/li&gt;
+        &lt;li&gt;
+          &lt;h4&gt;The Octocat&lt;/h4&gt;
+          &lt;a href=&quot;http://github-media-downloads.s3.amazonaws.com/Octocats.zip&quot;&gt;&lt;img alt=&quot;Octocat&quot; src=&quot;https://a248.e.akamai.net/assets.github.com/images/modules/about_page/octocat.png?1310086001&quot; /&gt;&lt;/a&gt;
+          &lt;a href=&quot;http://github-media-downloads.s3.amazonaws.com/Octocats.zip&quot; class=&quot;minibutton btn-download download&quot;&gt;Download&lt;/a&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/div&gt;
+
+    
+    
+    &lt;span id='server_response_time' data-time='0.01946' data-host='fe7'&gt;&lt;/span&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre></noscript></div>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#public_dir      = "public/tech-blogbin-blog"    # compiled site directory
+</span><span class='line'>public_dir      = "public"    # compiled site directory</span></code></pre></td></tr></table></div></figure>
+
+
+<h5>5. 运行 rake generate 重新编译，最后运行 rake deploy 部署至 GitHub</h5>
+
+<p>等待一段时间后，可以通过 <a href="http://tech-blog.blogbin.info/" title="Tech.Blogbin'Blog">http://tech-blog.blogbin.info/</a> 正常访问</p>
+
+<p>二. 问题</p>
+
+<h5>1. 404 错误：There isn&#8217;t a GitHub Page hosted here, sorry.</h5>
+
+<p>主要原因是没有设置正确的 source/CNAME，或者域名解析设置错误，或者耐心等待一段时间。</p>
+
+<blockquote><p><img src="/images/2012-08-14-buying-domain-and-configuring-domain-for-githubs-octopress/404.png"></p></blockquote>
+
+
+<h5>2. 加载错误的 CSS 路径</h5>
+
+<p>首页 index.html 中仍要加载 tech-blogbin-blog 子目录的 css 文件，正确调整第 4 点的 Octopress 配置文件可解决问题。</p>
+
+<blockquote><p><img src="/images/2012-08-14-buying-domain-and-configuring-domain-for-githubs-octopress/missing_css.png"></p></blockquote>
+
+
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Tech Blogbin <tech.blogbin@gmail.com></span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-14T22:41:00+08:00" pubdate data-updated="true">Aug 14<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/domain/'>Domain</a>, <a class='category' href='/blog/categories/eznow/'>Eznow</a>, <a class='category' href='/blog/categories/github/'>GitHub</a>, <a class='category' href='/blog/categories/octopress/'>Octopress</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://tech-blog.blogbin.info/blog/2012/08/14/buying-domain-and-configuring-domain-for-githubs-octopress/" data-via="tech_blogbin" data-counturl="http://tech-blog.blogbin.info/blog/2012/08/14/buying-domain-and-configuring-domain-for-githubs-octopress/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2012/08/14/shen-si-wei-at-sg552sg552-meta-ruby-programming/" title="Previous Post: 申思维 @sg552sg552 meta ruby programming">&laquo; 申思维 @sg552sg552 meta ruby programming</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2012/08/15/displaying-attachments-and-due-date-within-email-when-a-issue-is-created/" title="Next Post: Redmine 改进：新建问题发送邮件中显示完成时间和上传的附件信息">Redmine 改进：新建问题发送邮件中显示完成时间和上传的附件信息 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>About Me</h1>
+  <p><a href=mailto:tech.blogbin@gmail.com>tech.blogbin@gmail.com</a></p>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2012/09/12/resolving-error-env-ruby-noexec-wrapper-no-such-file-or-directory/">resolving error: env: ruby_noexec_wrapper: No such file or directory</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/09/12/upgrading-to-rails-3-dot-2-8/">Upgrading to Rails 3.2.8</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/09/09/using-bootstrap/">Using Bootstrap and Bootswatch</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/08/31/using-bitbucket/">Using Bitbucket</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/08/31/installing-gitlab-on-ubuntu-server-12-04-amd64/">installing-gitlab-on-ubuntu-server-12-04-amd64</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/08/29/monitoring-rails-app-with-the-new-relic/">Monitoring rails app with the New Relic</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/08/28/securing-centos-server-with-firewall/">Securing CentOS Server with firewall</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/08/27/installing-bigbluebutton/">Installing BigBlueButton</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/08/26/using-tokkonopapas-octopress-tagcloud/">Using tokkonopapa's octopress-tagcloud</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/08/25/using-jcftangs-octopress-relatedposts/">Using jcftang's octopress-relatedposts</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+    <h1>Related Posts</h1>
+    <ul class="posts">
+    
+        <li class="related">
+        <a href="/blog/2012/09/12/resolving-error-env-ruby-noexec-wrapper-no-such-file-or-directory/">resolving error: env: ruby_noexec_wrapper: No such file or directory</a>
+        </li>
+    
+        <li class="related">
+        <a href="/blog/2012/09/12/upgrading-to-rails-3-dot-2-8/">Upgrading to Rails 3.2.8</a>
+        </li>
+    
+        <li class="related">
+        <a href="/blog/2012/09/09/using-bootstrap/">Using Bootstrap and Bootswatch</a>
+        </li>
+    
+        <li class="related">
+        <a href="/blog/2012/08/31/using-bitbucket/">Using Bitbucket</a>
+        </li>
+    
+        <li class="related">
+        <a href="/blog/2012/08/31/installing-gitlab-on-ubuntu-server-12-04-amd64/">installing-gitlab-on-ubuntu-server-12-04-amd64</a>
+        </li>
+    
+    </ul>
+</section>
+<section>
+  <h1>Categories</h1>
+    <ul id="category-list"><li><a href='/blog/categories/apple'>Apple (1)</a></li><li><a href='/blog/categories/assets'>Assets (2)</a></li><li><a href='/blog/categories/bigbluebutton'>BigBlueButton (1)</a></li><li><a href='/blog/categories/binarylogic'>binarylogic (2)</a></li><li><a href='/blog/categories/bitbucket'>Bitbucket (1)</a></li><li><a href='/blog/categories/bootswatch'>Bootswatch (1)</a></li><li><a href='/blog/categories/bundle'>Bundle (7)</a></li><li><a href='/blog/categories/bundler'>Bundler (7)</a></li><li><a href='/blog/categories/centos'>CentOS (3)</a></li><li><a href='/blog/categories/coffee-rails'>coffee-rails (1)</a></li><li><a href='/blog/categories/configuration'>Configuration (1)</a></li><li><a href='/blog/categories/css'>CSS (1)</a></li><li><a href='/blog/categories/deployment'>Deployment (3)</a></li><li><a href='/blog/categories/dhh'>DHH (1)</a></li><li><a href='/blog/categories/domain'>Domain (1)</a></li><li><a href='/blog/categories/eznow'>Eznow (1)</a></li><li><a href='/blog/categories/firebug'>Firebug (1)</a></li><li><a href='/blog/categories/firefox'>Firefox (1)</a></li><li><a href='/blog/categories/firewall'>Firewall (1)</a></li><li><a href='/blog/categories/gem'>Gem (7)</a></li><li><a href='/blog/categories/gemfile'>Gemfile (7)</a></li><li><a href='/blog/categories/git'>Git (3)</a></li><li><a href='/blog/categories/git-flow'>git-flow (1)</a></li><li><a href='/blog/categories/github'>Github (2)</a></li><li><a href='/blog/categories/github'>GitHub (4)</a></li><li><a href='/blog/categories/gitlab'>Gitlab (1)</a></li><li><a href='/blog/categories/heroku'>Heroku (1)</a></li><li><a href='/blog/categories/iftop'>iftop (1)</a></li><li><a href='/blog/categories/installation'>Installation (1)</a></li><li><a href='/blog/categories/jbuilder'>JBuilder (1)</a></li><li><a href='/blog/categories/json'>JSON (1)</a></li><li><a href='/blog/categories/macos-x'>MacOS X (1)</a></li><li><a href='/blog/categories/metaprogramming-ruby'>MetaProgramming Ruby (7)</a></li><li><a href='/blog/categories/mountain-lion-10-8'>Mountain Lion 10.8 (1)</a></li><li><a href='/blog/categories/neerajcse'>neerajcse (1)</a></li><li><a href='/blog/categories/net'>Net (1)</a></li><li><a href='/blog/categories/network'>Network (1)</a></li><li><a href='/blog/categories/new-relic'>New Relic (2)</a></li><li><a href='/blog/categories/octopress'>Octopress (6)</a></li><li><a href='/blog/categories/octopress-plugin'>Octopress Plugin (2)</a></li><li><a href='/blog/categories/octopress-calendar-aside'>octopress-calendar-aside (1)</a></li><li><a href='/blog/categories/octopress-calendar-tagcloud'>octopress-calendar-tagcloud (1)</a></li><li><a href='/blog/categories/python'>Python (1)</a></li><li><a href='/blog/categories/rails'>Rails (8)</a></li><li><a href='/blog/categories/rails-3-1-0'>Rails 3.1.0 (1)</a></li><li><a href='/blog/categories/rails-3-2-8'>Rails 3.2.8 (1)</a></li><li><a href='/blog/categories/redmine'>Redmine (1)</a></li><li><a href='/blog/categories/rmagick'>RMagick (1)</a></li><li><a href='/blog/categories/ror'>RoR (8)</a></li><li><a href='/blog/categories/ruby'>Ruby (18)</a></li><li><a href='/blog/categories/rubyonrails'>RubyOnRails (8)</a></li><li><a href='/blog/categories/sass'>SASS (1)</a></li><li><a href='/blog/categories/sass-rails'>sass-rails (1)</a></li><li><a href='/blog/categories/scss'>SCSS (1)</a></li><li><a href='/blog/categories/security'>Security (1)</a></li><li><a href='/blog/categories/settingslogic'>Settingslogic (2)</a></li><li><a href='/blog/categories/sina-weibo-sdk'>Sina Weibo SDK (1)</a></li><li><a href='/blog/categories/sns'>SNS (1)</a></li><li><a href='/blog/categories/tokkonopapa'>tokkonopapa (1)</a></li><li><a href='/blog/categories/twitter-bootstrap'>Twitter Bootstrap (1)</a></li><li><a href='/blog/categories/ubuntu'>Ubuntu (1)</a></li><li><a href='/blog/categories/ubuntu-server-12-04-amd64'>Ubuntu Server 12.04 amd64 (1)</a></li><li><a href='/blog/categories/uglifier'>uglifier (1)</a></li><li><a href='/blog/categories/yum'>yum (1)</a></li></ul>
+</section>
+<section>
+  <h1>Tag Cloud</h1>
+    <span id="tag-cloud"><a href='/blog/categories/apple' style='font-size: 103.33333333333333%'>Apple(1)</a> <a href='/blog/categories/assets' style='font-size: 106.66666666666667%'>Assets(2)</a> <a href='/blog/categories/bigbluebutton' style='font-size: 103.33333333333333%'>BigBlueButton(1)</a> <a href='/blog/categories/binarylogic' style='font-size: 106.66666666666667%'>binarylogic(2)</a> <a href='/blog/categories/bitbucket' style='font-size: 103.33333333333333%'>Bitbucket(1)</a> <a href='/blog/categories/bootswatch' style='font-size: 103.33333333333333%'>Bootswatch(1)</a> <a href='/blog/categories/bundle' style='font-size: 123.33333333333333%'>Bundle(7)</a> <a href='/blog/categories/bundler' style='font-size: 123.33333333333333%'>Bundler(7)</a> <a href='/blog/categories/centos' style='font-size: 110.0%'>CentOS(3)</a> <a href='/blog/categories/coffee-rails' style='font-size: 103.33333333333333%'>coffee-rails(1)</a> <a href='/blog/categories/configuration' style='font-size: 103.33333333333333%'>Configuration(1)</a> <a href='/blog/categories/css' style='font-size: 103.33333333333333%'>CSS(1)</a> <a href='/blog/categories/deployment' style='font-size: 110.0%'>Deployment(3)</a> <a href='/blog/categories/dhh' style='font-size: 103.33333333333333%'>DHH(1)</a> <a href='/blog/categories/domain' style='font-size: 103.33333333333333%'>Domain(1)</a> <a href='/blog/categories/eznow' style='font-size: 103.33333333333333%'>Eznow(1)</a> <a href='/blog/categories/firebug' style='font-size: 103.33333333333333%'>Firebug(1)</a> <a href='/blog/categories/firefox' style='font-size: 103.33333333333333%'>Firefox(1)</a> <a href='/blog/categories/firewall' style='font-size: 103.33333333333333%'>Firewall(1)</a> <a href='/blog/categories/gem' style='font-size: 123.33333333333333%'>Gem(7)</a> <a href='/blog/categories/gemfile' style='font-size: 123.33333333333333%'>Gemfile(7)</a> <a href='/blog/categories/git' style='font-size: 110.0%'>Git(3)</a> <a href='/blog/categories/git-flow' style='font-size: 103.33333333333333%'>git-flow(1)</a> <a href='/blog/categories/github' style='font-size: 106.66666666666667%'>Github(2)</a> <a href='/blog/categories/github' style='font-size: 113.33333333333333%'>GitHub(4)</a> <a href='/blog/categories/gitlab' style='font-size: 103.33333333333333%'>Gitlab(1)</a> <a href='/blog/categories/heroku' style='font-size: 103.33333333333333%'>Heroku(1)</a> <a href='/blog/categories/iftop' style='font-size: 103.33333333333333%'>iftop(1)</a> <a href='/blog/categories/installation' style='font-size: 103.33333333333333%'>Installation(1)</a> <a href='/blog/categories/jbuilder' style='font-size: 103.33333333333333%'>JBuilder(1)</a> <a href='/blog/categories/json' style='font-size: 103.33333333333333%'>JSON(1)</a> <a href='/blog/categories/macos-x' style='font-size: 103.33333333333333%'>MacOS X(1)</a> <a href='/blog/categories/metaprogramming-ruby' style='font-size: 123.33333333333333%'>MetaProgramming Ruby(7)</a> <a href='/blog/categories/mountain-lion-10-8' style='font-size: 103.33333333333333%'>Mountain Lion 10.8(1)</a> <a href='/blog/categories/neerajcse' style='font-size: 103.33333333333333%'>neerajcse(1)</a> <a href='/blog/categories/net' style='font-size: 103.33333333333333%'>Net(1)</a> <a href='/blog/categories/network' style='font-size: 103.33333333333333%'>Network(1)</a> <a href='/blog/categories/new-relic' style='font-size: 106.66666666666667%'>New Relic(2)</a> <a href='/blog/categories/octopress' style='font-size: 120.0%'>Octopress(6)</a> <a href='/blog/categories/octopress-plugin' style='font-size: 106.66666666666667%'>Octopress Plugin(2)</a> <a href='/blog/categories/octopress-calendar-aside' style='font-size: 103.33333333333333%'>octopress-calendar-aside(1)</a> <a href='/blog/categories/octopress-calendar-tagcloud' style='font-size: 103.33333333333333%'>octopress-calendar-tagcloud(1)</a> <a href='/blog/categories/python' style='font-size: 103.33333333333333%'>Python(1)</a> <a href='/blog/categories/rails' style='font-size: 126.66666666666667%'>Rails(8)</a> <a href='/blog/categories/rails-3-1-0' style='font-size: 103.33333333333333%'>Rails 3.1.0(1)</a> <a href='/blog/categories/rails-3-2-8' style='font-size: 103.33333333333333%'>Rails 3.2.8(1)</a> <a href='/blog/categories/redmine' style='font-size: 103.33333333333333%'>Redmine(1)</a> <a href='/blog/categories/rmagick' style='font-size: 103.33333333333333%'>RMagick(1)</a> <a href='/blog/categories/ror' style='font-size: 126.66666666666667%'>RoR(8)</a> <a href='/blog/categories/ruby' style='font-size: 160.0%'>Ruby(18)</a> <a href='/blog/categories/rubyonrails' style='font-size: 126.66666666666667%'>RubyOnRails(8)</a> <a href='/blog/categories/sass' style='font-size: 103.33333333333333%'>SASS(1)</a> <a href='/blog/categories/sass-rails' style='font-size: 103.33333333333333%'>sass-rails(1)</a> <a href='/blog/categories/scss' style='font-size: 103.33333333333333%'>SCSS(1)</a> <a href='/blog/categories/security' style='font-size: 103.33333333333333%'>Security(1)</a> <a href='/blog/categories/settingslogic' style='font-size: 106.66666666666667%'>Settingslogic(2)</a> <a href='/blog/categories/sina-weibo-sdk' style='font-size: 103.33333333333333%'>Sina Weibo SDK(1)</a> <a href='/blog/categories/sns' style='font-size: 103.33333333333333%'>SNS(1)</a> <a href='/blog/categories/tokkonopapa' style='font-size: 103.33333333333333%'>tokkonopapa(1)</a> <a href='/blog/categories/twitter-bootstrap' style='font-size: 103.33333333333333%'>Twitter Bootstrap(1)</a> <a href='/blog/categories/ubuntu' style='font-size: 103.33333333333333%'>Ubuntu(1)</a> <a href='/blog/categories/ubuntu-server-12-04-amd64' style='font-size: 103.33333333333333%'>Ubuntu Server 12.04 amd64(1)</a> <a href='/blog/categories/uglifier' style='font-size: 103.33333333333333%'>uglifier(1)</a> <a href='/blog/categories/yum' style='font-size: 103.33333333333333%'>yum(1)</a> </span>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/blogbin">@blogbin</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'blogbin',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+<section class="googleplus">
+  <h1>
+    <a href="https://plus.google.com/tech.blogbin@gmail.com?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+<!--
+    Calendar aside/plugin for octopress blogging framework.
+    Copyright (C) 2012  Neeraj Kumar ( neerajpkumar@gmail.com, neerajkumar@outlook.com)
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+--!>
+<style>
+	.highlighted-calendar-day
+	{
+		color : #CCC;
+		font-weight : bold;
+	}
+	
+	.calendar-header-day{
+		font-weight : bold;
+		color : #AAA;
+		font-size : 14px;
+	}
+	
+	.highlighted-calendar-day a
+	{
+		
+	}
+	
+	.prev-link
+	{
+		float:left;
+	}
+	
+	.next-link
+	{
+		float: right;
+	}
+	.calendar-day
+	{
+		color : #888;
+		font-weight : 12px;
+	}
+	
+	.calendar-table
+	{
+		width : 100%;
+		
+	}
+	
+	.calendar-table td
+	{
+		border-right : dotted 1px lightgrey;
+		text-align : center;
+	}
+	
+	.calendar-table td:last-child
+	{
+		border-right : none;
+	}
+	
+	.calendar-table th
+	{
+		background-color : lightgrey;
+		text-align : center;
+	}
+	.prevCalendarLink img
+	{	
+		
+		width : 20px;
+		height : 20px;
+		border: 0px;
+		float: left;
+		
+	}
+	
+	.nextCalendarLink img
+	{
+		
+		width : 20px;
+		height: 20px;
+		border: 0px;
+		float: right;
+		
+	}
+</style>
+<script type="text/javascript" src="/javascripts/calendar.js"></script>
+<section id="calendarDiv">
+	<span style="display:block" id="calendarSpan"></span>
+	<div>
+		<a href="#" class="previousMonth show"/><a href="#" class="nextMonth hide"/>
+	</div>
+</section>
+<script type="text/javascript">
+  
+monthCalendar = function(id,year,month)
+{
+  var highlightArray = new Array();
+  var hightlightLinks = new Array();
+  
+  highlightArray.push('09/12/2012');
+  hightlightLinks.push('/blog/2012/09/12/resolving-error-env-ruby-noexec-wrapper-no-such-file-or-directory/');
+  
+  highlightArray.push('09/12/2012');
+  hightlightLinks.push('/blog/2012/09/12/upgrading-to-rails-3-dot-2-8/');
+  
+  highlightArray.push('09/09/2012');
+  hightlightLinks.push('/blog/2012/09/09/using-bootstrap/');
+  
+  highlightArray.push('08/31/2012');
+  hightlightLinks.push('/blog/2012/08/31/using-bitbucket/');
+  
+  highlightArray.push('08/31/2012');
+  hightlightLinks.push('/blog/2012/08/31/installing-gitlab-on-ubuntu-server-12-04-amd64/');
+  
+  highlightArray.push('08/29/2012');
+  hightlightLinks.push('/blog/2012/08/29/monitoring-rails-app-with-the-new-relic/');
+  
+  highlightArray.push('08/28/2012');
+  hightlightLinks.push('/blog/2012/08/28/securing-centos-server-with-firewall/');
+  
+  highlightArray.push('08/27/2012');
+  hightlightLinks.push('/blog/2012/08/27/installing-bigbluebutton/');
+  
+  highlightArray.push('08/26/2012');
+  hightlightLinks.push('/blog/2012/08/26/using-tokkonopapas-octopress-tagcloud/');
+  
+  highlightArray.push('08/25/2012');
+  hightlightLinks.push('/blog/2012/08/25/using-jcftangs-octopress-relatedposts/');
+  		
+  var cal = new Calendar(month,year,highlightArray,hightlightLinks);
+  cal.generateHTML(id);
+  var element = document.getElementById(id);
+  element.innerHTML = cal.getHTML();
+}
+	
+loadCalendar = function(){
+  var now = new Date();
+  var month = now.getMonth();
+  var year = now.getFullYear();
+  monthCalendar('calendarDiv',year,month);
+}
+	
+	if(Array.prototype.indexOf == undefined)
+	{
+		 Array.prototype.indexOf = function (searchElement /*, fromIndex */ ) {
+			"use strict";
+			if (this == null) {
+				throw new TypeError();
+			}
+			var t = Object(this);
+			var len = t.length >>> 0;
+			if (len === 0) {
+				return -1;
+			}
+			var n = 0;
+			if (arguments.length > 0) {
+				n = Number(arguments[1]);
+				if (n != n) { // shortcut for verifying if it's NaN
+					n = 0;
+				} else if (n != 0 && n != Infinity && n != -Infinity) {
+					n = (n > 0 || -1) * Math.floor(Math.abs(n));
+				}
+			}
+			if (n >= len) {
+				return -1;
+			}
+			var k = n >= 0 ? n : Math.max(len - Math.abs(n), 0);
+			for (; k < len; k++) {
+				if (k in t && t[k] === searchElement) {
+					return k;
+				}
+			}
+			return -1;
+		}
+	}
+$(document).ready(function(){
+  loadCalendar();
+});
+</script>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - Tech Blogbin <tech.blogbin@gmail.com> -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'tech-blogbin-blog';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://tech-blog.blogbin.info/blog/2012/08/14/buying-domain-and-configuring-domain-for-githubs-octopress/';
+        var disqus_url = 'http://tech-blog.blogbin.info/blog/2012/08/14/buying-domain-and-configuring-domain-for-githubs-octopress/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fd6efaaa40f50ef1ec634f16880c40100' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+</body>
+</html>

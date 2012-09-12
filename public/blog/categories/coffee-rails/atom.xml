@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: coffee-rails | Tech.Blogbin's Blog]]></title>
+  <link href="http://tech-blog.blogbin.info/blog/categories/coffee-rails/atom.xml" rel="self"/>
+  <link href="http://tech-blog.blogbin.info/"/>
+  <updated>2012-09-12T23:56:17+08:00</updated>
+  <id>http://tech-blog.blogbin.info/</id>
+  <author>
+    <name><![CDATA[Tech Blogbin ]]></name>
+    <email><![CDATA[Tech Blogbin <tech.blogbin@gmail.com>]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Upgrading to Rails 3.2.8]]></title>
+    <link href="http://tech-blog.blogbin.info/blog/2012/09/12/upgrading-to-rails-3-dot-2-8/"/>
+    <updated>2012-09-12T23:23:00+08:00</updated>
+    <id>http://tech-blog.blogbin.info/blog/2012/09/12/upgrading-to-rails-3-dot-2-8</id>
+    <content type="html"><![CDATA[<p>最近计划将 Rails 从 3.1.0 升级到 3.2.8 版本。</p>
+
+<p>一是为解决 Rails 3.1.0 版本的 Security Issue，引入新功能；
+二是为解决 Assets 相关的 Bugs，比如在 development 环境，scss 修改后无法动态编译，需要重启方能生效的问题；</p>
+
+<!--more-->
+
+
+<p>Gemfile 除了将 Rails 版本修改为 3.2.8 之外，需要调整 group assets 中 sass-rails, coffee-rails 的版本依赖。</p>
+
+<p>为避免 Rails 版本升级失败，方便回退版本，在 Gemfile 定义一些变量和判断条件来做检查，如：</p>
+
+<p>``` ruby Gemfile</p>
+
+<h1>rails</h1>
+
+<h1>rails version</h1>
+
+<p>RAILS_3_2_8 = '3.2.8'
+RAILS_3_1_0 = '3.1.0'</p>
+
+<p>RAILS_VERSION = RAILS_3_2_8</p>
+
+<p>case RAILS_VERSION</p>
+
+<p>  when RAILS_3_1_0</p>
+
+<pre><code>gem 'rails', '3.1.0'
+</code></pre>
+
+<p>  when RAILS_3_2_8</p>
+
+<pre><code>gem 'rails', '3.2.8'
+</code></pre>
+
+<p>end</p>
+
+<p>group :assets do</p>
+
+<p>  case RAILS_VERSION</p>
+
+<pre><code>when RAILS_3_1_0
+  gem 'sass-rails', "  ~&gt; 3.1.0"
+  gem 'coffee-rails', "~&gt; 3.1.0"
+  gem 'uglifier'
+
+when RAILS_3_2_8
+  gem 'sass-rails',   '~&gt; 3.2.3'
+  gem 'coffee-rails', '~&gt; 3.2.1'
+
+  # See https://github.com/sstephenson/execjs#readme for more supported runtimes
+  # gem 'therubyracer', :platforms =&gt; :ruby
+
+  gem 'uglifier', '&gt;= 1.0.3'
+</code></pre>
+
+<p>  end</p>
+
+<p>end
+```</p>
+
+<p>运行 bundle install 之前，需要先删除 Gemfile.lock，以防原来的版本依赖带来的干扰
+```
+blogbins-MacBook-Pro:focus blogbin$ rm Gemfile.lock</p>
+
+<p>blogbins-MacBook-Pro:focus blogbin$ bundle install
+```</p>
+]]></content>
+  </entry>
+  
+</feed>

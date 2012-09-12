@@ -1,0 +1,1122 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Tech.Blogbin's Blog</title>
+
+  <meta name="alexaVerifyID" content="-6pNt74TSllotvjLFDIa77kSKLI" />
+
+  <meta name="author" content="Tech Blogbin <tech.blogbin@gmail.com>">
+
+  
+  <meta name="description" content="通过 RVM 和 Gemset 新建 Rails 项目下运行 bundle 命令，不管是 bundle install or bundle ，都提示失败： env: ruby_noexec_wrapper: No such file or directory 1
+2
+3
+4
+5
+6
+7
+8 &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://tech-blog.blogbin.info/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Tech.Blogbin's Blog" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-34083026-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Tech.Blogbin's Blog</a></h1>
+  
+    <h2>A blogging for geeker.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss email">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+    <li><a href="Tech Blogbin <tech.blogbin@gmail.com>" rel="subscribe-email" title="subscribe via email">Email</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:tech-blog.blogbin.info" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/categories">Categories</a></li>
+  <li><a href="/tags">Tags</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/09/12/resolving-error-env-ruby-noexec-wrapper-no-such-file-or-directory/">Resolving Error: Env: Ruby_noexec_wrapper: No Such File or Directory</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-12T23:42:00+08:00" pubdate data-updated="true">Sep 12<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/09/12/resolving-error-env-ruby-noexec-wrapper-no-such-file-or-directory/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>通过 RVM 和 Gemset 新建 Rails 项目下运行 bundle 命令，不管是 bundle install or bundle ，都提示失败：</p>
+
+<p>env: ruby_noexec_wrapper: No such file or directory</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>blogbins-MacBook-Pro:message blogbin$ bundle install
+</span><span class='line'>env: ruby_noexec_wrapper: No such file or directory
+</span><span class='line'>blogbins-MacBook-Pro:message blogbin$ gem list
+</span><span class='line'>
+</span><span class='line'>*** LOCAL GEMS ***
+</span><span class='line'>
+</span><span class='line'>bundler (1.0.22)
+</span><span class='line'>rubygems-update (1.8.24)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>非常奇怪，后来考虑可能是 RubyGem 版本问题，尝试更新 RubyGem 的版本</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2012/09/12/resolving-error-env-ruby-noexec-wrapper-no-such-file-or-directory/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/09/12/upgrading-to-rails-3-dot-2-8/">Upgrading to Rails 3.2.8</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-12T23:23:00+08:00" pubdate data-updated="true">Sep 12<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/09/12/upgrading-to-rails-3-dot-2-8/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>最近计划将 Rails 从 3.1.0 升级到 3.2.8 版本。</p>
+
+<p>一是为解决 Rails 3.1.0 版本的 Security Issue，引入新功能；
+二是为解决 Assets 相关的 Bugs，比如在 development 环境，scss 修改后无法动态编译，需要重启方能生效的问题；</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2012/09/12/upgrading-to-rails-3-dot-2-8/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/09/09/using-bootstrap/">Using Bootstrap and Bootswatch</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-09T01:01:00+08:00" pubdate data-updated="true">Sep 9<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/09/09/using-bootstrap/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Bootstrap 是 Twitter 开源免费提供的 CSS框架，它是快速开发Web应用程序的前端工具包。
+它是一个CSS和HTML的集合，它使用了最新的浏览器技术，给Web开发提供了时尚的版式</p>
+
+<p><a href="http://twitter.github.com/bootstrap/index.html">http://twitter.github.com/bootstrap/index.html</a></p>
+
+<p><a href="https://github.com/twitter/bootstrap">https://github.com/twitter/bootstrap</a></p>
+
+<p>中文翻译参见：
+Twitter Bootstrap中文版/中文翻译
+<a href="http://wrongwaycn.github.com/bootstrap/docs/index.html">http://wrongwaycn.github.com/bootstrap/docs/index.html</a></p>
+
+<p>Bootstrap 默认只提供黑色和白色风格，也有一些付费的风格。如果想尝试免费的其它风格，可以试试看 Bootswatch
+<a href="http://bootswatch.com/">http://bootswatch.com/</a></p>
+
+<p><a href="https://github.com/maxim/bootswatch-rails">https://github.com/maxim/bootswatch-rails</a></p>
+
+<p>Rails 项目引入 Bootstrap 和 Bootswatch 比较容易。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2012/09/09/using-bootstrap/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/08/31/using-bitbucket/">Using Bitbucket</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-31T22:41:00+08:00" pubdate data-updated="true">Aug 31<span>st</span>, 2012</time>
+        
+         | <a href="/blog/2012/08/31/using-bitbucket/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Bitbucket <a href="https://bitbucket.org/">https://bitbucket.org/</a>
+是免费存放私人 Git 仓库的一个 GitHub 之外很好的选择。不限空间，不限项目。即使免费，也可以创建多个团队协助开发，
+限制是每个团队人数不能超过 5 人。</p>
+
+<p>是我提交／备份非公开项目的好地方。</p>
+
+<p>Tech-blog 这个 Octopress 博客，已经部署／提交在多个 SaaS，故写一个 shell 脚本减轻工作量：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#! /bin/bash
+</span><span class='line'>git push
+</span><span class='line'>
+</span><span class='line'>git push local master
+</span><span class='line'>
+</span><span class='line'>git push heroku master
+</span><span class='line'>
+</span><span class='line'>git push bitbucket master
+</span><span class='line'>
+</span><span class='line'>rake deploy</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/08/31/installing-gitlab-on-ubuntu-server-12-04-amd64/">Installing-gitlab-on-ubuntu-server-12-04-amd64</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-31T19:54:00+08:00" pubdate data-updated="true">Aug 31<span>st</span>, 2012</time>
+        
+         | <a href="/blog/2012/08/31/installing-gitlab-on-ubuntu-server-12-04-amd64/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Gitlab 是开源免费的 Git 仓库管理系统，可以作为 GitHub 本地小型的简化版本。</p>
+
+<p>支持 Web 化管理 Git 项目，管理用户和 SSH-KEY，提供对 Git 项目的文件浏览，提交浏览，文件比较和代码评审，
+并提供一定程度的 Wiki 和 Issue 问题跟踪功能。</p>
+
+<p>感觉 Git 管理功能比 Gitosis 要强，但问题跟踪要比 Redmine 要弱；</p>
+
+<p>没有组织结构或者团队等企业架构管理，偏适用小型项目团队。</p>
+
+<p>在 Ubuntu Server 上安装还算简单，官网 Wiki 有详细的安装指南。</p>
+
+<p>但我却走了不少弯路，先总结如下：</p>
+
+<ol>
+<li><p>要选择 Ubuntu Server 来安装 Gitlab，而不是选择用 Ubuntu Desktop，否则可能会出现一堆依赖相关的错误；</p></li>
+<li><p>不要用快捷命令一下子跳过前三步，可能因为网络问题，有些依赖包不能正常下载和安装，建议老老实实从 1. Install packages 开始安装</p></li>
+</ol>
+
+
+<blockquote><p>First 3 steps can be easily skipped with simply install script:</p><p># Install curl and sudo <br/>apt-get install curl sudo</p><p># 3 steps in 1 command :)<br/>curl https://raw.github.com/gitlabhq/gitlabhq/master/doc/debian_ubuntu.sh | sh<br/>Now you can go to step 4&#8221;</p><p>1. Install packages<br/>Keep in mind that sudo is not installed for debian by default. You should install it with as root: apt-get update && apt-get upgrade && apt-get install sudo</p></blockquote>
+
+
+<h5>参阅</h5>
+
+<p>GITLAB: Self Hosted Git Management Application</p>
+
+<p><a href="http://gitlabhq.com/">http://gitlabhq.com/</a></p>
+
+<p>gitlabhq/gitlabhq</p>
+
+<p><a href="https://github.com/gitlabhq/gitlabhq">https://github.com/gitlabhq/gitlabhq</a></p>
+
+<p>gitlabhq/doc/installation.md at stable · gitlabhq/gitlabhq</p>
+
+<p><a href="https://github.com/gitlabhq/gitlabhq/blob/stable/doc/installation.md">https://github.com/gitlabhq/gitlabhq/blob/stable/doc/installation.md</a></p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2012/08/31/installing-gitlab-on-ubuntu-server-12-04-amd64/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/08/29/monitoring-rails-app-with-the-new-relic/">Monitoring Rails App With the New Relic</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-29T22:01:00+08:00" pubdate data-updated="true">Aug 29<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/08/29/monitoring-rails-app-with-the-new-relic/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>尝试 New Relic 监控 Rails App 项目的运行情况。</p>
+
+<p>如果采用 Rails 3，安装 New Relic 非常简单，如果使用 Rails 2，比较繁琐一些。
+好在官方网站有相应的介绍，仔细阅读即可。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2012/08/29/monitoring-rails-app-with-the-new-relic/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/08/28/securing-centos-server-with-firewall/">Securing CentOS Server With Firewall</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-28T21:37:00+08:00" pubdate data-updated="true">Aug 28<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/08/28/securing-centos-server-with-firewall/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>对 CentOS 敏感端口如 SSH, FTP 等服务端口做限制来源 IP 地址的限制，每一个端口防火墙配置都要指定来源 IP 地址比较烦；
+把一堆端口混在一条配置规则也不太利于维护。</p>
+
+<p>为了避免每条过滤规则都要重复指定客户端 IP 地址，采用加入一个新链。</p>
+
+<h5>参阅</h5>
+
+<p>Iptables 指南 1.1.19</p>
+
+<p><a href="http://www.frozentux.net/iptables-tutorial/cn/iptables-tutorial-cn-1.1.19.html#PREPARATIONS">http://www.frozentux.net/iptables-tutorial/cn/iptables-tutorial-cn-1.1.19.html#PREPARATIONS</a></p>
+
+<p>42.8. Firewalls</p>
+
+<p><a href="http://www.centos.org/docs/5/html/Deployment_Guide-en-US/ch-fw.html#s1-basic-firewall">http://www.centos.org/docs/5/html/Deployment_Guide-en-US/ch-fw.html#s1-basic-firewall</a></p>
+
+<p>42.9. IPTables</p>
+
+<p><a href="http://www.centos.org/docs/5/html/Deployment_Guide-en-US/ch-iptables.html#s2-iptables-init-conf">http://www.centos.org/docs/5/html/Deployment_Guide-en-US/ch-iptables.html#s2-iptables-init-conf</a></p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2012/08/28/securing-centos-server-with-firewall/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/08/27/installing-bigbluebutton/">Installing BigBlueButton</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-27T20:56:00+08:00" pubdate data-updated="true">Aug 27<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/08/27/installing-bigbluebutton/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>一直使用开源免费的 BigBlueButton 作为 Web 多人会议，文档分享讨论和桌面分享的系统。</p>
+
+<p>BigBlueButton &#8211; Open Source Web Conferencing | www.bigbluebutton.org
+<a href="http://www.bigbluebutton.org/">http://www.bigbluebutton.org/</a></p>
+
+<p>发现 7 月份，BigBlueButton 提供基于 0.8x 的 VM 虚拟机。这比之前使用 0.7x VM 虚拟机，手动升级到 0.8 很方便。
+安装过程参阅：</p>
+
+<p><a href="http://code.google.com/p/bigbluebutton/wiki/BigBlueButtonVM">http://code.google.com/p/bigbluebutton/wiki/BigBlueButtonVM</a></p>
+
+<p>这次安装遇到 FAQ 提到的问题，VM 虚拟机启动之后，没有正常链接到网络，没有自动安装 BigBlueButton。还好官方 FAQ 提供手动安装 BigBlueButton 的办法。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2012/08/27/installing-bigbluebutton/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/08/26/using-tokkonopapas-octopress-tagcloud/">Using Tokkonopapa's Octopress-tagcloud</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-26T23:39:00+08:00" pubdate data-updated="true">Aug 26<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/08/26/using-tokkonopapas-octopress-tagcloud/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h5>参阅</h5>
+
+<p>tokkonopapa/octopress-tagcloud · GitHub
+<a href="https://github.com/tokkonopapa/octopress-tagcloud">https://github.com/tokkonopapa/octopress-tagcloud</a></p>
+
+<h5>导航栏添加 Categories 和 Tags 链接</h5>
+
+<p>修改 source/_includes/custom/navigation.html 添加 Categories 和 Tags 链接：</p>
+
+<figure class='code'><figcaption><span>source/_includes/custom/navigation.html</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;ul</span> <span class="na">class=</span><span class="s">&quot;main-navigation&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;/&quot;</span><span class="nt">&gt;</span>Blog<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;/categories&quot;</span><span class="nt">&gt;</span>Categories<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;/tags&quot;</span><span class="nt">&gt;</span>Tags<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;/blog/archives&quot;</span><span class="nt">&gt;</span>Archives<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+</span><span class='line'><span class="nt">&lt;/ul&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>运行 rake page 创建 source/categores 和 source/tags 目录和 html 文件：</p>
+
+<figure class='code'><figcaption><span>source/_includes/custom/navigation.html</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'>blogbins-MacBook-Pro:octopress blogbin$ rake new_page[&quot;categories&quot;]
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>source/categories/index.markdown 内容为：</p>
+
+<figure class='code'><figcaption><span> (index.html)</span> <a href='/downloads/code/octopress/categories/index.html'>download</a></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'>---
+</span><span class='line'>layout: page
+</span><span class='line'>title: &quot;category_list&quot;
+</span><span class='line'>date: 2012-08-23 00:01
+</span><span class='line'>comments: true
+</span><span class='line'>sharing: true
+</span><span class='line'>footer: true
+</span><span class='line'>---
+</span><span class='line'>
+</span><span class='line'>{% category_list counter:true %}
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>source/_includes/custom/navigation.html</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'>blogbins-MacBook-Pro:octopress blogbin$ rake new_page[&quot;tags&quot;]
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>source/tags/index.markdown 内容为：</p>
+
+<figure class='code'><figcaption><span> (index.html)</span> <a href='/downloads/code/octopress/tags/index.html'>download</a></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'>---
+</span><span class='line'>layout: page
+</span><span class='line'>title: &quot;tags&quot;
+</span><span class='line'>date: 2012-08-23 00:10
+</span><span class='line'>comments: true
+</span><span class='line'>sharing: true
+</span><span class='line'>footer: true
+</span><span class='line'>---
+</span><span class='line'>
+</span><span class='line'>{% tag_cloud %}
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2012/08/26/using-tokkonopapas-octopress-tagcloud/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/08/25/using-jcftangs-octopress-relatedposts/">Using Jcftang's Octopress-relatedposts</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-25T08:33:00+08:00" pubdate data-updated="true">Aug 25<span>th</span>, 2012</time>
+        
+         | <a href="/blog/2012/08/25/using-jcftangs-octopress-relatedposts/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>参阅 jcftang/octopress-relatedposts <a href="https://github.com/jcftang/octopress-relatedposts">https://github.com/jcftang/octopress-relatedposts</a></p>
+
+<p>其实 Octopress 已经内置了 LSI 引擎，安装和配置 octopress-relatedposts 比较简单。</p>
+
+<blockquote><p>Firstly add this to your _config.yml file</p><p>lsi: true<br/>The create a file such as source/_includes/custom/asides/related.html with the following content</p><p>&#8230;.</p><p>It is possible to style the list, but in the above I have chosen to keep the same style as the recent posts.</p><p>Finally, add the file to your default asides list in your _config.yml file</p><p>default_asides: [custom/asides/related.html, &#8230;]</p></blockquote>
+
+
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2012/08/25/using-jcftangs-octopress-relatedposts/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/blog/page/2/">&larr; Older</a>
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <h1>About Me</h1>
+  <p><a href=mailto:tech.blogbin@gmail.com>tech.blogbin@gmail.com</a></p>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2012/09/12/resolving-error-env-ruby-noexec-wrapper-no-such-file-or-directory/">resolving error: env: ruby_noexec_wrapper: No such file or directory</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/09/12/upgrading-to-rails-3-dot-2-8/">Upgrading to Rails 3.2.8</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/09/09/using-bootstrap/">Using Bootstrap and Bootswatch</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/08/31/using-bitbucket/">Using Bitbucket</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/08/31/installing-gitlab-on-ubuntu-server-12-04-amd64/">installing-gitlab-on-ubuntu-server-12-04-amd64</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/08/29/monitoring-rails-app-with-the-new-relic/">Monitoring rails app with the New Relic</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/08/28/securing-centos-server-with-firewall/">Securing CentOS Server with firewall</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/08/27/installing-bigbluebutton/">Installing BigBlueButton</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/08/26/using-tokkonopapas-octopress-tagcloud/">Using tokkonopapa's octopress-tagcloud</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/08/25/using-jcftangs-octopress-relatedposts/">Using jcftang's octopress-relatedposts</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+    <h1>Related Posts</h1>
+    <ul class="posts">
+    
+    </ul>
+</section>
+<section>
+  <h1>Categories</h1>
+    <ul id="category-list"><li><a href='/blog/categories/apple'>Apple (1)</a></li><li><a href='/blog/categories/assets'>Assets (2)</a></li><li><a href='/blog/categories/bigbluebutton'>BigBlueButton (1)</a></li><li><a href='/blog/categories/binarylogic'>binarylogic (2)</a></li><li><a href='/blog/categories/bitbucket'>Bitbucket (1)</a></li><li><a href='/blog/categories/bootswatch'>Bootswatch (1)</a></li><li><a href='/blog/categories/bundle'>Bundle (7)</a></li><li><a href='/blog/categories/bundler'>Bundler (7)</a></li><li><a href='/blog/categories/centos'>CentOS (3)</a></li><li><a href='/blog/categories/coffee-rails'>coffee-rails (1)</a></li><li><a href='/blog/categories/configuration'>Configuration (1)</a></li><li><a href='/blog/categories/css'>CSS (1)</a></li><li><a href='/blog/categories/deployment'>Deployment (3)</a></li><li><a href='/blog/categories/dhh'>DHH (1)</a></li><li><a href='/blog/categories/domain'>Domain (1)</a></li><li><a href='/blog/categories/eznow'>Eznow (1)</a></li><li><a href='/blog/categories/firebug'>Firebug (1)</a></li><li><a href='/blog/categories/firefox'>Firefox (1)</a></li><li><a href='/blog/categories/firewall'>Firewall (1)</a></li><li><a href='/blog/categories/gem'>Gem (7)</a></li><li><a href='/blog/categories/gemfile'>Gemfile (7)</a></li><li><a href='/blog/categories/git'>Git (3)</a></li><li><a href='/blog/categories/git-flow'>git-flow (1)</a></li><li><a href='/blog/categories/github'>Github (2)</a></li><li><a href='/blog/categories/github'>GitHub (4)</a></li><li><a href='/blog/categories/gitlab'>Gitlab (1)</a></li><li><a href='/blog/categories/heroku'>Heroku (1)</a></li><li><a href='/blog/categories/iftop'>iftop (1)</a></li><li><a href='/blog/categories/installation'>Installation (1)</a></li><li><a href='/blog/categories/jbuilder'>JBuilder (1)</a></li><li><a href='/blog/categories/json'>JSON (1)</a></li><li><a href='/blog/categories/macos-x'>MacOS X (1)</a></li><li><a href='/blog/categories/metaprogramming-ruby'>MetaProgramming Ruby (7)</a></li><li><a href='/blog/categories/mountain-lion-10-8'>Mountain Lion 10.8 (1)</a></li><li><a href='/blog/categories/neerajcse'>neerajcse (1)</a></li><li><a href='/blog/categories/net'>Net (1)</a></li><li><a href='/blog/categories/network'>Network (1)</a></li><li><a href='/blog/categories/new-relic'>New Relic (2)</a></li><li><a href='/blog/categories/octopress'>Octopress (6)</a></li><li><a href='/blog/categories/octopress-plugin'>Octopress Plugin (2)</a></li><li><a href='/blog/categories/octopress-calendar-aside'>octopress-calendar-aside (1)</a></li><li><a href='/blog/categories/octopress-calendar-tagcloud'>octopress-calendar-tagcloud (1)</a></li><li><a href='/blog/categories/python'>Python (1)</a></li><li><a href='/blog/categories/rails'>Rails (8)</a></li><li><a href='/blog/categories/rails-3-1-0'>Rails 3.1.0 (1)</a></li><li><a href='/blog/categories/rails-3-2-8'>Rails 3.2.8 (1)</a></li><li><a href='/blog/categories/redmine'>Redmine (1)</a></li><li><a href='/blog/categories/rmagick'>RMagick (1)</a></li><li><a href='/blog/categories/ror'>RoR (8)</a></li><li><a href='/blog/categories/ruby'>Ruby (18)</a></li><li><a href='/blog/categories/rubyonrails'>RubyOnRails (8)</a></li><li><a href='/blog/categories/sass'>SASS (1)</a></li><li><a href='/blog/categories/sass-rails'>sass-rails (1)</a></li><li><a href='/blog/categories/scss'>SCSS (1)</a></li><li><a href='/blog/categories/security'>Security (1)</a></li><li><a href='/blog/categories/settingslogic'>Settingslogic (2)</a></li><li><a href='/blog/categories/sina-weibo-sdk'>Sina Weibo SDK (1)</a></li><li><a href='/blog/categories/sns'>SNS (1)</a></li><li><a href='/blog/categories/tokkonopapa'>tokkonopapa (1)</a></li><li><a href='/blog/categories/twitter-bootstrap'>Twitter Bootstrap (1)</a></li><li><a href='/blog/categories/ubuntu'>Ubuntu (1)</a></li><li><a href='/blog/categories/ubuntu-server-12-04-amd64'>Ubuntu Server 12.04 amd64 (1)</a></li><li><a href='/blog/categories/uglifier'>uglifier (1)</a></li><li><a href='/blog/categories/yum'>yum (1)</a></li></ul>
+</section>
+<section>
+  <h1>Tag Cloud</h1>
+    <span id="tag-cloud"><a href='/blog/categories/apple' style='font-size: 103.33333333333333%'>Apple(1)</a> <a href='/blog/categories/assets' style='font-size: 106.66666666666667%'>Assets(2)</a> <a href='/blog/categories/bigbluebutton' style='font-size: 103.33333333333333%'>BigBlueButton(1)</a> <a href='/blog/categories/binarylogic' style='font-size: 106.66666666666667%'>binarylogic(2)</a> <a href='/blog/categories/bitbucket' style='font-size: 103.33333333333333%'>Bitbucket(1)</a> <a href='/blog/categories/bootswatch' style='font-size: 103.33333333333333%'>Bootswatch(1)</a> <a href='/blog/categories/bundle' style='font-size: 123.33333333333333%'>Bundle(7)</a> <a href='/blog/categories/bundler' style='font-size: 123.33333333333333%'>Bundler(7)</a> <a href='/blog/categories/centos' style='font-size: 110.0%'>CentOS(3)</a> <a href='/blog/categories/coffee-rails' style='font-size: 103.33333333333333%'>coffee-rails(1)</a> <a href='/blog/categories/configuration' style='font-size: 103.33333333333333%'>Configuration(1)</a> <a href='/blog/categories/css' style='font-size: 103.33333333333333%'>CSS(1)</a> <a href='/blog/categories/deployment' style='font-size: 110.0%'>Deployment(3)</a> <a href='/blog/categories/dhh' style='font-size: 103.33333333333333%'>DHH(1)</a> <a href='/blog/categories/domain' style='font-size: 103.33333333333333%'>Domain(1)</a> <a href='/blog/categories/eznow' style='font-size: 103.33333333333333%'>Eznow(1)</a> <a href='/blog/categories/firebug' style='font-size: 103.33333333333333%'>Firebug(1)</a> <a href='/blog/categories/firefox' style='font-size: 103.33333333333333%'>Firefox(1)</a> <a href='/blog/categories/firewall' style='font-size: 103.33333333333333%'>Firewall(1)</a> <a href='/blog/categories/gem' style='font-size: 123.33333333333333%'>Gem(7)</a> <a href='/blog/categories/gemfile' style='font-size: 123.33333333333333%'>Gemfile(7)</a> <a href='/blog/categories/git' style='font-size: 110.0%'>Git(3)</a> <a href='/blog/categories/git-flow' style='font-size: 103.33333333333333%'>git-flow(1)</a> <a href='/blog/categories/github' style='font-size: 106.66666666666667%'>Github(2)</a> <a href='/blog/categories/github' style='font-size: 113.33333333333333%'>GitHub(4)</a> <a href='/blog/categories/gitlab' style='font-size: 103.33333333333333%'>Gitlab(1)</a> <a href='/blog/categories/heroku' style='font-size: 103.33333333333333%'>Heroku(1)</a> <a href='/blog/categories/iftop' style='font-size: 103.33333333333333%'>iftop(1)</a> <a href='/blog/categories/installation' style='font-size: 103.33333333333333%'>Installation(1)</a> <a href='/blog/categories/jbuilder' style='font-size: 103.33333333333333%'>JBuilder(1)</a> <a href='/blog/categories/json' style='font-size: 103.33333333333333%'>JSON(1)</a> <a href='/blog/categories/macos-x' style='font-size: 103.33333333333333%'>MacOS X(1)</a> <a href='/blog/categories/metaprogramming-ruby' style='font-size: 123.33333333333333%'>MetaProgramming Ruby(7)</a> <a href='/blog/categories/mountain-lion-10-8' style='font-size: 103.33333333333333%'>Mountain Lion 10.8(1)</a> <a href='/blog/categories/neerajcse' style='font-size: 103.33333333333333%'>neerajcse(1)</a> <a href='/blog/categories/net' style='font-size: 103.33333333333333%'>Net(1)</a> <a href='/blog/categories/network' style='font-size: 103.33333333333333%'>Network(1)</a> <a href='/blog/categories/new-relic' style='font-size: 106.66666666666667%'>New Relic(2)</a> <a href='/blog/categories/octopress' style='font-size: 120.0%'>Octopress(6)</a> <a href='/blog/categories/octopress-plugin' style='font-size: 106.66666666666667%'>Octopress Plugin(2)</a> <a href='/blog/categories/octopress-calendar-aside' style='font-size: 103.33333333333333%'>octopress-calendar-aside(1)</a> <a href='/blog/categories/octopress-calendar-tagcloud' style='font-size: 103.33333333333333%'>octopress-calendar-tagcloud(1)</a> <a href='/blog/categories/python' style='font-size: 103.33333333333333%'>Python(1)</a> <a href='/blog/categories/rails' style='font-size: 126.66666666666667%'>Rails(8)</a> <a href='/blog/categories/rails-3-1-0' style='font-size: 103.33333333333333%'>Rails 3.1.0(1)</a> <a href='/blog/categories/rails-3-2-8' style='font-size: 103.33333333333333%'>Rails 3.2.8(1)</a> <a href='/blog/categories/redmine' style='font-size: 103.33333333333333%'>Redmine(1)</a> <a href='/blog/categories/rmagick' style='font-size: 103.33333333333333%'>RMagick(1)</a> <a href='/blog/categories/ror' style='font-size: 126.66666666666667%'>RoR(8)</a> <a href='/blog/categories/ruby' style='font-size: 160.0%'>Ruby(18)</a> <a href='/blog/categories/rubyonrails' style='font-size: 126.66666666666667%'>RubyOnRails(8)</a> <a href='/blog/categories/sass' style='font-size: 103.33333333333333%'>SASS(1)</a> <a href='/blog/categories/sass-rails' style='font-size: 103.33333333333333%'>sass-rails(1)</a> <a href='/blog/categories/scss' style='font-size: 103.33333333333333%'>SCSS(1)</a> <a href='/blog/categories/security' style='font-size: 103.33333333333333%'>Security(1)</a> <a href='/blog/categories/settingslogic' style='font-size: 106.66666666666667%'>Settingslogic(2)</a> <a href='/blog/categories/sina-weibo-sdk' style='font-size: 103.33333333333333%'>Sina Weibo SDK(1)</a> <a href='/blog/categories/sns' style='font-size: 103.33333333333333%'>SNS(1)</a> <a href='/blog/categories/tokkonopapa' style='font-size: 103.33333333333333%'>tokkonopapa(1)</a> <a href='/blog/categories/twitter-bootstrap' style='font-size: 103.33333333333333%'>Twitter Bootstrap(1)</a> <a href='/blog/categories/ubuntu' style='font-size: 103.33333333333333%'>Ubuntu(1)</a> <a href='/blog/categories/ubuntu-server-12-04-amd64' style='font-size: 103.33333333333333%'>Ubuntu Server 12.04 amd64(1)</a> <a href='/blog/categories/uglifier' style='font-size: 103.33333333333333%'>uglifier(1)</a> <a href='/blog/categories/yum' style='font-size: 103.33333333333333%'>yum(1)</a> </span>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/blogbin">@blogbin</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'blogbin',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+<section class="googleplus">
+  <h1>
+    <a href="https://plus.google.com/tech.blogbin@gmail.com?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+<!--
+    Calendar aside/plugin for octopress blogging framework.
+    Copyright (C) 2012  Neeraj Kumar ( neerajpkumar@gmail.com, neerajkumar@outlook.com)
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+--!>
+<style>
+	.highlighted-calendar-day
+	{
+		color : #CCC;
+		font-weight : bold;
+	}
+	
+	.calendar-header-day{
+		font-weight : bold;
+		color : #AAA;
+		font-size : 14px;
+	}
+	
+	.highlighted-calendar-day a
+	{
+		
+	}
+	
+	.prev-link
+	{
+		float:left;
+	}
+	
+	.next-link
+	{
+		float: right;
+	}
+	.calendar-day
+	{
+		color : #888;
+		font-weight : 12px;
+	}
+	
+	.calendar-table
+	{
+		width : 100%;
+		
+	}
+	
+	.calendar-table td
+	{
+		border-right : dotted 1px lightgrey;
+		text-align : center;
+	}
+	
+	.calendar-table td:last-child
+	{
+		border-right : none;
+	}
+	
+	.calendar-table th
+	{
+		background-color : lightgrey;
+		text-align : center;
+	}
+	.prevCalendarLink img
+	{	
+		
+		width : 20px;
+		height : 20px;
+		border: 0px;
+		float: left;
+		
+	}
+	
+	.nextCalendarLink img
+	{
+		
+		width : 20px;
+		height: 20px;
+		border: 0px;
+		float: right;
+		
+	}
+</style>
+<script type="text/javascript" src="/javascripts/calendar.js"></script>
+<section id="calendarDiv">
+	<span style="display:block" id="calendarSpan"></span>
+	<div>
+		<a href="#" class="previousMonth show"/><a href="#" class="nextMonth hide"/>
+	</div>
+</section>
+<script type="text/javascript">
+  
+monthCalendar = function(id,year,month)
+{
+  var highlightArray = new Array();
+  var hightlightLinks = new Array();
+  
+  highlightArray.push('09/12/2012');
+  hightlightLinks.push('/blog/2012/09/12/resolving-error-env-ruby-noexec-wrapper-no-such-file-or-directory/');
+  
+  highlightArray.push('09/12/2012');
+  hightlightLinks.push('/blog/2012/09/12/upgrading-to-rails-3-dot-2-8/');
+  
+  highlightArray.push('09/09/2012');
+  hightlightLinks.push('/blog/2012/09/09/using-bootstrap/');
+  
+  highlightArray.push('08/31/2012');
+  hightlightLinks.push('/blog/2012/08/31/using-bitbucket/');
+  
+  highlightArray.push('08/31/2012');
+  hightlightLinks.push('/blog/2012/08/31/installing-gitlab-on-ubuntu-server-12-04-amd64/');
+  
+  highlightArray.push('08/29/2012');
+  hightlightLinks.push('/blog/2012/08/29/monitoring-rails-app-with-the-new-relic/');
+  
+  highlightArray.push('08/28/2012');
+  hightlightLinks.push('/blog/2012/08/28/securing-centos-server-with-firewall/');
+  
+  highlightArray.push('08/27/2012');
+  hightlightLinks.push('/blog/2012/08/27/installing-bigbluebutton/');
+  
+  highlightArray.push('08/26/2012');
+  hightlightLinks.push('/blog/2012/08/26/using-tokkonopapas-octopress-tagcloud/');
+  
+  highlightArray.push('08/25/2012');
+  hightlightLinks.push('/blog/2012/08/25/using-jcftangs-octopress-relatedposts/');
+  		
+  var cal = new Calendar(month,year,highlightArray,hightlightLinks);
+  cal.generateHTML(id);
+  var element = document.getElementById(id);
+  element.innerHTML = cal.getHTML();
+}
+	
+loadCalendar = function(){
+  var now = new Date();
+  var month = now.getMonth();
+  var year = now.getFullYear();
+  monthCalendar('calendarDiv',year,month);
+}
+	
+	if(Array.prototype.indexOf == undefined)
+	{
+		 Array.prototype.indexOf = function (searchElement /*, fromIndex */ ) {
+			"use strict";
+			if (this == null) {
+				throw new TypeError();
+			}
+			var t = Object(this);
+			var len = t.length >>> 0;
+			if (len === 0) {
+				return -1;
+			}
+			var n = 0;
+			if (arguments.length > 0) {
+				n = Number(arguments[1]);
+				if (n != n) { // shortcut for verifying if it's NaN
+					n = 0;
+				} else if (n != 0 && n != Infinity && n != -Infinity) {
+					n = (n > 0 || -1) * Math.floor(Math.abs(n));
+				}
+			}
+			if (n >= len) {
+				return -1;
+			}
+			var k = n >= 0 ? n : Math.max(len - Math.abs(n), 0);
+			for (; k < len; k++) {
+				if (k in t && t[k] === searchElement) {
+					return k;
+				}
+			}
+			return -1;
+		}
+	}
+$(document).ready(function(){
+  loadCalendar();
+});
+</script>
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - Tech Blogbin <tech.blogbin@gmail.com> -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'tech-blogbin-blog';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fd6efaaa40f50ef1ec634f16880c40100' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+</body>
+</html>

@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Assets | Tech.Blogbin's Blog]]></title>
+  <link href="http://tech-blog.blogbin.info/blog/categories/assets/atom.xml" rel="self"/>
+  <link href="http://tech-blog.blogbin.info/"/>
+  <updated>2012-09-12T23:56:17+08:00</updated>
+  <id>http://tech-blog.blogbin.info/</id>
+  <author>
+    <name><![CDATA[Tech Blogbin ]]></name>
+    <email><![CDATA[Tech Blogbin <tech.blogbin@gmail.com>]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Upgrading to Rails 3.2.8]]></title>
+    <link href="http://tech-blog.blogbin.info/blog/2012/09/12/upgrading-to-rails-3-dot-2-8/"/>
+    <updated>2012-09-12T23:23:00+08:00</updated>
+    <id>http://tech-blog.blogbin.info/blog/2012/09/12/upgrading-to-rails-3-dot-2-8</id>
+    <content type="html"><![CDATA[<p>最近计划将 Rails 从 3.1.0 升级到 3.2.8 版本。</p>
+
+<p>一是为解决 Rails 3.1.0 版本的 Security Issue，引入新功能；
+二是为解决 Assets 相关的 Bugs，比如在 development 环境，scss 修改后无法动态编译，需要重启方能生效的问题；</p>
+
+<!--more-->
+
+
+<p>Gemfile 除了将 Rails 版本修改为 3.2.8 之外，需要调整 group assets 中 sass-rails, coffee-rails 的版本依赖。</p>
+
+<p>为避免 Rails 版本升级失败，方便回退版本，在 Gemfile 定义一些变量和判断条件来做检查，如：</p>
+
+<p>``` ruby Gemfile</p>
+
+<h1>rails</h1>
+
+<h1>rails version</h1>
+
+<p>RAILS_3_2_8 = '3.2.8'
+RAILS_3_1_0 = '3.1.0'</p>
+
+<p>RAILS_VERSION = RAILS_3_2_8</p>
+
+<p>case RAILS_VERSION</p>
+
+<p>  when RAILS_3_1_0</p>
+
+<pre><code>gem 'rails', '3.1.0'
+</code></pre>
+
+<p>  when RAILS_3_2_8</p>
+
+<pre><code>gem 'rails', '3.2.8'
+</code></pre>
+
+<p>end</p>
+
+<p>group :assets do</p>
+
+<p>  case RAILS_VERSION</p>
+
+<pre><code>when RAILS_3_1_0
+  gem 'sass-rails', "  ~&gt; 3.1.0"
+  gem 'coffee-rails', "~&gt; 3.1.0"
+  gem 'uglifier'
+
+when RAILS_3_2_8
+  gem 'sass-rails',   '~&gt; 3.2.3'
+  gem 'coffee-rails', '~&gt; 3.2.1'
+
+  # See https://github.com/sstephenson/execjs#readme for more supported runtimes
+  # gem 'therubyracer', :platforms =&gt; :ruby
+
+  gem 'uglifier', '&gt;= 1.0.3'
+</code></pre>
+
+<p>  end</p>
+
+<p>end
+```</p>
+
+<p>运行 bundle install 之前，需要先删除 Gemfile.lock，以防原来的版本依赖带来的干扰
+```
+blogbins-MacBook-Pro:focus blogbin$ rm Gemfile.lock</p>
+
+<p>blogbins-MacBook-Pro:focus blogbin$ bundle install
+```</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Using Bootstrap and Bootswatch]]></title>
+    <link href="http://tech-blog.blogbin.info/blog/2012/09/09/using-bootstrap/"/>
+    <updated>2012-09-09T01:01:00+08:00</updated>
+    <id>http://tech-blog.blogbin.info/blog/2012/09/09/using-bootstrap</id>
+    <content type="html"><![CDATA[<p>Bootstrap 是 Twitter 开源免费提供的 CSS框架，它是快速开发Web应用程序的前端工具包。
+它是一个CSS和HTML的集合，它使用了最新的浏览器技术，给Web开发提供了时尚的版式</p>
+
+<p><a href="http://twitter.github.com/bootstrap/index.html">http://twitter.github.com/bootstrap/index.html</a></p>
+
+<p><a href="https://github.com/twitter/bootstrap">https://github.com/twitter/bootstrap</a></p>
+
+<p>中文翻译参见：
+Twitter Bootstrap中文版/中文翻译
+<a href="http://wrongwaycn.github.com/bootstrap/docs/index.html">http://wrongwaycn.github.com/bootstrap/docs/index.html</a></p>
+
+<p>Bootstrap 默认只提供黑色和白色风格，也有一些付费的风格。如果想尝试免费的其它风格，可以试试看 Bootswatch
+<a href="http://bootswatch.com/">http://bootswatch.com/</a></p>
+
+<p><a href="https://github.com/maxim/bootswatch-rails">https://github.com/maxim/bootswatch-rails</a></p>
+
+<p>Rails 项目引入 Bootstrap 和 Bootswatch 比较容易。</p>
+
+<!--more-->
+
+
+<p>修改 Gemfile
+<code>ruby Gemfile
+gem 'bootstrap-sass'
+gem 'bootswatch-rails'
+</code></p>
+
+<p>在 app/assets/stylesheets/application.css.scs 通过 @import 引入 bootstrap 和 bootswatch 的 css</p>
+
+<p>``` css app/assets/stylesheets/application.css.scss
+// Example using 'Cerulean' bootswatch
+//
+// First import journal variables
+@import "bootswatch/cerulean/variables";</p>
+
+<p>// Then bootstrap itself
+@import "bootstrap";</p>
+
+<p>// Bootstrap body padding for fixed navbar
+//body { padding-top: 40px; }</p>
+
+<p>// Responsive styles go here in case you want them
+@import "bootstrap-responsive";</p>
+
+<p>// And finally bootswatch style itself
+@import "bootswatch/cerulean/bootswatch";</p>
+
+<p>// Whatever application styles you have go last
+@import "video_recommendation_types";
+```</p>
+
+<p>Bootstrap 有些交互控件（如 Dropdown）需要一些 javascript，建议部署在 vertor/assets/javascripts目录
+<code>
+blogbins-MacBook-Pro:focus blogbin$ find vendor/assets/
+vendor/assets/
+vendor/assets//javascripts
+vendor/assets//javascripts/bootstraps
+vendor/assets//javascripts/bootstraps/bootstrap-collapse.js
+vendor/assets//javascripts/bootstraps/bootstrap-dropdown.js
+vendor/assets//javascripts/bootstraps/index.js
+vendor/assets//stylesheets
+vendor/assets//stylesheets/.gitkeep
+</code></p>
+
+<p>建议在该目录下创建 manifest 清单文件，引用其它 javascript 文件</p>
+
+<p>```
+blogbins-MacBook-Pro:focus blogbin$ cat vendor/assets//javascripts/bootstraps/index.js
+//= require_tree .</p>
+
+<p>blogbins-MacBook-Pro:focus blogbin$
+```</p>
+
+<p>在 app/assets/javascripts/application.js 引入需要的 javascript
+``` javascript app/assets/javascripts/application.js
+//This is a manifest file that'll be compiled into including all the files listed below.
+//Add new JavaScript/Coffee code in separate files in this directory and they'll automatically
+// be included in the compiled file accessible from http://example.com/assets/application.js
+//It's not advisable to add code directly here, but if you do, it'll appear at the bottom of the
+// the compiled file.</p>
+
+<p>//= require jquery
+//= require jquery_ujs</p>
+
+<p>//= require bootstraps</p>
+
+<p>// 可以继续需要引入其它 javascript 文件或清单文件
+```</p>
+
+<p>最后运行 bundle install 安装／更新 gems 之前，需要先删除 Gemfile.lock，以防原来的版本依赖带来的干扰
+```
+blogbins-MacBook-Pro:focus blogbin$ rm Gemfile.lock</p>
+
+<p>blogbins-MacBook-Pro:focus blogbin$ bundle install
+```</p>
+]]></content>
+  </entry>
+  
+</feed>

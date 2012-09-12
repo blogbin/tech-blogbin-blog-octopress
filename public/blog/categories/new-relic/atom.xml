@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: New Relic | Tech.Blogbin's Blog]]></title>
+  <link href="http://tech-blog.blogbin.info/blog/categories/new-relic/atom.xml" rel="self"/>
+  <link href="http://tech-blog.blogbin.info/"/>
+  <updated>2012-09-12T23:56:17+08:00</updated>
+  <id>http://tech-blog.blogbin.info/</id>
+  <author>
+    <name><![CDATA[Tech Blogbin ]]></name>
+    <email><![CDATA[Tech Blogbin <tech.blogbin@gmail.com>]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Monitoring rails app with the New Relic]]></title>
+    <link href="http://tech-blog.blogbin.info/blog/2012/08/29/monitoring-rails-app-with-the-new-relic/"/>
+    <updated>2012-08-29T22:01:00+08:00</updated>
+    <id>http://tech-blog.blogbin.info/blog/2012/08/29/monitoring-rails-app-with-the-new-relic</id>
+    <content type="html"><![CDATA[<p>尝试 New Relic 监控 Rails App 项目的运行情况。</p>
+
+<p>如果采用 Rails 3，安装 New Relic 非常简单，如果使用 Rails 2，比较繁琐一些。
+好在官方网站有相应的介绍，仔细阅读即可。</p>
+
+<!--more-->
+
+
+<h5>参阅</h5>
+
+<p>Ruby Agent installation - New Relic Documentation</p>
+
+<p><a href="https://newrelic.com/docs/ruby/ruby-agent-installation">https://newrelic.com/docs/ruby/ruby-agent-installation</a>
+```
+Installing the Gem
+We recommend installing the New Relic Ruby gem in order to have better control over versions and dependencies. However, the gem is not supported for Rails versions prior to 2.0. If you're using Rails 1.2.6 and earlier, install the plugin.</p>
+
+<p>Our gem is available on rubygems.org as newrelic_rpm:</p>
+
+<p> sudo gem install newrelic_rpm
+For Rails 3 and installations using Bundler, simply add our gem to the Gemfile:</p>
+
+<p>gem 'newrelic_rpm'
+For Rails versions 2.1 to 2.3 without Bundler, edit environment.rb and add to the initializer block:</p>
+
+<p>config.gem "newrelic_rpm"
+For Rails versions 2.0.*, edit environment.rb and add this statement after the initializer block:</p>
+
+<p>require "newrelic_rpm"
+```</p>
+
+<p>Ruby Agent installation - plugin - New Relic Documentation</p>
+
+<p><a href="https://newrelic.com/docs/ruby/ruby-agent-installation-plugin">https://newrelic.com/docs/ruby/ruby-agent-installation-plugin</a>
+```
+Installing the Plugin
+Note that we strongly encourage using the gem.
+The plugin should be installed from Github using the following commands.</p>
+
+<p>For Rails versions 2.*:</p>
+
+<p>ruby script/plugin install git://github.com/newrelic/rpm.git
+mv vendor/plugins/rpm vendor/plugins/newrelic_rpm</p>
+
+<p>This will export the plugin into your application's vendor/plugins directory.</p>
+
+<p>If you can't install the plugin directly from the git URL, you can clone the repository into the vendor/plugins directory.
+```
+I'm using Unicorn and I don't see any data - New Relic Documentation</p>
+
+<p><a href="https://newrelic.com/docs/troubleshooting/im-using-unicorn-and-i-dont-see-any-data">https://newrelic.com/docs/troubleshooting/im-using-unicorn-and-i-dont-see-any-data</a>
+```
+I'm using Unicorn and I don't see any data</p>
+
+<p>If you're using Unicorn with the agent, you should be using the preload_app truedirective in your Unicorn configuration or the agent may not finish starting up. (see http://unicorn.bogomips.org/Unicorn/Configurator.html#method-i-preload_app)</p>
+
+<p>If you don't want to use preload_app true, you can manually call our handler for forking web servers from an initializer file in config/initializers:</p>
+
+<h1>Ensure the agent is started using Unicorn</h1>
+
+<h1>This is needed when using Unicorn and preload_app is not set to true.</h1>
+
+<h1>See http://support.newrelic.com/kb/troubleshooting/unicorn-no-data</h1>
+
+<p>::NewRelic::Agent.after_fork(:force_reconnect => true) if defined? Unicorn
+```</p>
+
+<h5>监控效果如下图：</h5>
+
+<p><blockquote><p><img src="/images/2012-08-29-monitoring-rails-app-with-the-new-relic/rails_app.jpeg"></p></blockquote></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Monitoring server performance with New Relic]]></title>
+    <link href="http://tech-blog.blogbin.info/blog/2012/08/22/monitoring-server-performance-with-new-relic/"/>
+    <updated>2012-08-22T21:21:00+08:00</updated>
+    <id>http://tech-blog.blogbin.info/blog/2012/08/22/monitoring-server-performance-with-new-relic</id>
+    <content type="html"><![CDATA[<p>使用 New Relic 监控服务端性能，优点：</p>
+
+<ol>
+<li><p>免费帐号可以监控任意数量服务器常规性能指标，如 CPU, Memory, DISK, I/O 和 Network；</p></li>
+<li><p>被监控的服务器采用 rpm + yum 方式安装监控代理，安装无损系统；</p></li>
+<li><p>监控数据主动发送到 New Relic，一般无需调整防火墙策略；</p></li>
+<li><p>New Relic 和 Rails 核心团队合作，可以深入监控 Rails 项目执行情况（如页面执行耗时，SQL 执行耗时等），但这需要收费，或者申请试用一段时间；</p></li>
+</ol>
+
+
+<p>和 Zabbix 相比，省去本地安装监控中心的工作，本地监控代理安装也非常简单。</p>
+
+<p>参阅：
+Web Application Performance Management (APM) : New Relic
+<a href="www.newrelic.com">www.newrelic.com</a></p>
+
+<!--more-->
+
+
+<h5>1. 监控服务器</h5>
+
+<p>安装监控代理过程非常简单，以 CentOS 6.2 为例，执行以下命令：
+```
+sudo rpm -Uvh http://download.newrelic.com/pub/newrelic/el5/i386/newrelic-repo-5-3.noarch.rpm</p>
+
+<p>sudo yum install -y newrelic-sysmond</p>
+
+<h1>其中 a56esdse7cfdsfa5a49fbfdsdsfdsd1wewfwfew28 为您的监控 license_key</h1>
+
+<p>sudo nrsysmond-config --set license_key=a56esdse7cfdsfa5a49fbfdsdsfdsd1wewfwfew28</p>
+
+<p>sudo /etc/init.d/newrelic-sysmond start
+```</p>
+
+<h5>2. 监控 Rails 项目</h5>
+
+<p><code>ruby Gemfile
+gem "newrelic_rpm"
+</code></p>
+
+<p>运行 bundle install</p>
+
+<p>将 New Relic 提供的 newrelic.yml 部署在 config 目录</p>
+
+<p>最后按开发模式启动 Rails 项目</p>
+
+<p>浏览器访问 <a href="http://localhost:3000/newrelic">http://localhost:3000/newrelic</a>，效果如下：
+<blockquote><p><img src="/images/2012-08-22-monitoring-server-performance-with-new-relic/new_relic_development.jpg"></p></blockquote></p>
+]]></content>
+  </entry>
+  
+</feed>

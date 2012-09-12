@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Rails | Tech.Blogbin's Blog]]></title>
+  <link href="http://tech-blog.blogbin.info/blog/categories/rails/atom.xml" rel="self"/>
+  <link href="http://tech-blog.blogbin.info/"/>
+  <updated>2012-09-12T23:56:17+08:00</updated>
+  <id>http://tech-blog.blogbin.info/</id>
+  <author>
+    <name><![CDATA[Tech Blogbin ]]></name>
+    <email><![CDATA[Tech Blogbin <tech.blogbin@gmail.com>]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Upgrading to Rails 3.2.8]]></title>
+    <link href="http://tech-blog.blogbin.info/blog/2012/09/12/upgrading-to-rails-3-dot-2-8/"/>
+    <updated>2012-09-12T23:23:00+08:00</updated>
+    <id>http://tech-blog.blogbin.info/blog/2012/09/12/upgrading-to-rails-3-dot-2-8</id>
+    <content type="html"><![CDATA[<p>最近计划将 Rails 从 3.1.0 升级到 3.2.8 版本。</p>
+
+<p>一是为解决 Rails 3.1.0 版本的 Security Issue，引入新功能；
+二是为解决 Assets 相关的 Bugs，比如在 development 环境，scss 修改后无法动态编译，需要重启方能生效的问题；</p>
+
+<!--more-->
+
+
+<p>Gemfile 除了将 Rails 版本修改为 3.2.8 之外，需要调整 group assets 中 sass-rails, coffee-rails 的版本依赖。</p>
+
+<p>为避免 Rails 版本升级失败，方便回退版本，在 Gemfile 定义一些变量和判断条件来做检查，如：</p>
+
+<p>``` ruby Gemfile</p>
+
+<h1>rails</h1>
+
+<h1>rails version</h1>
+
+<p>RAILS_3_2_8 = '3.2.8'
+RAILS_3_1_0 = '3.1.0'</p>
+
+<p>RAILS_VERSION = RAILS_3_2_8</p>
+
+<p>case RAILS_VERSION</p>
+
+<p>  when RAILS_3_1_0</p>
+
+<pre><code>gem 'rails', '3.1.0'
+</code></pre>
+
+<p>  when RAILS_3_2_8</p>
+
+<pre><code>gem 'rails', '3.2.8'
+</code></pre>
+
+<p>end</p>
+
+<p>group :assets do</p>
+
+<p>  case RAILS_VERSION</p>
+
+<pre><code>when RAILS_3_1_0
+  gem 'sass-rails', "  ~&gt; 3.1.0"
+  gem 'coffee-rails', "~&gt; 3.1.0"
+  gem 'uglifier'
+
+when RAILS_3_2_8
+  gem 'sass-rails',   '~&gt; 3.2.3'
+  gem 'coffee-rails', '~&gt; 3.2.1'
+
+  # See https://github.com/sstephenson/execjs#readme for more supported runtimes
+  # gem 'therubyracer', :platforms =&gt; :ruby
+
+  gem 'uglifier', '&gt;= 1.0.3'
+</code></pre>
+
+<p>  end</p>
+
+<p>end
+```</p>
+
+<p>运行 bundle install 之前，需要先删除 Gemfile.lock，以防原来的版本依赖带来的干扰
+```
+blogbins-MacBook-Pro:focus blogbin$ rm Gemfile.lock</p>
+
+<p>blogbins-MacBook-Pro:focus blogbin$ bundle install
+```</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Using Bootstrap and Bootswatch]]></title>
+    <link href="http://tech-blog.blogbin.info/blog/2012/09/09/using-bootstrap/"/>
+    <updated>2012-09-09T01:01:00+08:00</updated>
+    <id>http://tech-blog.blogbin.info/blog/2012/09/09/using-bootstrap</id>
+    <content type="html"><![CDATA[<p>Bootstrap 是 Twitter 开源免费提供的 CSS框架，它是快速开发Web应用程序的前端工具包。
+它是一个CSS和HTML的集合，它使用了最新的浏览器技术，给Web开发提供了时尚的版式</p>
+
+<p><a href="http://twitter.github.com/bootstrap/index.html">http://twitter.github.com/bootstrap/index.html</a></p>
+
+<p><a href="https://github.com/twitter/bootstrap">https://github.com/twitter/bootstrap</a></p>
+
+<p>中文翻译参见：
+Twitter Bootstrap中文版/中文翻译
+<a href="http://wrongwaycn.github.com/bootstrap/docs/index.html">http://wrongwaycn.github.com/bootstrap/docs/index.html</a></p>
+
+<p>Bootstrap 默认只提供黑色和白色风格，也有一些付费的风格。如果想尝试免费的其它风格，可以试试看 Bootswatch
+<a href="http://bootswatch.com/">http://bootswatch.com/</a></p>
+
+<p><a href="https://github.com/maxim/bootswatch-rails">https://github.com/maxim/bootswatch-rails</a></p>
+
+<p>Rails 项目引入 Bootstrap 和 Bootswatch 比较容易。</p>
+
+<!--more-->
+
+
+<p>修改 Gemfile
+<code>ruby Gemfile
+gem 'bootstrap-sass'
+gem 'bootswatch-rails'
+</code></p>
+
+<p>在 app/assets/stylesheets/application.css.scs 通过 @import 引入 bootstrap 和 bootswatch 的 css</p>
+
+<p>``` css app/assets/stylesheets/application.css.scss
+// Example using 'Cerulean' bootswatch
+//
+// First import journal variables
+@import "bootswatch/cerulean/variables";</p>
+
+<p>// Then bootstrap itself
+@import "bootstrap";</p>
+
+<p>// Bootstrap body padding for fixed navbar
+//body { padding-top: 40px; }</p>
+
+<p>// Responsive styles go here in case you want them
+@import "bootstrap-responsive";</p>
+
+<p>// And finally bootswatch style itself
+@import "bootswatch/cerulean/bootswatch";</p>
+
+<p>// Whatever application styles you have go last
+@import "video_recommendation_types";
+```</p>
+
+<p>Bootstrap 有些交互控件（如 Dropdown）需要一些 javascript，建议部署在 vertor/assets/javascripts目录
+<code>
+blogbins-MacBook-Pro:focus blogbin$ find vendor/assets/
+vendor/assets/
+vendor/assets//javascripts
+vendor/assets//javascripts/bootstraps
+vendor/assets//javascripts/bootstraps/bootstrap-collapse.js
+vendor/assets//javascripts/bootstraps/bootstrap-dropdown.js
+vendor/assets//javascripts/bootstraps/index.js
+vendor/assets//stylesheets
+vendor/assets//stylesheets/.gitkeep
+</code></p>
+
+<p>建议在该目录下创建 manifest 清单文件，引用其它 javascript 文件</p>
+
+<p>```
+blogbins-MacBook-Pro:focus blogbin$ cat vendor/assets//javascripts/bootstraps/index.js
+//= require_tree .</p>
+
+<p>blogbins-MacBook-Pro:focus blogbin$
+```</p>
+
+<p>在 app/assets/javascripts/application.js 引入需要的 javascript
+``` javascript app/assets/javascripts/application.js
+//This is a manifest file that'll be compiled into including all the files listed below.
+//Add new JavaScript/Coffee code in separate files in this directory and they'll automatically
+// be included in the compiled file accessible from http://example.com/assets/application.js
+//It's not advisable to add code directly here, but if you do, it'll appear at the bottom of the
+// the compiled file.</p>
+
+<p>//= require jquery
+//= require jquery_ujs</p>
+
+<p>//= require bootstraps</p>
+
+<p>// 可以继续需要引入其它 javascript 文件或清单文件
+```</p>
+
+<p>最后运行 bundle install 安装／更新 gems 之前，需要先删除 Gemfile.lock，以防原来的版本依赖带来的干扰
+```
+blogbins-MacBook-Pro:focus blogbin$ rm Gemfile.lock</p>
+
+<p>blogbins-MacBook-Pro:focus blogbin$ bundle install
+```</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Monitoring rails app with the New Relic]]></title>
+    <link href="http://tech-blog.blogbin.info/blog/2012/08/29/monitoring-rails-app-with-the-new-relic/"/>
+    <updated>2012-08-29T22:01:00+08:00</updated>
+    <id>http://tech-blog.blogbin.info/blog/2012/08/29/monitoring-rails-app-with-the-new-relic</id>
+    <content type="html"><![CDATA[<p>尝试 New Relic 监控 Rails App 项目的运行情况。</p>
+
+<p>如果采用 Rails 3，安装 New Relic 非常简单，如果使用 Rails 2，比较繁琐一些。
+好在官方网站有相应的介绍，仔细阅读即可。</p>
+
+<!--more-->
+
+
+<h5>参阅</h5>
+
+<p>Ruby Agent installation - New Relic Documentation</p>
+
+<p><a href="https://newrelic.com/docs/ruby/ruby-agent-installation">https://newrelic.com/docs/ruby/ruby-agent-installation</a>
+```
+Installing the Gem
+We recommend installing the New Relic Ruby gem in order to have better control over versions and dependencies. However, the gem is not supported for Rails versions prior to 2.0. If you're using Rails 1.2.6 and earlier, install the plugin.</p>
+
+<p>Our gem is available on rubygems.org as newrelic_rpm:</p>
+
+<p> sudo gem install newrelic_rpm
+For Rails 3 and installations using Bundler, simply add our gem to the Gemfile:</p>
+
+<p>gem 'newrelic_rpm'
+For Rails versions 2.1 to 2.3 without Bundler, edit environment.rb and add to the initializer block:</p>
+
+<p>config.gem "newrelic_rpm"
+For Rails versions 2.0.*, edit environment.rb and add this statement after the initializer block:</p>
+
+<p>require "newrelic_rpm"
+```</p>
+
+<p>Ruby Agent installation - plugin - New Relic Documentation</p>
+
+<p><a href="https://newrelic.com/docs/ruby/ruby-agent-installation-plugin">https://newrelic.com/docs/ruby/ruby-agent-installation-plugin</a>
+```
+Installing the Plugin
+Note that we strongly encourage using the gem.
+The plugin should be installed from Github using the following commands.</p>
+
+<p>For Rails versions 2.*:</p>
+
+<p>ruby script/plugin install git://github.com/newrelic/rpm.git
+mv vendor/plugins/rpm vendor/plugins/newrelic_rpm</p>
+
+<p>This will export the plugin into your application's vendor/plugins directory.</p>
+
+<p>If you can't install the plugin directly from the git URL, you can clone the repository into the vendor/plugins directory.
+```
+I'm using Unicorn and I don't see any data - New Relic Documentation</p>
+
+<p><a href="https://newrelic.com/docs/troubleshooting/im-using-unicorn-and-i-dont-see-any-data">https://newrelic.com/docs/troubleshooting/im-using-unicorn-and-i-dont-see-any-data</a>
+```
+I'm using Unicorn and I don't see any data</p>
+
+<p>If you're using Unicorn with the agent, you should be using the preload_app truedirective in your Unicorn configuration or the agent may not finish starting up. (see http://unicorn.bogomips.org/Unicorn/Configurator.html#method-i-preload_app)</p>
+
+<p>If you don't want to use preload_app true, you can manually call our handler for forking web servers from an initializer file in config/initializers:</p>
+
+<h1>Ensure the agent is started using Unicorn</h1>
+
+<h1>This is needed when using Unicorn and preload_app is not set to true.</h1>
+
+<h1>See http://support.newrelic.com/kb/troubleshooting/unicorn-no-data</h1>
+
+<p>::NewRelic::Agent.after_fork(:force_reconnect => true) if defined? Unicorn
+```</p>
+
+<h5>监控效果如下图：</h5>
+
+<p><blockquote><p><img src="/images/2012-08-29-monitoring-rails-app-with-the-new-relic/rails_app.jpeg"></p></blockquote></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Using jcftang's octopress-relatedposts]]></title>
+    <link href="http://tech-blog.blogbin.info/blog/2012/08/25/using-jcftangs-octopress-relatedposts/"/>
+    <updated>2012-08-25T08:33:00+08:00</updated>
+    <id>http://tech-blog.blogbin.info/blog/2012/08/25/using-jcftangs-octopress-relatedposts</id>
+    <content type="html"><![CDATA[<p>参阅 jcftang/octopress-relatedposts <a href="https://github.com/jcftang/octopress-relatedposts">https://github.com/jcftang/octopress-relatedposts</a></p>
+
+<p>其实 Octopress 已经内置了 LSI 引擎，安装和配置 octopress-relatedposts 比较简单。</p>
+
+<p><blockquote><p>Firstly add this to your _config.yml file</p></p><p><p>lsi: true<br/>The create a file such as source/_includes/custom/asides/related.html with the following content</p></p><p><p>....</p></p><p><p>It is possible to style the list, but in the above I have chosen to keep the same style as the recent posts.</p></p><p><p>Finally, add the file to your default asides list in your _config.yml file</p></p><p><p>default_asides: [custom/asides/related.html, ...]</p></blockquote></p>
+
+<!--more-->
+
+
+<p>相关帖子效果如下图：
+<blockquote><p><img src="/images/2012-08-25-using-jcftangs-octopress-relatedposts/octopress-relatedposts.jpeg"></p></blockquote></p>
+
+<p>引入   source/_includes/custom/asides/related.html
+比较遗憾的时，启用 LSI 后，运行 rake generate 的时间延长了 10 倍左右。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Using binarylogic/settingslogic]]></title>
+    <link href="http://tech-blog.blogbin.info/blog/2012/08/22/using-binarylogic-slash-settingslogic/"/>
+    <updated>2012-08-22T22:00:00+08:00</updated>
+    <id>http://tech-blog.blogbin.info/blog/2012/08/22/using-binarylogic-slash-settingslogic</id>
+    <content type="html"><![CDATA[<p>Rails 项目中有一些全局配置信息需要保存在文件中，采用 binarylogic/settingslogic 来管理这些配置信息：</p>
+
+<p>参阅：</p>
+
+<p>binarylogic/settingslogic <a href="https://github.com/binarylogic/settingslogic">https://github.com/binarylogic/settingslogic</a></p>
+
+<p>介紹 Settingslogic | Beryllium Work <a href="http://blog.berylliumwork.com/2012/02/settingslogic.html">http://blog.berylliumwork.com/2012/02/settingslogic.html</a></p>
+
+<p>假设 config 有配置文件：
+``` ruby settings.yml
+default: *default
+  server_url:</p>
+
+<pre><code>check_sensitive_data: "http://localhst:3000/bad_word_checker/check.json"
+</code></pre>
+
+<p>development:
+  &lt;&lt;: *default
+  server_url:</p>
+
+<pre><code>check_sensitive_data: "http://localhst:3001/bad_word_checker/check.json" 
+</code></pre>
+
+<p>test:
+  &lt;&lt;: *default
+  server_url:</p>
+
+<pre><code>check_sensitive_data: "http://localhst:3002/bad_word_checker/check.json" 
+</code></pre>
+
+<p>production:
+  &lt;&lt;: *default
+  server_url:</p>
+
+<pre><code>check_sensitive_data: "http://localhst:3003/bad_word_checker/check.json" 
+</code></pre>
+
+<p>```</p>
+
+<!--more-->
+
+
+<p>访问配置信息的代码比较丑陋，如
+``` ruby settings.rb
+SYS_CONFIG = YAML.load_file(Rails.root.join("config/sys_config.yml"))[Rails.env]</p>
+
+<p>puts SYS_CONFIG["server_url"]["check_sensitive_data"]     # => "http://localhst:3001/bad_word_checker/check.json"
+```</p>
+
+<p>如果采用 settingslogic，先创建 settings.rb 文件
+``` ruby app/model/settings.rb</p>
+
+<h1>encoding: UTF-8</h1>
+
+<h1>binarylogic/settingslogic</h1>
+
+<h1>https://github.com/binarylogic/settingslogic</h1>
+
+<p>class Settings &lt; Settingslogic
+  source "#{Rails.root}/config/settings.yml"
+  namespace Rails.env
+end
+```</p>
+
+<p>通过 Settings 来访问配置信息，如：
+<code>ruby
+puts Settings.server_url.check_sensitive_data    # =&gt; "http://localhst:3001/bad_word_checker/check.json"
+</code></p>
+
+<p>看看，不需要指定 yml 文件和 env 环境，非常容易。</p>
+]]></content>
+  </entry>
+  
+</feed>

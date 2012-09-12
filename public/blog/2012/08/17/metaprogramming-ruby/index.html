@@ -1,0 +1,601 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Ruby元编程 - 逸光 - 我信仰超越光的不是物质，是思维 - Tech.Blogbin's Blog</title>
+
+  <meta name="alexaVerifyID" content="-6pNt74TSllotvjLFDIa77kSKLI" />
+
+  <meta name="author" content="Tech Blogbin <tech.blogbin@gmail.com>">
+
+  
+  <meta name="description" content="参阅：
+逸光 http://deathking.is-programmer.com// Ruby元编程 - 逸光 - 我信仰超越光的不是物质，是思维 http://deathking.is-programmer.com/posts/28864.html 1. 慎用 eval 一般来说，能避免 &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://tech-blog.blogbin.info/blog/2012/08/17/metaprogramming-ruby/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Tech.Blogbin's Blog" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-34083026-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Tech.Blogbin's Blog</a></h1>
+  
+    <h2>A blogging for geeker.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss email">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+    <li><a href="Tech Blogbin <tech.blogbin@gmail.com>" rel="subscribe-email" title="subscribe via email">Email</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:tech-blog.blogbin.info" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/categories">Categories</a></li>
+  <li><a href="/tags">Tags</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Ruby元编程 - 逸光 - 我信仰超越光的不是物质，是思维</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-17T09:36:00+08:00" pubdate data-updated="true">Aug 17<span>th</span>, 2012</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>参阅：
+逸光 <a href="http://deathking.is-programmer.com/">http://deathking.is-programmer.com//</a></p>
+
+<p>Ruby元编程 - 逸光 - 我信仰超越光的不是物质，是思维 <a href="http://deathking.is-programmer.com/posts/28864.html">http://deathking.is-programmer.com/posts/28864.html</a></p>
+
+<h5>1. 慎用 eval</h5>
+
+<blockquote><p>一般来说，能避免 eval 就尽量避免，因为 eval 有额外的“分析时”开销（将字符串作为源代码进行词法、文法分析），而这个“剖析时”却又是在程序“运行时”进行的。把不需要惰性求值的表达式预先进行及早求值，能避免一些分析时开销。如果可能的话，用 instance_exec，或 instance_eval 带块的形式，也比直接在字符串上求值好。</p></blockquote>
+
+
+
+
+<!--more-->
+
+
+<h5>2. 一句话明了 class_eval 的区别</h5>
+
+<blockquote><p>当作用于类时，class_eval将会定义实例方法，而instance_eval定义类方法。</p></blockquote>
+
+
+<h5>3. class_variables 操作的是类变量，而非类实例变量</h5>
+
+<blockquote><p>1.3.9 class_variables <br/>　　如果你想知道一个类中有哪些类变量，我们可以使用class_varibles方法。他返回一个数组（Array），以符号（Symbol）的形式返回类变量的名称。<br/><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span><br/><span class='line-number'>2</span><br/><span class='line-number'>3</span><br/><span class='line-number'>4</span><br/><span class='line-number'>5</span><br/><span class='line-number'>6</span><br/><span class='line-number'>7</span><br/><span class='line-number'>8</span><br/><span class='line-number'>9</span><br/><span class='line-number'>10</span><br/><span class='line-number'>11</span><br/><span class='line-number'>12</span><br/></pre></td><td class='code'><pre><code class=''><span class='line'>classRubyist<br/></span><span class='line'>  @@geek="Ruby's Matz"<br/></span><span class='line'>  @@country="USA"<br/></span><span class='line'>end<br/></span><span class='line'> <br/></span><span class='line'><br/></span><span class='line'>classChild &lt; Rubyist<br/></span><span class='line'>  @@city="Nashville"<br/></span><span class='line'>end<br/></span><span class='line'>print Rubyist.class_variables# =&gt; [:@@geek, :@@country]<br/></span><span class='line'>puts<br/></span><span class='line'>p Child.class_variables# =&gt; [:@@city]</span></code></pre></td></tr></table></div></figure><br/>　　你可以从程序的输出中观察到Child.class_variables输出的是在Child类中定义的类变量（@@city）。Child类没有从父类中继承类变量（@@geek, @@country）。</p></blockquote>
+
+
+<h5>4. 常量操作 const_get 和 const_set</h5>
+
+<blockquote><p>1.3.11 const_get, const_set</p><p>　　类似的，const_get和const_set用于操作常量。const_get返回指定常量的值：</p><p><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span><br/></pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">puts</span> <span class="nb">Float</span><span class="o">.</span><span class="n">const_get</span><span class="p">(</span><span class="ss">:MIN</span><span class="p">)</span> <span class="c1"># =&gt; 2.2250738585072e-308</span><br/></span></code></pre></td></tr></table></div></figure><br/>　　const_set为指定的常量设置指定的值，并返回该对象。如果常量不存在，那么他会创建该常量，就是下面示范的那样：<br/><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span><br/><span class='line-number'>2</span><br/><span class='line-number'>3</span><br/><span class='line-number'>4</span><br/></pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Rubyist</span><br/></span><span class='line'><br/></span><span class='line'><span class="k">end</span><br/></span><span class='line'><span class="nb">puts</span> <span class="no">Rubyist</span><span class="o">.</span><span class="n">const_set</span><span class="p">(</span><span class="s2">&quot;PI&quot;</span><span class="p">,</span> <span class="mi">22</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="mi">7</span><span class="o">.</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># =&gt; 3.14285714285714</span><br/></span></code></pre></td></tr></table></div></figure></p><p>　　因为const_get返回常量的值，因此，你可以使用此方法获得一个类的名字并为这个类添加一个新的实例化对象的方法。这样使得我们有能力在运行时创建类并实例化其实例。<br/><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span><br/><span class='line-number'>2</span><br/><span class='line-number'>3</span><br/><span class='line-number'>4</span><br/><span class='line-number'>5</span><br/><span class='line-number'>6</span><br/><span class='line-number'>7</span><br/><span class='line-number'>8</span><br/><span class='line-number'>9</span><br/><span class='line-number'>10</span><br/><span class='line-number'>11</span><br/><span class='line-number'>12</span><br/><span class='line-number'>13</span><br/><span class='line-number'>14</span><br/><span class='line-number'>15</span><br/><span class='line-number'>16</span><br/><span class='line-number'>17</span><br/><span class='line-number'>18</span><br/><span class='line-number'>19</span><br/><span class='line-number'>20</span><br/><span class='line-number'>21</span><br/></pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># Let us call our new class &#39;Rubyist&#39;</span><br/></span><span class='line'><span class="c1"># (we could have prompted the user for a class name)</span><br/></span><span class='line'><span class="n">class_name</span> <span class="o">=</span> <span class="s2">&quot;rubyist&quot;</span><span class="o">.</span><span class="n">capitalize</span><br/></span><span class='line'><br/></span><span class='line'><span class="no">Object</span><span class="o">.</span><span class="n">const_set</span><span class="p">(</span><span class="n">class_name</span><span class="p">,</span> <span class="no">Class</span><span class="o">.</span><span class="n">new</span><span class="p">)</span><br/></span><span class='line'><br/></span><span class='line'><span class="c1"># Let us create a method &#39;who&#39;</span><br/></span><span class='line'><span class="c1"># (we could have prompted the user for a method name)</span><br/></span><span class='line'><span class="n">class_name</span> <span class="o">=</span> <span class="no">Object</span><span class="o">.</span><span class="n">const_get</span><span class="p">(</span><span class="n">class_name</span><span class="p">)</span><br/></span><span class='line'><br/></span><span class='line'><span class="nb">puts</span> <span class="n">class_name</span> <span class="c1"># =&gt; Rubyist</span><br/></span><span class='line'><br/></span><span class='line'><span class="n">class_name</span><span class="o">.</span><span class="n">class_eval</span> <span class="k">do</span><br/></span><span class='line'><br/></span><span class='line'>  <span class="n">define_method</span> <span class="ss">:who</span> <span class="k">do</span> <span class="o">|</span><span class="n">my_arg</span><span class="o">|</span><br/></span><span class='line'><br/></span><span class='line'>    <span class="n">my_arg</span><br/></span><span class='line'>  <span class="k">end</span><br/></span><span class='line'><span class="k">end</span><br/></span><span class='line'><span class="n">obj</span> <span class="o">=</span> <span class="n">class_name</span><span class="o">.</span><span class="n">new</span><br/></span><span class='line'><span class="nb">puts</span> <span class="n">obj</span><span class="o">.</span><span class="n">who</span><span class="p">(</span><span class="s1">&#39;Matz&#39;</span><span class="p">)</span> <span class="c1"># =&gt; Matz</span><br/></span></code></pre></td></tr></table></div></figure></p></blockquote>
+
+
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Tech Blogbin <tech.blogbin@gmail.com></span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-17T09:36:00+08:00" pubdate data-updated="true">Aug 17<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/metaprogramming-ruby/'>MetaProgramming Ruby</a>, <a class='category' href='/blog/categories/ruby/'>Ruby</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://tech-blog.blogbin.info/blog/2012/08/17/metaprogramming-ruby/" data-via="tech_blogbin" data-counturl="http://tech-blog.blogbin.info/blog/2012/08/17/metaprogramming-ruby/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2012/08/16/a-story-about-ruby-and-metaprogramming-ruby-2/" title="Previous Post: Hisea's Ruby和元编程的故事 - 第2回: 类与模块，Ruby的绝代双骄">&laquo; Hisea's Ruby和元编程的故事 - 第2回: 类与模块，Ruby的绝代双骄</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2012/08/17/softwareishards-introduction-to-firebug-net-panel/" title="Next Post: softwareishard's introduction to firebug net panel">softwareishard's introduction to firebug net panel &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>About Me</h1>
+  <p><a href=mailto:tech.blogbin@gmail.com>tech.blogbin@gmail.com</a></p>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2012/09/12/resolving-error-env-ruby-noexec-wrapper-no-such-file-or-directory/">resolving error: env: ruby_noexec_wrapper: No such file or directory</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/09/12/upgrading-to-rails-3-dot-2-8/">Upgrading to Rails 3.2.8</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/09/09/using-bootstrap/">Using Bootstrap and Bootswatch</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/08/31/using-bitbucket/">Using Bitbucket</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/08/31/installing-gitlab-on-ubuntu-server-12-04-amd64/">installing-gitlab-on-ubuntu-server-12-04-amd64</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/08/29/monitoring-rails-app-with-the-new-relic/">Monitoring rails app with the New Relic</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/08/28/securing-centos-server-with-firewall/">Securing CentOS Server with firewall</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/08/27/installing-bigbluebutton/">Installing BigBlueButton</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/08/26/using-tokkonopapas-octopress-tagcloud/">Using tokkonopapa's octopress-tagcloud</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/08/25/using-jcftangs-octopress-relatedposts/">Using jcftang's octopress-relatedposts</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+    <h1>Related Posts</h1>
+    <ul class="posts">
+    
+        <li class="related">
+        <a href="/blog/2012/09/12/resolving-error-env-ruby-noexec-wrapper-no-such-file-or-directory/">resolving error: env: ruby_noexec_wrapper: No such file or directory</a>
+        </li>
+    
+        <li class="related">
+        <a href="/blog/2012/09/12/upgrading-to-rails-3-dot-2-8/">Upgrading to Rails 3.2.8</a>
+        </li>
+    
+        <li class="related">
+        <a href="/blog/2012/09/09/using-bootstrap/">Using Bootstrap and Bootswatch</a>
+        </li>
+    
+        <li class="related">
+        <a href="/blog/2012/08/31/using-bitbucket/">Using Bitbucket</a>
+        </li>
+    
+        <li class="related">
+        <a href="/blog/2012/08/31/installing-gitlab-on-ubuntu-server-12-04-amd64/">installing-gitlab-on-ubuntu-server-12-04-amd64</a>
+        </li>
+    
+    </ul>
+</section>
+<section>
+  <h1>Categories</h1>
+    <ul id="category-list"><li><a href='/blog/categories/apple'>Apple (1)</a></li><li><a href='/blog/categories/assets'>Assets (2)</a></li><li><a href='/blog/categories/bigbluebutton'>BigBlueButton (1)</a></li><li><a href='/blog/categories/binarylogic'>binarylogic (2)</a></li><li><a href='/blog/categories/bitbucket'>Bitbucket (1)</a></li><li><a href='/blog/categories/bootswatch'>Bootswatch (1)</a></li><li><a href='/blog/categories/bundle'>Bundle (7)</a></li><li><a href='/blog/categories/bundler'>Bundler (7)</a></li><li><a href='/blog/categories/centos'>CentOS (3)</a></li><li><a href='/blog/categories/coffee-rails'>coffee-rails (1)</a></li><li><a href='/blog/categories/configuration'>Configuration (1)</a></li><li><a href='/blog/categories/css'>CSS (1)</a></li><li><a href='/blog/categories/deployment'>Deployment (3)</a></li><li><a href='/blog/categories/dhh'>DHH (1)</a></li><li><a href='/blog/categories/domain'>Domain (1)</a></li><li><a href='/blog/categories/eznow'>Eznow (1)</a></li><li><a href='/blog/categories/firebug'>Firebug (1)</a></li><li><a href='/blog/categories/firefox'>Firefox (1)</a></li><li><a href='/blog/categories/firewall'>Firewall (1)</a></li><li><a href='/blog/categories/gem'>Gem (7)</a></li><li><a href='/blog/categories/gemfile'>Gemfile (7)</a></li><li><a href='/blog/categories/git'>Git (3)</a></li><li><a href='/blog/categories/git-flow'>git-flow (1)</a></li><li><a href='/blog/categories/github'>Github (2)</a></li><li><a href='/blog/categories/github'>GitHub (4)</a></li><li><a href='/blog/categories/gitlab'>Gitlab (1)</a></li><li><a href='/blog/categories/heroku'>Heroku (1)</a></li><li><a href='/blog/categories/iftop'>iftop (1)</a></li><li><a href='/blog/categories/installation'>Installation (1)</a></li><li><a href='/blog/categories/jbuilder'>JBuilder (1)</a></li><li><a href='/blog/categories/json'>JSON (1)</a></li><li><a href='/blog/categories/macos-x'>MacOS X (1)</a></li><li><a href='/blog/categories/metaprogramming-ruby'>MetaProgramming Ruby (7)</a></li><li><a href='/blog/categories/mountain-lion-10-8'>Mountain Lion 10.8 (1)</a></li><li><a href='/blog/categories/neerajcse'>neerajcse (1)</a></li><li><a href='/blog/categories/net'>Net (1)</a></li><li><a href='/blog/categories/network'>Network (1)</a></li><li><a href='/blog/categories/new-relic'>New Relic (2)</a></li><li><a href='/blog/categories/octopress'>Octopress (6)</a></li><li><a href='/blog/categories/octopress-plugin'>Octopress Plugin (2)</a></li><li><a href='/blog/categories/octopress-calendar-aside'>octopress-calendar-aside (1)</a></li><li><a href='/blog/categories/octopress-calendar-tagcloud'>octopress-calendar-tagcloud (1)</a></li><li><a href='/blog/categories/python'>Python (1)</a></li><li><a href='/blog/categories/rails'>Rails (8)</a></li><li><a href='/blog/categories/rails-3-1-0'>Rails 3.1.0 (1)</a></li><li><a href='/blog/categories/rails-3-2-8'>Rails 3.2.8 (1)</a></li><li><a href='/blog/categories/redmine'>Redmine (1)</a></li><li><a href='/blog/categories/rmagick'>RMagick (1)</a></li><li><a href='/blog/categories/ror'>RoR (8)</a></li><li><a href='/blog/categories/ruby'>Ruby (18)</a></li><li><a href='/blog/categories/rubyonrails'>RubyOnRails (8)</a></li><li><a href='/blog/categories/sass'>SASS (1)</a></li><li><a href='/blog/categories/sass-rails'>sass-rails (1)</a></li><li><a href='/blog/categories/scss'>SCSS (1)</a></li><li><a href='/blog/categories/security'>Security (1)</a></li><li><a href='/blog/categories/settingslogic'>Settingslogic (2)</a></li><li><a href='/blog/categories/sina-weibo-sdk'>Sina Weibo SDK (1)</a></li><li><a href='/blog/categories/sns'>SNS (1)</a></li><li><a href='/blog/categories/tokkonopapa'>tokkonopapa (1)</a></li><li><a href='/blog/categories/twitter-bootstrap'>Twitter Bootstrap (1)</a></li><li><a href='/blog/categories/ubuntu'>Ubuntu (1)</a></li><li><a href='/blog/categories/ubuntu-server-12-04-amd64'>Ubuntu Server 12.04 amd64 (1)</a></li><li><a href='/blog/categories/uglifier'>uglifier (1)</a></li><li><a href='/blog/categories/yum'>yum (1)</a></li></ul>
+</section>
+<section>
+  <h1>Tag Cloud</h1>
+    <span id="tag-cloud"><a href='/blog/categories/apple' style='font-size: 103.33333333333333%'>Apple(1)</a> <a href='/blog/categories/assets' style='font-size: 106.66666666666667%'>Assets(2)</a> <a href='/blog/categories/bigbluebutton' style='font-size: 103.33333333333333%'>BigBlueButton(1)</a> <a href='/blog/categories/binarylogic' style='font-size: 106.66666666666667%'>binarylogic(2)</a> <a href='/blog/categories/bitbucket' style='font-size: 103.33333333333333%'>Bitbucket(1)</a> <a href='/blog/categories/bootswatch' style='font-size: 103.33333333333333%'>Bootswatch(1)</a> <a href='/blog/categories/bundle' style='font-size: 123.33333333333333%'>Bundle(7)</a> <a href='/blog/categories/bundler' style='font-size: 123.33333333333333%'>Bundler(7)</a> <a href='/blog/categories/centos' style='font-size: 110.0%'>CentOS(3)</a> <a href='/blog/categories/coffee-rails' style='font-size: 103.33333333333333%'>coffee-rails(1)</a> <a href='/blog/categories/configuration' style='font-size: 103.33333333333333%'>Configuration(1)</a> <a href='/blog/categories/css' style='font-size: 103.33333333333333%'>CSS(1)</a> <a href='/blog/categories/deployment' style='font-size: 110.0%'>Deployment(3)</a> <a href='/blog/categories/dhh' style='font-size: 103.33333333333333%'>DHH(1)</a> <a href='/blog/categories/domain' style='font-size: 103.33333333333333%'>Domain(1)</a> <a href='/blog/categories/eznow' style='font-size: 103.33333333333333%'>Eznow(1)</a> <a href='/blog/categories/firebug' style='font-size: 103.33333333333333%'>Firebug(1)</a> <a href='/blog/categories/firefox' style='font-size: 103.33333333333333%'>Firefox(1)</a> <a href='/blog/categories/firewall' style='font-size: 103.33333333333333%'>Firewall(1)</a> <a href='/blog/categories/gem' style='font-size: 123.33333333333333%'>Gem(7)</a> <a href='/blog/categories/gemfile' style='font-size: 123.33333333333333%'>Gemfile(7)</a> <a href='/blog/categories/git' style='font-size: 110.0%'>Git(3)</a> <a href='/blog/categories/git-flow' style='font-size: 103.33333333333333%'>git-flow(1)</a> <a href='/blog/categories/github' style='font-size: 106.66666666666667%'>Github(2)</a> <a href='/blog/categories/github' style='font-size: 113.33333333333333%'>GitHub(4)</a> <a href='/blog/categories/gitlab' style='font-size: 103.33333333333333%'>Gitlab(1)</a> <a href='/blog/categories/heroku' style='font-size: 103.33333333333333%'>Heroku(1)</a> <a href='/blog/categories/iftop' style='font-size: 103.33333333333333%'>iftop(1)</a> <a href='/blog/categories/installation' style='font-size: 103.33333333333333%'>Installation(1)</a> <a href='/blog/categories/jbuilder' style='font-size: 103.33333333333333%'>JBuilder(1)</a> <a href='/blog/categories/json' style='font-size: 103.33333333333333%'>JSON(1)</a> <a href='/blog/categories/macos-x' style='font-size: 103.33333333333333%'>MacOS X(1)</a> <a href='/blog/categories/metaprogramming-ruby' style='font-size: 123.33333333333333%'>MetaProgramming Ruby(7)</a> <a href='/blog/categories/mountain-lion-10-8' style='font-size: 103.33333333333333%'>Mountain Lion 10.8(1)</a> <a href='/blog/categories/neerajcse' style='font-size: 103.33333333333333%'>neerajcse(1)</a> <a href='/blog/categories/net' style='font-size: 103.33333333333333%'>Net(1)</a> <a href='/blog/categories/network' style='font-size: 103.33333333333333%'>Network(1)</a> <a href='/blog/categories/new-relic' style='font-size: 106.66666666666667%'>New Relic(2)</a> <a href='/blog/categories/octopress' style='font-size: 120.0%'>Octopress(6)</a> <a href='/blog/categories/octopress-plugin' style='font-size: 106.66666666666667%'>Octopress Plugin(2)</a> <a href='/blog/categories/octopress-calendar-aside' style='font-size: 103.33333333333333%'>octopress-calendar-aside(1)</a> <a href='/blog/categories/octopress-calendar-tagcloud' style='font-size: 103.33333333333333%'>octopress-calendar-tagcloud(1)</a> <a href='/blog/categories/python' style='font-size: 103.33333333333333%'>Python(1)</a> <a href='/blog/categories/rails' style='font-size: 126.66666666666667%'>Rails(8)</a> <a href='/blog/categories/rails-3-1-0' style='font-size: 103.33333333333333%'>Rails 3.1.0(1)</a> <a href='/blog/categories/rails-3-2-8' style='font-size: 103.33333333333333%'>Rails 3.2.8(1)</a> <a href='/blog/categories/redmine' style='font-size: 103.33333333333333%'>Redmine(1)</a> <a href='/blog/categories/rmagick' style='font-size: 103.33333333333333%'>RMagick(1)</a> <a href='/blog/categories/ror' style='font-size: 126.66666666666667%'>RoR(8)</a> <a href='/blog/categories/ruby' style='font-size: 160.0%'>Ruby(18)</a> <a href='/blog/categories/rubyonrails' style='font-size: 126.66666666666667%'>RubyOnRails(8)</a> <a href='/blog/categories/sass' style='font-size: 103.33333333333333%'>SASS(1)</a> <a href='/blog/categories/sass-rails' style='font-size: 103.33333333333333%'>sass-rails(1)</a> <a href='/blog/categories/scss' style='font-size: 103.33333333333333%'>SCSS(1)</a> <a href='/blog/categories/security' style='font-size: 103.33333333333333%'>Security(1)</a> <a href='/blog/categories/settingslogic' style='font-size: 106.66666666666667%'>Settingslogic(2)</a> <a href='/blog/categories/sina-weibo-sdk' style='font-size: 103.33333333333333%'>Sina Weibo SDK(1)</a> <a href='/blog/categories/sns' style='font-size: 103.33333333333333%'>SNS(1)</a> <a href='/blog/categories/tokkonopapa' style='font-size: 103.33333333333333%'>tokkonopapa(1)</a> <a href='/blog/categories/twitter-bootstrap' style='font-size: 103.33333333333333%'>Twitter Bootstrap(1)</a> <a href='/blog/categories/ubuntu' style='font-size: 103.33333333333333%'>Ubuntu(1)</a> <a href='/blog/categories/ubuntu-server-12-04-amd64' style='font-size: 103.33333333333333%'>Ubuntu Server 12.04 amd64(1)</a> <a href='/blog/categories/uglifier' style='font-size: 103.33333333333333%'>uglifier(1)</a> <a href='/blog/categories/yum' style='font-size: 103.33333333333333%'>yum(1)</a> </span>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/blogbin">@blogbin</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'blogbin',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+<section class="googleplus">
+  <h1>
+    <a href="https://plus.google.com/tech.blogbin@gmail.com?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+<!--
+    Calendar aside/plugin for octopress blogging framework.
+    Copyright (C) 2012  Neeraj Kumar ( neerajpkumar@gmail.com, neerajkumar@outlook.com)
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+--!>
+<style>
+	.highlighted-calendar-day
+	{
+		color : #CCC;
+		font-weight : bold;
+	}
+	
+	.calendar-header-day{
+		font-weight : bold;
+		color : #AAA;
+		font-size : 14px;
+	}
+	
+	.highlighted-calendar-day a
+	{
+		
+	}
+	
+	.prev-link
+	{
+		float:left;
+	}
+	
+	.next-link
+	{
+		float: right;
+	}
+	.calendar-day
+	{
+		color : #888;
+		font-weight : 12px;
+	}
+	
+	.calendar-table
+	{
+		width : 100%;
+		
+	}
+	
+	.calendar-table td
+	{
+		border-right : dotted 1px lightgrey;
+		text-align : center;
+	}
+	
+	.calendar-table td:last-child
+	{
+		border-right : none;
+	}
+	
+	.calendar-table th
+	{
+		background-color : lightgrey;
+		text-align : center;
+	}
+	.prevCalendarLink img
+	{	
+		
+		width : 20px;
+		height : 20px;
+		border: 0px;
+		float: left;
+		
+	}
+	
+	.nextCalendarLink img
+	{
+		
+		width : 20px;
+		height: 20px;
+		border: 0px;
+		float: right;
+		
+	}
+</style>
+<script type="text/javascript" src="/javascripts/calendar.js"></script>
+<section id="calendarDiv">
+	<span style="display:block" id="calendarSpan"></span>
+	<div>
+		<a href="#" class="previousMonth show"/><a href="#" class="nextMonth hide"/>
+	</div>
+</section>
+<script type="text/javascript">
+  
+monthCalendar = function(id,year,month)
+{
+  var highlightArray = new Array();
+  var hightlightLinks = new Array();
+  
+  highlightArray.push('09/12/2012');
+  hightlightLinks.push('/blog/2012/09/12/resolving-error-env-ruby-noexec-wrapper-no-such-file-or-directory/');
+  
+  highlightArray.push('09/12/2012');
+  hightlightLinks.push('/blog/2012/09/12/upgrading-to-rails-3-dot-2-8/');
+  
+  highlightArray.push('09/09/2012');
+  hightlightLinks.push('/blog/2012/09/09/using-bootstrap/');
+  
+  highlightArray.push('08/31/2012');
+  hightlightLinks.push('/blog/2012/08/31/using-bitbucket/');
+  
+  highlightArray.push('08/31/2012');
+  hightlightLinks.push('/blog/2012/08/31/installing-gitlab-on-ubuntu-server-12-04-amd64/');
+  
+  highlightArray.push('08/29/2012');
+  hightlightLinks.push('/blog/2012/08/29/monitoring-rails-app-with-the-new-relic/');
+  
+  highlightArray.push('08/28/2012');
+  hightlightLinks.push('/blog/2012/08/28/securing-centos-server-with-firewall/');
+  
+  highlightArray.push('08/27/2012');
+  hightlightLinks.push('/blog/2012/08/27/installing-bigbluebutton/');
+  
+  highlightArray.push('08/26/2012');
+  hightlightLinks.push('/blog/2012/08/26/using-tokkonopapas-octopress-tagcloud/');
+  
+  highlightArray.push('08/25/2012');
+  hightlightLinks.push('/blog/2012/08/25/using-jcftangs-octopress-relatedposts/');
+  		
+  var cal = new Calendar(month,year,highlightArray,hightlightLinks);
+  cal.generateHTML(id);
+  var element = document.getElementById(id);
+  element.innerHTML = cal.getHTML();
+}
+	
+loadCalendar = function(){
+  var now = new Date();
+  var month = now.getMonth();
+  var year = now.getFullYear();
+  monthCalendar('calendarDiv',year,month);
+}
+	
+	if(Array.prototype.indexOf == undefined)
+	{
+		 Array.prototype.indexOf = function (searchElement /*, fromIndex */ ) {
+			"use strict";
+			if (this == null) {
+				throw new TypeError();
+			}
+			var t = Object(this);
+			var len = t.length >>> 0;
+			if (len === 0) {
+				return -1;
+			}
+			var n = 0;
+			if (arguments.length > 0) {
+				n = Number(arguments[1]);
+				if (n != n) { // shortcut for verifying if it's NaN
+					n = 0;
+				} else if (n != 0 && n != Infinity && n != -Infinity) {
+					n = (n > 0 || -1) * Math.floor(Math.abs(n));
+				}
+			}
+			if (n >= len) {
+				return -1;
+			}
+			var k = n >= 0 ? n : Math.max(len - Math.abs(n), 0);
+			for (; k < len; k++) {
+				if (k in t && t[k] === searchElement) {
+					return k;
+				}
+			}
+			return -1;
+		}
+	}
+$(document).ready(function(){
+  loadCalendar();
+});
+</script>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - Tech Blogbin <tech.blogbin@gmail.com> -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'tech-blogbin-blog';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://tech-blog.blogbin.info/blog/2012/08/17/metaprogramming-ruby/';
+        var disqus_url = 'http://tech-blog.blogbin.info/blog/2012/08/17/metaprogramming-ruby/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fd6efaaa40f50ef1ec634f16880c40100' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+</body>
+</html>
