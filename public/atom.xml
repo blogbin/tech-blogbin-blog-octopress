@@ -4,7 +4,7 @@
   <title><![CDATA[Tech.Blogbin's Blog]]></title>
   <link href="http://tech-blog.blogbin.info/atom.xml" rel="self"/>
   <link href="http://tech-blog.blogbin.info/"/>
-  <updated>2012-09-13T00:20:25+08:00</updated>
+  <updated>2012-09-15T22:36:33+08:00</updated>
   <id>http://tech-blog.blogbin.info/</id>
   <author>
     <name><![CDATA[Tech Blogbin ]]></name>
@@ -207,6 +207,54 @@
 </span><span class='line'>rubygems-update (1.8.24)</span></code></pre></td></tr></table></div></figure>
 
 
+<p>2012 年 9 月 15 日更新:
+应该是 bundler 版本过低造成的，解决办法如下：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>blogbins-MacBook-Pro:omniauth-atyun-oauth2 blogbin$ gem install bundler
+</span><span class='line'>Downloading http://rubygems.org/latest_specs.4.8.gz
+</span><span class='line'>File already downloaded and cached to /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@omniauth-atyun-oauth2/cache
+</span><span class='line'>Downloading http://rubygems.org/gems/bundler-1.1.4.gem
+</span><span class='line'>######################################################################## 100.0%
+</span><span class='line'>Successfully installed bundler-1.1.4
+</span><span class='line'>1 gem installed
+</span><span class='line'>Installing ri documentation for bundler-1.1.4...
+</span><span class='line'>Installing RDoc documentation for bundler-1.1.4...</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>blogbins-MacBook-Pro:omniauth-atyun-oauth2 blogbin$ gem list
+</span><span class='line'>
+</span><span class='line'>*** LOCAL GEMS ***
+</span><span class='line'>
+</span><span class='line'>bundler (1.1.4, 1.0.22)
+</span><span class='line'>gem-fast (0.0.6.3)
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>奇怪的是，之前的 bundler 1.0.22 没办法 uninstall，不过不影响 bundle 命令，暂不考虑解决它。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>blogbins-MacBook-Pro:omniauth-atyun-oauth2 blogbin$ gem uninstall bundler -v 1.0.22
+</span><span class='line'>INFO:  gem "bundler" is not installed</span></code></pre></td></tr></table></div></figure>
+
+
 <p>非常奇怪，后来考虑可能是 RubyGem 版本问题，尝试更新 RubyGem 的版本</p>
 
 <!--more-->
@@ -273,6 +321,153 @@
 二是为解决 Assets 相关的 Bugs，比如在 development 环境，scss 修改后无法动态编译，需要重启方能生效的问题；</p>
 
 <!--more-->
+
+
+<p>（ 2012 年 9 月 13 日更新）
+如果使用 haml，需要升级 haml 版本至 3.1.4</p>
+
+<figure class='code'><figcaption><span>Gemfile</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">case</span> <span class="no">RAILS_VERSION</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">when</span> <span class="no">RAILS_3_1_0</span>
+</span><span class='line'>    <span class="n">gem</span> <span class="s2">&quot;haml&quot;</span><span class="p">,</span> <span class="s2">&quot;3.0.17&quot;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">when</span> <span class="no">RAILS_3_2_8</span>
+</span><span class='line'>    <span class="n">gem</span> <span class="s2">&quot;haml&quot;</span><span class="p">,</span> <span class="s2">&quot;3.1.4&quot;</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<p>否则启动 Rails 项目会出现 undefined method `delegate_template_exists?&#8217; 的错误</p>
+
+<figure class='code'><figcaption><span>Gemfile</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">Uncaught</span> <span class="n">exception</span><span class="p">:</span> <span class="n">undefined</span> <span class="nb">method</span> <span class="sb">`delegate_template_exists?&#39; for class `</span><span class="no">ActionView</span><span class="o">::</span><span class="no">Base</span><span class="s1">&#39;</span>
+</span><span class='line'><span class="s1">     /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/haml-3.0.17/lib/haml/template/patch.rb:16:in `alias_method&#39;</span>
+</span><span class='line'>     <span class="sr">/Users/</span><span class="n">blogbin</span><span class="o">/.</span><span class="n">rvm</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="n">ruby</span><span class="o">-</span><span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">3</span><span class="o">-</span><span class="n">p0</span><span class="vi">@appstore</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="n">haml</span><span class="o">-</span><span class="mi">3</span><span class="o">.</span><span class="mi">0</span><span class="o">.</span><span class="mi">17</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">haml</span><span class="o">/</span><span class="n">template</span><span class="o">/</span><span class="n">patch</span><span class="o">.</span><span class="n">rb</span><span class="p">:</span><span class="mi">16</span><span class="ss">:in</span> <span class="sb">`&lt;class:Base&gt;&#39;</span>
+</span><span class='line'><span class="sb">     /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/haml-3.0.17/lib/haml/template/patch.rb:12:in `</span><span class="o">&lt;</span><span class="n">module</span><span class="ss">:ActionView</span><span class="o">&gt;</span><span class="s1">&#39;</span>
+</span><span class='line'><span class="s1">     /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/haml-3.0.17/lib/haml/template/patch.rb:11:in `&lt;top (required)&gt;&#39;</span>
+</span><span class='line'>     <span class="sr">/Users/</span><span class="n">blogbin</span><span class="o">/.</span><span class="n">rvm</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="n">ruby</span><span class="o">-</span><span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">3</span><span class="o">-</span><span class="n">p0</span><span class="vi">@appstore</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="n">activesupport</span><span class="o">-</span><span class="mi">3</span><span class="o">.</span><span class="mi">2</span><span class="o">.</span><span class="mi">8</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">active_support</span><span class="o">/</span><span class="n">dependencies</span><span class="o">.</span><span class="n">rb</span><span class="p">:</span><span class="mi">251</span><span class="ss">:in</span> <span class="sb">`require&#39;</span>
+</span><span class='line'><span class="sb">     /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/activesupport-3.2.8/lib/active_support/dependencies.rb:251:in `</span><span class="n">block</span> <span class="k">in</span> <span class="nb">require</span><span class="s1">&#39;</span>
+</span><span class='line'><span class="s1">     /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/activesupport-3.2.8/lib/active_support/dependencies.rb:236:in `load_dependency&#39;</span>
+</span><span class='line'>     <span class="sr">/Users/</span><span class="n">blogbin</span><span class="o">/.</span><span class="n">rvm</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="n">ruby</span><span class="o">-</span><span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">3</span><span class="o">-</span><span class="n">p0</span><span class="vi">@appstore</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="n">activesupport</span><span class="o">-</span><span class="mi">3</span><span class="o">.</span><span class="mi">2</span><span class="o">.</span><span class="mi">8</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">active_support</span><span class="o">/</span><span class="n">dependencies</span><span class="o">.</span><span class="n">rb</span><span class="p">:</span><span class="mi">251</span><span class="ss">:in</span> <span class="sb">`require&#39;</span>
+</span><span class='line'><span class="sb">     /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/haml-3.0.17/lib/haml/template.rb:60:in `</span><span class="o">&lt;</span><span class="n">top</span> <span class="p">(</span><span class="n">required</span><span class="p">)</span><span class="o">&gt;</span><span class="s1">&#39;</span>
+</span><span class='line'><span class="s1">     /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/activesupport-3.2.8/lib/active_support/dependencies.rb:251:in `require&#39;</span>
+</span><span class='line'>     <span class="sr">/Users/</span><span class="n">blogbin</span><span class="o">/.</span><span class="n">rvm</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="n">ruby</span><span class="o">-</span><span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">3</span><span class="o">-</span><span class="n">p0</span><span class="vi">@appstore</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="n">activesupport</span><span class="o">-</span><span class="mi">3</span><span class="o">.</span><span class="mi">2</span><span class="o">.</span><span class="mi">8</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">active_support</span><span class="o">/</span><span class="n">dependencies</span><span class="o">.</span><span class="n">rb</span><span class="p">:</span><span class="mi">251</span><span class="ss">:in</span> <span class="sb">`block in require&#39;</span>
+</span><span class='line'><span class="sb">     /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/activesupport-3.2.8/lib/active_support/dependencies.rb:236:in `</span><span class="n">load_dependency</span><span class="s1">&#39;</span>
+</span><span class='line'><span class="s1">     /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/activesupport-3.2.8/lib/active_support/dependencies.rb:251:in `require&#39;</span>
+</span><span class='line'>     <span class="sr">/Users/</span><span class="n">blogbin</span><span class="o">/.</span><span class="n">rvm</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="n">ruby</span><span class="o">-</span><span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">3</span><span class="o">-</span><span class="n">p0</span><span class="vi">@appstore</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="n">haml</span><span class="o">-</span><span class="mi">3</span><span class="o">.</span><span class="mi">0</span><span class="o">.</span><span class="mi">17</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">haml</span><span class="o">.</span><span class="n">rb</span><span class="p">:</span><span class="mi">36</span><span class="ss">:in</span> <span class="sb">`block in init_rails&#39;</span>
+</span><span class='line'><span class="sb">     /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/haml-3.0.17/lib/haml.rb:36:in `</span><span class="n">each</span><span class="s1">&#39;</span>
+</span><span class='line'><span class="s1">     /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/haml-3.0.17/lib/haml.rb:36:in `init_rails&#39;</span>
+</span><span class='line'>     <span class="sr">/Users/</span><span class="n">blogbin</span><span class="o">/.</span><span class="n">rvm</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="n">ruby</span><span class="o">-</span><span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">3</span><span class="o">-</span><span class="n">p0</span><span class="vi">@appstore</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="n">haml</span><span class="o">-</span><span class="mi">3</span><span class="o">.</span><span class="mi">0</span><span class="o">.</span><span class="mi">17</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">haml</span><span class="o">/</span><span class="n">railtie</span><span class="o">.</span><span class="n">rb</span><span class="p">:</span><span class="mi">18</span><span class="ss">:in</span> <span class="sb">`block (2 levels) in &lt;top (required)&gt;&#39;</span>
+</span><span class='line'><span class="sb">     /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/activesupport-3.2.8/lib/active_support/lazy_load_hooks.rb:36:in `</span><span class="nb">instance_eval</span><span class="s1">&#39;</span>
+</span><span class='line'><span class="s1">     /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/activesupport-3.2.8/lib/active_support/lazy_load_hooks.rb:36:in `execute_hook&#39;</span>
+</span><span class='line'>     <span class="sr">/Users/</span><span class="n">blogbin</span><span class="o">/.</span><span class="n">rvm</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="n">ruby</span><span class="o">-</span><span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">3</span><span class="o">-</span><span class="n">p0</span><span class="vi">@appstore</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="n">activesupport</span><span class="o">-</span><span class="mi">3</span><span class="o">.</span><span class="mi">2</span><span class="o">.</span><span class="mi">8</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">active_support</span><span class="o">/</span><span class="n">lazy_load_hooks</span><span class="o">.</span><span class="n">rb</span><span class="p">:</span><span class="mi">26</span><span class="ss">:in</span> <span class="sb">`block in on_load&#39;</span>
+</span><span class='line'><span class="sb">     /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/activesupport-3.2.8/lib/active_support/lazy_load_hooks.rb:25:in `</span><span class="n">each</span><span class="s1">&#39;</span>
+</span><span class='line'><span class="s1">     /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/activesupport-3.2.8/lib/active_support/lazy_load_hooks.rb:25:in `on_load&#39;</span>
+</span><span class='line'>     <span class="sr">/Users/</span><span class="n">blogbin</span><span class="o">/.</span><span class="n">rvm</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="n">ruby</span><span class="o">-</span><span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">3</span><span class="o">-</span><span class="n">p0</span><span class="vi">@appstore</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="n">haml</span><span class="o">-</span><span class="mi">3</span><span class="o">.</span><span class="mi">0</span><span class="o">.</span><span class="mi">17</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">haml</span><span class="o">/</span><span class="n">railtie</span><span class="o">.</span><span class="n">rb</span><span class="p">:</span><span class="mi">17</span><span class="ss">:in</span> <span class="sb">`block in &lt;top (required)&gt;&#39;</span>
+</span><span class='line'><span class="sb">     /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/activesupport-3.2.8/lib/active_support/lazy_load_hooks.rb:36:in `</span><span class="nb">instance_eval</span><span class="s1">&#39;</span>
+</span><span class='line'><span class="s1">     /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/activesupport-3.2.8/lib/active_support/lazy_load_hooks.rb:36:in `execute_hook&#39;</span>
+</span><span class='line'>     <span class="sr">/Users/</span><span class="n">blogbin</span><span class="o">/.</span><span class="n">rvm</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="n">ruby</span><span class="o">-</span><span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">3</span><span class="o">-</span><span class="n">p0</span><span class="vi">@appstore</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="n">activesupport</span><span class="o">-</span><span class="mi">3</span><span class="o">.</span><span class="mi">2</span><span class="o">.</span><span class="mi">8</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">active_support</span><span class="o">/</span><span class="n">lazy_load_hooks</span><span class="o">.</span><span class="n">rb</span><span class="p">:</span><span class="mi">43</span><span class="ss">:in</span> <span class="sb">`block in run_load_hooks&#39;</span>
+</span><span class='line'><span class="sb">     /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/activesupport-3.2.8/lib/active_support/lazy_load_hooks.rb:42:in `</span><span class="n">each</span><span class="s1">&#39;</span>
+</span><span class='line'><span class="s1">     /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/activesupport-3.2.8/lib/active_support/lazy_load_hooks.rb:42:in `run_load_hooks&#39;</span>
+</span><span class='line'>     <span class="sr">/Users/</span><span class="n">blogbin</span><span class="o">/.</span><span class="n">rvm</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="n">ruby</span><span class="o">-</span><span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">3</span><span class="o">-</span><span class="n">p0</span><span class="vi">@appstore</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="n">railties</span><span class="o">-</span><span class="mi">3</span><span class="o">.</span><span class="mi">2</span><span class="o">.</span><span class="mi">8</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">rails</span><span class="o">/</span><span class="n">application</span><span class="o">/</span><span class="n">bootstrap</span><span class="o">.</span><span class="n">rb</span><span class="p">:</span><span class="mi">69</span><span class="ss">:in</span> <span class="sb">`block in &lt;module:Bootstrap&gt;&#39;</span>
+</span><span class='line'><span class="sb">     /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/railties-3.2.8/lib/rails/initializable.rb:30:in `</span><span class="n">instance_exec</span><span class="s1">&#39;</span>
+</span><span class='line'><span class="s1">     /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/railties-3.2.8/lib/rails/initializable.rb:30:in `run&#39;</span>
+</span><span class='line'>     <span class="sr">/Users/</span><span class="n">blogbin</span><span class="o">/.</span><span class="n">rvm</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="n">ruby</span><span class="o">-</span><span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">3</span><span class="o">-</span><span class="n">p0</span><span class="vi">@appstore</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="n">railties</span><span class="o">-</span><span class="mi">3</span><span class="o">.</span><span class="mi">2</span><span class="o">.</span><span class="mi">8</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">rails</span><span class="o">/</span><span class="n">initializable</span><span class="o">.</span><span class="n">rb</span><span class="p">:</span><span class="mi">55</span><span class="ss">:in</span> <span class="sb">`block in run_initializers&#39;</span>
+</span><span class='line'><span class="sb">     /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/railties-3.2.8/lib/rails/initializable.rb:54:in `</span><span class="n">each</span><span class="s1">&#39;</span>
+</span><span class='line'><span class="s1">     /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/railties-3.2.8/lib/rails/initializable.rb:54:in `run_initializers&#39;</span>
+</span><span class='line'>     <span class="sr">/Users/</span><span class="n">blogbin</span><span class="o">/.</span><span class="n">rvm</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="n">ruby</span><span class="o">-</span><span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">3</span><span class="o">-</span><span class="n">p0</span><span class="vi">@appstore</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="n">railties</span><span class="o">-</span><span class="mi">3</span><span class="o">.</span><span class="mi">2</span><span class="o">.</span><span class="mi">8</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">rails</span><span class="o">/</span><span class="n">application</span><span class="o">.</span><span class="n">rb</span><span class="p">:</span><span class="mi">136</span><span class="ss">:in</span> <span class="sb">`initialize!&#39;</span>
+</span><span class='line'><span class="sb">     /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/railties-3.2.8/lib/rails/railtie/configurable.rb:30:in `</span><span class="nb">method_missing</span><span class="s1">&#39;</span>
+</span><span class='line'><span class="s1">     /Users/blogbin/projects/workspaces/app_store/ruby/app_store/config/environment.rb:7:in `&lt;top (required)&gt;&#39;</span>
+</span><span class='line'>     <span class="sr">/Users/</span><span class="n">blogbin</span><span class="o">/.</span><span class="n">rvm</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="n">ruby</span><span class="o">-</span><span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">3</span><span class="o">-</span><span class="n">p0</span><span class="vi">@appstore</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="n">activesupport</span><span class="o">-</span><span class="mi">3</span><span class="o">.</span><span class="mi">2</span><span class="o">.</span><span class="mi">8</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">active_support</span><span class="o">/</span><span class="n">dependencies</span><span class="o">.</span><span class="n">rb</span><span class="p">:</span><span class="mi">251</span><span class="ss">:in</span> <span class="sb">`require&#39;</span>
+</span><span class='line'><span class="sb">     /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/activesupport-3.2.8/lib/active_support/dependencies.rb:251:in `</span><span class="n">block</span> <span class="k">in</span> <span class="nb">require</span><span class="s1">&#39;</span>
+</span><span class='line'><span class="s1">     /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/activesupport-3.2.8/lib/active_support/dependencies.rb:236:in `load_dependency&#39;</span>
+</span><span class='line'>     <span class="sr">/Users/</span><span class="n">blogbin</span><span class="o">/.</span><span class="n">rvm</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="n">ruby</span><span class="o">-</span><span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">3</span><span class="o">-</span><span class="n">p0</span><span class="vi">@appstore</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="n">activesupport</span><span class="o">-</span><span class="mi">3</span><span class="o">.</span><span class="mi">2</span><span class="o">.</span><span class="mi">8</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">active_support</span><span class="o">/</span><span class="n">dependencies</span><span class="o">.</span><span class="n">rb</span><span class="p">:</span><span class="mi">251</span><span class="ss">:in</span> <span class="sb">`require&#39;</span>
+</span><span class='line'><span class="sb">     /Users/blogbin/projects/workspaces/app_store/ruby/app_store/config.ru:4:in `</span><span class="n">block</span> <span class="k">in</span> <span class="o">&lt;</span><span class="n">main</span><span class="o">&gt;</span><span class="s1">&#39;</span>
+</span><span class='line'><span class="s1">     /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/rack-1.4.1/lib/rack/builder.rb:51:in `instance_eval&#39;</span>
+</span><span class='line'>     <span class="sr">/Users/</span><span class="n">blogbin</span><span class="o">/.</span><span class="n">rvm</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="n">ruby</span><span class="o">-</span><span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">3</span><span class="o">-</span><span class="n">p0</span><span class="vi">@appstore</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="n">rack</span><span class="o">-</span><span class="mi">1</span><span class="o">.</span><span class="mi">4</span><span class="o">.</span><span class="mi">1</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">rack</span><span class="o">/</span><span class="n">builder</span><span class="o">.</span><span class="n">rb</span><span class="p">:</span><span class="mi">51</span><span class="ss">:in</span> <span class="sb">`initialize&#39;</span>
+</span><span class='line'><span class="sb">     /Users/blogbin/projects/workspaces/app_store/ruby/app_store/config.ru:1:in `</span><span class="kp">new</span><span class="s1">&#39;</span>
+</span><span class='line'><span class="s1">     /Users/blogbin/projects/workspaces/app_store/ruby/app_store/config.ru:1:in `&lt;main&gt;&#39;</span>
+</span><span class='line'>     <span class="sr">/Users/</span><span class="n">blogbin</span><span class="o">/.</span><span class="n">rvm</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="n">ruby</span><span class="o">-</span><span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">3</span><span class="o">-</span><span class="n">p0</span><span class="vi">@appstore</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="n">rack</span><span class="o">-</span><span class="mi">1</span><span class="o">.</span><span class="mi">4</span><span class="o">.</span><span class="mi">1</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">rack</span><span class="o">/</span><span class="n">builder</span><span class="o">.</span><span class="n">rb</span><span class="p">:</span><span class="mi">40</span><span class="ss">:in</span> <span class="sb">`eval&#39;</span>
+</span><span class='line'><span class="sb">     /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/rack-1.4.1/lib/rack/builder.rb:40:in `</span><span class="n">parse_file</span><span class="s1">&#39;</span>
+</span><span class='line'><span class="s1">     /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/rack-1.4.1/lib/rack/server.rb:200:in `app&#39;</span>
+</span><span class='line'>     <span class="sr">/Users/</span><span class="n">blogbin</span><span class="o">/.</span><span class="n">rvm</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="n">ruby</span><span class="o">-</span><span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">3</span><span class="o">-</span><span class="n">p0</span><span class="vi">@appstore</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="n">railties</span><span class="o">-</span><span class="mi">3</span><span class="o">.</span><span class="mi">2</span><span class="o">.</span><span class="mi">8</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">rails</span><span class="o">/</span><span class="n">commands</span><span class="o">/</span><span class="n">server</span><span class="o">.</span><span class="n">rb</span><span class="p">:</span><span class="mi">46</span><span class="ss">:in</span> <span class="sb">`app&#39;</span>
+</span><span class='line'><span class="sb">     /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/rack-1.4.1/lib/rack/server.rb:301:in `</span><span class="n">wrapped_app</span><span class="s1">&#39;</span>
+</span><span class='line'><span class="s1">     /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/rack-1.4.1/lib/rack/server.rb:252:in `start&#39;</span>
+</span><span class='line'>     <span class="sr">/Users/</span><span class="n">blogbin</span><span class="o">/.</span><span class="n">rvm</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="n">ruby</span><span class="o">-</span><span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">3</span><span class="o">-</span><span class="n">p0</span><span class="vi">@appstore</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="n">railties</span><span class="o">-</span><span class="mi">3</span><span class="o">.</span><span class="mi">2</span><span class="o">.</span><span class="mi">8</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">rails</span><span class="o">/</span><span class="n">commands</span><span class="o">/</span><span class="n">server</span><span class="o">.</span><span class="n">rb</span><span class="p">:</span><span class="mi">70</span><span class="ss">:in</span> <span class="sb">`start&#39;</span>
+</span><span class='line'><span class="sb">     /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/railties-3.2.8/lib/rails/commands.rb:55:in `</span><span class="n">block</span> <span class="k">in</span> <span class="o">&lt;</span><span class="n">top</span> <span class="p">(</span><span class="n">required</span><span class="p">)</span><span class="o">&gt;</span><span class="s1">&#39;</span>
+</span><span class='line'><span class="s1">     /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/railties-3.2.8/lib/rails/commands.rb:50:in `tap&#39;</span>
+</span><span class='line'>     <span class="sr">/Users/</span><span class="n">blogbin</span><span class="o">/.</span><span class="n">rvm</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="n">ruby</span><span class="o">-</span><span class="mi">1</span><span class="o">.</span><span class="mi">9</span><span class="o">.</span><span class="mi">3</span><span class="o">-</span><span class="n">p0</span><span class="vi">@appstore</span><span class="o">/</span><span class="n">gems</span><span class="o">/</span><span class="n">railties</span><span class="o">-</span><span class="mi">3</span><span class="o">.</span><span class="mi">2</span><span class="o">.</span><span class="mi">8</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">rails</span><span class="o">/</span><span class="n">commands</span><span class="o">.</span><span class="n">rb</span><span class="p">:</span><span class="mi">50</span><span class="ss">:in</span> <span class="sb">`&lt;top (required)&gt;&#39;</span>
+</span><span class='line'><span class="sb">     /Users/blogbin/projects/workspaces/app_store/ruby/app_store/script/rails:6:in `</span><span class="nb">require</span><span class="s1">&#39;</span>
+</span><span class='line'><span class="s1">     /Users/blogbin/projects/workspaces/app_store/ruby/app_store/script/rails:6:in `&lt;top (required)&gt;&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>Gemfile 除了将 Rails 版本修改为 3.2.8 之外，需要调整 group assets 中 sass-rails, coffee-rails 的版本依赖。</p>

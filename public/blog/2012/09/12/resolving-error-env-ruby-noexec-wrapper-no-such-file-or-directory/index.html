@@ -83,6 +83,7 @@
   <li><a href="/categories">Categories</a></li>
   <li><a href="/tags">Tags</a></li>
   <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/links">Links</a></li>
 </ul>
 
 </nav>
@@ -138,6 +139,54 @@
 </span><span class='line'>
 </span><span class='line'>bundler (1.0.22)
 </span><span class='line'>rubygems-update (1.8.24)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>2012 年 9 月 15 日更新:
+应该是 bundler 版本过低造成的，解决办法如下：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>blogbins-MacBook-Pro:omniauth-atyun-oauth2 blogbin$ gem install bundler
+</span><span class='line'>Downloading http://rubygems.org/latest_specs.4.8.gz
+</span><span class='line'>File already downloaded and cached to /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@omniauth-atyun-oauth2/cache
+</span><span class='line'>Downloading http://rubygems.org/gems/bundler-1.1.4.gem
+</span><span class='line'>######################################################################## 100.0%
+</span><span class='line'>Successfully installed bundler-1.1.4
+</span><span class='line'>1 gem installed
+</span><span class='line'>Installing ri documentation for bundler-1.1.4...
+</span><span class='line'>Installing RDoc documentation for bundler-1.1.4...</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>blogbins-MacBook-Pro:omniauth-atyun-oauth2 blogbin$ gem list
+</span><span class='line'>
+</span><span class='line'>*** LOCAL GEMS ***
+</span><span class='line'>
+</span><span class='line'>bundler (1.1.4, 1.0.22)
+</span><span class='line'>gem-fast (0.0.6.3)
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>奇怪的是，之前的 bundler 1.0.22 没办法 uninstall，不过不影响 bundle 命令，暂不考虑解决它。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>blogbins-MacBook-Pro:omniauth-atyun-oauth2 blogbin$ gem uninstall bundler -v 1.0.22
+</span><span class='line'>INFO:  gem "bundler" is not installed</span></code></pre></td></tr></table></div></figure>
 
 
 <p>非常奇怪，后来考虑可能是 RubyGem 版本问题，尝试更新 RubyGem 的版本</p>
@@ -256,6 +305,7 @@
   
     <section>
   <h1>About Me</h1>
+  <p><a href=mailto:tech.blogbin@gmail.com>tech.blogbin@gmail.com</a></p>
   <p><a href=mailto:tech.blogbin@gmail.com>tech.blogbin@gmail.com</a></p>
 </section>
 <section>

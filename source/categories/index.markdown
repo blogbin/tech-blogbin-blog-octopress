@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "category_list"
+title: "Categories"
 date: 2012-08-23 00:01
 comments: true
 sharing: true
