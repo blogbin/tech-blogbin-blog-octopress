@@ -323,6 +323,8 @@
         <a class="basic-alignment left" href="/blog/2012/09/12/resolving-error-env-ruby-noexec-wrapper-no-such-file-or-directory/" title="Previous Post: resolving error: env: ruby_noexec_wrapper: No such file or directory">&laquo; resolving error: env: ruby_noexec_wrapper: No such file or directory</a>
       
       
+        <a class="basic-alignment right" href="/blog/2012/09/15/could-not-find-gem-rails-equals-3-dot-2-8-ruby-in-the-gems-available-on-this-machine/" title="Next Post: Could not find gem 'rails (= 3.2.8) ruby' in the gems available on this machine.">Could not find gem 'rails (= 3.2.8) ruby' in the gems available on this machine. &raquo;</a>
+      
     </p>
   </footer>
 </article>
@@ -339,12 +341,16 @@
   
     <section>
   <h1>About Me</h1>
-  <p><a href=mailto:tech.blogbin@gmail.com>tech.blogbin@gmail.com</a></p>
-  <p><a href=mailto:tech.blogbin@gmail.com>tech.blogbin@gmail.com</a></p>
+  <p>Gmail: <a href=mailto:tech.blogbin@gmail.com>tech.blogbin@gmail.com</a></p>
+  <p>MSN: <a href=mailto:tech.blogbin@gmail.com>blogbin@hotmail.com</a></p>
 </section>
 <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2012/09/15/could-not-find-gem-rails-equals-3-dot-2-8-ruby-in-the-gems-available-on-this-machine/">Could not find gem 'rails (= 3.2.8) ruby' in the gems available on this machine.</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2012/09/13/resolving-error-css-dot-scss-has-already-been-required/">Resolving error: .css.scss has already been required</a>
@@ -382,15 +388,15 @@
         <a href="/blog/2012/08/27/installing-bigbluebutton/">Installing BigBlueButton</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2012/08/26/using-tokkonopapas-octopress-tagcloud/">Using tokkonopapa's octopress-tagcloud</a>
-      </li>
-    
   </ul>
 </section>
 <section>
     <h1>Related Posts</h1>
     <ul class="posts">
+    
+        <li class="related">
+        <a href="/blog/2012/09/15/could-not-find-gem-rails-equals-3-dot-2-8-ruby-in-the-gems-available-on-this-machine/">Could not find gem 'rails (= 3.2.8) ruby' in the gems available on this machine.</a>
+        </li>
     
         <li class="related">
         <a href="/blog/2012/09/12/resolving-error-env-ruby-noexec-wrapper-no-such-file-or-directory/">resolving error: env: ruby_noexec_wrapper: No such file or directory</a>
@@ -406,10 +412,6 @@
     
         <li class="related">
         <a href="/blog/2012/08/31/using-bitbucket/">Using Bitbucket</a>
-        </li>
-    
-        <li class="related">
-        <a href="/blog/2012/08/31/installing-gitlab-on-ubuntu-server-12-04-amd64/">installing-gitlab-on-ubuntu-server-12-04-amd64</a>
         </li>
     
     </ul>
@@ -570,6 +572,9 @@ monthCalendar = function(id,year,month)
   var highlightArray = new Array();
   var hightlightLinks = new Array();
   
+  highlightArray.push('09/15/2012');
+  hightlightLinks.push('/blog/2012/09/15/could-not-find-gem-rails-equals-3-dot-2-8-ruby-in-the-gems-available-on-this-machine/');
+  
   highlightArray.push('09/13/2012');
   hightlightLinks.push('/blog/2012/09/13/resolving-error-css-dot-scss-has-already-been-required/');
   
@@ -596,9 +601,6 @@ monthCalendar = function(id,year,month)
   
   highlightArray.push('08/27/2012');
   hightlightLinks.push('/blog/2012/08/27/installing-bigbluebutton/');
-  
-  highlightArray.push('08/26/2012');
-  hightlightLinks.push('/blog/2012/08/26/using-tokkonopapas-octopress-tagcloud/');
   		
   var cal = new Calendar(month,year,highlightArray,hightlightLinks);
   cal.generateHTML(id);

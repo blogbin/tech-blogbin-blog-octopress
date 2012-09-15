@@ -5,16 +5,18 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Rails 返回 json 格式的内容 - Tech.Blogbin's Blog</title>
+  <title>Could not find gem 'rails (= 3.2.8) ruby' in the gems available on this machine. - Tech.Blogbin's Blog</title>
 
   <meta name="alexaVerifyID" content="-6pNt74TSllotvjLFDIa77kSKLI" />
 
   <meta name="author" content="Tech Blogbin <tech.blogbin@gmail.com>">
 
   
-  <meta name="description" content="需要在 Rails 返回 json 格式的内容。虽然 Ruby 或者 Rails 内置对对象转为 json 的支持。
-但对于自定义的 json 格式和内容。 推荐使用 DHH 开发的Gem： rails/jbuilder
-https://github.com/rails/jbuilder &hellip;">
+  <meta name="description" content="之前 Rails 项目的 Rails 版本升级到 3.2.8。在 Centos 6.x 和 MacOS 都比较顺利。 但有同事反馈 Ubuntu 12.x + RVM + Gemset 方式无法遇到麻烦，不管是执行 bundle install or gem install 1
+2
+3
+4
+5 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -23,7 +25,7 @@ https://github.com/rails/jbuilder &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://tech-blog.blogbin.info/blog/2012/08/20/dhhs-json-jbuilder-at-rails/">
+  <link rel="canonical" href="http://tech-blog.blogbin.info/blog/2012/09/15/could-not-find-gem-rails-equals-3-dot-2-8-ruby-in-the-gems-available-on-this-machine/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -89,7 +91,7 @@ https://github.com/rails/jbuilder &hellip;">
   
   <header>
     
-      <h1 class="entry-title">Rails 返回 Json 格式的内容</h1>
+      <h1 class="entry-title">Could Not Find Gem 'Rails (= 3.2.8) Ruby' in the Gems Available on This Machine.</h1>
     
     
       <p class="meta">
@@ -105,7 +107,7 @@ https://github.com/rails/jbuilder &hellip;">
   
 
 
-<time datetime="2012-08-20T23:51:00+08:00" pubdate data-updated="true">Aug 20<span>th</span>, 2012</time>
+<time datetime="2012-09-15T22:47:00+08:00" pubdate data-updated="true">Sep 15<span>th</span>, 2012</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -114,49 +116,33 @@ https://github.com/rails/jbuilder &hellip;">
   </header>
 
 
-<div class="entry-content"><p>需要在 Rails 返回 json 格式的内容。虽然 Ruby 或者 Rails 内置对对象转为 json 的支持。
-但对于自定义的 json 格式和内容。 推荐使用 DHH 开发的Gem：</p>
+<div class="entry-content"><p>之前 Rails 项目的 Rails 版本升级到 3.2.8。在 Centos 6.x 和 MacOS 都比较顺利。</p>
 
-<p>rails/jbuilder
-<a href="https://github.com/rails/jbuilder">https://github.com/rails/jbuilder</a></p>
-
-<p>RailsCasts 网站有一份教程，可以作为学习的补充
-320 Jbuilder - RailsCasts
-<a href="http://railscasts.com/episodes/320-jbuilder?view=asciicast">http://railscasts.com/episodes/320-jbuilder?view=asciicast</a></p>
-
-<p>其实之前已经使用 ails/jbuilder 返回 json 格式内容，但一段时间没用，结果又碰到同样问题。</p>
-
-<p>访问 url 时，系统后台报错：
-undefined local variable or method `json&#8217;</p>
-
-<p>结果发现，原来是 渲染的模版扩展名不小心写错了，正确的是 .json.jbuilder；
-而我不小心写成了 .json.builder（xml 格式渲染模版的扩展名）。</p>
+<p>但有同事反馈 Ubuntu 12.x + RVM + Gemset 方式无法遇到麻烦，不管是执行 bundle install or gem install</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Started GET "/security/authorizations/lookup.json" for 127.0.0.1 at 2012-08-20 23:38:40 +0800
-</span><span class='line'>ActionView::Template::Error - undefined local variable or method `json' for #&lt;#&lt;Class:0x007fde54624320&gt;:0x007fde5461e6a0&gt;:
-</span><span class='line'>     /Users/blogbin/projects/workspaces/app_store/ruby/xbmc/app/views/security/authorizations/lookup.json.builder:2:in `_app_views_security_authorizations_lookup_json_builder___4549964192266964499_70296437709400'
-</span><span class='line'>     /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/actionpack-3.1.0/lib/action_view/template.rb:144:in `block in render'
-</span><span class='line'>     /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/activesupport-3.1.0/lib/active_support/notifications.rb:55:in `instrument'
-</span><span class='line'>     /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/actionpack-3.1.0/lib/action_view/template.rb:142:in `render'
-</span><span class='line'>     /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/actionpack-3.1.0/lib/action_view/renderer/template_renderer.rb:40:in `block (2 levels) in render_template'
-</span><span class='line'>     /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/actionpack-3.1.0/lib/action_view/renderer/abstract_renderer.rb:33:in `block in instrument'
-</span><span class='line'>     /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/activesupport-3.1.0/lib/active_support/notifications.rb:53:in `block in instrument'
-</span><span class='line'>     /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/activesupport-3.1.0/lib/active_support/notifications/instrumenter.rb:21:in `instrument'
-</span><span class='line'>     /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/activesupport-3.1.0/lib/active_support/notifications.rb:53:in `instrument'
-</span><span class='line'>     /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>liwy@ubuntu:~/.rvm/gems/ruby-1.9.3-p125/cache$ bundle install
+</span><span class='line'>Could not find gem 'rails (= 3.2.8) ruby' in the gems available on this machine.
+</span><span class='line'>
+</span><span class='line'>liwy@ubuntu:~/.rvm/gems/ruby-1.9.3-p125/cache$ gem install rails -v 3.2.8 
+</span><span class='line'>Could not find gem 'rails (= 3.2.8) ruby' in the gems available on this machine.</span></code></pre></td></tr></table></div></figure>
 
+
+<p>后来同事反馈，删除掉 rvm cache 的 <em>specs</em>.gz 相关的文件，重新执行 bundle install or gem install 成功</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>liwy@ubuntu:~/.rvm/gems/ruby-1.9.3-p125/cache$ rm -rf latest_specs.4.8.gz
+</span><span class='line'>
+</span><span class='line'>liwy@ubuntu:~/.rvm/gems/ruby-1.9.3-p125/cache$ rm -rf specs.4.8.gz</span></code></pre></td></tr></table></div></figure>
+
+
+<p>怀疑是网络原因，造成下载的 gz 不完整，删掉重新下载，应该可以解决类似问题。</p>
 </div>
 
 
@@ -179,21 +165,15 @@ undefined local variable or method `json&#8217;</p>
   
 
 
-<time datetime="2012-08-20T23:51:00+08:00" pubdate data-updated="true">Aug 20<span>th</span>, 2012</time>
+<time datetime="2012-09-15T22:47:00+08:00" pubdate data-updated="true">Sep 15<span>th</span>, 2012</time>
       
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/bundle/'>Bundle</a>, <a class='category' href='/blog/categories/bundler/'>Bundler</a>, <a class='category' href='/blog/categories/dhh/'>DHH</a>, <a class='category' href='/blog/categories/gem/'>Gem</a>, <a class='category' href='/blog/categories/gemfile/'>Gemfile</a>, <a class='category' href='/blog/categories/jbuilder/'>JBuilder</a>, <a class='category' href='/blog/categories/json/'>JSON</a>, <a class='category' href='/blog/categories/rails/'>Rails</a>, <a class='category' href='/blog/categories/ror/'>RoR</a>, <a class='category' href='/blog/categories/ruby/'>Ruby</a>, <a class='category' href='/blog/categories/rubyonrails/'>RubyOnRails</a>
-  
-</span>
 
 
     </p>
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://tech-blog.blogbin.info/blog/2012/08/20/dhhs-json-jbuilder-at-rails/" data-via="tech_blogbin" data-counturl="http://tech-blog.blogbin.info/blog/2012/08/20/dhhs-json-jbuilder-at-rails/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://tech-blog.blogbin.info/blog/2012/09/15/could-not-find-gem-rails-equals-3-dot-2-8-ruby-in-the-gems-available-on-this-machine/" data-via="tech_blogbin" data-counturl="http://tech-blog.blogbin.info/blog/2012/09/15/could-not-find-gem-rails-equals-3-dot-2-8-ruby-in-the-gems-available-on-this-machine/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -206,10 +186,8 @@ undefined local variable or method `json&#8217;</p>
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2012/08/18/sinaweibo-python-sdk/" title="Previous Post: sinaweibo python sdk">&laquo; sinaweibo python sdk</a>
+        <a class="basic-alignment left" href="/blog/2012/09/13/resolving-error-css-dot-scss-has-already-been-required/" title="Previous Post: Resolving error: .css.scss has already been required">&laquo; Resolving error: .css.scss has already been required</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2012/08/22/monitoring-server-performance-with-new-relic/" title="Next Post: Monitoring server performance with New Relic">Monitoring server performance with New Relic &raquo;</a>
       
     </p>
   </footer>
@@ -281,10 +259,6 @@ undefined local variable or method `json&#8217;</p>
     <ul class="posts">
     
         <li class="related">
-        <a href="/blog/2012/09/15/could-not-find-gem-rails-equals-3-dot-2-8-ruby-in-the-gems-available-on-this-machine/">Could not find gem 'rails (= 3.2.8) ruby' in the gems available on this machine.</a>
-        </li>
-    
-        <li class="related">
         <a href="/blog/2012/09/13/resolving-error-css-dot-scss-has-already-been-required/">Resolving error: .css.scss has already been required</a>
         </li>
     
@@ -298,6 +272,10 @@ undefined local variable or method `json&#8217;</p>
     
         <li class="related">
         <a href="/blog/2012/09/09/using-bootstrap/">Using Bootstrap and Bootswatch</a>
+        </li>
+    
+        <li class="related">
+        <a href="/blog/2012/08/31/using-bitbucket/">Using Bitbucket</a>
         </li>
     
     </ul>
@@ -558,8 +536,8 @@ $(document).ready(function(){
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://tech-blog.blogbin.info/blog/2012/08/20/dhhs-json-jbuilder-at-rails/';
-        var disqus_url = 'http://tech-blog.blogbin.info/blog/2012/08/20/dhhs-json-jbuilder-at-rails/';
+        var disqus_identifier = 'http://tech-blog.blogbin.info/blog/2012/09/15/could-not-find-gem-rails-equals-3-dot-2-8-ruby-in-the-gems-available-on-this-machine/';
+        var disqus_url = 'http://tech-blog.blogbin.info/blog/2012/09/15/could-not-find-gem-rails-equals-3-dot-2-8-ruby-in-the-gems-available-on-this-machine/';
         var disqus_script = 'embed.js';
       
     (function () {

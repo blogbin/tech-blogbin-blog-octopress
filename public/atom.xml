@@ -4,7 +4,7 @@
   <title><![CDATA[Tech.Blogbin's Blog]]></title>
   <link href="http://tech-blog.blogbin.info/atom.xml" rel="self"/>
   <link href="http://tech-blog.blogbin.info/"/>
-  <updated>2012-09-15T22:36:33+08:00</updated>
+  <updated>2012-09-15T22:56:09+08:00</updated>
   <id>http://tech-blog.blogbin.info/</id>
   <author>
     <name><![CDATA[Tech Blogbin ]]></name>
@@ -12,6 +12,41 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Could not find gem 'rails (= 3.2.8) ruby' in the gems available on this machine.]]></title>
+    <link href="http://tech-blog.blogbin.info/blog/2012/09/15/could-not-find-gem-rails-equals-3-dot-2-8-ruby-in-the-gems-available-on-this-machine/"/>
+    <updated>2012-09-15T22:47:00+08:00</updated>
+    <id>http://tech-blog.blogbin.info/blog/2012/09/15/could-not-find-gem-rails-equals-3-dot-2-8-ruby-in-the-gems-available-on-this-machine</id>
+    <content type="html"><![CDATA[<p>之前 Rails 项目的 Rails 版本升级到 3.2.8。在 Centos 6.x 和 MacOS 都比较顺利。</p>
+
+<p>但有同事反馈 Ubuntu 12.x + RVM + Gemset 方式无法遇到麻烦，不管是执行 bundle install or gem install</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>liwy@ubuntu:~/.rvm/gems/ruby-1.9.3-p125/cache$ bundle install
+</span><span class='line'>Could not find gem 'rails (= 3.2.8) ruby' in the gems available on this machine.
+</span><span class='line'>
+</span><span class='line'>liwy@ubuntu:~/.rvm/gems/ruby-1.9.3-p125/cache$ gem install rails -v 3.2.8 
+</span><span class='line'>Could not find gem 'rails (= 3.2.8) ruby' in the gems available on this machine.</span></code></pre></td></tr></table></div></figure>
+
+
+<p>后来同事反馈，删除掉 rvm cache 的 <em>specs</em>.gz 相关的文件，重新执行 bundle install or gem install 成功</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>liwy@ubuntu:~/.rvm/gems/ruby-1.9.3-p125/cache$ rm -rf latest_specs.4.8.gz
+</span><span class='line'>
+</span><span class='line'>liwy@ubuntu:~/.rvm/gems/ruby-1.9.3-p125/cache$ rm -rf specs.4.8.gz</span></code></pre></td></tr></table></div></figure>
+
+
+<p>怀疑是网络原因，造成下载的 gz 不完整，删掉重新下载，应该可以解决类似问题。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Resolving error: .css.scss has already been required]]></title>
@@ -2280,26 +2315,6 @@ undefined local variable or method `json&#8217;</p>
 
 
 <blockquote><p>Managed to fix it following these steps:</p><p>Installed XCode 4.4 and Command Line Tools<br/>Ran this in terminal:</p><p>sudo chown -R <user> /usr/local<br/>brew update<br/>brew tap homebrew/dupes<br/>brew install apple-gcc42</p><p>Installed XQuartz 2.7.2 (http://xquartz.macosforge.org/landing)</p><p>Fixed any errors reported by brew doctor<br/>Ran this in terminal:</p><p>gem uninstall rmagick<br/>brew uninstall imagemagick<br/>brew install &#8211;fresh imagemagick<br/>gem install rmagick</p><p>After this, RMagick worked flawlessly again!</p></blockquote>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[softwareishard's introduction to firebug net panel]]></title>
-    <link href="http://tech-blog.blogbin.info/blog/2012/08/17/softwareishards-introduction-to-firebug-net-panel/"/>
-    <updated>2012-08-17T23:06:00+08:00</updated>
-    <id>http://tech-blog.blogbin.info/blog/2012/08/17/softwareishards-introduction-to-firebug-net-panel</id>
-    <content type="html"><![CDATA[<p>Firebug 监控浏览器的网络请求，softwareishard 网站有很详细的介绍。</p>
-
-<p><a href="http://www.softwareishard.com/blog/firebug/introduction-to-firebug-net-panel/">http://www.softwareishard.com/blog/firebug/introduction-to-firebug-net-panel/</a></p>
-
-<p><a href="http://www.softwareishard.com/blog/firebug/firebug-net-panel-timings/">http://www.softwareishard.com/blog/firebug/firebug-net-panel-timings/</a></p>
-
-<p>甚至比 Firebug 官方 Wiki <a href="http://getfirebug.com/wiki/index.php/Net_Panel">http://getfirebug.com/wiki/index.php/Net_Panel</a> 都要详细。</p>
-
-<p>特别留意一下 DomContentLoaded event 和 load event 代表的意思，其它都比较好理解。</p>
-
-<blockquote><p>DomContentLoaded event <br/>- time when DomContentLoad event was fired (since the beginning of the request, can be negative if the request has been started after the event)</p><p>load event <br/>- time when page load event was fired (since the beginning of the request, can be negative if the request has been started after the event)</p></blockquote>
 
 ]]></content>
   </entry>

@@ -173,8 +173,14 @@
         <lastmod>2012-09-13T00:20:17+08:00</lastmod>
     </url>
     <url>
+        <loc>
+            http://tech-blog.blogbin.info/blog/2012/09/15/could-not-find-gem-rails-equals-3-dot-2-8-ruby-in-the-gems-available-on-this-machine/
+        </loc>
+        <lastmod>2012-09-15T22:53:30+08:00</lastmod>
+    </url>
+    <url>
         <loc>http://tech-blog.blogbin.info/blog/archives/</loc>
-        <lastmod>2012-09-15T22:32:29+08:00</lastmod>
+        <lastmod>2012-09-15T22:53:30+08:00</lastmod>
     </url>
     <url>
         <loc>http://tech-blog.blogbin.info/categories/</loc>
@@ -182,15 +188,15 @@
     </url>
     <url>
         <loc>http://tech-blog.blogbin.info/downloads/code/octopress/categories/</loc>
-        <lastmod>2012-09-15T22:32:29+08:00</lastmod>
+        <lastmod>2012-09-15T22:53:30+08:00</lastmod>
     </url>
     <url>
         <loc>http://tech-blog.blogbin.info/downloads/code/octopress/tags/</loc>
-        <lastmod>2012-09-15T22:32:29+08:00</lastmod>
+        <lastmod>2012-09-15T22:53:30+08:00</lastmod>
     </url>
     <url>
         <loc>http://tech-blog.blogbin.info/</loc>
-        <lastmod>2012-09-15T22:32:29+08:00</lastmod>
+        <lastmod>2012-09-15T22:55:52+08:00</lastmod>
     </url>
     <url>
         <loc>http://tech-blog.blogbin.info/links/</loc>

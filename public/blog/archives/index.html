@@ -12,8 +12,8 @@
   <meta name="author" content="Tech Blogbin <tech.blogbin@gmail.com>">
 
   
-  <meta name="description" content="Blog Archive 2012 Resolving error: .css.scss has already been required
-Sep 13 2012 posted in Assets, Bundle, Bundler, CSS, Gem, Gemfile, JavaScript &hellip;">
+  <meta name="description" content="Blog Archive 2012 Could not find gem 'rails (= 3.2.8) ruby' in the gems available on this machine.
+Sep 15 2012 Resolving error: .css.scss has &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -97,6 +97,16 @@ Sep 13 2012 posted in Assets, Bundle, Bundler, CSS, Gem, Gemfile, JavaScript &he
 
   
   <h2>2012</h2>
+
+<article>
+  
+<h1><a href="/blog/2012/09/15/could-not-find-gem-rails-equals-3-dot-2-8-ruby-in-the-gems-available-on-this-machine/">Could not find gem 'rails (= 3.2.8) ruby' in the gems available on this machine.</a></h1>
+<time datetime="2012-09-15T22:47:00+08:00" pubdate><span class='month'>Sep</span> <span class='day'>15</span> <span class='year'>2012</span></time>
+
+
+</article>
+
+
 
 <article>
   
@@ -551,12 +561,16 @@ Sep 13 2012 posted in Assets, Bundle, Bundler, CSS, Gem, Gemfile, JavaScript &he
   
     <section>
   <h1>About Me</h1>
-  <p><a href=mailto:tech.blogbin@gmail.com>tech.blogbin@gmail.com</a></p>
-  <p><a href=mailto:tech.blogbin@gmail.com>tech.blogbin@gmail.com</a></p>
+  <p>Gmail: <a href=mailto:tech.blogbin@gmail.com>tech.blogbin@gmail.com</a></p>
+  <p>MSN: <a href=mailto:tech.blogbin@gmail.com>blogbin@hotmail.com</a></p>
 </section>
 <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2012/09/15/could-not-find-gem-rails-equals-3-dot-2-8-ruby-in-the-gems-available-on-this-machine/">Could not find gem 'rails (= 3.2.8) ruby' in the gems available on this machine.</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2012/09/13/resolving-error-css-dot-scss-has-already-been-required/">Resolving error: .css.scss has already been required</a>
@@ -592,10 +606,6 @@ Sep 13 2012 posted in Assets, Bundle, Bundler, CSS, Gem, Gemfile, JavaScript &he
     
       <li class="post">
         <a href="/blog/2012/08/27/installing-bigbluebutton/">Installing BigBlueButton</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/08/26/using-tokkonopapas-octopress-tagcloud/">Using tokkonopapa's octopress-tagcloud</a>
       </li>
     
   </ul>
@@ -762,6 +772,9 @@ monthCalendar = function(id,year,month)
   var highlightArray = new Array();
   var hightlightLinks = new Array();
   
+  highlightArray.push('09/15/2012');
+  hightlightLinks.push('/blog/2012/09/15/could-not-find-gem-rails-equals-3-dot-2-8-ruby-in-the-gems-available-on-this-machine/');
+  
   highlightArray.push('09/13/2012');
   hightlightLinks.push('/blog/2012/09/13/resolving-error-css-dot-scss-has-already-been-required/');
   
@@ -788,9 +801,6 @@ monthCalendar = function(id,year,month)
   
   highlightArray.push('08/27/2012');
   hightlightLinks.push('/blog/2012/08/27/installing-bigbluebutton/');
-  
-  highlightArray.push('08/26/2012');
-  hightlightLinks.push('/blog/2012/08/26/using-tokkonopapas-octopress-tagcloud/');
   		
   var cal = new Calendar(month,year,highlightArray,hightlightLinks);
   cal.generateHTML(id);
