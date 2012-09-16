@@ -4,6 +4,17 @@ title: "Could not find gem 'rails (= 3.2.8) ruby' in the gems available on this 
 date: 2012-09-15 22:47
 comments: true
 categories: 
+- Rails
+- Ubuntu
+- Gem
+- specs
+- latest_specs
+tags: 
+- Rails
+- Ubuntu
+- Gem
+- specs
+- latest_specs
 ---
 
 之前 Rails 项目的 Rails 版本升级到 3.2.8。在 Centos 6.x 和 MacOS 都比较顺利。

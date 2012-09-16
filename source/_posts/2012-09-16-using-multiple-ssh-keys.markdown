@@ -1,0 +1,98 @@
+---
+layout: post
+title: "Using multiple SSH keys"
+date: 2012-09-16 08:51
+comments: true
+categories:
+- SSH
+- Git
+- GitCafe 
+tags:
+- SSH
+- Git
+- GitCafe 
+---
+
+本地有很多 Git 仓库，需要分别提交不同的远程仓库，甚至同一个本地仓库，需要推送到多个不同远程仓库。所有远程仓库公用一个公钥，和公用相同密码一样存在安全隐患。
+
+需要寻求使用多个 SSH Keys 访问远程仓库的解决方案。
+参考；
+
+[http://4simple.github.com/docs/multipleSSHkeys/](http://4simple.github.com/docs/multipleSSHkeys/)
+
+[http://www.worldhello.net/2010/01/17/280.html](http://www.worldhello.net/2010/01/17/280.html)
+
+[http://www.xwuxin.com/?p=1994](http://www.xwuxin.com/?p=1994)
+
+
+已推送到 GitCafe 为例，先创建 SSH key。
+注意不要覆盖已有的 id_rsa，建议按 ~/.ssh/<vendor>/<account>/id_rsa 分目录管理 id_rsa 
+
+例如： /Users/blogbin/.ssh/gitcafe/tech.blogbin/id_rsa
+
+<!--more-->
+
+```
+blogbins-MacBook-Pro:octopress blogbin$ ssh-keygen -t rsa -C "tech.blogbin@gmail.com"
+Generating public/private rsa key pair.
+Enter file in which to save the key (/Users/blogbin/.ssh/id_rsa): /Users/blogbin/.ssh/gitcafe/tech.blogbin/id_rsa
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
+Your identification has been saved in /Users/blogbin/.ssh/gitcafe/tech.blogbin/id_rsa.
+Your public key has been saved in /Users/blogbin/.ssh/gitcafe/tech.blogbin/id_rsa.pub.
+The key fingerprint is:
+38:77:b7:01:2f:3c:e9:83:03:9e:e9:40:95:e9:b2:52 tech.blogbin@gmail.com
+The key's randomart image is:
++--[ RSA 2048]----+
+|                 |
+|       o         |
+|      +   .      |
+|     o . . +     |
+|    E = S * +    |
+|   o + * + + o   |
+|  . o + o o .    |
+|   . o   . .     |
+|      .          |
++-----------------+
+```
+
+配置 ~/.ssh/config 映射不同的主机使用不同的 SSH Key
+```
+blogbins-MacBook-Pro:octopress blogbin$ cat ~/.ssh/config
+Host heroku.com
+  HostName heroku.com
+  User tech.blogbin@gmail.com
+  IdentityFile ~/.ssh/github_rsa.pub
+
+Host gitcafe.com
+  User tech.blogbin@gmail.com
+  Hostname gitcafe.com
+  PreferredAuthentications publickey
+  IdentityFile ~/.ssh/gitcafe/tech.blogbin/id_rsa
+```
+
+将新创建的 id_rsa 内容提交在远程 git 仓库的 SSH Public Keys 中管理
+```
+blogbins-MacBook-Pro:octopress blogbin$ cat  /Users/blogbin/.ssh/gitcafe/tech.blogbin/id_rsa.pub
+
+... 以下省略 ...
+```
+
+推送到远程 git 仓库，以 GitCafe 为例：
+```
+blogbins-MacBook-Pro:octopress blogbin$ git remote add gitcafe git@gitcafe.com:blogbin/tech-blogbin-blog-octopress.git
+blogbins-MacBook-Pro:octopress blogbin$ git push -u gitcafe master
+The authenticity of host 'gitcafe.com (50.116.2.223)' can't be established.
+RSA key fingerprint is 84:9e:c9:8e:7f:36:28:08:7e:13:bf:43:12:74:11:4e.
+Are you sure you want to continue connecting (yes/no)? yes
+Warning: Permanently added 'gitcafe.com,50.116.2.223' (RSA) to the list of known hosts.
+Identity added: /Users/blogbin/.ssh/gitcafe/tech.blogbin/id_rsa (/Users/blogbin/.ssh/gitcafe/tech.blogbin/id_rsa)
+Counting objects: 13098, done.
+Delta compression using up to 2 threads.
+Compressing objects: 100% (6032/6032), done.
+Writing objects: 100% (13098/13098), 5.51 MiB | 52 KiB/s, done.
+Total 13098 (delta 7409), reused 9883 (delta 5632)
+To git@gitcafe.com:blogbin/tech-blogbin-blog-octopress.git
+ * [new branch]      master -> master
+Branch master set up to track remote branch master from gitcafe. 
+```

@@ -4,7 +4,7 @@
   <title><![CDATA[Tech.Blogbin's Blog]]></title>
   <link href="http://tech-blog.blogbin.info/atom.xml" rel="self"/>
   <link href="http://tech-blog.blogbin.info/"/>
-  <updated>2012-09-15T22:56:09+08:00</updated>
+  <updated>2012-09-16T09:07:56+08:00</updated>
   <id>http://tech-blog.blogbin.info/</id>
   <author>
     <name><![CDATA[Tech Blogbin ]]></name>
@@ -12,6 +12,161 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Using multiple SSH keys]]></title>
+    <link href="http://tech-blog.blogbin.info/blog/2012/09/16/using-multiple-ssh-keys/"/>
+    <updated>2012-09-16T08:51:00+08:00</updated>
+    <id>http://tech-blog.blogbin.info/blog/2012/09/16/using-multiple-ssh-keys</id>
+    <content type="html"><![CDATA[<p>本地有很多 Git 仓库，需要分别提交不同的远程仓库，甚至同一个本地仓库，需要推送到多个不同远程仓库。所有远程仓库公用一个公钥，和公用相同密码一样存在安全隐患。</p>
+
+<p>需要寻求使用多个 SSH Keys 访问远程仓库的解决方案。
+参考；</p>
+
+<p><a href="http://4simple.github.com/docs/multipleSSHkeys/">http://4simple.github.com/docs/multipleSSHkeys/</a></p>
+
+<p><a href="http://www.worldhello.net/2010/01/17/280.html">http://www.worldhello.net/2010/01/17/280.html</a></p>
+
+<p><a href="http://www.xwuxin.com/?p=1994">http://www.xwuxin.com/?p=1994</a></p>
+
+<p>已推送到 GitCafe 为例，先创建 SSH key。
+注意不要覆盖已有的 id_rsa，建议按 ~/.ssh/<vendor>/<account>/id_rsa 分目录管理 id_rsa</p>
+
+<p>例如： /Users/blogbin/.ssh/gitcafe/tech.blogbin/id_rsa</p>
+
+<!--more-->
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>blogbins-MacBook-Pro:octopress blogbin$ ssh-keygen -t rsa -C "tech.blogbin@gmail.com"
+</span><span class='line'>Generating public/private rsa key pair.
+</span><span class='line'>Enter file in which to save the key (/Users/blogbin/.ssh/id_rsa): /Users/blogbin/.ssh/gitcafe/tech.blogbin/id_rsa
+</span><span class='line'>Enter passphrase (empty for no passphrase):
+</span><span class='line'>Enter same passphrase again:
+</span><span class='line'>Your identification has been saved in /Users/blogbin/.ssh/gitcafe/tech.blogbin/id_rsa.
+</span><span class='line'>Your public key has been saved in /Users/blogbin/.ssh/gitcafe/tech.blogbin/id_rsa.pub.
+</span><span class='line'>The key fingerprint is:
+</span><span class='line'>38:77:b7:01:2f:3c:e9:83:03:9e:e9:40:95:e9:b2:52 tech.blogbin@gmail.com
+</span><span class='line'>The key's randomart image is:
+</span><span class='line'>+--[ RSA 2048]----+
+</span><span class='line'>|                 |
+</span><span class='line'>|       o         |
+</span><span class='line'>|      +   .      |
+</span><span class='line'>|     o . . +     |
+</span><span class='line'>|    E = S * +    |
+</span><span class='line'>|   o + * + + o   |
+</span><span class='line'>|  . o + o o .    |
+</span><span class='line'>|   . o   . .     |
+</span><span class='line'>|      .          |
+</span><span class='line'>+-----------------+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>配置 ~/.ssh/config 映射不同的主机使用不同的 SSH Key</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>blogbins-MacBook-Pro:octopress blogbin$ cat ~/.ssh/config
+</span><span class='line'>Host heroku.com
+</span><span class='line'>  HostName heroku.com
+</span><span class='line'>  User tech.blogbin@gmail.com
+</span><span class='line'>  IdentityFile ~/.ssh/github_rsa.pub
+</span><span class='line'>
+</span><span class='line'>Host gitcafe.com
+</span><span class='line'>  User tech.blogbin@gmail.com
+</span><span class='line'>  Hostname gitcafe.com
+</span><span class='line'>  PreferredAuthentications publickey
+</span><span class='line'>  IdentityFile ~/.ssh/gitcafe/tech.blogbin/id_rsa</span></code></pre></td></tr></table></div></figure>
+
+
+<p>将新创建的 id_rsa 内容提交在远程 git 仓库的 SSH Public Keys 中管理</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>blogbins-MacBook-Pro:octopress blogbin$ cat  /Users/blogbin/.ssh/gitcafe/tech.blogbin/id_rsa.pub
+</span><span class='line'>
+</span><span class='line'>... 以下省略 ...</span></code></pre></td></tr></table></div></figure>
+
+
+<p>推送到远程 git 仓库，以 GitCafe 为例：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>blogbins-MacBook-Pro:octopress blogbin$ git remote add gitcafe git@gitcafe.com:blogbin/tech-blogbin-blog-octopress.git
+</span><span class='line'>blogbins-MacBook-Pro:octopress blogbin$ git push -u gitcafe master
+</span><span class='line'>The authenticity of host 'gitcafe.com (50.116.2.223)' can't be established.
+</span><span class='line'>RSA key fingerprint is 84:9e:c9:8e:7f:36:28:08:7e:13:bf:43:12:74:11:4e.
+</span><span class='line'>Are you sure you want to continue connecting (yes/no)? yes
+</span><span class='line'>Warning: Permanently added 'gitcafe.com,50.116.2.223' (RSA) to the list of known hosts.
+</span><span class='line'>Identity added: /Users/blogbin/.ssh/gitcafe/tech.blogbin/id_rsa (/Users/blogbin/.ssh/gitcafe/tech.blogbin/id_rsa)
+</span><span class='line'>Counting objects: 13098, done.
+</span><span class='line'>Delta compression using up to 2 threads.
+</span><span class='line'>Compressing objects: 100% (6032/6032), done.
+</span><span class='line'>Writing objects: 100% (13098/13098), 5.51 MiB | 52 KiB/s, done.
+</span><span class='line'>Total 13098 (delta 7409), reused 9883 (delta 5632)
+</span><span class='line'>To git@gitcafe.com:blogbin/tech-blogbin-blog-octopress.git
+</span><span class='line'> * [new branch]      master -&gt; master
+</span><span class='line'>Branch master set up to track remote branch master from gitcafe. </span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Using GitCafe]]></title>
+    <link href="http://tech-blog.blogbin.info/blog/2012/09/16/using-gitcafe/"/>
+    <updated>2012-09-16T08:36:00+08:00</updated>
+    <id>http://tech-blog.blogbin.info/blog/2012/09/16/using-gitcafe</id>
+    <content type="html"><![CDATA[<p>试用了 GitCafe <a href="http://www.gitcafe.com/">http://www.gitcafe.com/</a>，</p>
+
+<p>国内的 Git 仓库管理系统。功能和 Bitbucket <a href="https://bitbucket.org/">https://bitbucket.org/</a></p>
+
+<p>可以作为 GitHub, Heroku, Bitbucket 之后，另外一个 Git 远程仓库。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Could not find gem 'rails (= 3.2.8) ruby' in the gems available on this machine.]]></title>
@@ -2207,114 +2362,6 @@ undefined local variable or method `json&#8217;</p>
 </span><span class='line'>     /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/activesupport-3.1.0/lib/active_support/notifications/instrumenter.rb:21:in `instrument'
 </span><span class='line'>     /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/activesupport-3.1.0/lib/active_support/notifications.rb:53:in `instrument'
 </span><span class='line'>     /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore</span></code></pre></td></tr></table></div></figure>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[sinaweibo python sdk]]></title>
-    <link href="http://tech-blog.blogbin.info/blog/2012/08/18/sinaweibo-python-sdk/"/>
-    <updated>2012-08-18T20:57:00+08:00</updated>
-    <id>http://tech-blog.blogbin.info/blog/2012/08/18/sinaweibo-python-sdk</id>
-    <content type="html"><![CDATA[<p>Python 客户端需要访问新浪微博 API，参照官方推荐的 Python SDK：</p>
-
-<p><a href="http://michaelliao.github.com/sinaweibopy/">http://michaelliao.github.com/sinaweibopy/d</a></p>
-
-<p>发现自己使用的 Python 版本为 2.4，不支持 if &#8230; then 同在一行的语法。调整举例：</p>
-
-<figure class='code'><figcaption><span>weibo.py </span><a href='https://github.com/blogbin/sinaweibopy/raw/9ea1bf949dbdf49153b50e9a2c787847d348fc9e/src/weibo.py'>link</a></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="c">#data.append(v.encode(&#39;utf-8&#39;) if isinstance(v, unicode) else v)</span>
-</span><span class='line'><span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="nb">unicode</span><span class="p">):</span>
-</span><span class='line'>    <span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">&#39;utf-8&#39;</span><span class="p">))</span>
-</span><span class='line'><span class="k">else</span><span class="p">:</span>
-</span><span class='line'>    <span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">v</span> <span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>在 GitHub 发起一个 Pull Request 请求：</p>
-
-<p><a href="https://github.com/michaelliao/sinaweibopy/pull/2">https://github.com/michaelliao/sinaweibopy/pull/2</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Gem install RMagick on Apple MacOS X Mountain Lion 10.8]]></title>
-    <link href="http://tech-blog.blogbin.info/blog/2012/08/18/gem-install-rmagick-on-apple-macos-x-mountain-lion-10-dot-8/"/>
-    <updated>2012-08-18T20:14:00+08:00</updated>
-    <id>http://tech-blog.blogbin.info/blog/2012/08/18/gem-install-rmagick-on-apple-macos-x-mountain-lion-10-dot-8</id>
-    <content type="html"><![CDATA[<p>最近升级了 Mountain Lion 10.8，结果发现使用 RMagick 的 Rails 项目无法正常启动，碉堡了！</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>blogbins-MacBook-Pro:xbmc blogbin$ rails server
-</span><span class='line'>:macosx
-</span><span class='line'>WARNING: Nokogiri was built against LibXML version 2.7.3, but has dynamically loaded 2.7.8
-</span><span class='line'>/Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `require': dlopen(/Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/rmagick-2.13.1/lib/RMagick2.bundle, 9): Library not loaded: /usr/lib/libltdl.7.dylib (LoadError)
-</span><span class='line'>  Referenced from: /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/rmagick-2.13.1/lib/RMagick2.bundle
-</span><span class='line'>  Reason: Incompatible library version: RMagick2.bundle requires version 10.0.0 or later, but libltdl.7.dylib provides version 5.0.0 - /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/rmagick-2.13.1/lib/RMagick2.bundle
-</span><span class='line'>     from /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `block in require'
-</span><span class='line'>     from /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:223:in `block in load_dependency'
-</span><span class='line'>     from /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:640:in `new_constants_in'
-</span><span class='line'>     from /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:223:in `load_dependency'
-</span><span class='line'>     from /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/activesupport-3.1.0/lib/active_support/dependencies.rb:240:in `require'
-</span><span class='line'>     from /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/rmagick-2.13.1/lib/rmagick.rb:11:in `&lt;top (required)&gt;'
-</span><span class='line'>     from /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/bundler-1.1.3/lib/bundler/runtime.rb:68:in `require'
-</span><span class='line'>     from /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/bundler-1.1.3/lib/bundler/runtime.rb:68:in `block (2 levels) in require'
-</span><span class='line'>     from /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/bundler-1.1.3/lib/bundler/runtime.rb:66:in `each'
-</span><span class='line'>     from /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/bundler-1.1.3/lib/bundler/runtime.rb:66:in `block in require'
-</span><span class='line'>     from /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/bundler-1.1.3/lib/bundler/runtime.rb:55:in `each'
-</span><span class='line'>     from /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/bundler-1.1.3/lib/bundler/runtime.rb:55:in `require'
-</span><span class='line'>     from /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/bundler-1.1.3/lib/bundler.rb:119:in `require'
-</span><span class='line'>     from /Users/blogbin/projects/workspaces/app_store/ruby/xbmc/config/application.rb:7:in `&lt;top (required)&gt;'
-</span><span class='line'>     from /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/railties-3.1.0/lib/rails/commands.rb:52:in `require'
-</span><span class='line'>     from /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/railties-3.1.0/lib/rails/commands.rb:52:in `block in &lt;top (required)&gt;'
-</span><span class='line'>     from /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/railties-3.1.0/lib/rails/commands.rb:49:in `tap'
-</span><span class='line'>     from /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/railties-3.1.0/lib/rails/commands.rb:49:in `&lt;top (required)&gt;'
-</span><span class='line'>     from script/rails:6:in `require'
-</span><span class='line'>     from script/rails:6:in `&lt;main&gt;</span></code></pre></td></tr></table></div></figure>
-
-
-<p></p>
-
-<p>Google 搜索了不少帖子，大部分都只是解决一部分问题，又冒出新的问题
-最后终于找到一篇介绍完整的解决的办法。</p>
-
-<p><a href="http://coderwall.com/p/njrnzq">http://coderwall.com/p/njrnzq</a></p>
-
-<!--more-->
-
-
-
-
-<blockquote><p>Managed to fix it following these steps:</p><p>Installed XCode 4.4 and Command Line Tools<br/>Ran this in terminal:</p><p>sudo chown -R <user> /usr/local<br/>brew update<br/>brew tap homebrew/dupes<br/>brew install apple-gcc42</p><p>Installed XQuartz 2.7.2 (http://xquartz.macosforge.org/landing)</p><p>Fixed any errors reported by brew doctor<br/>Ran this in terminal:</p><p>gem uninstall rmagick<br/>brew uninstall imagemagick<br/>brew install &#8211;fresh imagemagick<br/>gem install rmagick</p><p>After this, RMagick worked flawlessly again!</p></blockquote>
 
 ]]></content>
   </entry>
