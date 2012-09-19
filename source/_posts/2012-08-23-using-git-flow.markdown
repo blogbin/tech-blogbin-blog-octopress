@@ -31,6 +31,10 @@ Git开发管理之道 - 无网不剩
 如果你以前采用 master 为主线或开发分支，产品分支为其他分支，脑筋要转过来。
 
 <!--more-->
+##### 2012/9/19 更新：
+
+安装 git flow 
+[https://github.com/nvie/gitflow/wiki/Installation](https://github.com/nvie/gitflow/wiki/Installation)
 
 git flow 初始化本地仓库
 ```
