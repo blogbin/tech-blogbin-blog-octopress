@@ -4,7 +4,7 @@
   <title><![CDATA[Tech.Blogbin's Blog]]></title>
   <link href="http://tech-blog.blogbin.info/atom.xml" rel="self"/>
   <link href="http://tech-blog.blogbin.info/"/>
-  <updated>2012-09-19T21:47:19+08:00</updated>
+  <updated>2012-10-04T00:13:46+08:00</updated>
   <id>http://tech-blog.blogbin.info/</id>
   <author>
     <name><![CDATA[Tech Blogbin ]]></name>
@@ -12,6 +12,73 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Rails Recipes Rails 3 Edition Recipe 1 Create Meaningful Many-to-Many Relationships]]></title>
+    <link href="http://tech-blog.blogbin.info/blog/2012/10/03/rails-recipes-rails-3-edition-recipe-1-create-meaningful-many-to-many-relationships/"/>
+    <updated>2012-10-03T23:50:00+08:00</updated>
+    <id>http://tech-blog.blogbin.info/blog/2012/10/03/rails-recipes-rails-3-edition-recipe-1-create-meaningful-many-to-many-relationships</id>
+    <content type="html"><![CDATA[<p>Rails 中 ActiveRecord 两个模型之间的多对多关系很少简单用 has_and_belong_to_many 来表示，而是引入第三个模型（关联模型），将之前 A 和 B 的多对多关系，拆分为 A 和 C 的一对多，
+B 和 C 的一对多。引入新的关联模型 C ，很容易在 A 和 B 关系上定义一些属性。</p>
+
+<!--more-->
+
+
+
+
+<blockquote><p>When modeling many-to-many relationships in Rails, many newcomers<br/>assume they should use the has_and_belongs_to_many() (habtm) macro with its<br/>associated join table. For years, application developers have been creating<br/>strangely named join tables in order to simply connect two tables. But habtm<br/>is best suited to relationships that have no attributes or meaning of their own.<br/>And, given some thought, almost every relationship in a Rails model deserves<br/>its own name to represent its function in the domain being modeled.</p><p>The idea with join models is that if your many-to-many relationship needs to have some richness<br/>in the association, instead of putting a simple, dumb join table in the middle<br/>of the relationship,</p></blockquote>
+
+
+<p>migrate 创建 关联表（just simply connect two tables） 可以不需要定义 id 主键</p>
+
+<figure class='code'><figcaption><span>rr2/many_to_many/beginning_schema.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">create_table</span> <span class="ss">:magazines_readers</span><span class="p">,</span> <span class="ss">:id</span> <span class="o">=&gt;</span> <span class="kp">false</span> <span class="k">do</span> <span class="o">|</span><span class="n">t</span><span class="o">|</span>
+</span><span class='line'>  <span class="n">t</span><span class="o">.</span><span class="n">integer</span> <span class="ss">:magazine_id</span>
+</span><span class='line'>  <span class="n">t</span><span class="o">.</span><span class="n">integer</span> <span class="ss">:reader_id</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>参阅：</p>
+
+<blockquote><p>By default, create_table will create a primary key called id. You can change the name of the primary key with the :primary_key option (don’t forget to update the corresponding model) or, if you don’t want a primary key at all (for example for a HABTM join table), you can pass the option :id => false. If you need to pass database specific options you can place an SQL fragment in the :options option. For example,</p><p>create_table :products, :options => &#8220;ENGINE=BLACKHOLE&#8221; do |t|<br/>  t.string :name, :null => false<br/>end<br/>will append ENGINE=BLACKHOLE to the SQL statement used to create the table (when using MySQL, the default is ENGINE=InnoDB).</p></blockquote>
+
+
+<p><a href="http://guides.rubyonrails.org/migrations.html#creating-a-table">http://guides.rubyonrails.org/migrations.html#creating-a-table</a></p>
+
+<p>一个 Association 可以根据需要定义不同的 has_many，如：</p>
+
+<figure class='code'><figcaption><span>ManyToManyWithAttributesOnTheRelationship/app/models/magazine.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Magazine</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+</span><span class='line'>  <span class="n">has_many</span> <span class="ss">:subscriptions</span>
+</span><span class='line'>  <span class="n">has_many</span> <span class="ss">:readers</span><span class="p">,</span> <span class="ss">:through</span> <span class="o">=&gt;</span> <span class="ss">:subscriptions</span>
+</span><span class='line'>  <span class="n">has_many</span> <span class="ss">:semiannual_subscribers</span><span class="p">,</span>
+</span><span class='line'>      <span class="ss">:through</span> <span class="o">=&gt;</span> <span class="ss">:subscriptions</span><span class="p">,</span>
+</span><span class='line'>      <span class="ss">:source</span> <span class="o">=&gt;</span> <span class="ss">:reader</span><span class="p">,</span>
+</span><span class='line'>      <span class="ss">:conditions</span> <span class="o">=&gt;</span> <span class="o">[</span><span class="s1">&#39;length_in_issues = 6&#39;</span><span class="o">]</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>更多关于 has_many 和 :through 信息参阅：</p>
+
+<p>[http://guides.rubyonrails.org/association_basics.html#the-has_many-association](http://guides.rubyonrails.org/association_basics.html#the-has_many-association</p>
+
+<p><a href="http://guides.rubyonrails.org/association_basics.html#the-has_many-through-association">http://guides.rubyonrails.org/association_basics.html#the-has_many-through-association</a></p>
+
+<p><a href="http://guides.rubyonrails.org/association_basics.html#has_many-association-reference">http://guides.rubyonrails.org/association_basics.html#has_many-association-reference</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Using multiple SSH keys]]></title>
@@ -2316,57 +2383,6 @@ Web Application Performance Management (APM) : New Relic
 <p>浏览器访问 <a href="http://localhost:3000/newrelic">http://localhost:3000/newrelic</a>，效果如下：</p>
 
 <blockquote><p><img src="http://tech-blog.blogbin.info/images/2012-08-22-monitoring-server-performance-with-new-relic/new_relic_development.jpg"></p></blockquote>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Rails 返回 json 格式的内容]]></title>
-    <link href="http://tech-blog.blogbin.info/blog/2012/08/20/dhhs-json-jbuilder-at-rails/"/>
-    <updated>2012-08-20T23:51:00+08:00</updated>
-    <id>http://tech-blog.blogbin.info/blog/2012/08/20/dhhs-json-jbuilder-at-rails</id>
-    <content type="html"><![CDATA[<p>需要在 Rails 返回 json 格式的内容。虽然 Ruby 或者 Rails 内置对对象转为 json 的支持。
-但对于自定义的 json 格式和内容。 推荐使用 DHH 开发的Gem：</p>
-
-<p>rails/jbuilder
-<a href="https://github.com/rails/jbuilder">https://github.com/rails/jbuilder</a></p>
-
-<p>RailsCasts 网站有一份教程，可以作为学习的补充
-320 Jbuilder - RailsCasts
-<a href="http://railscasts.com/episodes/320-jbuilder?view=asciicast">http://railscasts.com/episodes/320-jbuilder?view=asciicast</a></p>
-
-<p>其实之前已经使用 ails/jbuilder 返回 json 格式内容，但一段时间没用，结果又碰到同样问题。</p>
-
-<p>访问 url 时，系统后台报错：
-undefined local variable or method `json&#8217;</p>
-
-<p>结果发现，原来是 渲染的模版扩展名不小心写错了，正确的是 .json.jbuilder；
-而我不小心写成了 .json.builder（xml 格式渲染模版的扩展名）。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Started GET "/security/authorizations/lookup.json" for 127.0.0.1 at 2012-08-20 23:38:40 +0800
-</span><span class='line'>ActionView::Template::Error - undefined local variable or method `json' for #&lt;#&lt;Class:0x007fde54624320&gt;:0x007fde5461e6a0&gt;:
-</span><span class='line'>     /Users/blogbin/projects/workspaces/app_store/ruby/xbmc/app/views/security/authorizations/lookup.json.builder:2:in `_app_views_security_authorizations_lookup_json_builder___4549964192266964499_70296437709400'
-</span><span class='line'>     /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/actionpack-3.1.0/lib/action_view/template.rb:144:in `block in render'
-</span><span class='line'>     /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/activesupport-3.1.0/lib/active_support/notifications.rb:55:in `instrument'
-</span><span class='line'>     /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/actionpack-3.1.0/lib/action_view/template.rb:142:in `render'
-</span><span class='line'>     /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/actionpack-3.1.0/lib/action_view/renderer/template_renderer.rb:40:in `block (2 levels) in render_template'
-</span><span class='line'>     /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/actionpack-3.1.0/lib/action_view/renderer/abstract_renderer.rb:33:in `block in instrument'
-</span><span class='line'>     /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/activesupport-3.1.0/lib/active_support/notifications.rb:53:in `block in instrument'
-</span><span class='line'>     /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/activesupport-3.1.0/lib/active_support/notifications/instrumenter.rb:21:in `instrument'
-</span><span class='line'>     /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/activesupport-3.1.0/lib/active_support/notifications.rb:53:in `instrument'
-</span><span class='line'>     /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore</span></code></pre></td></tr></table></div></figure>
 
 ]]></content>
   </entry>

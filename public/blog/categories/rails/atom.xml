@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Rails | Tech.Blogbin's Blog]]></title>
   <link href="http://tech-blog.blogbin.info/blog/categories/rails/atom.xml" rel="self"/>
   <link href="http://tech-blog.blogbin.info/"/>
-  <updated>2012-09-19T21:47:19+08:00</updated>
+  <updated>2012-10-04T00:13:46+08:00</updated>
   <id>http://tech-blog.blogbin.info/</id>
   <author>
     <name><![CDATA[Tech Blogbin ]]></name>
@@ -12,6 +12,58 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Rails Recipes Rails 3 Edition Recipe 1 Create Meaningful Many-to-Many Relationships]]></title>
+    <link href="http://tech-blog.blogbin.info/blog/2012/10/03/rails-recipes-rails-3-edition-recipe-1-create-meaningful-many-to-many-relationships/"/>
+    <updated>2012-10-03T23:50:00+08:00</updated>
+    <id>http://tech-blog.blogbin.info/blog/2012/10/03/rails-recipes-rails-3-edition-recipe-1-create-meaningful-many-to-many-relationships</id>
+    <content type="html"><![CDATA[<p>Rails 中 ActiveRecord 两个模型之间的多对多关系很少简单用 has_and_belong_to_many 来表示，而是引入第三个模型（关联模型），将之前 A 和 B 的多对多关系，拆分为 A 和 C 的一对多，
+B 和 C 的一对多。引入新的关联模型 C ，很容易在 A 和 B 关系上定义一些属性。</p>
+
+<!--more-->
+
+
+<p><blockquote><p>When modeling many-to-many relationships in Rails, many newcomers<br/>assume they should use the has_and_belongs_to_many() (habtm) macro with its<br/>associated join table. For years, application developers have been creating<br/>strangely named join tables in order to simply connect two tables. But habtm<br/>is best suited to relationships that have no attributes or meaning of their own.<br/>And, given some thought, almost every relationship in a Rails model deserves<br/>its own name to represent its function in the domain being modeled.</p></p><p><p>The idea with join models is that if your many-to-many relationship needs to have some richness<br/>in the association, instead of putting a simple, dumb join table in the middle<br/>of the relationship,</p></blockquote></p>
+
+<p>migrate 创建 关联表（just simply connect two tables） 可以不需要定义 id 主键
+``` ruby rr2/many_to_many/beginning_schema.rb
+create_table :magazines_readers, :id => false do |t|</p>
+
+<pre><code>t.integer :magazine_id
+t.integer :reader_id
+</code></pre>
+
+<p>end
+```
+参阅：
+<blockquote><p>By default, create_table will create a primary key called id. You can change the name of the primary key with the :primary_key option (don’t forget to update the corresponding model) or, if you don’t want a primary key at all (for example for a HABTM join table), you can pass the option :id => false. If you need to pass database specific options you can place an SQL fragment in the :options option. For example,</p></p><p><p>create_table :products, :options => "ENGINE=BLACKHOLE" do |t|<br/>  t.string :name, :null => false<br/>end<br/>will append ENGINE=BLACKHOLE to the SQL statement used to create the table (when using MySQL, the default is ENGINE=InnoDB).</p></blockquote>
+<a href="http://guides.rubyonrails.org/migrations.html#creating-a-table">http://guides.rubyonrails.org/migrations.html#creating-a-table</a></p>
+
+<p>一个 Association 可以根据需要定义不同的 has_many，如：
+``` ruby ManyToManyWithAttributesOnTheRelationship/app/models/magazine.rb
+class Magazine &lt; ActiveRecord::Base</p>
+
+<pre><code>has_many :subscriptions
+has_many :readers, :through =&gt; :subscriptions
+has_many :semiannual_subscribers,
+    :through =&gt; :subscriptions,
+    :source =&gt; :reader,
+    :conditions =&gt; ['length_in_issues = 6']
+</code></pre>
+
+<p>end
+```</p>
+
+<p>更多关于 has_many 和 :through 信息参阅：</p>
+
+<p>[http://guides.rubyonrails.org/association_basics.html#the-has_many-association](http://guides.rubyonrails.org/association_basics.html#the-has_many-association</p>
+
+<p><a href="http://guides.rubyonrails.org/association_basics.html#the-has_many-through-association">http://guides.rubyonrails.org/association_basics.html#the-has_many-through-association</a></p>
+
+<p><a href="http://guides.rubyonrails.org/association_basics.html#has_many-association-reference">http://guides.rubyonrails.org/association_basics.html#has_many-association-reference</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Could not find gem 'rails (= 3.2.8) ruby' in the gems available on this machine.]]></title>
@@ -396,84 +448,6 @@ blogbins-MacBook-Pro:focus blogbin$ rm Gemfile.lock</p>
 
 <p>blogbins-MacBook-Pro:focus blogbin$ bundle install
 ```</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Monitoring rails app with the New Relic]]></title>
-    <link href="http://tech-blog.blogbin.info/blog/2012/08/29/monitoring-rails-app-with-the-new-relic/"/>
-    <updated>2012-08-29T22:01:00+08:00</updated>
-    <id>http://tech-blog.blogbin.info/blog/2012/08/29/monitoring-rails-app-with-the-new-relic</id>
-    <content type="html"><![CDATA[<p>尝试 New Relic 监控 Rails App 项目的运行情况。</p>
-
-<p>如果采用 Rails 3，安装 New Relic 非常简单，如果使用 Rails 2，比较繁琐一些。
-好在官方网站有相应的介绍，仔细阅读即可。</p>
-
-<!--more-->
-
-
-<h5>参阅</h5>
-
-<p>Ruby Agent installation - New Relic Documentation</p>
-
-<p><a href="https://newrelic.com/docs/ruby/ruby-agent-installation">https://newrelic.com/docs/ruby/ruby-agent-installation</a>
-```
-Installing the Gem
-We recommend installing the New Relic Ruby gem in order to have better control over versions and dependencies. However, the gem is not supported for Rails versions prior to 2.0. If you're using Rails 1.2.6 and earlier, install the plugin.</p>
-
-<p>Our gem is available on rubygems.org as newrelic_rpm:</p>
-
-<p> sudo gem install newrelic_rpm
-For Rails 3 and installations using Bundler, simply add our gem to the Gemfile:</p>
-
-<p>gem 'newrelic_rpm'
-For Rails versions 2.1 to 2.3 without Bundler, edit environment.rb and add to the initializer block:</p>
-
-<p>config.gem "newrelic_rpm"
-For Rails versions 2.0.*, edit environment.rb and add this statement after the initializer block:</p>
-
-<p>require "newrelic_rpm"
-```</p>
-
-<p>Ruby Agent installation - plugin - New Relic Documentation</p>
-
-<p><a href="https://newrelic.com/docs/ruby/ruby-agent-installation-plugin">https://newrelic.com/docs/ruby/ruby-agent-installation-plugin</a>
-```
-Installing the Plugin
-Note that we strongly encourage using the gem.
-The plugin should be installed from Github using the following commands.</p>
-
-<p>For Rails versions 2.*:</p>
-
-<p>ruby script/plugin install git://github.com/newrelic/rpm.git
-mv vendor/plugins/rpm vendor/plugins/newrelic_rpm</p>
-
-<p>This will export the plugin into your application's vendor/plugins directory.</p>
-
-<p>If you can't install the plugin directly from the git URL, you can clone the repository into the vendor/plugins directory.
-```
-I'm using Unicorn and I don't see any data - New Relic Documentation</p>
-
-<p><a href="https://newrelic.com/docs/troubleshooting/im-using-unicorn-and-i-dont-see-any-data">https://newrelic.com/docs/troubleshooting/im-using-unicorn-and-i-dont-see-any-data</a>
-```
-I'm using Unicorn and I don't see any data</p>
-
-<p>If you're using Unicorn with the agent, you should be using the preload_app truedirective in your Unicorn configuration or the agent may not finish starting up. (see http://unicorn.bogomips.org/Unicorn/Configurator.html#method-i-preload_app)</p>
-
-<p>If you don't want to use preload_app true, you can manually call our handler for forking web servers from an initializer file in config/initializers:</p>
-
-<h1>Ensure the agent is started using Unicorn</h1>
-
-<h1>This is needed when using Unicorn and preload_app is not set to true.</h1>
-
-<h1>See http://support.newrelic.com/kb/troubleshooting/unicorn-no-data</h1>
-
-<p>::NewRelic::Agent.after_fork(:force_reconnect => true) if defined? Unicorn
-```</p>
-
-<h5>监控效果如下图：</h5>
-
-<p><blockquote><p><img src="/images/2012-08-29-monitoring-rails-app-with-the-new-relic/rails_app.jpeg"></p></blockquote></p>
 ]]></content>
   </entry>
   

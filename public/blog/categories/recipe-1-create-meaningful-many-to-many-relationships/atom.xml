@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Recipe 1 Create Meaningful Many-to-Many Relationships | Tech.Blogbin's Blog]]></title>
+  <link href="http://tech-blog.blogbin.info/blog/categories/recipe-1-create-meaningful-many-to-many-relationships/atom.xml" rel="self"/>
+  <link href="http://tech-blog.blogbin.info/"/>
+  <updated>2012-10-04T00:13:46+08:00</updated>
+  <id>http://tech-blog.blogbin.info/</id>
+  <author>
+    <name><![CDATA[Tech Blogbin ]]></name>
+    <email><![CDATA[Tech Blogbin <tech.blogbin@gmail.com>]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Rails Recipes Rails 3 Edition Recipe 1 Create Meaningful Many-to-Many Relationships]]></title>
+    <link href="http://tech-blog.blogbin.info/blog/2012/10/03/rails-recipes-rails-3-edition-recipe-1-create-meaningful-many-to-many-relationships/"/>
+    <updated>2012-10-03T23:50:00+08:00</updated>
+    <id>http://tech-blog.blogbin.info/blog/2012/10/03/rails-recipes-rails-3-edition-recipe-1-create-meaningful-many-to-many-relationships</id>
+    <content type="html"><![CDATA[<p>Rails 中 ActiveRecord 两个模型之间的多对多关系很少简单用 has_and_belong_to_many 来表示，而是引入第三个模型（关联模型），将之前 A 和 B 的多对多关系，拆分为 A 和 C 的一对多，
+B 和 C 的一对多。引入新的关联模型 C ，很容易在 A 和 B 关系上定义一些属性。</p>
+
+<!--more-->
+
+
+<p><blockquote><p>When modeling many-to-many relationships in Rails, many newcomers<br/>assume they should use the has_and_belongs_to_many() (habtm) macro with its<br/>associated join table. For years, application developers have been creating<br/>strangely named join tables in order to simply connect two tables. But habtm<br/>is best suited to relationships that have no attributes or meaning of their own.<br/>And, given some thought, almost every relationship in a Rails model deserves<br/>its own name to represent its function in the domain being modeled.</p></p><p><p>The idea with join models is that if your many-to-many relationship needs to have some richness<br/>in the association, instead of putting a simple, dumb join table in the middle<br/>of the relationship,</p></blockquote></p>
+
+<p>migrate 创建 关联表（just simply connect two tables） 可以不需要定义 id 主键
+``` ruby rr2/many_to_many/beginning_schema.rb
+create_table :magazines_readers, :id => false do |t|</p>
+
+<pre><code>t.integer :magazine_id
+t.integer :reader_id
+</code></pre>
+
+<p>end
+```
+参阅：
+<blockquote><p>By default, create_table will create a primary key called id. You can change the name of the primary key with the :primary_key option (don’t forget to update the corresponding model) or, if you don’t want a primary key at all (for example for a HABTM join table), you can pass the option :id => false. If you need to pass database specific options you can place an SQL fragment in the :options option. For example,</p></p><p><p>create_table :products, :options => "ENGINE=BLACKHOLE" do |t|<br/>  t.string :name, :null => false<br/>end<br/>will append ENGINE=BLACKHOLE to the SQL statement used to create the table (when using MySQL, the default is ENGINE=InnoDB).</p></blockquote>
+<a href="http://guides.rubyonrails.org/migrations.html#creating-a-table">http://guides.rubyonrails.org/migrations.html#creating-a-table</a></p>
+
+<p>一个 Association 可以根据需要定义不同的 has_many，如：
+``` ruby ManyToManyWithAttributesOnTheRelationship/app/models/magazine.rb
+class Magazine &lt; ActiveRecord::Base</p>
+
+<pre><code>has_many :subscriptions
+has_many :readers, :through =&gt; :subscriptions
+has_many :semiannual_subscribers,
+    :through =&gt; :subscriptions,
+    :source =&gt; :reader,
+    :conditions =&gt; ['length_in_issues = 6']
+</code></pre>
+
+<p>end
+```</p>
+
+<p>更多关于 has_many 和 :through 信息参阅：</p>
+
+<p>[http://guides.rubyonrails.org/association_basics.html#the-has_many-association](http://guides.rubyonrails.org/association_basics.html#the-has_many-association</p>
+
+<p><a href="http://guides.rubyonrails.org/association_basics.html#the-has_many-through-association">http://guides.rubyonrails.org/association_basics.html#the-has_many-through-association</a></p>
+
+<p><a href="http://guides.rubyonrails.org/association_basics.html#has_many-association-reference">http://guides.rubyonrails.org/association_basics.html#has_many-association-reference</a></p>
+]]></content>
+  </entry>
+  
+</feed>
