@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Rails Recipes Rails 3 Edition | Tech.Blogbin's Blog]]></title>
   <link href="http://tech-blog.blogbin.info/blog/categories/rails-recipes-rails-3-edition/atom.xml" rel="self"/>
   <link href="http://tech-blog.blogbin.info/"/>
-  <updated>2012-10-04T00:13:46+08:00</updated>
+  <updated>2012-10-04T10:40:37+08:00</updated>
   <id>http://tech-blog.blogbin.info/</id>
   <author>
     <name><![CDATA[Tech Blogbin ]]></name>
@@ -18,7 +18,9 @@
     <link href="http://tech-blog.blogbin.info/blog/2012/10/03/rails-recipes-rails-3-edition-recipe-1-create-meaningful-many-to-many-relationships/"/>
     <updated>2012-10-03T23:50:00+08:00</updated>
     <id>http://tech-blog.blogbin.info/blog/2012/10/03/rails-recipes-rails-3-edition-recipe-1-create-meaningful-many-to-many-relationships</id>
-    <content type="html"><![CDATA[<p>Rails 中 ActiveRecord 两个模型之间的多对多关系很少简单用 has_and_belong_to_many 来表示，而是引入第三个模型（关联模型），将之前 A 和 B 的多对多关系，拆分为 A 和 C 的一对多，
+    <content type="html"><![CDATA[<h4>关联模型</h4>
+
+<p>Rails 中 ActiveRecord 两个模型之间的多对多关系很少简单用 has_and_belong_to_many 来表示，而是引入第三个模型（关联模型），将之前 A 和 B 的多对多关系，拆分为 A 和 C 的一对多，
 B 和 C 的一对多。引入新的关联模型 C ，很容易在 A 和 B 关系上定义一些属性。</p>
 
 <!--more-->
@@ -40,6 +42,8 @@ t.integer :reader_id
 <blockquote><p>By default, create_table will create a primary key called id. You can change the name of the primary key with the :primary_key option (don’t forget to update the corresponding model) or, if you don’t want a primary key at all (for example for a HABTM join table), you can pass the option :id => false. If you need to pass database specific options you can place an SQL fragment in the :options option. For example,</p></p><p><p>create_table :products, :options => "ENGINE=BLACKHOLE" do |t|<br/>  t.string :name, :null => false<br/>end<br/>will append ENGINE=BLACKHOLE to the SQL statement used to create the table (when using MySQL, the default is ENGINE=InnoDB).</p></blockquote>
 <a href="http://guides.rubyonrails.org/migrations.html#creating-a-table">http://guides.rubyonrails.org/migrations.html#creating-a-table</a></p>
 
+<h4>多个 has_many</h4>
+
 <p>一个 Association 可以根据需要定义不同的 has_many，如：
 ``` ruby ManyToManyWithAttributesOnTheRelationship/app/models/magazine.rb
 class Magazine &lt; ActiveRecord::Base</p>
@@ -55,7 +59,17 @@ has_many :semiannual_subscribers,
 <p>end
 ```</p>
 
-<p>更多关于 has_many 和 :through 信息参阅：</p>
+<h4>has_many 中 :calss 和 :source 的区别</h4>
+
+<p>无法通过 has_many 的一个参数自动推断出 Rails ActiveRecord 模型名称时，如果 has_many 如果使用 :through ，需要设置 :source 参数，否者使用 :calss_name 参数。
+<blockquote><p>```<br/>class Relationship &lt; ActiveRecord::Base<br/>  belongs_to :user,</p></p><p><pre><code>:class_name =&gt; 'User', :foreign_key =&gt; 'user_id'<br/></code></pre></p><p><p>  belongs_to :buddy,</p></p><p><pre><code>:class_name =&gt; 'User', :foreign_key =&gt; 'buddy_id'<br/></code></pre></p><p><p>end<br/>class User &lt; ActiveRecord::Base<br/>  has_many :relations_to,</p></p><p><pre><code>:foreign_key =&gt; 'user_id',  :class_name =&gt; 'Relationship'<br/></code></pre></p><p><p>  has_many :relations_from,</p></p><p><pre><code>:foreign_key =&gt; 'buddy_id', :class_name =&gt; 'Relationship'                             <br/></code></pre></p><p><p>  has_many :linked_to,</p></p><p><pre><code>:through =&gt; :relations_to,   :source =&gt; :buddy<br/></code></pre></p><p><p>  has_many :linked_from,</p></p><p><pre><code>:through =&gt; :relations_from, :source =&gt; :user<br/></code></pre></p><p><p>end<br/>```</p></blockquote>
+参阅：</p>
+
+<p><a href="http://stackoverflow.com/questions/4632408/need-help-to-understand-source-option-of-has-one-has-many-through-of-rails">http://stackoverflow.com/questions/4632408/need-help-to-understand-source-option-of-has-one-has-many-through-of-rails</a></p>
+
+<p><a href="http://hlee.iteye.com/blog/1254723">http://hlee.iteye.com/blog/1254723</a></p>
+
+<h4>更多关于 has_many 和 :through 信息参阅：</h4>
 
 <p>[http://guides.rubyonrails.org/association_basics.html#the-has_many-association](http://guides.rubyonrails.org/association_basics.html#the-has_many-association</p>
 

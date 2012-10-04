@@ -1,0 +1,618 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>guides.rubyonrails.org association_basics - Tech.Blogbin's Blog</title>
+
+  <meta name="alexaVerifyID" content="-6pNt74TSllotvjLFDIa77kSKLI" />
+
+  <meta name="author" content="Tech Blogbin <tech.blogbin@gmail.com>">
+
+  
+  <meta name="description" content="association_basics 学习 Rails ActiveRecord 中 has_many 的 :through, :as, source, :inverse_of 等几个参数的用法 has_many 的 :through 可以快速获得嵌套 has_many 的对象。如： The &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://tech-blog.blogbin.info/blog/2012/10/04/guides-dot-rubyonrails-dot-org-association-basics/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Tech.Blogbin's Blog" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-34083026-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Tech.Blogbin's Blog</a></h1>
+  
+    <h2>A blogging for geeker.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss email">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+    <li><a href="Tech Blogbin <tech.blogbin@gmail.com>" rel="subscribe-email" title="subscribe via email">Email</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:tech-blog.blogbin.info" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/categories">Categories</a></li>
+  <li><a href="/tags">Tags</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/links">Links</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">guides.rubyonrails.org Association_basics</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-10-04T10:34:00+08:00" pubdate data-updated="true">Oct 4<span>th</span>, 2012</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><h4>association_basics</h4>
+
+<p>学习 Rails ActiveRecord 中 has_many 的 :through, :as, source, :inverse_of 等几个参数的用法</p>
+
+<!--more-->
+
+
+<p>has_many 的 :through 可以快速获得嵌套 has_many 的对象。如：</p>
+
+<blockquote><p>The has_many :through association is also useful for setting up “shortcuts” through nested has_many associations. For example, if a document has many sections, and a section has many paragraphs, you may sometimes want to get a simple collection of all paragraphs in the document. You could set that up this way:<br/><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span><br/><span class='line-number'>2</span><br/><span class='line-number'>3</span><br/><span class='line-number'>4</span><br/><span class='line-number'>5</span><br/><span class='line-number'>6</span><br/><span class='line-number'>7</span><br/><span class='line-number'>8</span><br/><span class='line-number'>9</span><br/><span class='line-number'>10</span><br/><span class='line-number'>11</span><br/><span class='line-number'>12</span><br/><span class='line-number'>13</span><br/></pre></td><td class='code'><pre><code class=''><span class='line'>class Document &lt; ActiveRecord::Base<br/></span><span class='line'>  has_many :sections<br/></span><span class='line'>  has_many :paragraphs, :through =&gt; :sections<br/></span><span class='line'>end<br/></span><span class='line'> <br/></span><span class='line'>class Section &lt; ActiveRecord::Base<br/></span><span class='line'>  belongs_to :document<br/></span><span class='line'>  has_many :paragraphs<br/></span><span class='line'>end<br/></span><span class='line'> <br/></span><span class='line'>class Paragraph &lt; ActiveRecord::Base<br/></span><span class='line'>  belongs_to :section<br/></span><span class='line'>end</span></code></pre></td></tr></table></div></figure><br/>With :through => :sections specified, Rails will now understand:<br/><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span><br/></pre></td><td class='code'><pre><code class=''><span class='line'>@document.paragraphs</span></code></pre></td></tr></table></div></figure></p></blockquote>
+
+
+<p>但如何直接赋值似乎成为一个问题，如：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>@document.paragraphs = paragraphs</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>泛型关联</h4>
+
+<p>polymorphic-associations</p>
+
+<blockquote><p>2.9 Polymorphic Associations<br/>A slightly more advanced twist on associations is the polymorphic association. With polymorphic associations, a model can belong to more than one other model, on a single association. For example, you might have a picture model that belongs to either an employee model or a product model. Here’s how this could be declared:<br/><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span><br/><span class='line-number'>2</span><br/><span class='line-number'>3</span><br/><span class='line-number'>4</span><br/><span class='line-number'>5</span><br/><span class='line-number'>6</span><br/><span class='line-number'>7</span><br/><span class='line-number'>8</span><br/><span class='line-number'>9</span><br/><span class='line-number'>10</span><br/><span class='line-number'>11</span><br/></pre></td><td class='code'><pre><code class=''><span class='line'>class Picture &lt; ActiveRecord::Base<br/></span><span class='line'>  belongs_to :imageable, :polymorphic =&gt; true<br/></span><span class='line'>end<br/></span><span class='line'> <br/></span><span class='line'>class Employee &lt; ActiveRecord::Base<br/></span><span class='line'>  has_many :pictures, :as =&gt; :imageable<br/></span><span class='line'>end<br/></span><span class='line'> <br/></span><span class='line'>class Product &lt; ActiveRecord::Base<br/></span><span class='line'>  has_many :pictures, :as =&gt; :imageable<br/></span><span class='line'>end</span></code></pre></td></tr></table></div></figure></p></blockquote>
+
+
+<p>注意 Picture 的 :belong_to 和 Employee 以及 Product 的 :as 保持一致，都是 :imageable</p>
+
+<blockquote><p>From an instance of the Employee model, you can retrieve a collection of pictures: @employee.pictures.</p><p>Similarly, you can retrieve @product.pictures.</p><p>If you have an instance of the Picture model, you can get to its parent via @picture.imageable. To make this work, you need to declare both a foreign key column and a type column in the model that declares the polymorphic interface:<br/><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span><br/><span class='line-number'>2</span><br/><span class='line-number'>3</span><br/><span class='line-number'>4</span><br/><span class='line-number'>5</span><br/><span class='line-number'>6</span><br/><span class='line-number'>7</span><br/><span class='line-number'>8</span><br/><span class='line-number'>9</span><br/><span class='line-number'>10</span><br/></pre></td><td class='code'><pre><code class=''><span class='line'>class CreatePictures &lt; ActiveRecord::Migration<br/></span><span class='line'>  def change<br/></span><span class='line'>    create_table :pictures do |t|<br/></span><span class='line'>      t.string  :name<br/></span><span class='line'>      t.integer :imageable_id<br/></span><span class='line'>      t.string  :imageable_type<br/></span><span class='line'>      t.timestamps<br/></span><span class='line'>    end<br/></span><span class='line'>  end<br/></span><span class='line'>end</span></code></pre></td></tr></table></div></figure><br/>This migration can be simplified by using the t.references form:<br/><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span><br/><span class='line-number'>2</span><br/><span class='line-number'>3</span><br/><span class='line-number'>4</span><br/><span class='line-number'>5</span><br/><span class='line-number'>6</span><br/><span class='line-number'>7</span><br/><span class='line-number'>8</span><br/><span class='line-number'>9</span><br/></pre></td><td class='code'><pre><code class=''><span class='line'>class CreatePictures &lt; ActiveRecord::Migration<br/></span><span class='line'>  def change<br/></span><span class='line'>    create_table :pictures do |t|<br/></span><span class='line'>      t.string :name<br/></span><span class='line'>      t.references :imageable, :polymorphic =&gt; true<br/></span><span class='line'>      t.timestamps<br/></span><span class='line'>    end<br/></span><span class='line'>  end<br/></span><span class='line'>end</span></code></pre></td></tr></table></div></figure></p></blockquote>
+
+
+<p>被关联的数据表（如 pictures）需要定义 xxx_id, xxx_type 两个字段（如 imageable_id, imageable_type )</p>
+
+<p><a href="http://guides.rubyonrails.org/association_basics.html#polymorphic-associations">http://guides.rubyonrails.org/association_basics.html#polymorphic-associations</a></p>
+
+<h4>has_many 的 :inverse_of 用法</h4>
+
+<blockquote><p>拿最简单的one-one来举例子吧：<br/>User has_one Account<br/>Account belongs_to User<br/>在未设置:inverse_of的情况下：<br/><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span><br/><span class='line-number'>2</span><br/><span class='line-number'>3</span><br/><span class='line-number'>4</span><br/><span class='line-number'>5</span><br/><span class='line-number'>6</span><br/><span class='line-number'>7</span><br/><span class='line-number'>8</span><br/></pre></td><td class='code'><pre><code class=''><span class='line'>u = User.first<br/></span><span class='line'>[2] pry(main)&gt; account = u.account<br/></span><span class='line'>  Account Load (0.5ms)  SELECT `accounts`.* FROM `accounts` WHERE `accounts`.`id` = 2 LIMIT 1<br/></span><span class='line'>[3] pry(main)&gt; account.user<br/></span><span class='line'>  User Load (0.6ms)  SELECT `users`.* FROM `users` WHERE `users`.`id` = 3 LIMIT 1<br/></span><span class='line'> ```<br/></span><span class='line'><br/></span><span class='line'>设置了inverse_of 以后：</span></code></pre></td></tr></table></div></figure><br/>class User < ActiveRecord::Base<br/>  has_one :account, :inverse_of => :user<br/>end<br/>[1] pry(main)> u = User.first<br/>  User Load (0.3ms)  SELECT `users`.* FROM `users` LIMIT 1<br/>[2] pry(main)> account = u.account<br/>  Account Load (0.1ms)  SELECT `accounts`.* FROM `accounts` WHERE `accounts`.`user_id` = 3 LIMIT 1<br/>[3] pry(main)> account.user # No SQL Query<br/>&#8220;`<br/>其中，把user.accout这一方法看成函数就是account(a_user) -> a_account<br/>对应的反函数是user(a_account) 一定返回a_user</p></blockquote>
+
+
+<p>参阅：
+<a href="http://ruby-china.org/topics/5375">http://ruby-china.org/topics/5375</a></p>
+
+<h4>更多关于 has_many 等信息参阅：</h4>
+
+<p>[http://guides.rubyonrails.org/association_basics.html#the-has_many-association](http://guides.rubyonrails.org/association_basics.html#the-has_many-association</p>
+
+<p><a href="http://guides.rubyonrails.org/association_basics.html#the-has_many-through-association">http://guides.rubyonrails.org/association_basics.html#the-has_many-through-association</a></p>
+
+<p><a href="http://guides.rubyonrails.org/association_basics.html#has_many-association-reference">http://guides.rubyonrails.org/association_basics.html#has_many-association-reference</a></p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Tech.Blogbin <tech.blogbin@gmail.com></span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-10-04T10:34:00+08:00" pubdate data-updated="true">Oct 4<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/ruby-on-rails-guides-a-guide-to-active-record-associations/'>Ruby on Rails Guides A Guide to Active Record Associations</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://tech-blog.blogbin.info/blog/2012/10/04/guides-dot-rubyonrails-dot-org-association-basics/" data-via="tech_blogbin" data-counturl="http://tech-blog.blogbin.info/blog/2012/10/04/guides-dot-rubyonrails-dot-org-association-basics/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2012/10/03/rails-recipes-rails-3-edition-recipe-1-create-meaningful-many-to-many-relationships/" title="Previous Post: Rails Recipes Rails 3 Edition Recipe 1 Create Meaningful Many-to-Many Relationships">&laquo; Rails Recipes Rails 3 Edition Recipe 1 Create Meaningful Many-to-Many Relationships</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>About Me</h1>
+  <p>Gmail: <a href=mailto:tech.blogbin@gmail.com>tech.blogbin@gmail.com</a></p>
+  <p>MSN: <a href=mailto:tech.blogbin@gmail.com>blogbin@hotmail.com</a></p>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2012/10/04/guides-dot-rubyonrails-dot-org-association-basics/">guides.rubyonrails.org association_basics</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/10/03/rails-recipes-rails-3-edition-recipe-1-create-meaningful-many-to-many-relationships/">Rails Recipes Rails 3 Edition Recipe 1 Create Meaningful Many-to-Many Relationships</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/09/16/using-multiple-ssh-keys/">Using multiple SSH keys</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/09/16/using-gitcafe/">Using GitCafe</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/09/15/could-not-find-gem-rails-equals-3-dot-2-8-ruby-in-the-gems-available-on-this-machine/">Could not find gem 'rails (= 3.2.8) ruby' in the gems available on this machine.</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/09/13/resolving-error-css-dot-scss-has-already-been-required/">Resolving error: .css.scss has already been required</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/09/12/resolving-error-env-ruby-noexec-wrapper-no-such-file-or-directory/">resolving error: env: ruby_noexec_wrapper: No such file or directory</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/09/12/upgrading-to-rails-3-dot-2-8/">Upgrading to Rails 3.2.8</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/09/09/using-bootstrap/">Using Bootstrap and Bootswatch</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/08/31/using-bitbucket/">Using Bitbucket</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+    <h1>Related Posts</h1>
+    <ul class="posts">
+    
+        <li class="related">
+        <a href="/blog/2012/10/03/rails-recipes-rails-3-edition-recipe-1-create-meaningful-many-to-many-relationships/">Rails Recipes Rails 3 Edition Recipe 1 Create Meaningful Many-to-Many Relationships</a>
+        </li>
+    
+        <li class="related">
+        <a href="/blog/2012/09/16/using-multiple-ssh-keys/">Using multiple SSH keys</a>
+        </li>
+    
+        <li class="related">
+        <a href="/blog/2012/09/16/using-gitcafe/">Using GitCafe</a>
+        </li>
+    
+        <li class="related">
+        <a href="/blog/2012/09/15/could-not-find-gem-rails-equals-3-dot-2-8-ruby-in-the-gems-available-on-this-machine/">Could not find gem 'rails (= 3.2.8) ruby' in the gems available on this machine.</a>
+        </li>
+    
+        <li class="related">
+        <a href="/blog/2012/09/13/resolving-error-css-dot-scss-has-already-been-required/">Resolving error: .css.scss has already been required</a>
+        </li>
+    
+    </ul>
+</section>
+<section>
+  <h1>Categories</h1>
+    <ul id="category-list"><li><a href='/blog/categories/apple'>Apple (1)</a></li><li><a href='/blog/categories/assets'>Assets (3)</a></li><li><a href='/blog/categories/bigbluebutton'>BigBlueButton (1)</a></li><li><a href='/blog/categories/binarylogic'>binarylogic (2)</a></li><li><a href='/blog/categories/bitbucket'>Bitbucket (2)</a></li><li><a href='/blog/categories/bootswatch'>Bootswatch (1)</a></li><li><a href='/blog/categories/bundle'>Bundle (8)</a></li><li><a href='/blog/categories/bundler'>Bundler (8)</a></li><li><a href='/blog/categories/centos'>CentOS (3)</a></li><li><a href='/blog/categories/coffee-rails'>coffee-rails (1)</a></li><li><a href='/blog/categories/configuration'>Configuration (1)</a></li><li><a href='/blog/categories/css'>CSS (2)</a></li><li><a href='/blog/categories/deployment'>Deployment (3)</a></li><li><a href='/blog/categories/dhh'>DHH (1)</a></li><li><a href='/blog/categories/domain'>Domain (1)</a></li><li><a href='/blog/categories/eznow'>Eznow (1)</a></li><li><a href='/blog/categories/firebug'>Firebug (1)</a></li><li><a href='/blog/categories/firefox'>Firefox (1)</a></li><li><a href='/blog/categories/firewall'>Firewall (1)</a></li><li><a href='/blog/categories/gem'>Gem (9)</a></li><li><a href='/blog/categories/gemfile'>Gemfile (8)</a></li><li><a href='/blog/categories/git'>Git (5)</a></li><li><a href='/blog/categories/git-flow'>git-flow (1)</a></li><li><a href='/blog/categories/gitcafe'>GitCafe (2)</a></li><li><a href='/blog/categories/github'>GitHub (4)</a></li><li><a href='/blog/categories/github'>Github (2)</a></li><li><a href='/blog/categories/gitlab'>Gitlab (1)</a></li><li><a href='/blog/categories/heroku'>Heroku (1)</a></li><li><a href='/blog/categories/iftop'>iftop (1)</a></li><li><a href='/blog/categories/installation'>Installation (1)</a></li><li><a href='/blog/categories/javascript'>JavaScript (1)</a></li><li><a href='/blog/categories/jbuilder'>JBuilder (1)</a></li><li><a href='/blog/categories/json'>JSON (1)</a></li><li><a href='/blog/categories/latest-specs'>latest_specs (1)</a></li><li><a href='/blog/categories/macos-x'>MacOS X (1)</a></li><li><a href='/blog/categories/metaprogramming-ruby'>MetaProgramming Ruby (7)</a></li><li><a href='/blog/categories/mountain-lion-10-8'>Mountain Lion 10.8 (1)</a></li><li><a href='/blog/categories/neerajcse'>neerajcse (1)</a></li><li><a href='/blog/categories/net'>Net (1)</a></li><li><a href='/blog/categories/network'>Network (1)</a></li><li><a href='/blog/categories/new-relic'>New Relic (2)</a></li><li><a href='/blog/categories/octopress'>Octopress (6)</a></li><li><a href='/blog/categories/octopress-plugin'>Octopress Plugin (2)</a></li><li><a href='/blog/categories/octopress-calendar-aside'>octopress-calendar-aside (1)</a></li><li><a href='/blog/categories/octopress-calendar-tagcloud'>octopress-calendar-tagcloud (1)</a></li><li><a href='/blog/categories/python'>Python (1)</a></li><li><a href='/blog/categories/rails'>Rails (11)</a></li><li><a href='/blog/categories/rails-3-1-0'>Rails 3.1.0 (1)</a></li><li><a href='/blog/categories/rails-3-2-8'>Rails 3.2.8 (1)</a></li><li><a href='/blog/categories/rails-recipes-rails-3-edition'>Rails Recipes Rails 3 Edition (1)</a></li><li><a href='/blog/categories/recipe-1-create-meaningful-many-to-many-relationships'>Recipe 1 Create Meaningful Many-to-Many Relationships (1)</a></li><li><a href='/blog/categories/redmine'>Redmine (1)</a></li><li><a href='/blog/categories/rmagick'>RMagick (1)</a></li><li><a href='/blog/categories/ror'>RoR (9)</a></li><li><a href='/blog/categories/ruby'>Ruby (19)</a></li><li><a href='/blog/categories/ruby-on-rails-guides-a-guide-to-active-record-associations'>Ruby on Rails Guides A Guide to Active Record Associations (1)</a></li><li><a href='/blog/categories/rubyonrails'>RubyOnRails (9)</a></li><li><a href='/blog/categories/sass'>SASS (2)</a></li><li><a href='/blog/categories/sass-rails'>sass-rails (1)</a></li><li><a href='/blog/categories/scss'>SCSS (2)</a></li><li><a href='/blog/categories/security'>Security (1)</a></li><li><a href='/blog/categories/settingslogic'>Settingslogic (2)</a></li><li><a href='/blog/categories/sina-weibo-sdk'>Sina Weibo SDK (1)</a></li><li><a href='/blog/categories/sns'>SNS (1)</a></li><li><a href='/blog/categories/specs'>specs (1)</a></li><li><a href='/blog/categories/ssh'>SSH (1)</a></li><li><a href='/blog/categories/tokkonopapa'>tokkonopapa (1)</a></li><li><a href='/blog/categories/twitter-bootstrap'>Twitter Bootstrap (1)</a></li><li><a href='/blog/categories/ubuntu'>Ubuntu (2)</a></li><li><a href='/blog/categories/ubuntu-server-12-04-amd64'>Ubuntu Server 12.04 amd64 (1)</a></li><li><a href='/blog/categories/uglifier'>uglifier (1)</a></li><li><a href='/blog/categories/yum'>yum (1)</a></li></ul>
+</section>
+<section>
+  <h1>Tag Cloud</h1>
+    <span id="tag-cloud"><a href='/blog/categories/apple' style='font-size: 103.15789473684211%'>Apple(1)</a> <a href='/blog/categories/assets' style='font-size: 109.47368421052632%'>Assets(3)</a> <a href='/blog/categories/bigbluebutton' style='font-size: 103.15789473684211%'>BigBlueButton(1)</a> <a href='/blog/categories/binarylogic' style='font-size: 106.3157894736842%'>binarylogic(2)</a> <a href='/blog/categories/bitbucket' style='font-size: 106.3157894736842%'>Bitbucket(2)</a> <a href='/blog/categories/bootswatch' style='font-size: 103.15789473684211%'>Bootswatch(1)</a> <a href='/blog/categories/bundle' style='font-size: 125.26315789473685%'>Bundle(8)</a> <a href='/blog/categories/bundler' style='font-size: 125.26315789473685%'>Bundler(8)</a> <a href='/blog/categories/centos' style='font-size: 109.47368421052632%'>CentOS(3)</a> <a href='/blog/categories/coffee-rails' style='font-size: 103.15789473684211%'>coffee-rails(1)</a> <a href='/blog/categories/configuration' style='font-size: 103.15789473684211%'>Configuration(1)</a> <a href='/blog/categories/css' style='font-size: 106.3157894736842%'>CSS(2)</a> <a href='/blog/categories/deployment' style='font-size: 109.47368421052632%'>Deployment(3)</a> <a href='/blog/categories/dhh' style='font-size: 103.15789473684211%'>DHH(1)</a> <a href='/blog/categories/domain' style='font-size: 103.15789473684211%'>Domain(1)</a> <a href='/blog/categories/eznow' style='font-size: 103.15789473684211%'>Eznow(1)</a> <a href='/blog/categories/firebug' style='font-size: 103.15789473684211%'>Firebug(1)</a> <a href='/blog/categories/firefox' style='font-size: 103.15789473684211%'>Firefox(1)</a> <a href='/blog/categories/firewall' style='font-size: 103.15789473684211%'>Firewall(1)</a> <a href='/blog/categories/gem' style='font-size: 128.42105263157896%'>Gem(9)</a> <a href='/blog/categories/gemfile' style='font-size: 125.26315789473685%'>Gemfile(8)</a> <a href='/blog/categories/git' style='font-size: 115.78947368421052%'>Git(5)</a> <a href='/blog/categories/git-flow' style='font-size: 103.15789473684211%'>git-flow(1)</a> <a href='/blog/categories/gitcafe' style='font-size: 106.3157894736842%'>GitCafe(2)</a> <a href='/blog/categories/github' style='font-size: 112.63157894736842%'>GitHub(4)</a> <a href='/blog/categories/github' style='font-size: 106.3157894736842%'>Github(2)</a> <a href='/blog/categories/gitlab' style='font-size: 103.15789473684211%'>Gitlab(1)</a> <a href='/blog/categories/heroku' style='font-size: 103.15789473684211%'>Heroku(1)</a> <a href='/blog/categories/iftop' style='font-size: 103.15789473684211%'>iftop(1)</a> <a href='/blog/categories/installation' style='font-size: 103.15789473684211%'>Installation(1)</a> <a href='/blog/categories/javascript' style='font-size: 103.15789473684211%'>JavaScript(1)</a> <a href='/blog/categories/jbuilder' style='font-size: 103.15789473684211%'>JBuilder(1)</a> <a href='/blog/categories/json' style='font-size: 103.15789473684211%'>JSON(1)</a> <a href='/blog/categories/latest-specs' style='font-size: 103.15789473684211%'>latest_specs(1)</a> <a href='/blog/categories/macos-x' style='font-size: 103.15789473684211%'>MacOS X(1)</a> <a href='/blog/categories/metaprogramming-ruby' style='font-size: 122.10526315789474%'>MetaProgramming Ruby(7)</a> <a href='/blog/categories/mountain-lion-10-8' style='font-size: 103.15789473684211%'>Mountain Lion 10.8(1)</a> <a href='/blog/categories/neerajcse' style='font-size: 103.15789473684211%'>neerajcse(1)</a> <a href='/blog/categories/net' style='font-size: 103.15789473684211%'>Net(1)</a> <a href='/blog/categories/network' style='font-size: 103.15789473684211%'>Network(1)</a> <a href='/blog/categories/new-relic' style='font-size: 106.3157894736842%'>New Relic(2)</a> <a href='/blog/categories/octopress' style='font-size: 118.94736842105263%'>Octopress(6)</a> <a href='/blog/categories/octopress-plugin' style='font-size: 106.3157894736842%'>Octopress Plugin(2)</a> <a href='/blog/categories/octopress-calendar-aside' style='font-size: 103.15789473684211%'>octopress-calendar-aside(1)</a> <a href='/blog/categories/octopress-calendar-tagcloud' style='font-size: 103.15789473684211%'>octopress-calendar-tagcloud(1)</a> <a href='/blog/categories/python' style='font-size: 103.15789473684211%'>Python(1)</a> <a href='/blog/categories/rails' style='font-size: 134.73684210526315%'>Rails(11)</a> <a href='/blog/categories/rails-3-1-0' style='font-size: 103.15789473684211%'>Rails 3.1.0(1)</a> <a href='/blog/categories/rails-3-2-8' style='font-size: 103.15789473684211%'>Rails 3.2.8(1)</a> <a href='/blog/categories/rails-recipes-rails-3-edition' style='font-size: 103.15789473684211%'>Rails Recipes Rails 3 Edition(1)</a> <a href='/blog/categories/recipe-1-create-meaningful-many-to-many-relationships' style='font-size: 103.15789473684211%'>Recipe 1 Create Meaningful Many-to-Many Relationships(1)</a> <a href='/blog/categories/redmine' style='font-size: 103.15789473684211%'>Redmine(1)</a> <a href='/blog/categories/rmagick' style='font-size: 103.15789473684211%'>RMagick(1)</a> <a href='/blog/categories/ror' style='font-size: 128.42105263157896%'>RoR(9)</a> <a href='/blog/categories/ruby' style='font-size: 160.0%'>Ruby(19)</a> <a href='/blog/categories/ruby-on-rails-guides-a-guide-to-active-record-associations' style='font-size: 103.15789473684211%'>Ruby on Rails Guides A Guide to Active Record Associations(1)</a> <a href='/blog/categories/rubyonrails' style='font-size: 128.42105263157896%'>RubyOnRails(9)</a> <a href='/blog/categories/sass' style='font-size: 106.3157894736842%'>SASS(2)</a> <a href='/blog/categories/sass-rails' style='font-size: 103.15789473684211%'>sass-rails(1)</a> <a href='/blog/categories/scss' style='font-size: 106.3157894736842%'>SCSS(2)</a> <a href='/blog/categories/security' style='font-size: 103.15789473684211%'>Security(1)</a> <a href='/blog/categories/settingslogic' style='font-size: 106.3157894736842%'>Settingslogic(2)</a> <a href='/blog/categories/sina-weibo-sdk' style='font-size: 103.15789473684211%'>Sina Weibo SDK(1)</a> <a href='/blog/categories/sns' style='font-size: 103.15789473684211%'>SNS(1)</a> <a href='/blog/categories/specs' style='font-size: 103.15789473684211%'>specs(1)</a> <a href='/blog/categories/ssh' style='font-size: 103.15789473684211%'>SSH(1)</a> <a href='/blog/categories/tokkonopapa' style='font-size: 103.15789473684211%'>tokkonopapa(1)</a> <a href='/blog/categories/twitter-bootstrap' style='font-size: 103.15789473684211%'>Twitter Bootstrap(1)</a> <a href='/blog/categories/ubuntu' style='font-size: 106.3157894736842%'>Ubuntu(2)</a> <a href='/blog/categories/ubuntu-server-12-04-amd64' style='font-size: 103.15789473684211%'>Ubuntu Server 12.04 amd64(1)</a> <a href='/blog/categories/uglifier' style='font-size: 103.15789473684211%'>uglifier(1)</a> <a href='/blog/categories/yum' style='font-size: 103.15789473684211%'>yum(1)</a> </span>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/blogbin">@blogbin</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'blogbin',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+<section class="googleplus">
+  <h1>
+    <a href="https://plus.google.com/tech.blogbin@gmail.com?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+<!--
+    Calendar aside/plugin for octopress blogging framework.
+    Copyright (C) 2012  Neeraj Kumar ( neerajpkumar@gmail.com, neerajkumar@outlook.com)
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+--!>
+<style>
+	.highlighted-calendar-day
+	{
+		color : #CCC;
+		font-weight : bold;
+	}
+	
+	.calendar-header-day{
+		font-weight : bold;
+		color : #AAA;
+		font-size : 14px;
+	}
+	
+	.highlighted-calendar-day a
+	{
+		
+	}
+	
+	.prev-link
+	{
+		float:left;
+	}
+	
+	.next-link
+	{
+		float: right;
+	}
+	.calendar-day
+	{
+		color : #888;
+		font-weight : 12px;
+	}
+	
+	.calendar-table
+	{
+		width : 100%;
+		
+	}
+	
+	.calendar-table td
+	{
+		border-right : dotted 1px lightgrey;
+		text-align : center;
+	}
+	
+	.calendar-table td:last-child
+	{
+		border-right : none;
+	}
+	
+	.calendar-table th
+	{
+		background-color : lightgrey;
+		text-align : center;
+	}
+	.prevCalendarLink img
+	{	
+		
+		width : 20px;
+		height : 20px;
+		border: 0px;
+		float: left;
+		
+	}
+	
+	.nextCalendarLink img
+	{
+		
+		width : 20px;
+		height: 20px;
+		border: 0px;
+		float: right;
+		
+	}
+</style>
+<script type="text/javascript" src="/javascripts/calendar.js"></script>
+<section id="calendarDiv">
+	<span style="display:block" id="calendarSpan"></span>
+	<div>
+		<a href="#" class="previousMonth show"/><a href="#" class="nextMonth hide"/>
+	</div>
+</section>
+<script type="text/javascript">
+  
+monthCalendar = function(id,year,month)
+{
+  var highlightArray = new Array();
+  var hightlightLinks = new Array();
+  
+  highlightArray.push('10/04/2012');
+  hightlightLinks.push('/blog/2012/10/04/guides-dot-rubyonrails-dot-org-association-basics/');
+  
+  highlightArray.push('10/03/2012');
+  hightlightLinks.push('/blog/2012/10/03/rails-recipes-rails-3-edition-recipe-1-create-meaningful-many-to-many-relationships/');
+  
+  highlightArray.push('09/16/2012');
+  hightlightLinks.push('/blog/2012/09/16/using-multiple-ssh-keys/');
+  
+  highlightArray.push('09/16/2012');
+  hightlightLinks.push('/blog/2012/09/16/using-gitcafe/');
+  
+  highlightArray.push('09/15/2012');
+  hightlightLinks.push('/blog/2012/09/15/could-not-find-gem-rails-equals-3-dot-2-8-ruby-in-the-gems-available-on-this-machine/');
+  
+  highlightArray.push('09/13/2012');
+  hightlightLinks.push('/blog/2012/09/13/resolving-error-css-dot-scss-has-already-been-required/');
+  
+  highlightArray.push('09/12/2012');
+  hightlightLinks.push('/blog/2012/09/12/resolving-error-env-ruby-noexec-wrapper-no-such-file-or-directory/');
+  
+  highlightArray.push('09/12/2012');
+  hightlightLinks.push('/blog/2012/09/12/upgrading-to-rails-3-dot-2-8/');
+  
+  highlightArray.push('09/09/2012');
+  hightlightLinks.push('/blog/2012/09/09/using-bootstrap/');
+  
+  highlightArray.push('08/31/2012');
+  hightlightLinks.push('/blog/2012/08/31/using-bitbucket/');
+  		
+  var cal = new Calendar(month,year,highlightArray,hightlightLinks);
+  cal.generateHTML(id);
+  var element = document.getElementById(id);
+  element.innerHTML = cal.getHTML();
+}
+	
+loadCalendar = function(){
+  var now = new Date();
+  var month = now.getMonth();
+  var year = now.getFullYear();
+  monthCalendar('calendarDiv',year,month);
+}
+	
+	if(Array.prototype.indexOf == undefined)
+	{
+		 Array.prototype.indexOf = function (searchElement /*, fromIndex */ ) {
+			"use strict";
+			if (this == null) {
+				throw new TypeError();
+			}
+			var t = Object(this);
+			var len = t.length >>> 0;
+			if (len === 0) {
+				return -1;
+			}
+			var n = 0;
+			if (arguments.length > 0) {
+				n = Number(arguments[1]);
+				if (n != n) { // shortcut for verifying if it's NaN
+					n = 0;
+				} else if (n != 0 && n != Infinity && n != -Infinity) {
+					n = (n > 0 || -1) * Math.floor(Math.abs(n));
+				}
+			}
+			if (n >= len) {
+				return -1;
+			}
+			var k = n >= 0 ? n : Math.max(len - Math.abs(n), 0);
+			for (; k < len; k++) {
+				if (k in t && t[k] === searchElement) {
+					return k;
+				}
+			}
+			return -1;
+		}
+	}
+$(document).ready(function(){
+  loadCalendar();
+});
+</script>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - Tech Blogbin <tech.blogbin@gmail.com> -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'tech-blogbin-blog';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://tech-blog.blogbin.info/blog/2012/10/04/guides-dot-rubyonrails-dot-org-association-basics/';
+        var disqus_url = 'http://tech-blog.blogbin.info/blog/2012/10/04/guides-dot-rubyonrails-dot-org-association-basics/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fd6efaaa40f50ef1ec634f16880c40100' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+</body>
+</html>

@@ -4,7 +4,7 @@
   <title><![CDATA[Tech.Blogbin's Blog]]></title>
   <link href="http://tech-blog.blogbin.info/atom.xml" rel="self"/>
   <link href="http://tech-blog.blogbin.info/"/>
-  <updated>2012-10-04T00:13:46+08:00</updated>
+  <updated>2012-10-04T10:40:37+08:00</updated>
   <id>http://tech-blog.blogbin.info/</id>
   <author>
     <name><![CDATA[Tech Blogbin ]]></name>
@@ -14,11 +14,70 @@
 
   
   <entry>
+    <title type="html"><![CDATA[guides.rubyonrails.org association_basics]]></title>
+    <link href="http://tech-blog.blogbin.info/blog/2012/10/04/guides-dot-rubyonrails-dot-org-association-basics/"/>
+    <updated>2012-10-04T10:34:00+08:00</updated>
+    <id>http://tech-blog.blogbin.info/blog/2012/10/04/guides-dot-rubyonrails-dot-org-association-basics</id>
+    <content type="html"><![CDATA[<h4>association_basics</h4>
+
+<p>学习 Rails ActiveRecord 中 has_many 的 :through, :as, source, :inverse_of 等几个参数的用法</p>
+
+<!--more-->
+
+
+<p>has_many 的 :through 可以快速获得嵌套 has_many 的对象。如：</p>
+
+<blockquote><p>The has_many :through association is also useful for setting up “shortcuts” through nested has_many associations. For example, if a document has many sections, and a section has many paragraphs, you may sometimes want to get a simple collection of all paragraphs in the document. You could set that up this way:<br/><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span><br/><span class='line-number'>2</span><br/><span class='line-number'>3</span><br/><span class='line-number'>4</span><br/><span class='line-number'>5</span><br/><span class='line-number'>6</span><br/><span class='line-number'>7</span><br/><span class='line-number'>8</span><br/><span class='line-number'>9</span><br/><span class='line-number'>10</span><br/><span class='line-number'>11</span><br/><span class='line-number'>12</span><br/><span class='line-number'>13</span><br/></pre></td><td class='code'><pre><code class=''><span class='line'>class Document &lt; ActiveRecord::Base<br/></span><span class='line'>  has_many :sections<br/></span><span class='line'>  has_many :paragraphs, :through =&gt; :sections<br/></span><span class='line'>end<br/></span><span class='line'> <br/></span><span class='line'>class Section &lt; ActiveRecord::Base<br/></span><span class='line'>  belongs_to :document<br/></span><span class='line'>  has_many :paragraphs<br/></span><span class='line'>end<br/></span><span class='line'> <br/></span><span class='line'>class Paragraph &lt; ActiveRecord::Base<br/></span><span class='line'>  belongs_to :section<br/></span><span class='line'>end</span></code></pre></td></tr></table></div></figure><br/>With :through => :sections specified, Rails will now understand:<br/><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span><br/></pre></td><td class='code'><pre><code class=''><span class='line'>@document.paragraphs</span></code></pre></td></tr></table></div></figure></p></blockquote>
+
+
+<p>但如何直接赋值似乎成为一个问题，如：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>@document.paragraphs = paragraphs</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>泛型关联</h4>
+
+<p>polymorphic-associations</p>
+
+<blockquote><p>2.9 Polymorphic Associations<br/>A slightly more advanced twist on associations is the polymorphic association. With polymorphic associations, a model can belong to more than one other model, on a single association. For example, you might have a picture model that belongs to either an employee model or a product model. Here’s how this could be declared:<br/><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span><br/><span class='line-number'>2</span><br/><span class='line-number'>3</span><br/><span class='line-number'>4</span><br/><span class='line-number'>5</span><br/><span class='line-number'>6</span><br/><span class='line-number'>7</span><br/><span class='line-number'>8</span><br/><span class='line-number'>9</span><br/><span class='line-number'>10</span><br/><span class='line-number'>11</span><br/></pre></td><td class='code'><pre><code class=''><span class='line'>class Picture &lt; ActiveRecord::Base<br/></span><span class='line'>  belongs_to :imageable, :polymorphic =&gt; true<br/></span><span class='line'>end<br/></span><span class='line'> <br/></span><span class='line'>class Employee &lt; ActiveRecord::Base<br/></span><span class='line'>  has_many :pictures, :as =&gt; :imageable<br/></span><span class='line'>end<br/></span><span class='line'> <br/></span><span class='line'>class Product &lt; ActiveRecord::Base<br/></span><span class='line'>  has_many :pictures, :as =&gt; :imageable<br/></span><span class='line'>end</span></code></pre></td></tr></table></div></figure></p></blockquote>
+
+
+<p>注意 Picture 的 :belong_to 和 Employee 以及 Product 的 :as 保持一致，都是 :imageable</p>
+
+<blockquote><p>From an instance of the Employee model, you can retrieve a collection of pictures: @employee.pictures.</p><p>Similarly, you can retrieve @product.pictures.</p><p>If you have an instance of the Picture model, you can get to its parent via @picture.imageable. To make this work, you need to declare both a foreign key column and a type column in the model that declares the polymorphic interface:<br/><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span><br/><span class='line-number'>2</span><br/><span class='line-number'>3</span><br/><span class='line-number'>4</span><br/><span class='line-number'>5</span><br/><span class='line-number'>6</span><br/><span class='line-number'>7</span><br/><span class='line-number'>8</span><br/><span class='line-number'>9</span><br/><span class='line-number'>10</span><br/></pre></td><td class='code'><pre><code class=''><span class='line'>class CreatePictures &lt; ActiveRecord::Migration<br/></span><span class='line'>  def change<br/></span><span class='line'>    create_table :pictures do |t|<br/></span><span class='line'>      t.string  :name<br/></span><span class='line'>      t.integer :imageable_id<br/></span><span class='line'>      t.string  :imageable_type<br/></span><span class='line'>      t.timestamps<br/></span><span class='line'>    end<br/></span><span class='line'>  end<br/></span><span class='line'>end</span></code></pre></td></tr></table></div></figure><br/>This migration can be simplified by using the t.references form:<br/><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span><br/><span class='line-number'>2</span><br/><span class='line-number'>3</span><br/><span class='line-number'>4</span><br/><span class='line-number'>5</span><br/><span class='line-number'>6</span><br/><span class='line-number'>7</span><br/><span class='line-number'>8</span><br/><span class='line-number'>9</span><br/></pre></td><td class='code'><pre><code class=''><span class='line'>class CreatePictures &lt; ActiveRecord::Migration<br/></span><span class='line'>  def change<br/></span><span class='line'>    create_table :pictures do |t|<br/></span><span class='line'>      t.string :name<br/></span><span class='line'>      t.references :imageable, :polymorphic =&gt; true<br/></span><span class='line'>      t.timestamps<br/></span><span class='line'>    end<br/></span><span class='line'>  end<br/></span><span class='line'>end</span></code></pre></td></tr></table></div></figure></p></blockquote>
+
+
+<p>被关联的数据表（如 pictures）需要定义 xxx_id, xxx_type 两个字段（如 imageable_id, imageable_type )</p>
+
+<p><a href="http://guides.rubyonrails.org/association_basics.html#polymorphic-associations">http://guides.rubyonrails.org/association_basics.html#polymorphic-associations</a></p>
+
+<h4>has_many 的 :inverse_of 用法</h4>
+
+<blockquote><p>拿最简单的one-one来举例子吧：<br/>User has_one Account<br/>Account belongs_to User<br/>在未设置:inverse_of的情况下：<br/><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span><br/><span class='line-number'>2</span><br/><span class='line-number'>3</span><br/><span class='line-number'>4</span><br/><span class='line-number'>5</span><br/><span class='line-number'>6</span><br/><span class='line-number'>7</span><br/><span class='line-number'>8</span><br/></pre></td><td class='code'><pre><code class=''><span class='line'>u = User.first<br/></span><span class='line'>[2] pry(main)&gt; account = u.account<br/></span><span class='line'>  Account Load (0.5ms)  SELECT `accounts`.* FROM `accounts` WHERE `accounts`.`id` = 2 LIMIT 1<br/></span><span class='line'>[3] pry(main)&gt; account.user<br/></span><span class='line'>  User Load (0.6ms)  SELECT `users`.* FROM `users` WHERE `users`.`id` = 3 LIMIT 1<br/></span><span class='line'> ```<br/></span><span class='line'><br/></span><span class='line'>设置了inverse_of 以后：</span></code></pre></td></tr></table></div></figure><br/>class User < ActiveRecord::Base<br/>  has_one :account, :inverse_of => :user<br/>end<br/>[1] pry(main)> u = User.first<br/>  User Load (0.3ms)  SELECT `users`.* FROM `users` LIMIT 1<br/>[2] pry(main)> account = u.account<br/>  Account Load (0.1ms)  SELECT `accounts`.* FROM `accounts` WHERE `accounts`.`user_id` = 3 LIMIT 1<br/>[3] pry(main)> account.user # No SQL Query<br/>&#8220;`<br/>其中，把user.accout这一方法看成函数就是account(a_user) -> a_account<br/>对应的反函数是user(a_account) 一定返回a_user</p></blockquote>
+
+
+<p>参阅：
+<a href="http://ruby-china.org/topics/5375">http://ruby-china.org/topics/5375</a></p>
+
+<h4>更多关于 has_many 等信息参阅：</h4>
+
+<p>[http://guides.rubyonrails.org/association_basics.html#the-has_many-association](http://guides.rubyonrails.org/association_basics.html#the-has_many-association</p>
+
+<p><a href="http://guides.rubyonrails.org/association_basics.html#the-has_many-through-association">http://guides.rubyonrails.org/association_basics.html#the-has_many-through-association</a></p>
+
+<p><a href="http://guides.rubyonrails.org/association_basics.html#has_many-association-reference">http://guides.rubyonrails.org/association_basics.html#has_many-association-reference</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Rails Recipes Rails 3 Edition Recipe 1 Create Meaningful Many-to-Many Relationships]]></title>
     <link href="http://tech-blog.blogbin.info/blog/2012/10/03/rails-recipes-rails-3-edition-recipe-1-create-meaningful-many-to-many-relationships/"/>
     <updated>2012-10-03T23:50:00+08:00</updated>
     <id>http://tech-blog.blogbin.info/blog/2012/10/03/rails-recipes-rails-3-edition-recipe-1-create-meaningful-many-to-many-relationships</id>
-    <content type="html"><![CDATA[<p>Rails 中 ActiveRecord 两个模型之间的多对多关系很少简单用 has_and_belong_to_many 来表示，而是引入第三个模型（关联模型），将之前 A 和 B 的多对多关系，拆分为 A 和 C 的一对多，
+    <content type="html"><![CDATA[<h4>关联模型</h4>
+
+<p>Rails 中 ActiveRecord 两个模型之间的多对多关系很少简单用 has_and_belong_to_many 来表示，而是引入第三个模型（关联模型），将之前 A 和 B 的多对多关系，拆分为 A 和 C 的一对多，
 B 和 C 的一对多。引入新的关联模型 C ，很容易在 A 和 B 关系上定义一些属性。</p>
 
 <!--more-->
@@ -49,6 +108,8 @@ B 和 C 的一对多。引入新的关联模型 C ，很容易在 A 和 B 关系
 
 <p><a href="http://guides.rubyonrails.org/migrations.html#creating-a-table">http://guides.rubyonrails.org/migrations.html#creating-a-table</a></p>
 
+<h4>多个 has_many</h4>
+
 <p>一个 Association 可以根据需要定义不同的 has_many，如：</p>
 
 <figure class='code'><figcaption><span>ManyToManyWithAttributesOnTheRelationship/app/models/magazine.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -70,7 +131,20 @@ B 和 C 的一对多。引入新的关联模型 C ，很容易在 A 和 B 关系
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>更多关于 has_many 和 :through 信息参阅：</p>
+<h4>has_many 中 :calss 和 :source 的区别</h4>
+
+<p>无法通过 has_many 的一个参数自动推断出 Rails ActiveRecord 模型名称时，如果 has_many 如果使用 :through ，需要设置 :source 参数，否者使用 :calss_name 参数。</p>
+
+<blockquote><p><figure class='code'><figcaption><span>ManyToManyWithAttributesOnTheRelationship/app/models/magazine.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span><br/><span class='line-number'>2</span><br/><span class='line-number'>3</span><br/><span class='line-number'>4</span><br/><span class='line-number'>5</span><br/><span class='line-number'>6</span><br/><span class='line-number'>7</span><br/><span class='line-number'>8</span><br/><span class='line-number'>9</span><br/><span class='line-number'>10</span><br/><span class='line-number'>11</span><br/><span class='line-number'>12</span><br/><span class='line-number'>13</span><br/><span class='line-number'>14</span><br/><span class='line-number'>15</span><br/><span class='line-number'>16</span><br/><span class='line-number'>17</span><br/></pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Relationship</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span><br/></span><span class='line'>  <span class="n">belongs_to</span> <span class="ss">:user</span><span class="p">,</span><br/></span><span class='line'>    <span class="ss">:class_name</span> <span class="o">=&gt;</span> <span class="s1">&#39;User&#39;</span><span class="p">,</span> <span class="ss">:foreign_key</span> <span class="o">=&gt;</span> <span class="s1">&#39;user_id&#39;</span><br/></span><span class='line'>  <span class="n">belongs_to</span> <span class="ss">:buddy</span><span class="p">,</span><br/></span><span class='line'>    <span class="ss">:class_name</span> <span class="o">=&gt;</span> <span class="s1">&#39;User&#39;</span><span class="p">,</span> <span class="ss">:foreign_key</span> <span class="o">=&gt;</span> <span class="s1">&#39;buddy_id&#39;</span><br/></span><span class='line'><span class="k">end</span><br/></span><span class='line'><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span><br/></span><span class='line'>  <span class="n">has_many</span> <span class="ss">:relations_to</span><span class="p">,</span><br/></span><span class='line'>    <span class="ss">:foreign_key</span> <span class="o">=&gt;</span> <span class="s1">&#39;user_id&#39;</span><span class="p">,</span>  <span class="ss">:class_name</span> <span class="o">=&gt;</span> <span class="s1">&#39;Relationship&#39;</span><br/></span><span class='line'>  <span class="n">has_many</span> <span class="ss">:relations_from</span><span class="p">,</span><br/></span><span class='line'>    <span class="ss">:foreign_key</span> <span class="o">=&gt;</span> <span class="s1">&#39;buddy_id&#39;</span><span class="p">,</span> <span class="ss">:class_name</span> <span class="o">=&gt;</span> <span class="s1">&#39;Relationship&#39;</span><br/></span><span class='line'><br/></span><span class='line'>  <span class="n">has_many</span> <span class="ss">:linked_to</span><span class="p">,</span><br/></span><span class='line'>    <span class="ss">:through</span> <span class="o">=&gt;</span> <span class="ss">:relations_to</span><span class="p">,</span>   <span class="ss">:source</span> <span class="o">=&gt;</span> <span class="ss">:buddy</span><br/></span><span class='line'>  <span class="n">has_many</span> <span class="ss">:linked_from</span><span class="p">,</span><br/></span><span class='line'>    <span class="ss">:through</span> <span class="o">=&gt;</span> <span class="ss">:relations_from</span><span class="p">,</span> <span class="ss">:source</span> <span class="o">=&gt;</span> <span class="ss">:user</span><br/></span><span class='line'><span class="k">end</span><br/></span></code></pre></td></tr></table></div></figure></p></blockquote>
+
+
+<p>参阅：</p>
+
+<p><a href="http://stackoverflow.com/questions/4632408/need-help-to-understand-source-option-of-has-one-has-many-through-of-rails">http://stackoverflow.com/questions/4632408/need-help-to-understand-source-option-of-has-one-has-many-through-of-rails</a></p>
+
+<p><a href="http://hlee.iteye.com/blog/1254723">http://hlee.iteye.com/blog/1254723</a></p>
+
+<h4>更多关于 has_many 和 :through 信息参阅：</h4>
 
 <p>[http://guides.rubyonrails.org/association_basics.html#the-has_many-association](http://guides.rubyonrails.org/association_basics.html#the-has_many-association</p>
 
@@ -2318,72 +2392,6 @@ neerajcse/octopress-calendar-aside · GitHub
 
 
 <p>看看，不需要指定 yml 文件和 env 环境，非常容易。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Monitoring server performance with New Relic]]></title>
-    <link href="http://tech-blog.blogbin.info/blog/2012/08/22/monitoring-server-performance-with-new-relic/"/>
-    <updated>2012-08-22T21:21:00+08:00</updated>
-    <id>http://tech-blog.blogbin.info/blog/2012/08/22/monitoring-server-performance-with-new-relic</id>
-    <content type="html"><![CDATA[<p>使用 New Relic 监控服务端性能，优点：</p>
-
-<ol>
-<li><p>免费帐号可以监控任意数量服务器常规性能指标，如 CPU, Memory, DISK, I/O 和 Network；</p></li>
-<li><p>被监控的服务器采用 rpm + yum 方式安装监控代理，安装无损系统；</p></li>
-<li><p>监控数据主动发送到 New Relic，一般无需调整防火墙策略；</p></li>
-<li><p>New Relic 和 Rails 核心团队合作，可以深入监控 Rails 项目执行情况（如页面执行耗时，SQL 执行耗时等），但这需要收费，或者申请试用一段时间；</p></li>
-</ol>
-
-
-<p>和 Zabbix 相比，省去本地安装监控中心的工作，本地监控代理安装也非常简单。</p>
-
-<p>参阅：
-Web Application Performance Management (APM) : New Relic
-<a href="www.newrelic.com">www.newrelic.com</a></p>
-
-<!--more-->
-
-
-<h5>1. 监控服务器</h5>
-
-<p>安装监控代理过程非常简单，以 CentOS 6.2 为例，执行以下命令：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>sudo rpm -Uvh http://download.newrelic.com/pub/newrelic/el5/i386/newrelic-repo-5-3.noarch.rpm
-</span><span class='line'>
-</span><span class='line'>sudo yum install -y newrelic-sysmond
-</span><span class='line'>
-</span><span class='line'># 其中 a56esdse7cfdsfa5a49fbfdsdsfdsd1wewfwfew28 为您的监控 license_key
-</span><span class='line'>sudo nrsysmond-config --set license_key=a56esdse7cfdsfa5a49fbfdsdsfdsd1wewfwfew28
-</span><span class='line'>
-</span><span class='line'>sudo /etc/init.d/newrelic-sysmond start</span></code></pre></td></tr></table></div></figure>
-
-
-<h5>2. 监控 Rails 项目</h5>
-
-<figure class='code'><figcaption><span>Gemfile</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">gem</span> <span class="s2">&quot;newrelic_rpm&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>运行 bundle install</p>
-
-<p>将 New Relic 提供的 newrelic.yml 部署在 config 目录</p>
-
-<p>最后按开发模式启动 Rails 项目</p>
-
-<p>浏览器访问 <a href="http://localhost:3000/newrelic">http://localhost:3000/newrelic</a>，效果如下：</p>
-
-<blockquote><p><img src="http://tech-blog.blogbin.info/images/2012-08-22-monitoring-server-performance-with-new-relic/new_relic_development.jpg"></p></blockquote>
-
 ]]></content>
   </entry>
   

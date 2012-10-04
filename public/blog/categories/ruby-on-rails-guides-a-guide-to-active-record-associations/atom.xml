@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Ruby on Rails Guides A Guide to Active Record Associations | Tech.Blogbin's Blog]]></title>
+  <link href="http://tech-blog.blogbin.info/blog/categories/ruby-on-rails-guides-a-guide-to-active-record-associations/atom.xml" rel="self"/>
+  <link href="http://tech-blog.blogbin.info/"/>
+  <updated>2012-10-04T10:40:37+08:00</updated>
+  <id>http://tech-blog.blogbin.info/</id>
+  <author>
+    <name><![CDATA[Tech Blogbin ]]></name>
+    <email><![CDATA[Tech Blogbin <tech.blogbin@gmail.com>]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[guides.rubyonrails.org association_basics]]></title>
+    <link href="http://tech-blog.blogbin.info/blog/2012/10/04/guides-dot-rubyonrails-dot-org-association-basics/"/>
+    <updated>2012-10-04T10:34:00+08:00</updated>
+    <id>http://tech-blog.blogbin.info/blog/2012/10/04/guides-dot-rubyonrails-dot-org-association-basics</id>
+    <content type="html"><![CDATA[<h4>association_basics</h4>
+
+<p>学习 Rails ActiveRecord 中 has_many 的 :through, :as, source, :inverse_of 等几个参数的用法</p>
+
+<!--more-->
+
+
+<p>has_many 的 :through 可以快速获得嵌套 has_many 的对象。如：
+<blockquote><p>The has_many :through association is also useful for setting up “shortcuts” through nested has_many associations. For example, if a document has many sections, and a section has many paragraphs, you may sometimes want to get a simple collection of all paragraphs in the document. You could set that up this way:<br/>```<br/>class Document &lt; ActiveRecord::Base<br/>  has_many :sections<br/>  has_many :paragraphs, :through => :sections<br/>end</p></p><p><p>class Section &lt; ActiveRecord::Base<br/>  belongs_to :document<br/>  has_many :paragraphs<br/>end</p></p><p><p>class Paragraph &lt; ActiveRecord::Base<br/>  belongs_to :section<br/>end<br/><code><br/>With :through =&gt; :sections specified, Rails will now understand:<br/></code><br/>@document.paragraphs<br/><code></p></blockquote>
+但如何直接赋值似乎成为一个问题，如：
+</code>
+@document.paragraphs = paragraphs
+```</p>
+
+<h4>泛型关联</h4>
+
+<p>polymorphic-associations
+<blockquote><p>2.9 Polymorphic Associations<br/>A slightly more advanced twist on associations is the polymorphic association. With polymorphic associations, a model can belong to more than one other model, on a single association. For example, you might have a picture model that belongs to either an employee model or a product model. Here’s how this could be declared:<br/>```<br/>class Picture &lt; ActiveRecord::Base<br/>  belongs_to :imageable, :polymorphic => true<br/>end</p></p><p><p>class Employee &lt; ActiveRecord::Base<br/>  has_many :pictures, :as => :imageable<br/>end</p></p><p><p>class Product &lt; ActiveRecord::Base<br/>  has_many :pictures, :as => :imageable<br/>end<br/>```</p></blockquote></p>
+
+<p>注意 Picture 的 :belong_to 和 Employee 以及 Product 的 :as 保持一致，都是 :imageable
+<blockquote><p>From an instance of the Employee model, you can retrieve a collection of pictures: @employee.pictures.</p></p><p><p>Similarly, you can retrieve @product.pictures.</p></p><p><p>If you have an instance of the Picture model, you can get to its parent via @picture.imageable. To make this work, you need to declare both a foreign key column and a type column in the model that declares the polymorphic interface:<br/>```<br/>class CreatePictures &lt; ActiveRecord::Migration<br/>  def change</p></p><p><pre><code>create_table :pictures do |t|<br/>  t.string  :name<br/>  t.integer :imageable_id<br/>  t.string  :imageable_type<br/>  t.timestamps<br/>end<br/></code></pre></p><p><p>  end<br/>end<br/><code><br/>This migration can be simplified by using the t.references form:<br/></code><br/>class CreatePictures &lt; ActiveRecord::Migration<br/>  def change</p></p><p><pre><code>create_table :pictures do |t|<br/>  t.string :name<br/>  t.references :imageable, :polymorphic =&gt; true<br/>  t.timestamps<br/>end<br/></code></pre></p><p><p>  end<br/>end<br/>```</p></blockquote>
+被关联的数据表（如 pictures）需要定义 xxx_id, xxx_type 两个字段（如 imageable_id, imageable_type )</p>
+
+<p><a href="http://guides.rubyonrails.org/association_basics.html#polymorphic-associations">http://guides.rubyonrails.org/association_basics.html#polymorphic-associations</a></p>
+
+<h4>has_many 的 :inverse_of 用法</h4>
+
+<p><blockquote><p>拿最简单的one-one来举例子吧：<br/>User has_one Account<br/>Account belongs_to User<br/>在未设置:inverse_of的情况下：<br/><code><br/>u = User.first<br/>[2] pry(main)&gt; account = u.account<br/>  Account Load (0.5ms)  SELECT `accounts`.* FROM `accounts` WHERE `accounts`.`id` = 2 LIMIT 1<br/>[3] pry(main)&gt; account.user<br/>  User Load (0.6ms)  SELECT `users`.* FROM `users` WHERE `users`.`id` = 3 LIMIT 1<br/></code></p></p><p><p>设置了inverse_of 以后：<br/><code><br/>class User &lt; ActiveRecord::Base<br/>  has_one :account, :inverse_of =&gt; :user<br/>end<br/>[1] pry(main)&gt; u = User.first<br/>  User Load (0.3ms)  SELECT `users`.* FROM `users` LIMIT 1<br/>[2] pry(main)&gt; account = u.account<br/>  Account Load (0.1ms)  SELECT `accounts`.* FROM `accounts` WHERE `accounts`.`user_id` = 3 LIMIT 1<br/>[3] pry(main)&gt; account.user # No SQL Query<br/></code><br/>其中，把user.accout这一方法看成函数就是account(a_user) -> a_account<br/>对应的反函数是user(a_account) 一定返回a_user</p></blockquote>
+参阅：
+<a href="http://ruby-china.org/topics/5375">http://ruby-china.org/topics/5375</a></p>
+
+<h4>更多关于 has_many 等信息参阅：</h4>
+
+<p>[http://guides.rubyonrails.org/association_basics.html#the-has_many-association](http://guides.rubyonrails.org/association_basics.html#the-has_many-association</p>
+
+<p><a href="http://guides.rubyonrails.org/association_basics.html#the-has_many-through-association">http://guides.rubyonrails.org/association_basics.html#the-has_many-through-association</a></p>
+
+<p><a href="http://guides.rubyonrails.org/association_basics.html#has_many-association-reference">http://guides.rubyonrails.org/association_basics.html#has_many-association-reference</a></p>
+]]></content>
+  </entry>
+  
+</feed>
