@@ -4,7 +4,7 @@
   <title><![CDATA[Tech.Blogbin's Blog]]></title>
   <link href="http://tech-blog.blogbin.info/atom.xml" rel="self"/>
   <link href="http://tech-blog.blogbin.info/"/>
-  <updated>2012-10-06T21:05:24+08:00</updated>
+  <updated>2012-10-07T00:24:33+08:00</updated>
   <id>http://tech-blog.blogbin.info/</id>
   <author>
     <name><![CDATA[Tech Blogbin ]]></name>
@@ -12,6 +12,37 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Rails Recipes Rails 3 Edition Recipe 4 Set Default Criteria for Model Operations]]></title>
+    <link href="http://tech-blog.blogbin.info/blog/2012/10/07/rails-recipes-rails-3-edition-recipe-4-set-default-criteria-for-model-operations/"/>
+    <updated>2012-10-07T00:13:00+08:00</updated>
+    <id>http://tech-blog.blogbin.info/blog/2012/10/07/rails-recipes-rails-3-edition-recipe-4-set-default-criteria-for-model-operations</id>
+    <content type="html"><![CDATA[<p>使用 default_scope 来设定 ActiveRecord 模型的默认查询条件。</p>
+
+<p>先看一下之前用 scope 来实现的效果：</p>
+
+<blockquote><p>set default criteria for model operations using Active Record’s<br/>default_scope() method.</p><p><figure class='code'><figcaption><span>rr2/default_scopes/app/models/product_first.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span><br/><span class='line-number'>2</span><br/><span class='line-number'>3</span><br/></pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Product</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span><br/></span><span class='line'>  <span class="n">scope</span> <span class="ss">:available</span><span class="p">,</span> <span class="n">where</span><span class="p">(</span><span class="ss">:available</span> <span class="o">=&gt;</span> <span class="kp">true</span><span class="p">)</span><br/></span><span class='line'><span class="k">end</span><br/></span></code></pre></td></tr></table></div></figure></p><p><!--more--></p><p><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span><br/><span class='line-number'>2</span><br/><span class='line-number'>3</span><br/><span class='line-number'>4</span><br/><span class='line-number'>5</span><br/><span class='line-number'>6</span><br/><span class='line-number'>7</span><br/><span class='line-number'>8</span><br/><span class='line-number'>9</span><br/><span class='line-number'>10</span><br/><span class='line-number'>11</span><br/></pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&gt;</span> <span class="no">Product</span><span class="o">.</span><span class="n">count</span><br/></span><span class='line'><span class="o">=&gt;</span> <span class="mi">6</span><br/></span><span class='line'><span class="o">&gt;</span> <span class="no">Product</span><span class="o">.</span><span class="n">available</span><span class="o">.</span><span class="n">count</span><br/></span><span class='line'><span class="o">=&gt;</span> <span class="mi">4</span><br/></span><span class='line'><span class="o">&gt;</span> <span class="no">Product</span><span class="o">.</span><span class="n">available</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:name</span><span class="p">)</span><br/></span><span class='line'><span class="o">=&gt;</span> <span class="o">[</span><span class="s2">&quot;Furbie&quot;</span><span class="p">,</span><br/></span><span class='line'><span class="s2">&quot;Godzilla&quot;</span><span class="p">,</span><br/></span><span class='line'><span class="s2">&quot;Mr. Bill&quot;</span><span class="p">,</span><br/></span><span class='line'><span class="s2">&quot;Cat Lady Action Figure&quot;</span><span class="o">]</span><br/></span><span class='line'><span class="o">&gt;</span> <span class="no">Product</span><span class="o">.</span><span class="n">available</span><span class="o">.</span><span class="n">find_by_name</span><span class="p">(</span><span class="s2">&quot;Godzilla&quot;</span><span class="p">)</span><br/></span><span class='line'><span class="o">=&gt;</span> <span class="c1">#&lt;Product id: 2, name: &quot;Godzilla&quot;, ...&gt;</span><br/></span></code></pre></td></tr></table></div></figure></p></blockquote>
+
+
+<p>每次都要调用一串 scope 定义的类方法，没有 DRY 。</p>
+
+<p>重构用 default_scope 的效果：</p>
+
+<blockquote><p><figure class='code'><figcaption><span>rr2/default_scopes/app/models/product.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span><br/><span class='line-number'>2</span><br/><span class='line-number'>3</span><br/></pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Product</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span><br/></span><span class='line'>    <span class="n">default_scope</span> <span class="ss">:available</span><span class="p">,</span> <span class="n">where</span><span class="p">(</span><span class="ss">:available</span> <span class="o">=&gt;</span> <span class="kp">true</span><span class="p">)</span><br/></span><span class='line'><span class="k">end</span><br/></span></code></pre></td></tr></table></div></figure></p><p><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span><br/><span class='line-number'>2</span><br/><span class='line-number'>3</span><br/><span class='line-number'>4</span><br/><span class='line-number'>5</span><br/><span class='line-number'>6</span><br/><span class='line-number'>7</span><br/><span class='line-number'>8</span><br/><span class='line-number'>9</span><br/></pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&gt;</span> <span class="no">Product</span><span class="o">.</span><span class="n">all</span><span class="o">.</span><span class="n">map</span> <span class="o">&amp;</span><span class="ss">:available</span><br/></span><span class='line'><span class="o">=&gt;</span> <span class="o">[</span><span class="kp">true</span><span class="p">,</span> <span class="kp">true</span><span class="p">,</span> <span class="kp">true</span><span class="p">,</span> <span class="kp">true</span><span class="p">,</span> <span class="kp">true</span><span class="o">]</span><br/></span><span class='line'><span class="o">&gt;</span> <span class="no">Product</span><span class="o">.</span><span class="n">connection</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;select count(*) from products&quot;</span><span class="p">)</span><br/></span><span class='line'><span class="o">=&gt;</span> <span class="o">[</span><span class="p">{</span><span class="s2">&quot;count(*)&quot;</span><span class="o">=&gt;</span><span class="mi">11</span><span class="p">,</span> <span class="mi">0</span><span class="o">=&gt;</span><span class="mi">11</span><span class="p">}</span><span class="o">]</span><br/></span><span class='line'><span class="o">&gt;</span> <span class="n">lb</span> <span class="o">=</span> <span class="no">Product</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="ss">:name</span> <span class="o">=&gt;</span> <span class="s2">&quot;Liquid Brains&quot;</span><span class="p">,</span><br/></span><span class='line'><span class="ss">:price</span> <span class="o">=&gt;</span> <span class="mi">19</span><span class="o">.</span><span class="mi">74</span><span class="p">)</span><br/></span><span class='line'><span class="o">=&gt;</span> <span class="c1">#&lt;Product id: 12, ... updated_at: &quot;2010-11-04 23:34:49&quot;&gt;</span><br/></span><span class='line'><span class="o">&gt;</span> <span class="n">lb</span><span class="o">.</span><span class="n">available?</span><br/></span><span class='line'><span class="o">=&gt;</span> <span class="kp">true</span><br/></span></code></pre></td></tr></table></div></figure></p></blockquote>
+
+
+<p>注意 default_scope 只影响默认查询条件，不会影响 create, new 等方法。如：</p>
+
+<blockquote><p><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span><br/><span class='line-number'>2</span><br/><span class='line-number'>3</span><br/><span class='line-number'>4</span><br/><span class='line-number'>5</span><br/><span class='line-number'>6</span><br/><span class='line-number'>7</span><br/><span class='line-number'>8</span><br/></pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&gt;</span> <span class="no">Product</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="ss">:name</span> <span class="o">=&gt;</span> <span class="s2">&quot;Hideous Harvey&quot;</span><span class="p">,</span><br/></span><span class='line'><span class="ss">:price</span> <span class="o">=&gt;</span> <span class="mi">2</span><span class="o">.</span><span class="mi">99</span><span class="p">,</span><br/></span><span class='line'><span class="ss">:available</span> <span class="o">=&gt;</span> <span class="kp">false</span><span class="p">)</span><br/></span><span class='line'><span class="o">=&gt;</span> <span class="c1">#&lt;Product id: 13, name: &quot;Hideous Harvey&quot; ... &gt;</span><br/></span><span class='line'><span class="o">&gt;</span> <span class="no">Product</span><span class="o">.</span><span class="n">find_by_id</span><span class="p">(</span><span class="mi">13</span><span class="p">)</span><br/></span><span class='line'><span class="o">=&gt;</span> <span class="kp">nil</span><br/></span><span class='line'><span class="o">&gt;</span> <span class="no">Product</span><span class="o">.</span><span class="n">unscoped</span> <span class="p">{</span> <span class="no">Product</span><span class="o">.</span><span class="n">find_by_id</span><span class="p">(</span><span class="mi">13</span><span class="p">)</span> <span class="p">}</span><br/></span><span class='line'><span class="o">=&gt;</span> <span class="c1">#&lt;Product id: 13, name: &quot;Hideous Harvey&quot; ...&gt;</span><br/></span></code></pre></td></tr></table></div></figure><br/>When we created the Product, this time we passed in an explicit value for the<br/>available attribute. The default scope’s value doesn’t apply if you override it<br/>explicitly. On our first attempt to find the record we just created, the query<br/>responds as if the record doesn’t exist. When we bypass the default scope<br/>with the unscoped() method, the record is returned.</p></blockquote>
+
+
+<p>使用 default_scope 可能会给其他人带来困扰。需要把握平衡。</p>
+
+<blockquote><p>Without reading through your models, another programmer won’t know that<br/>a default scope is implied.<br/>use default scopes is a trade-off between convenience<br/>and transparency.</p></blockquote>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Rails Recipes Rails 3 Edition Recipe 3 Connect to Multiple Databases]]></title>
@@ -2077,74 +2108,6 @@ neerajcse/octopress-calendar-aside · GitHub
 </span><span class='line'>default_asides: [ custom/asides/about.html, asides/recent_posts.html, asides/github.html,  asides/delicious.html, asides/pinboard.html, asides/googleplus.html, asides/calendar.html ]</span></code></pre></td></tr></table></div></figure>
 
 
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[installing iftop on CentOS 6]]></title>
-    <link href="http://tech-blog.blogbin.info/blog/2012/08/24/installing-iftop-on-centos-6/"/>
-    <updated>2012-08-24T22:55:00+08:00</updated>
-    <id>http://tech-blog.blogbin.info/blog/2012/08/24/installing-iftop-on-centos-6</id>
-    <content type="html"><![CDATA[<p>使用 iftop 简单监控服务器网络流量。安装过程如下：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>[root@hj01 ~]# yum install -y wget
-</span><span class='line'>
-</span><span class='line'>[root@hj01 ~]# wget http://www.ex-parrot.com/~pdw/iftop/download/iftop-0.17.tar.gz
-</span><span class='line'>
-</span><span class='line'>[root@hj01 ~]# tar -xvf iftop-0.17
-</span><span class='line'>
-</span><span class='line'>[root@hj01 ~]# yum install -y flex byacc  libpcap　libpcap-devel ncurses ncurses-devel
-</span><span class='line'>
-</span><span class='line'>[root@hj01 ~]# yum install -y libpcap-devel
-</span><span class='line'>
-</span><span class='line'>[root@hj01 ~]# cd iftop-0.17
-</span><span class='line'>
-</span><span class='line'>[root@hj01 iftop-0.17]# ./configure
-</span><span class='line'>
-</span><span class='line'>[root@hj01 iftop-0.17]# make
-</span><span class='line'>
-</span><span class='line'>[root@hj01 iftop-0.17]# make install
-</span><span class='line'>
-</span><span class='line'>[root@hj01 iftop-0.17]# iftop</span></code></pre></td></tr></table></div></figure>
-
-
-<!--more-->
-
-
-<p>运行 sudo iftop 可能会出现 iftop: command not found 的情况，如：</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>[atyun@localhost iftop-0.17]$ sudo iftop
-</span><span class='line'>
-</span><span class='line'>sudo: iftop: command not found</span></code></pre></td></tr></table></div></figure>
-
-
-<p>明确写出 iftop 命令的完整路径，如</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>[atyun@localhost iftop-0.17]$ sudo /usr/local/sbin/iftop</span></code></pre></td></tr></table></div></figure>
 
 ]]></content>
   </entry>
