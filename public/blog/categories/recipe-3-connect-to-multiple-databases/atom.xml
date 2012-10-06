@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Recipe 3 Connect to Multiple Databases | Tech.Blogbin's Blog]]></title>
+  <link href="http://tech-blog.blogbin.info/blog/categories/recipe-3-connect-to-multiple-databases/atom.xml" rel="self"/>
+  <link href="http://tech-blog.blogbin.info/"/>
+  <updated>2012-10-06T21:05:24+08:00</updated>
+  <id>http://tech-blog.blogbin.info/</id>
+  <author>
+    <name><![CDATA[Tech Blogbin ]]></name>
+    <email><![CDATA[Tech Blogbin <tech.blogbin@gmail.com>]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Rails Recipes Rails 3 Edition Recipe 3 Connect to Multiple Databases]]></title>
+    <link href="http://tech-blog.blogbin.info/blog/2012/10/06/rails-recipes-rails-3-edition-recipe-3-connect-to-multiple-databases/"/>
+    <updated>2012-10-06T19:58:00+08:00</updated>
+    <id>http://tech-blog.blogbin.info/blog/2012/10/06/rails-recipes-rails-3-edition-recipe-3-connect-to-multiple-databases</id>
+    <content type="html"><![CDATA[<p>Rails 项目中同时连接多个数据库的办法。</p>
+
+<p>Rails 项目启动时, ActiveRecord::Railtie 调用 ActiveRecord::Base 的 establish_connection 方法来初始化数据库连接。
+<blockquote><p>In Rails 3 and newer, this process<br/>does its work by delegating to each subframework of Rails and asking that<br/>subframework to initialize itself. Each of these initializers is called a Railtie.<br/>Active Record defines ActiveRecord::Railtie to play the initialization role. One of<br/>its jobs is to initialize database connections.</p></p><p><p>So, in the default case, all your models get access to this default connection.<br/>If you make a connection from one of your model classes (by calling establish_connection()),<br/>that connection is available from that class and any of its children<br/>but not from its superclasses, including ActiveRecord::Base.</p></p><p><p>When asked for its connection, the behavior of a model is to start with the<br/>exact class the request is made from and work its way up the inheritance<br/>hierarchy until it finds a connection. This is a key point in working with<br/>multiple databases. A model’s connection applies to that model and any of<br/>its children in the hierarchy unless overridden.</p></blockquote></p>
+
+<!--more-->
+
+
+<p>通过调用 establish_connection 方法来连接外部数据库
+<blockquote><p>``` ruby rr2/multiple_dbs/app/models/plain_product.rb<br/>class Product &lt; ActiveRecord::Base</p></p><p><pre><code>establish_connection :products  <br/></code></pre></p><p><p>end<br/>```</p></blockquote></p>
+
+<p>建议为外部数据库的数据，提供对应的本地映射表和模型。如果可能，保持本地映射表和模型只读状态。
+<blockquote><p>we’ll create a mapping table in our<br/>application’s default database (the same one the cart table exists in):<br/>``` ruby rr2/multiple_dbs/db/migrate/20101128145152_create_product_references.rb<br/>class CreateProductReferences &lt; ActiveRecord::Migration</p></p><p><pre><code>def self.up<br/>    create_table :product_references do |t|<br/>    t.integer :product_id<br/>    t.timestamps<br/>    end<br/>end<br/>def self.down<br/>    drop_table :product_references<br/>end<br/></code></pre></p><p><p>end<br/>```<br/>This table’s sole purpose is to provide a local reference to a product. The<br/>product’s id will be stored in the product reference’s product_id field.</p></blockquote></p>
+
+<p>可以创建一个专门连接其它数据库的模型类（抽象的，不需要对应数据表），并创建相应的子类。
+<blockquote><p>``` ruby rr2/multiple_dbs/app/models/external.rb<br/>class External &lt; ActiveRecord::Base</p></p><p><pre><code>self.abstract_class = true<br/>establish_connection :products<br/></code></pre></p><p><p>end<br/>```</p></p><p><p><code>ruby ConnectingToMultipleDatabases/app/models/product.rb<br/>class Product &lt; External<br/>end<br/></code></p></p><p><p><code>ruby rr2/multiple_dbs/app/models/tax_conversion.rb<br/>class TaxConversion &lt; External<br/>end<br/></code></p></blockquote></p>
+
+<p>访问其它数据库的另外方法：
+<blockquote><p>If you have to continue using an external database, you might consider<br/>exposing that data as a REST service, allowing access only via HTTP calls as<br/>Connect to Multiple Databases<br/>opposed to direct database access. For read-only feeds of data that need to<br/>participate in complex joins, consider replicating the data from its source<br/>table to the databases that need to use it.</p></blockquote></p>
+
+<p>exposing that data as a REST service，可以使用 Rails 提供的 ActiveResouce。可参阅：</p>
+
+<p><a href="http://api.rubyonrails.org/classes/ActiveResource/Base.html">http://api.rubyonrails.org/classes/ActiveResource/Base.html</a></p>
+
+<p><a href="https://github.com/rails/activeresource">https://github.com/rails/activeresource</a></p>
+]]></content>
+  </entry>
+  
+</feed>

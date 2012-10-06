@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Rails | Tech.Blogbin's Blog]]></title>
   <link href="http://tech-blog.blogbin.info/blog/categories/rails/atom.xml" rel="self"/>
   <link href="http://tech-blog.blogbin.info/"/>
-  <updated>2012-10-06T17:24:52+08:00</updated>
+  <updated>2012-10-06T21:05:24+08:00</updated>
   <id>http://tech-blog.blogbin.info/</id>
   <author>
     <name><![CDATA[Tech Blogbin ]]></name>
@@ -12,6 +12,39 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Rails Recipes Rails 3 Edition Recipe 3 Connect to Multiple Databases]]></title>
+    <link href="http://tech-blog.blogbin.info/blog/2012/10/06/rails-recipes-rails-3-edition-recipe-3-connect-to-multiple-databases/"/>
+    <updated>2012-10-06T19:58:00+08:00</updated>
+    <id>http://tech-blog.blogbin.info/blog/2012/10/06/rails-recipes-rails-3-edition-recipe-3-connect-to-multiple-databases</id>
+    <content type="html"><![CDATA[<p>Rails 项目中同时连接多个数据库的办法。</p>
+
+<p>Rails 项目启动时, ActiveRecord::Railtie 调用 ActiveRecord::Base 的 establish_connection 方法来初始化数据库连接。
+<blockquote><p>In Rails 3 and newer, this process<br/>does its work by delegating to each subframework of Rails and asking that<br/>subframework to initialize itself. Each of these initializers is called a Railtie.<br/>Active Record defines ActiveRecord::Railtie to play the initialization role. One of<br/>its jobs is to initialize database connections.</p></p><p><p>So, in the default case, all your models get access to this default connection.<br/>If you make a connection from one of your model classes (by calling establish_connection()),<br/>that connection is available from that class and any of its children<br/>but not from its superclasses, including ActiveRecord::Base.</p></p><p><p>When asked for its connection, the behavior of a model is to start with the<br/>exact class the request is made from and work its way up the inheritance<br/>hierarchy until it finds a connection. This is a key point in working with<br/>multiple databases. A model’s connection applies to that model and any of<br/>its children in the hierarchy unless overridden.</p></blockquote></p>
+
+<!--more-->
+
+
+<p>通过调用 establish_connection 方法来连接外部数据库
+<blockquote><p>``` ruby rr2/multiple_dbs/app/models/plain_product.rb<br/>class Product &lt; ActiveRecord::Base</p></p><p><pre><code>establish_connection :products  <br/></code></pre></p><p><p>end<br/>```</p></blockquote></p>
+
+<p>建议为外部数据库的数据，提供对应的本地映射表和模型。如果可能，保持本地映射表和模型只读状态。
+<blockquote><p>we’ll create a mapping table in our<br/>application’s default database (the same one the cart table exists in):<br/>``` ruby rr2/multiple_dbs/db/migrate/20101128145152_create_product_references.rb<br/>class CreateProductReferences &lt; ActiveRecord::Migration</p></p><p><pre><code>def self.up<br/>    create_table :product_references do |t|<br/>    t.integer :product_id<br/>    t.timestamps<br/>    end<br/>end<br/>def self.down<br/>    drop_table :product_references<br/>end<br/></code></pre></p><p><p>end<br/>```<br/>This table’s sole purpose is to provide a local reference to a product. The<br/>product’s id will be stored in the product reference’s product_id field.</p></blockquote></p>
+
+<p>可以创建一个专门连接其它数据库的模型类（抽象的，不需要对应数据表），并创建相应的子类。
+<blockquote><p>``` ruby rr2/multiple_dbs/app/models/external.rb<br/>class External &lt; ActiveRecord::Base</p></p><p><pre><code>self.abstract_class = true<br/>establish_connection :products<br/></code></pre></p><p><p>end<br/>```</p></p><p><p><code>ruby ConnectingToMultipleDatabases/app/models/product.rb<br/>class Product &lt; External<br/>end<br/></code></p></p><p><p><code>ruby rr2/multiple_dbs/app/models/tax_conversion.rb<br/>class TaxConversion &lt; External<br/>end<br/></code></p></blockquote></p>
+
+<p>访问其它数据库的另外方法：
+<blockquote><p>If you have to continue using an external database, you might consider<br/>exposing that data as a REST service, allowing access only via HTTP calls as<br/>Connect to Multiple Databases<br/>opposed to direct database access. For read-only feeds of data that need to<br/>participate in complex joins, consider replicating the data from its source<br/>table to the databases that need to use it.</p></blockquote></p>
+
+<p>exposing that data as a REST service，可以使用 Rails 提供的 ActiveResouce。可参阅：</p>
+
+<p><a href="http://api.rubyonrails.org/classes/ActiveResource/Base.html">http://api.rubyonrails.org/classes/ActiveResource/Base.html</a></p>
+
+<p><a href="https://github.com/rails/activeresource">https://github.com/rails/activeresource</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Rails Recipes Rails 3 Edition Recipe 2 Create Declarative Named Queries]]></title>
@@ -228,165 +261,6 @@ liwy@ubuntu:~/.rvm/gems/ruby-1.9.3-p125/cache$ rm -rf latest_specs.4.8.gz</p>
 //= require jquery_ujs
 //= require_tree .
 </code></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Upgrading to Rails 3.2.8]]></title>
-    <link href="http://tech-blog.blogbin.info/blog/2012/09/12/upgrading-to-rails-3-dot-2-8/"/>
-    <updated>2012-09-12T23:23:00+08:00</updated>
-    <id>http://tech-blog.blogbin.info/blog/2012/09/12/upgrading-to-rails-3-dot-2-8</id>
-    <content type="html"><![CDATA[<p>最近计划将 Rails 从 3.1.0 升级到 3.2.8 版本。</p>
-
-<p>一是为解决 Rails 3.1.0 版本的 Security Issue，引入新功能；
-二是为解决 Assets 相关的 Bugs，比如在 development 环境，scss 修改后无法动态编译，需要重启方能生效的问题；</p>
-
-<!--more-->
-
-
-<p>（ 2012 年 9 月 13 日更新）
-如果使用 haml，需要升级 haml 版本至 3.1.4
-``` ruby Gemfile
-case RAILS_VERSION</p>
-
-<p>  when RAILS_3_1_0</p>
-
-<pre><code>gem "haml", "3.0.17"
-</code></pre>
-
-<p>  when RAILS_3_2_8</p>
-
-<pre><code>gem "haml", "3.1.4"
-</code></pre>
-
-<p>end
-```</p>
-
-<p>否则启动 Rails 项目会出现 undefined method <code>delegate_template_exists?' 的错误
-```
-Uncaught exception: undefined method</code>delegate_template_exists?' for class `ActionView::Base'</p>
-
-<pre><code> /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/haml-3.0.17/lib/haml/template/patch.rb:16:in `alias_method'
- /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/haml-3.0.17/lib/haml/template/patch.rb:16:in `&lt;class:Base&gt;'
- /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/haml-3.0.17/lib/haml/template/patch.rb:12:in `&lt;module:ActionView&gt;'
- /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/haml-3.0.17/lib/haml/template/patch.rb:11:in `&lt;top (required)&gt;'
- /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/activesupport-3.2.8/lib/active_support/dependencies.rb:251:in `require'
- /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/activesupport-3.2.8/lib/active_support/dependencies.rb:251:in `block in require'
- /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/activesupport-3.2.8/lib/active_support/dependencies.rb:236:in `load_dependency'
- /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/activesupport-3.2.8/lib/active_support/dependencies.rb:251:in `require'
- /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/haml-3.0.17/lib/haml/template.rb:60:in `&lt;top (required)&gt;'
- /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/activesupport-3.2.8/lib/active_support/dependencies.rb:251:in `require'
- /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/activesupport-3.2.8/lib/active_support/dependencies.rb:251:in `block in require'
- /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/activesupport-3.2.8/lib/active_support/dependencies.rb:236:in `load_dependency'
- /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/activesupport-3.2.8/lib/active_support/dependencies.rb:251:in `require'
- /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/haml-3.0.17/lib/haml.rb:36:in `block in init_rails'
- /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/haml-3.0.17/lib/haml.rb:36:in `each'
- /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/haml-3.0.17/lib/haml.rb:36:in `init_rails'
- /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/haml-3.0.17/lib/haml/railtie.rb:18:in `block (2 levels) in &lt;top (required)&gt;'
- /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/activesupport-3.2.8/lib/active_support/lazy_load_hooks.rb:36:in `instance_eval'
- /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/activesupport-3.2.8/lib/active_support/lazy_load_hooks.rb:36:in `execute_hook'
- /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/activesupport-3.2.8/lib/active_support/lazy_load_hooks.rb:26:in `block in on_load'
- /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/activesupport-3.2.8/lib/active_support/lazy_load_hooks.rb:25:in `each'
- /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/activesupport-3.2.8/lib/active_support/lazy_load_hooks.rb:25:in `on_load'
- /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/haml-3.0.17/lib/haml/railtie.rb:17:in `block in &lt;top (required)&gt;'
- /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/activesupport-3.2.8/lib/active_support/lazy_load_hooks.rb:36:in `instance_eval'
- /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/activesupport-3.2.8/lib/active_support/lazy_load_hooks.rb:36:in `execute_hook'
- /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/activesupport-3.2.8/lib/active_support/lazy_load_hooks.rb:43:in `block in run_load_hooks'
- /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/activesupport-3.2.8/lib/active_support/lazy_load_hooks.rb:42:in `each'
- /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/activesupport-3.2.8/lib/active_support/lazy_load_hooks.rb:42:in `run_load_hooks'
- /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/railties-3.2.8/lib/rails/application/bootstrap.rb:69:in `block in &lt;module:Bootstrap&gt;'
- /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/railties-3.2.8/lib/rails/initializable.rb:30:in `instance_exec'
- /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/railties-3.2.8/lib/rails/initializable.rb:30:in `run'
- /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/railties-3.2.8/lib/rails/initializable.rb:55:in `block in run_initializers'
- /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/railties-3.2.8/lib/rails/initializable.rb:54:in `each'
- /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/railties-3.2.8/lib/rails/initializable.rb:54:in `run_initializers'
- /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/railties-3.2.8/lib/rails/application.rb:136:in `initialize!'
- /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/railties-3.2.8/lib/rails/railtie/configurable.rb:30:in `method_missing'
- /Users/blogbin/projects/workspaces/app_store/ruby/app_store/config/environment.rb:7:in `&lt;top (required)&gt;'
- /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/activesupport-3.2.8/lib/active_support/dependencies.rb:251:in `require'
- /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/activesupport-3.2.8/lib/active_support/dependencies.rb:251:in `block in require'
- /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/activesupport-3.2.8/lib/active_support/dependencies.rb:236:in `load_dependency'
- /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/activesupport-3.2.8/lib/active_support/dependencies.rb:251:in `require'
- /Users/blogbin/projects/workspaces/app_store/ruby/app_store/config.ru:4:in `block in &lt;main&gt;'
- /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/rack-1.4.1/lib/rack/builder.rb:51:in `instance_eval'
- /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/rack-1.4.1/lib/rack/builder.rb:51:in `initialize'
- /Users/blogbin/projects/workspaces/app_store/ruby/app_store/config.ru:1:in `new'
- /Users/blogbin/projects/workspaces/app_store/ruby/app_store/config.ru:1:in `&lt;main&gt;'
- /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/rack-1.4.1/lib/rack/builder.rb:40:in `eval'
- /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/rack-1.4.1/lib/rack/builder.rb:40:in `parse_file'
- /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/rack-1.4.1/lib/rack/server.rb:200:in `app'
- /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/railties-3.2.8/lib/rails/commands/server.rb:46:in `app'
- /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/rack-1.4.1/lib/rack/server.rb:301:in `wrapped_app'
- /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/rack-1.4.1/lib/rack/server.rb:252:in `start'
- /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/railties-3.2.8/lib/rails/commands/server.rb:70:in `start'
- /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/railties-3.2.8/lib/rails/commands.rb:55:in `block in &lt;top (required)&gt;'
- /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/railties-3.2.8/lib/rails/commands.rb:50:in `tap'
- /Users/blogbin/.rvm/gems/ruby-1.9.3-p0@appstore/gems/railties-3.2.8/lib/rails/commands.rb:50:in `&lt;top (required)&gt;'
- /Users/blogbin/projects/workspaces/app_store/ruby/app_store/script/rails:6:in `require'
- /Users/blogbin/projects/workspaces/app_store/ruby/app_store/script/rails:6:in `&lt;top (required)&gt;' 
-</code></pre>
-
-<p>```</p>
-
-<p>Gemfile 除了将 Rails 版本修改为 3.2.8 之外，需要调整 group assets 中 sass-rails, coffee-rails 的版本依赖。</p>
-
-<p>为避免 Rails 版本升级失败，方便回退版本，在 Gemfile 定义一些变量和判断条件来做检查，如：</p>
-
-<p>``` ruby Gemfile</p>
-
-<h1>rails</h1>
-
-<h1>rails version</h1>
-
-<p>RAILS_3_2_8 = '3.2.8'
-RAILS_3_1_0 = '3.1.0'</p>
-
-<p>RAILS_VERSION = RAILS_3_2_8</p>
-
-<p>case RAILS_VERSION</p>
-
-<p>  when RAILS_3_1_0</p>
-
-<pre><code>gem 'rails', '3.1.0'
-</code></pre>
-
-<p>  when RAILS_3_2_8</p>
-
-<pre><code>gem 'rails', '3.2.8'
-</code></pre>
-
-<p>end</p>
-
-<p>group :assets do</p>
-
-<p>  case RAILS_VERSION</p>
-
-<pre><code>when RAILS_3_1_0
-  gem 'sass-rails', "  ~&gt; 3.1.0"
-  gem 'coffee-rails', "~&gt; 3.1.0"
-  gem 'uglifier'
-
-when RAILS_3_2_8
-  gem 'sass-rails',   '~&gt; 3.2.3'
-  gem 'coffee-rails', '~&gt; 3.2.1'
-
-  # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  # gem 'therubyracer', :platforms =&gt; :ruby
-
-  gem 'uglifier', '&gt;= 1.0.3'
-</code></pre>
-
-<p>  end</p>
-
-<p>end
-```</p>
-
-<p>运行 bundle install 之前，需要先删除 Gemfile.lock，以防原来的版本依赖带来的干扰
-```
-blogbins-MacBook-Pro:focus blogbin$ rm Gemfile.lock</p>
-
-<p>blogbins-MacBook-Pro:focus blogbin$ bundle install
-```</p>
 ]]></content>
   </entry>
   

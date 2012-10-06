@@ -4,7 +4,7 @@
   <title><![CDATA[Tech.Blogbin's Blog]]></title>
   <link href="http://tech-blog.blogbin.info/atom.xml" rel="self"/>
   <link href="http://tech-blog.blogbin.info/"/>
-  <updated>2012-10-06T17:24:52+08:00</updated>
+  <updated>2012-10-06T21:05:24+08:00</updated>
   <id>http://tech-blog.blogbin.info/</id>
   <author>
     <name><![CDATA[Tech Blogbin ]]></name>
@@ -12,6 +12,51 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Rails Recipes Rails 3 Edition Recipe 3 Connect to Multiple Databases]]></title>
+    <link href="http://tech-blog.blogbin.info/blog/2012/10/06/rails-recipes-rails-3-edition-recipe-3-connect-to-multiple-databases/"/>
+    <updated>2012-10-06T19:58:00+08:00</updated>
+    <id>http://tech-blog.blogbin.info/blog/2012/10/06/rails-recipes-rails-3-edition-recipe-3-connect-to-multiple-databases</id>
+    <content type="html"><![CDATA[<p>Rails 项目中同时连接多个数据库的办法。</p>
+
+<p>Rails 项目启动时, ActiveRecord::Railtie 调用 ActiveRecord::Base 的 establish_connection 方法来初始化数据库连接。</p>
+
+<blockquote><p>In Rails 3 and newer, this process<br/>does its work by delegating to each subframework of Rails and asking that<br/>subframework to initialize itself. Each of these initializers is called a Railtie.<br/>Active Record defines ActiveRecord::Railtie to play the initialization role. One of<br/>its jobs is to initialize database connections.</p><p>So, in the default case, all your models get access to this default connection.<br/>If you make a connection from one of your model classes (by calling establish_connection()),<br/>that connection is available from that class and any of its children<br/>but not from its superclasses, including ActiveRecord::Base.</p><p>When asked for its connection, the behavior of a model is to start with the<br/>exact class the request is made from and work its way up the inheritance<br/>hierarchy until it finds a connection. This is a key point in working with<br/>multiple databases. A model’s connection applies to that model and any of<br/>its children in the hierarchy unless overridden.</p></blockquote>
+
+
+
+
+<!--more-->
+
+
+<p>通过调用 establish_connection 方法来连接外部数据库</p>
+
+<blockquote><p><figure class='code'><figcaption><span>rr2/multiple_dbs/app/models/plain_product.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span><br/><span class='line-number'>2</span><br/><span class='line-number'>3</span><br/></pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Product</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span><br/></span><span class='line'>    <span class="n">establish_connection</span> <span class="ss">:products</span>   <br/></span><span class='line'><span class="k">end</span><br/></span></code></pre></td></tr></table></div></figure></p></blockquote>
+
+
+<p>建议为外部数据库的数据，提供对应的本地映射表和模型。如果可能，保持本地映射表和模型只读状态。</p>
+
+<blockquote><p>we’ll create a mapping table in our<br/>application’s default database (the same one the cart table exists in):<br/><figure class='code'><figcaption><span>rr2/multiple_dbs/db/migrate/20101128145152_create_product_references.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span><br/><span class='line-number'>2</span><br/><span class='line-number'>3</span><br/><span class='line-number'>4</span><br/><span class='line-number'>5</span><br/><span class='line-number'>6</span><br/><span class='line-number'>7</span><br/><span class='line-number'>8</span><br/><span class='line-number'>9</span><br/><span class='line-number'>10</span><br/><span class='line-number'>11</span><br/></pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">CreateProductReferences</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Migration</span><br/></span><span class='line'>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">up</span><br/></span><span class='line'>        <span class="n">create_table</span> <span class="ss">:product_references</span> <span class="k">do</span> <span class="o">|</span><span class="n">t</span><span class="o">|</span><br/></span><span class='line'>       <span class="n">t</span><span class="o">.</span><span class="n">integer</span> <span class="ss">:product_id</span><br/></span><span class='line'>       <span class="n">t</span><span class="o">.</span><span class="n">timestamps</span><br/></span><span class='line'>        <span class="k">end</span><br/></span><span class='line'>   <span class="k">end</span><br/></span><span class='line'>   <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">down</span><br/></span><span class='line'>      <span class="n">drop_table</span> <span class="ss">:product_references</span><br/></span><span class='line'>    <span class="k">end</span><br/></span><span class='line'><span class="k">end</span><br/></span></code></pre></td></tr></table></div></figure><br/>This table’s sole purpose is to provide a local reference to a product. The<br/>product’s id will be stored in the product reference’s product_id field.</p></blockquote>
+
+
+<p>可以创建一个专门连接其它数据库的模型类（抽象的，不需要对应数据表），并创建相应的子类。</p>
+
+<blockquote><p><figure class='code'><figcaption><span>rr2/multiple_dbs/app/models/external.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span><br/><span class='line-number'>2</span><br/><span class='line-number'>3</span><br/><span class='line-number'>4</span><br/></pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">External</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span><br/></span><span class='line'> <span class="nb">self</span><span class="o">.</span><span class="n">abstract_class</span> <span class="o">=</span> <span class="kp">true</span><br/></span><span class='line'>  <span class="n">establish_connection</span> <span class="ss">:products</span><br/></span><span class='line'><span class="k">end</span><br/></span></code></pre></td></tr></table></div></figure></p><p><figure class='code'><figcaption><span>ConnectingToMultipleDatabases/app/models/product.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span><br/><span class='line-number'>2</span><br/></pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Product</span> <span class="o">&lt;</span> <span class="no">External</span><br/></span><span class='line'><span class="k">end</span><br/></span></code></pre></td></tr></table></div></figure></p><p><figure class='code'><figcaption><span>rr2/multiple_dbs/app/models/tax_conversion.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span><br/><span class='line-number'>2</span><br/></pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">TaxConversion</span> <span class="o">&lt;</span> <span class="no">External</span><br/></span><span class='line'><span class="k">end</span><br/></span></code></pre></td></tr></table></div></figure></p></blockquote>
+
+
+<p>访问其它数据库的另外方法：</p>
+
+<blockquote><p>If you have to continue using an external database, you might consider<br/>exposing that data as a REST service, allowing access only via HTTP calls as<br/>Connect to Multiple Databases<br/>opposed to direct database access. For read-only feeds of data that need to<br/>participate in complex joins, consider replicating the data from its source<br/>table to the databases that need to use it.</p></blockquote>
+
+
+<p>exposing that data as a REST service，可以使用 Rails 提供的 ActiveResouce。可参阅：</p>
+
+<p><a href="http://api.rubyonrails.org/classes/ActiveResource/Base.html">http://api.rubyonrails.org/classes/ActiveResource/Base.html</a></p>
+
+<p><a href="https://github.com/rails/activeresource">https://github.com/rails/activeresource</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Rails Recipes Rails 3 Edition Recipe 2 Create Declarative Named Queries]]></title>
@@ -2100,230 +2145,6 @@ neerajcse/octopress-calendar-aside · GitHub
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>[atyun@localhost iftop-0.17]$ sudo /usr/local/sbin/iftop</span></code></pre></td></tr></table></div></figure>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[用 git-flow 进行分支操作]]></title>
-    <link href="http://tech-blog.blogbin.info/blog/2012/08/23/using-git-flow/"/>
-    <updated>2012-08-23T22:28:00+08:00</updated>
-    <id>http://tech-blog.blogbin.info/blog/2012/08/23/using-git-flow</id>
-    <content type="html"><![CDATA[<p>参阅：</p>
-
-<p>nvie/gitflow
-<a href="https://github.com/nvie/gitflow/">https://github.com/nvie/gitflow/</a></p>
-
-<p>A successful Git branching model » nvie.com
-<a href="http://nvie.com/posts/a-successful-git-branching-model/">http://nvie.com/posts/a-successful-git-branching-model/</a></p>
-
-<p>或者中文版</p>
-
-<p>Git开发管理之道 - 无网不剩
-<a href="http://blog.leezhong.com/translate/2010/10/30/a-successful-git-branch.html">http://blog.leezhong.com/translate/2010/10/30/a-successful-git-branch.html</a></p>
-
-<p>其实 git-flow 只是对 git 分支 checkout, 创建, merge 等命令进行包装，采用推荐的命令方式来使用优秀的分支创建和合并实践策略，
-避免代码改动提交混乱，对本地仓库管理的代码几乎没有影响。</p>
-
-<p>首先要明白 master 为产品分支，develop 为开发分支。
-如果你以前采用 master 为主线或开发分支，产品分支为其他分支，脑筋要转过来。</p>
-
-<!--more-->
-
-
-<h5>2012/9/19 更新：</h5>
-
-<p>安装 git flow
-<a href="https://github.com/nvie/gitflow/wiki/Installation">https://github.com/nvie/gitflow/wiki/Installation</a></p>
-
-<p>git flow 初始化本地仓库</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>blogbins-MacBook-Pro:octopress blogbin$ git flow init
-</span><span class='line'>
-</span><span class='line'>Which branch should be used for bringing forth production releases?
-</span><span class='line'>   - master
-</span><span class='line'>Branch name for production releases: [master]
-</span><span class='line'>Branch name for "next release" development: [develop]
-</span><span class='line'>
-</span><span class='line'>How to name your supporting branch prefixes?
-</span><span class='line'>Feature branches? [feature/]
-</span><span class='line'>Release branches? [release/]
-</span><span class='line'>Hotfix branches? [hotfix/]
-</span><span class='line'>Support branches? [support/]
-</span><span class='line'>Version tag prefix? [] TEBN
-</span><span class='line'>blogbins-MacBook-Pro:octopress blogbin$ git status
-</span><span class='line'># On branch develop
-</span><span class='line'>nothing to commit (working directory clean)</span></code></pre></td></tr></table></div></figure>
-
-
-<p>开始一个特性(octopress-indexer)开发</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>blogbins-MacBook-Pro:octopress blogbin$ git flow feature start octopress-indexer
-</span><span class='line'>Switched to a new branch 'feature/octopress-indexer'
-</span><span class='line'>
-</span><span class='line'>Summary of actions:
-</span><span class='line'>- A new branch 'feature/octopress-indexer' was created, based on 'develop'
-</span><span class='line'>- You are now on branch 'feature/octopress-indexer'
-</span><span class='line'>
-</span><span class='line'>Now, start committing on your feature. When done, use:
-</span><span class='line'>
-</span><span class='line'>     git flow feature finish octopress-indexer</span></code></pre></td></tr></table></div></figure>
-
-
-<p>结束一个特性开发</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>blogbins-MacBook-Pro:octopress blogbin$ git flow feature finish octopress-indexer
-</span><span class='line'>Switched to branch 'develop'
-</span><span class='line'>Updating 024efad..6a21c04
-</span><span class='line'>Fast-forward
-</span><span class='line'> plugins/indexer.rb                          |  255 +++++++++++++++++++++++++++
-</span><span class='line'> source/_includes/custom/asides/indexer.html |   10 ++
-</span><span class='line'> 2 files changed, 265 insertions(+)
-</span><span class='line'> create mode 100644 plugins/indexer.rb
-</span><span class='line'> create mode 100644 source/_includes/custom/asides/indexer.html
-</span><span class='line'>Deleted branch feature/octopress-indexer (was 6a21c04).
-</span><span class='line'>
-</span><span class='line'>Summary of actions:
-</span><span class='line'>- The feature branch 'feature/octopress-indexer' was merged into 'develop'
-</span><span class='line'>- Feature branch 'feature/octopress-indexer' has been removed
-</span><span class='line'>- You are now on branch 'develop'</span></code></pre></td></tr></table></div></figure>
-
-
-<p>手动将 develop 开发分支的改动 merge 回 master 产品分支</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>blogbins-MacBook-Pro:octopress blogbin$ git checkout master
-</span><span class='line'>Switched to branch 'master'
-</span><span class='line'>
-</span><span class='line'># 建议使用 --no-ff 选项，让 merge 也成为一个 commitment.
-</span><span class='line'>blogbins-MacBook-Pro:octopress blogbin$ git merge --no-ff develop
-</span><span class='line'>Merge made by the 'recursive' strategy.
-</span><span class='line'> plugins/indexer.rb                          |  255 +++++++++++++++++++++++++++
-</span><span class='line'> source/_includes/custom/asides/indexer.html |   10 ++
-</span><span class='line'> 2 files changed, 265 insertions(+)
-</span><span class='line'> create mode 100644 plugins/indexer.rb
-</span><span class='line'> create mode 100644 source/_includes/custom/asides/indexer.html</span></code></pre></td></tr></table></div></figure>
-
-
-<p>以上 git-flow 命令执行过程其实是对以下 git 命令的包装：</p>
-
-<p>先基于 master 产品分支创建并切换到 develop 开发分支</p>
-
-<p>git checkout -b develop master</p>
-
-<p>开始开发一个新特性，基于 develop 创建新特性分支</p>
-
-<p>git checkout -b feature/fengbin/using-git-flow develop</p>
-
-<p>修改文件，提交文件。。。</p>
-
-<p>切换回 develop 开发分支，将 using-git-flow 特性分支改动 merge 到 develop 开发分支</p>
-
-<p>git checkout develop</p>
-
-<p>git merge &#8211;no-ff feature/fengbin/using-git-flow</p>
-
-<p>最后删除 using-git-flow 特性分支</p>
-
-<p>git checkout -d feature/fengbin/using-git-flow develop</p>
-
-<p>已有项目中初始化 git-flow 可能会出现以下错误：</p>
-
-<p>Local branch &#8216;xxx&#8217; does not exist.</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>blogbins-MacBook-Pro:app_store blogbin$ git flow init
-</span><span class='line'>
-</span><span class='line'>Which branch should be used for bringing forth production releases?
-</span><span class='line'>   - features/favorite
-</span><span class='line'>   - master
-</span><span class='line'>Branch name for production releases: [master] develop
-</span><span class='line'>Local branch 'develop' does not exist.</span></code></pre></td></tr></table></div></figure>
-
-
-<p>查阅 git-flow 官方教程或者网络资料，不管是已有项目或者新项目，初始化 git-flow 都是相同的命令 git flow init。</p>
-
-<p>怀疑可能是本地仓库之前已经运行过 git flow init，随后有不按 git-flow 模式创建分支所致。</p>
-
-<h5>2012 年 8 月 27 日更新</h5>
-
-<p>解决办法为以下任选：</p>
-
-<ol>
-<li><p>重现 git clone 远端仓库克隆出一个本地仓库，在本地仓库重新运行 git flow init。</p></li>
-<li><p>手动创建 develop 开发分支，然后重新运行 git flow init</p></li>
-</ol>
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>blogbins-MacBook-Pro:atyun-focus-video blogbin$ git checkout -b develop master
-</span><span class='line'>Switched to a new branch 'develop'
-</span><span class='line'>blogbins-MacBook-Pro:atyun-focus-video blogbin$ git checkout master
-</span><span class='line'>Switched to branch 'master'
-</span><span class='line'>blogbins-MacBook-Pro:atyun-focus-video blogbin$ git flow init</span></code></pre></td></tr></table></div></figure>
-
-
 
 ]]></content>
   </entry>

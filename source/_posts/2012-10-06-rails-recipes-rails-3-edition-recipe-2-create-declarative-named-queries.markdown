@@ -6,11 +6,11 @@ comments: true
 author: Tech.Blogbin <tech.blogbin@gmail.com>
 categories: 
 - Rails Recipes Rails 3 Edition
-- Recipe Recipe 2 Create Declarative Named Queries
+- Recipe 2 Create Declarative Named Queries
 - Rails
 tags: 
 - Rails Recipes Rails 3 Edition
-- Recipe Recipe 2 Create Declarative Named Queries
+- Recipe 2 Create Declarative Named Queries
 - Rails
 ---
 
