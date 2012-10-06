@@ -4,7 +4,7 @@
   <title><![CDATA[Tech.Blogbin's Blog]]></title>
   <link href="http://tech-blog.blogbin.info/atom.xml" rel="self"/>
   <link href="http://tech-blog.blogbin.info/"/>
-  <updated>2012-10-04T10:40:37+08:00</updated>
+  <updated>2012-10-06T17:24:52+08:00</updated>
   <id>http://tech-blog.blogbin.info/</id>
   <author>
     <name><![CDATA[Tech Blogbin ]]></name>
@@ -12,6 +12,41 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Rails Recipes Rails 3 Edition Recipe 2 Create Declarative Named Queries]]></title>
+    <link href="http://tech-blog.blogbin.info/blog/2012/10/06/rails-recipes-rails-3-edition-recipe-2-create-declarative-named-queries/"/>
+    <updated>2012-10-06T17:12:00+08:00</updated>
+    <id>http://tech-blog.blogbin.info/blog/2012/10/06/rails-recipes-rails-3-edition-recipe-2-create-declarative-named-queries</id>
+    <content type="html"><![CDATA[<p>ActiveRecord Scope 是定义查询相关类方法的一种快捷方式。</p>
+
+<p>以下代码，模型查询或业务逻辑代码暴露在 controller</p>
+
+<blockquote><p><figure class='code'><figcaption><span>rr2/declarative_scopes/app/controllers/wombats_controller.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span><br/><span class='line-number'>2</span><br/><span class='line-number'>3</span><br/><span class='line-number'>4</span><br/><span class='line-number'>5</span><br/><span class='line-number'>6</span><br/><span class='line-number'>7</span><br/></pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">WombatsController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span><br/></span><span class='line'>  <span class="k">def</span> <span class="nf">search</span><br/></span><span class='line'>        <span class="vi">@wombats</span> <span class="o">=</span> <span class="no">Wombat</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="s2">&quot;bio like ?&quot;</span><span class="p">,</span> <span class="s2">&quot;%</span><span class="si">#{</span><span class="n">params</span><span class="o">[</span><span class="ss">:q</span><span class="o">]</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span><span class="o">.</span><br/></span><span class='line'>      <span class="n">order</span><span class="p">(</span><span class="ss">:age</span><span class="p">)</span><br/></span><span class='line'>     <span class="n">render</span> <span class="ss">:index</span><br/></span><span class='line'> <span class="k">end</span><br/></span><span class='line'><span class="k">end</span><br/></span></code></pre></td></tr></table></div></figure></p></blockquote>
+
+
+<p>重构将模型查询或业务逻辑代码封装在 model 类中，如：</p>
+
+<!--more-->
+
+
+<blockquote><p><figure class='code'><figcaption><span>rr2/declarative_scopes/app/controllers/wombats_controller.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span><br/><span class='line-number'>2</span><br/><span class='line-number'>3</span><br/><span class='line-number'>4</span><br/></pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">search</span><br/></span><span class='line'>  <span class="vi">@wombats</span> <span class="o">=</span> <span class="no">Wombat</span><span class="o">.</span><span class="n">with_bio_containing</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:q</span><span class="o">]</span><span class="p">)</span><br/></span><span class='line'>    <span class="n">render</span> <span class="ss">:index</span><br/></span><span class='line'><span class="k">end</span><br/></span></code></pre></td></tr></table></div></figure></p><p><figure class='code'><figcaption><span>rr2/declarative_scopes/app/models/wombat.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span><br/><span class='line-number'>2</span><br/><span class='line-number'>3</span><br/><span class='line-number'>4</span><br/><span class='line-number'>5</span><br/><span class='line-number'>6</span><br/></pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Wombat</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span><br/></span><span class='line'>    <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">with_bio_containing</span><span class="p">(</span><span class="n">query</span><span class="p">)</span><br/></span><span class='line'>       <span class="n">where</span><span class="p">(</span><span class="s2">&quot;bio like ?&quot;</span><span class="p">,</span> <span class="s2">&quot;%</span><span class="si">#{</span><span class="n">query</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span><span class="o">.</span><br/></span><span class='line'>     <span class="n">order</span><span class="p">(</span><span class="ss">:age</span><span class="p">)</span><br/></span><span class='line'> <span class="k">end</span><br/></span><span class='line'><span class="k">end</span><br/></span></code></pre></td></tr></table></div></figure></p></blockquote>
+
+
+<p>改用 scope 来定义与查询相关的方法，如</p>
+
+<blockquote><p><figure class='code'><figcaption><span>rr2/declarative_scopes/app/models/wombat.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span><br/><span class='line-number'>2</span><br/><span class='line-number'>3</span><br/><span class='line-number'>4</span><br/></pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Wombat</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span><br/></span><span class='line'>   <span class="n">scope</span> <span class="ss">:with_bio_containing</span><span class="p">,</span> <span class="nb">lambda</span> <span class="p">{</span><span class="o">|</span><span class="n">query</span><span class="o">|</span> <span class="n">where</span><span class="p">(</span><span class="s2">&quot;bio like ?&quot;</span><span class="p">,</span> <span class="s2">&quot;%</span><span class="si">#{</span><span class="n">query</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span><span class="o">.</span><br/></span><span class='line'>   <span class="n">order</span><span class="p">(</span><span class="ss">:age</span><span class="p">)</span> <span class="p">}</span><br/></span><span class='line'><span class="k">end</span><br/></span></code></pre></td></tr></table></div></figure></p></blockquote>
+
+
+<p>scope 方法返回 ActiveRecord::Relation，采用延迟加载的方式。</p>
+
+<blockquote><p>You see here that a call to our teenagers() scope actually returns an instance<br/>of ActiveRecord::Relation, not an Array of Person objects! We can ask an ActiveRecord::Relation<br/>to convert itself to SQL with the to_sql() method. If we combine two scopes,<br/>you see that the ActiveRecord::Relation objects actually combine to generate one<br/>composed query.</p></blockquote>
+
+
+<p>更多 ActiveRecord Scope 信息参见：
+<a href="http://guides.rubyonrails.org/active_record_querying.html#scopes">http://guides.rubyonrails.org/active_record_querying.html#scopes</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[guides.rubyonrails.org association_basics]]></title>
@@ -2290,108 +2325,6 @@ neerajcse/octopress-calendar-aside · GitHub
 
 
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Using binarylogic/settingslogic]]></title>
-    <link href="http://tech-blog.blogbin.info/blog/2012/08/22/using-binarylogic-slash-settingslogic/"/>
-    <updated>2012-08-22T22:00:00+08:00</updated>
-    <id>http://tech-blog.blogbin.info/blog/2012/08/22/using-binarylogic-slash-settingslogic</id>
-    <content type="html"><![CDATA[<p>Rails 项目中有一些全局配置信息需要保存在文件中，采用 binarylogic/settingslogic 来管理这些配置信息：</p>
-
-<p>参阅：</p>
-
-<p>binarylogic/settingslogic <a href="https://github.com/binarylogic/settingslogic">https://github.com/binarylogic/settingslogic</a></p>
-
-<p>介紹 Settingslogic | Beryllium Work <a href="http://blog.berylliumwork.com/2012/02/settingslogic.html">http://blog.berylliumwork.com/2012/02/settingslogic.html</a></p>
-
-<p>假设 config 有配置文件：</p>
-
-<figure class='code'><figcaption><span>settings.yml</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">default</span><span class="p">:</span> <span class="o">*</span><span class="n">default</span>
-</span><span class='line'>  <span class="n">server_url</span><span class="p">:</span>
-</span><span class='line'>    <span class="n">check_sensitive_data</span><span class="p">:</span> <span class="s2">&quot;http://localhst:3000/bad_word_checker/check.json&quot;</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">development</span><span class="p">:</span>
-</span><span class='line'>  <span class="o">&lt;&lt;</span><span class="p">:</span> <span class="o">*</span><span class="n">default</span>
-</span><span class='line'>  <span class="n">server_url</span><span class="p">:</span>
-</span><span class='line'>    <span class="n">check_sensitive_data</span><span class="p">:</span> <span class="s2">&quot;http://localhst:3001/bad_word_checker/check.json&quot;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nb">test</span><span class="p">:</span>
-</span><span class='line'>  <span class="o">&lt;&lt;</span><span class="p">:</span> <span class="o">*</span><span class="n">default</span>
-</span><span class='line'>  <span class="n">server_url</span><span class="p">:</span>
-</span><span class='line'>    <span class="n">check_sensitive_data</span><span class="p">:</span> <span class="s2">&quot;http://localhst:3002/bad_word_checker/check.json&quot;</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">production</span><span class="p">:</span>
-</span><span class='line'>  <span class="o">&lt;&lt;</span><span class="p">:</span> <span class="o">*</span><span class="n">default</span>
-</span><span class='line'>  <span class="n">server_url</span><span class="p">:</span>
-</span><span class='line'>    <span class="n">check_sensitive_data</span><span class="p">:</span> <span class="s2">&quot;http://localhst:3003/bad_word_checker/check.json&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<!--more-->
-
-
-<p>访问配置信息的代码比较丑陋，如</p>
-
-<figure class='code'><figcaption><span>settings.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">SYS_CONFIG</span> <span class="o">=</span> <span class="no">YAML</span><span class="o">.</span><span class="n">load_file</span><span class="p">(</span><span class="no">Rails</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;config/sys_config.yml&quot;</span><span class="p">))</span><span class="o">[</span><span class="no">Rails</span><span class="o">.</span><span class="n">env</span><span class="o">]</span>
-</span><span class='line'>
-</span><span class='line'><span class="nb">puts</span> <span class="no">SYS_CONFIG</span><span class="o">[</span><span class="s2">&quot;server_url&quot;</span><span class="o">][</span><span class="s2">&quot;check_sensitive_data&quot;</span><span class="o">]</span>     <span class="c1"># =&gt; &quot;http://localhst:3001/bad_word_checker/check.json&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>如果采用 settingslogic，先创建 settings.rb 文件</p>
-
-<figure class='code'><figcaption><span>app/model/settings.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># encoding: UTF-8</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1">#binarylogic/settingslogic</span>
-</span><span class='line'><span class="c1">#https://github.com/binarylogic/settingslogic</span>
-</span><span class='line'><span class="k">class</span> <span class="nc">Settings</span> <span class="o">&lt;</span> <span class="no">Settingslogic</span>
-</span><span class='line'>  <span class="n">source</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="no">Rails</span><span class="o">.</span><span class="n">root</span><span class="si">}</span><span class="s2">/config/settings.yml&quot;</span>
-</span><span class='line'>  <span class="n">namespace</span> <span class="no">Rails</span><span class="o">.</span><span class="n">env</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>通过 Settings 来访问配置信息，如：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">puts</span> <span class="no">Settings</span><span class="o">.</span><span class="n">server_url</span><span class="o">.</span><span class="n">check_sensitive_data</span>    <span class="c1"># =&gt; &quot;http://localhst:3001/bad_word_checker/check.json&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>看看，不需要指定 yml 文件和 env 环境，非常容易。</p>
 ]]></content>
   </entry>
   

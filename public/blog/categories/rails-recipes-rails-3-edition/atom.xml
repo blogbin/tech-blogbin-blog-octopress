@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Rails Recipes Rails 3 Edition | Tech.Blogbin's Blog]]></title>
   <link href="http://tech-blog.blogbin.info/blog/categories/rails-recipes-rails-3-edition/atom.xml" rel="self"/>
   <link href="http://tech-blog.blogbin.info/"/>
-  <updated>2012-10-04T10:40:37+08:00</updated>
+  <updated>2012-10-06T17:24:52+08:00</updated>
   <id>http://tech-blog.blogbin.info/</id>
   <author>
     <name><![CDATA[Tech Blogbin ]]></name>
@@ -12,6 +12,34 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Rails Recipes Rails 3 Edition Recipe 2 Create Declarative Named Queries]]></title>
+    <link href="http://tech-blog.blogbin.info/blog/2012/10/06/rails-recipes-rails-3-edition-recipe-2-create-declarative-named-queries/"/>
+    <updated>2012-10-06T17:12:00+08:00</updated>
+    <id>http://tech-blog.blogbin.info/blog/2012/10/06/rails-recipes-rails-3-edition-recipe-2-create-declarative-named-queries</id>
+    <content type="html"><![CDATA[<p>ActiveRecord Scope 是定义查询相关类方法的一种快捷方式。</p>
+
+<p>以下代码，模型查询或业务逻辑代码暴露在 controller
+<blockquote><p>``` ruby rr2/declarative_scopes/app/controllers/wombats_controller.rb<br/>class WombatsController &lt; ApplicationController</p></p><p><pre><code>def search<br/>    @wombats = Wombat.where("bio like ?", "%#{params[:q]}%").<br/>    order(:age)<br/>    render :index<br/>end<br/></code></pre></p><p><p>end<br/>```</p></blockquote></p>
+
+<p>重构将模型查询或业务逻辑代码封装在 model 类中，如：</p>
+
+<!--more-->
+
+
+<p><blockquote><p>``` ruby rr2/declarative_scopes/app/controllers/wombats_controller.rb<br/>def search</p></p><p><pre><code>@wombats = Wombat.with_bio_containing(params[:q])<br/>render :index<br/></code></pre></p><p><p>end<br/>```</p></p><p><p>```  ruby rr2/declarative_scopes/app/models/wombat.rb<br/>class Wombat &lt; ActiveRecord::Base</p></p><p><pre><code>def self.with_bio_containing(query)<br/>    where("bio like ?", "%#{query}%").<br/>    order(:age)<br/>end<br/></code></pre></p><p><p>end<br/>```</p></blockquote></p>
+
+<p>改用 scope 来定义与查询相关的方法，如
+<blockquote><p>``` ruby rr2/declarative_scopes/app/models/wombat.rb<br/>class Wombat &lt; ActiveRecord::Base</p></p><p><pre><code>scope :with_bio_containing, lambda {|query| where("bio like ?", "%#{query}%").<br/>order(:age) }<br/></code></pre></p><p><p>end<br/>```</p></blockquote></p>
+
+<p>scope 方法返回 ActiveRecord::Relation，采用延迟加载的方式。
+<blockquote><p>You see here that a call to our teenagers() scope actually returns an instance<br/>of ActiveRecord::Relation, not an Array of Person objects! We can ask an ActiveRecord::Relation<br/>to convert itself to SQL with the to_sql() method. If we combine two scopes,<br/>you see that the ActiveRecord::Relation objects actually combine to generate one<br/>composed query.</p></blockquote></p>
+
+<p>更多 ActiveRecord Scope 信息参见：
+<a href="http://guides.rubyonrails.org/active_record_querying.html#scopes">http://guides.rubyonrails.org/active_record_querying.html#scopes</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Rails Recipes Rails 3 Edition Recipe 1 Create Meaningful Many-to-Many Relationships]]></title>
