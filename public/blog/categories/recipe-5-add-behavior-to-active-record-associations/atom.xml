@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Recipe 5 Add Behavior to Active Record Associations | Tech.Blogbin's Blog]]></title>
+  <link href="http://tech-blog.blogbin.info/blog/categories/recipe-5-add-behavior-to-active-record-associations/atom.xml" rel="self"/>
+  <link href="http://tech-blog.blogbin.info/"/>
+  <updated>2012-10-07T08:01:05+08:00</updated>
+  <id>http://tech-blog.blogbin.info/</id>
+  <author>
+    <name><![CDATA[Tech Blogbin ]]></name>
+    <email><![CDATA[Tech Blogbin <tech.blogbin@gmail.com>]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Rails Recipes Rails 3 Edition Recipe 5 Add Behavior to Active Record Associations]]></title>
+    <link href="http://tech-blog.blogbin.info/blog/2012/10/07/rails-recipes-rails-3-edition-recipe-5-add-behavior-to-active-record-associations/"/>
+    <updated>2012-10-07T00:35:00+08:00</updated>
+    <id>http://tech-blog.blogbin.info/blog/2012/10/07/rails-recipes-rails-3-edition-recipe-5-add-behavior-to-active-record-associations</id>
+    <content type="html"><![CDATA[<p>ActiveRecord 有两种办法为 Association 增加行为或方法。先看一下 Association 增加的 create 方法：
+<blockquote><p>``` ruby<br/>$ rails console</p></p><p><blockquote><blockquote><p>me = Student.create(:name => "Chad", :graduating_year => 2020)<br/>=> #&lt;Student:0x26d18d8 @new_record=false, @attributes={"name"=>"Chad",<br/>"id"=>1, "graduating_year"=>2020}><br/>me.grades.create(:score => 1, :class_name => "Algebra")<br/>=> #&lt;Grade:0x269cb10 @new_record=false, @errors={}>, @attributes={"score"=>1,<br/>"class_name"=>"Algebra", "student_id"=>1, "id"=>1}><br/>```</p></blockquote></blockquote></p><p><!--more--></p><p><br/><p>``` ruby</p></p><p><blockquote><blockquote><p>me.grades.class<br/>=> Array<br/>Array.instance_methods.grep /create/<br/>=> []<br/>```</p></blockquote></p></blockquote></blockquote>
+
+<p>xxx.class 返回是 Array，但其实是 ActiveRecord::Associations::CollectionProxy 对象，它把 .class 的调用转发给封装的 Array 对象。
+<blockquote><p>The collection returned by an Active Record association isn’t actually an Array.<br/>It’s a collection proxy. Collection proxies are wrappers around the collections,<br/>allowing them to be lazily loaded and extended. To add behavior to an Active<br/>Record association, you add it to the collection proxy during the call to<br/>has_many().</p></p><p><p>What’s really going on is that the call to grades() returns an instance of<br/>ActiveRecord::Associations::CollectionProxy. This sits between your model’s client code<br/>and the actual objects the model is associated with. It masquerades as an<br/>object of the class you expect (Array in this example) and delegates calls to the<br/>appropriate application-specific model objects.</p></p><p><p>Since each access to an association can create<br/>a new instance of CollectionProxy, we can’t just get the association via a call to<br/>grades() and add our behaviors to it. Active Record controls the creation and<br/>return of these objects, so we’ll need to ask Active Record to extend the proxy<br/>object for us.</p></blockquote></p>
+
+<p>两种途径：
+1. has_many 的 :extend 参数指定一个 Module
+<blockquote><p>Active Record gives us two ways to accomplish this. First, we<br/>could define additional methods in a module and then extend the association<br/>proxy with that module.</p></p><p><p>``` ruby rr2/assoc_proxies/lib/grade_finder.rb<br/>module GradeFinder</p></p><p><pre><code>def below_average<br/>where('score &lt; ?', 2)<br/>end<br/></code></pre></p><p><p>end<br/>```</p></p><p><p>``` ruby rr2/assoc_proxies/app/models/student.rb<br/>require "grade_finder"<br/>class Student &lt; ActiveRecord::Base</p></p><p><pre><code>has_many :grades, :extend =&gt; GradeFinder<br/></code></pre></p><p><p>end<br/>```</p></p><p><p>``` ruby<br/>$ rails console</p></p><p><blockquote><blockquote><p>Student.first.grades.below_average<br/>=> [#&lt;Grade:0x26aecc0 @attributes={"score"=>"1",<br/>"student_id"=>"1", "id"=>"1"}>]<br/>```</p></blockquote></p></blockquote></blockquote>
+
+<ol>
+<li>has_many 传入一个代码块，代码块中定义方法
+<blockquote><p>Alternatively, we could have defined this method directly by passing a block<br/>to the declaration of the has_many() association:<br/>``` ruby rr2/assoc_proxies/app/models/student.rb<br/>class Student &lt; ActiveRecord::Base<br/> has_many :grades do</p><p><pre><code> def below_average<br/>     where('score &lt; ?', 2)<br/> end<br/></code></pre></p><p><p> end<br/>end<br/>```</p></blockquote></p></li>
+</ol>
+
+
+<p>有意思的是，扩展模块或代码块中定义方法上下文中, self 指向 Array 对象，而不是 Proxy 对象本身.
+<blockquote><p>These association proxies have access to all the same methods that would<br/>normally be defined on the associations, such as find(), count(), and create().<br/>An interesting point to notice is that inside the scope of one of these extended<br/>methods, the special variable self refers to the Array of associated Active Record<br/>objects. This means you can index into the array and perform any other<br/>operations on self that you could perform on an array.</p></blockquote></p>
+
+<p>如果要访问代理对象或者 Association 两边的对象，可通过 proxy_association 相关的属性和方法。
+<blockquote><p>Extensions can refer to the internals of the association proxy using these three attributes of the proxy_association accessor:</p></p><p><p>proxy_association.owner returns the object that the association is a part of.<br/>proxy_association.reflection returns the reflection object that describes the association.<br/>proxy_association.target returns the associated object for belongs_to or has_one, or the collection of associated objects for has_many or has_and_belongs_to_many.</p></blockquote></p>
+
+<p>关于 has_many 的 :extend 更多信息，参阅：
+<a href="http://guides.rubyonrails.org/association_basics.html#association-extensions">http://guides.rubyonrails.org/association_basics.html#association-extensions</a></p>
+]]></content>
+  </entry>
+  
+</feed>
