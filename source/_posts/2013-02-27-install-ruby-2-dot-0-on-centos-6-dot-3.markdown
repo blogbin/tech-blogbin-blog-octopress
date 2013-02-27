@@ -7,10 +7,12 @@ author: Tech.Blogbin <tech.blogbin@gmail.com>
 categories: 
 - Ruby
 - Rails
+- RVM
 - CentOS 6.3
 tags: 
 - Ruby
 - Rails
+- RVM
 - CentOS 6.3
 ---
 
@@ -67,6 +69,8 @@ Upgrade of RVM in /home/atyun/.rvm/ is complete.
 
 RVM reloaded!
 ```
+
+<!--more-->
 
 ```
 [atyun@v1.ex.ays.atyun.net ~]$rvm list known

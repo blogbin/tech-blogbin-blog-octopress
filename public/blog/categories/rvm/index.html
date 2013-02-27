@@ -5,15 +5,14 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Using Bootstrap and Bootswatch - Tech.Blogbin's Blog</title>
+  <title>Category: RVM - Tech.Blogbin's Blog</title>
 
   <meta name="alexaVerifyID" content="-6pNt74TSllotvjLFDIa77kSKLI" />
 
   <meta name="author" content="Tech Blogbin <tech.blogbin@gmail.com>">
 
   
-  <meta name="description" content="Bootstrap 是 Twitter 开源免费提供的 CSS框架，它是快速开发Web应用程序的前端工具包。
-它是一个CSS和HTML的集合，它使用了最新的浏览器技术，给Web开发提供了时尚的版式 http://twitter.github.com/bootstrap/index.html &hellip;">
+  <meta name="description" content="Category: RVM">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -22,7 +21,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://tech-blog.blogbin.info/blog/2012/09/09/using-bootstrap/">
+  <link rel="canonical" href="http://tech-blog.blogbin.infoblog/categories/rvm/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -84,250 +83,36 @@
   <div id="main">
     <div id="content">
       <div>
-<article class="hentry" role="article">
+<article role="article">
   
   <header>
-    
-      <h1 class="entry-title">Using Bootstrap and Bootswatch</h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-09-09T01:01:00+08:00" pubdate data-updated="true">Sep 9<span>th</span>, 2012</time>
-        
-         | <a href="#disqus_thread">Comments</a>
-        
-      </p>
+    <h1 class="entry-title">Category: RVM</h1>
     
   </header>
-
-
-<div class="entry-content"><p>Bootstrap 是 Twitter 开源免费提供的 CSS框架，它是快速开发Web应用程序的前端工具包。
-它是一个CSS和HTML的集合，它使用了最新的浏览器技术，给Web开发提供了时尚的版式</p>
-
-<p><a href="http://twitter.github.com/bootstrap/index.html">http://twitter.github.com/bootstrap/index.html</a></p>
-
-<p><a href="https://github.com/twitter/bootstrap">https://github.com/twitter/bootstrap</a></p>
-
-<p>中文翻译参见：
-Twitter Bootstrap中文版/中文翻译
-<a href="http://wrongwaycn.github.com/bootstrap/docs/index.html">http://wrongwaycn.github.com/bootstrap/docs/index.html</a></p>
-
-<p>Bootstrap 默认只提供黑色和白色风格，也有一些付费的风格。如果想尝试免费的其它风格，可以试试看 Bootswatch
-<a href="http://bootswatch.com/">http://bootswatch.com/</a></p>
-
-<p><a href="https://github.com/maxim/bootswatch-rails">https://github.com/maxim/bootswatch-rails</a></p>
-
-<p>Rails 项目引入 Bootstrap 和 Bootswatch 比较容易。</p>
-
-<!--more-->
-
-
-<p>修改 Gemfile</p>
-
-<figure class='code'><figcaption><span>Gemfile</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">gem</span> <span class="s1">&#39;bootstrap-sass&#39;</span>
-</span><span class='line'><span class="n">gem</span> <span class="s1">&#39;bootswatch-rails&#39;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>在 app/assets/stylesheets/application.css.scs 通过 @import 引入 bootstrap 和 bootswatch 的 css</p>
-
-<figure class='code'><figcaption><span>app/assets/stylesheets/application.css.scss</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="o">//</span> <span class="nt">Example</span> <span class="nt">using</span> <span class="s1">&#39;Cerulean&#39;</span> <span class="nt">bootswatch</span>
-</span><span class='line'><span class="o">//</span>
-</span><span class='line'><span class="o">//</span> <span class="nt">First</span> <span class="nt">import</span> <span class="nt">journal</span> <span class="nt">variables</span>
-</span><span class='line'><span class="k">@import</span> <span class="s2">&quot;bootswatch/cerulean/variables&quot;</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">//</span> <span class="nt">Then</span> <span class="nt">bootstrap</span> <span class="nt">itself</span>
-</span><span class='line'><span class="k">@import</span> <span class="s2">&quot;bootstrap&quot;</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">//</span> <span class="nt">Bootstrap</span> <span class="nt">body</span> <span class="nt">padding</span> <span class="nt">for</span> <span class="nt">fixed</span> <span class="nt">navbar</span>
-</span><span class='line'><span class="o">//</span><span class="nt">body</span> <span class="p">{</span> <span class="k">padding-top</span><span class="o">:</span> <span class="m">40px</span><span class="p">;</span> <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">//</span> <span class="nt">Responsive</span> <span class="nt">styles</span> <span class="nt">go</span> <span class="nt">here</span> <span class="nt">in</span> <span class="nt">case</span> <span class="nt">you</span> <span class="nt">want</span> <span class="nt">them</span>
-</span><span class='line'><span class="k">@import</span> <span class="s2">&quot;bootstrap-responsive&quot;</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">//</span> <span class="nt">And</span> <span class="nt">finally</span> <span class="nt">bootswatch</span> <span class="nt">style</span> <span class="nt">itself</span>
-</span><span class='line'><span class="k">@import</span> <span class="s2">&quot;bootswatch/cerulean/bootswatch&quot;</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">//</span> <span class="nt">Whatever</span> <span class="nt">application</span> <span class="nt">styles</span> <span class="nt">you</span> <span class="nt">have</span> <span class="nt">go</span> <span class="nt">last</span>
-</span><span class='line'><span class="k">@import</span> <span class="s2">&quot;video_recommendation_types&quot;</span><span class="p">;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Bootstrap 有些交互控件（如 Dropdown）需要一些 javascript，建议部署在 vertor/assets/javascripts目录</p>
-
-<figure class='code'><figcaption><span>app/assets/stylesheets/application.css.scss</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">blogbins-MacBook-Pro</span><span class="nd">:focus</span> <span class="nt">blogbin</span><span class="err">$</span> <span class="nt">find</span> <span class="nt">vendor</span><span class="o">/</span><span class="nt">assets</span><span class="o">/</span>
-</span><span class='line'><span class="nt">vendor</span><span class="o">/</span><span class="nt">assets</span><span class="o">/</span>
-</span><span class='line'><span class="nt">vendor</span><span class="o">/</span><span class="nt">assets</span><span class="o">//</span><span class="nt">javascripts</span>
-</span><span class='line'><span class="nt">vendor</span><span class="o">/</span><span class="nt">assets</span><span class="o">//</span><span class="nt">javascripts</span><span class="o">/</span><span class="nt">bootstraps</span>
-</span><span class='line'><span class="nt">vendor</span><span class="o">/</span><span class="nt">assets</span><span class="o">//</span><span class="nt">javascripts</span><span class="o">/</span><span class="nt">bootstraps</span><span class="o">/</span><span class="nt">bootstrap-collapse</span><span class="nc">.js</span>
-</span><span class='line'><span class="nt">vendor</span><span class="o">/</span><span class="nt">assets</span><span class="o">//</span><span class="nt">javascripts</span><span class="o">/</span><span class="nt">bootstraps</span><span class="o">/</span><span class="nt">bootstrap-dropdown</span><span class="nc">.js</span>
-</span><span class='line'><span class="nt">vendor</span><span class="o">/</span><span class="nt">assets</span><span class="o">//</span><span class="nt">javascripts</span><span class="o">/</span><span class="nt">bootstraps</span><span class="o">/</span><span class="nt">index</span><span class="nc">.js</span>
-</span><span class='line'><span class="nt">vendor</span><span class="o">/</span><span class="nt">assets</span><span class="o">//</span><span class="nt">stylesheets</span>
-</span><span class='line'><span class="nt">vendor</span><span class="o">/</span><span class="nt">assets</span><span class="o">//</span><span class="nt">stylesheets</span><span class="o">/</span><span class="nc">.gitkeep</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>建议在该目录下创建 manifest 清单文件，引用其它 javascript 文件</p>
-
-<figure class='code'><figcaption><span>app/assets/stylesheets/application.css.scss</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nt">blogbins-MacBook-Pro</span><span class="nd">:focus</span> <span class="nt">blogbin</span><span class="err">$</span> <span class="nt">cat</span> <span class="nt">vendor</span><span class="o">/</span><span class="nt">assets</span><span class="o">//</span><span class="nt">javascripts</span><span class="o">/</span><span class="nt">bootstraps</span><span class="o">/</span><span class="nt">index</span><span class="nc">.js</span>
-</span><span class='line'><span class="o">//=</span> <span class="nt">require_tree</span> <span class="o">.</span>
-</span><span class='line'>
-</span><span class='line'><span class="nt">blogbins-MacBook-Pro</span><span class="nd">:focus</span> <span class="nt">blogbin</span><span class="err">$</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>在 app/assets/javascripts/application.js 引入需要的 javascript</p>
-
-<figure class='code'><figcaption><span>app/assets/javascripts/application.js</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="c1">//This is a manifest file that&#39;ll be compiled into including all the files listed below.</span>
-</span><span class='line'><span class="c1">//Add new JavaScript/Coffee code in separate files in this directory and they&#39;ll automatically</span>
-</span><span class='line'><span class="c1">// be included in the compiled file accessible from http://example.com/assets/application.js</span>
-</span><span class='line'><span class="c1">//It&#39;s not advisable to add code directly here, but if you do, it&#39;ll appear at the bottom of the</span>
-</span><span class='line'><span class="c1">// the compiled file.</span>
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'><span class="c1">//= require jquery</span>
-</span><span class='line'><span class="c1">//= require jquery_ujs</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1">//= require bootstraps</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1">// 可以继续需要引入其它 javascript 文件或清单文件</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>最后运行 bundle install 安装／更新 gems 之前，需要先删除 Gemfile.lock，以防原来的版本依赖带来的干扰</p>
-
-<figure class='code'><figcaption><span>app/assets/javascripts/application.js</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">blogbins</span><span class="o">-</span><span class="nx">MacBook</span><span class="o">-</span><span class="nx">Pro</span><span class="o">:</span><span class="nx">focus</span> <span class="nx">blogbin$</span> <span class="nx">rm</span> <span class="nx">Gemfile</span><span class="p">.</span><span class="nx">lock</span>
-</span><span class='line'>
-</span><span class='line'><span class="nx">blogbins</span><span class="o">-</span><span class="nx">MacBook</span><span class="o">-</span><span class="nx">Pro</span><span class="o">:</span><span class="nx">focus</span> <span class="nx">blogbin$</span> <span class="nx">bundle</span> <span class="nx">install</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-</div>
-
-
-  <footer>
-    <p class="meta">
-      
   
-
-<span class="byline author vcard">Posted by <span class="fn">Tech Blogbin <tech.blogbin@gmail.com></span></span>
-
-      
-
-
-
-
-
+  <div id="blog-archives" class="category">
 
 
 
   
+  <h2>2013</h2>
+
+<article>
+  
+<h1><a href="/blog/2013/02/27/install-ruby-2-dot-0-on-centos-6-dot-3/">Install Ruby 2.0 on CentOS 6.3</a></h1>
+<time datetime="2013-02-27T23:44:00+08:00" pubdate><span class='month'>Feb</span> <span class='day'>27</span> <span class='year'>2013</span></time>
+
+<footer>
+  <span class="categories">posted in <a class='category' href='/blog/categories/centos-6-3/'>CentOS 6.3</a>, <a class='category' href='/blog/categories/rvm/'>RVM</a>, <a class='category' href='/blog/categories/rails/'>Rails</a>, <a class='category' href='/blog/categories/ruby/'>Ruby</a></span>
+</footer>
 
 
-<time datetime="2012-09-09T01:01:00+08:00" pubdate data-updated="true">Sep 9<span>th</span>, 2012</time>
-      
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/assets/'>Assets</a>, <a class='category' href='/blog/categories/bootswatch/'>Bootswatch</a>, <a class='category' href='/blog/categories/bundle/'>Bundle</a>, <a class='category' href='/blog/categories/bundler/'>Bundler</a>, <a class='category' href='/blog/categories/css/'>CSS</a>, <a class='category' href='/blog/categories/gem/'>Gem</a>, <a class='category' href='/blog/categories/gemfile/'>Gemfile</a>, <a class='category' href='/blog/categories/rails/'>Rails</a>, <a class='category' href='/blog/categories/ror/'>RoR</a>, <a class='category' href='/blog/categories/ruby/'>Ruby</a>, <a class='category' href='/blog/categories/rubyonrails/'>RubyOnRails</a>, <a class='category' href='/blog/categories/sass/'>SASS</a>, <a class='category' href='/blog/categories/scss/'>SCSS</a>, <a class='category' href='/blog/categories/twitter-bootstrap/'>Twitter Bootstrap</a>
-  
-</span>
-
-
-    </p>
-    
-      <div class="sharing">
-  
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://tech-blog.blogbin.info/blog/2012/09/09/using-bootstrap/" data-via="tech_blogbin" data-counturl="http://tech-blog.blogbin.info/blog/2012/09/09/using-bootstrap/" >Tweet</a>
-  
-  
-  <div class="g-plusone" data-size="medium"></div>
-  
-  
-    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
-  
-</div>
-
-    
-    <p class="meta">
-      
-        <a class="basic-alignment left" href="/blog/2012/08/31/using-bitbucket/" title="Previous Post: Using Bitbucket">&laquo; Using Bitbucket</a>
-      
-      
-        <a class="basic-alignment right" href="/blog/2012/09/12/upgrading-to-rails-3-dot-2-8/" title="Next Post: Upgrading to Rails 3.2.8">Upgrading to Rails 3.2.8 &raquo;</a>
-      
-    </p>
-  </footer>
 </article>
 
-  <section>
-    <h1>Comments</h1>
-    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 </div>
-  </section>
+
+  
+</article>
 
 </div>
 
@@ -387,26 +172,6 @@ Twitter Bootstrap中文版/中文翻译
 <section>
     <h1>Related Posts</h1>
     <ul class="posts">
-    
-        <li class="related">
-        <a href="/blog/2013/02/27/install-ruby-2-dot-0-on-centos-6-dot-3/">Install Ruby 2.0 on CentOS 6.3</a>
-        </li>
-    
-        <li class="related">
-        <a href="/blog/2012/10/07/rails-recipes-rails-3-edition-recipe-5-add-behavior-to-active-record-associations/">Rails Recipes Rails 3 Edition Recipe 5 Add Behavior to Active Record Associations</a>
-        </li>
-    
-        <li class="related">
-        <a href="/blog/2012/10/07/rails-recipes-rails-3-edition-recipe-4-set-default-criteria-for-model-operations/">Rails Recipes Rails 3 Edition Recipe 4 Set Default Criteria for Model Operations</a>
-        </li>
-    
-        <li class="related">
-        <a href="/blog/2012/10/06/rails-recipes-rails-3-edition-recipe-3-connect-to-multiple-databases/">Rails Recipes Rails 3 Edition Recipe 3 Connect to Multiple Databases</a>
-        </li>
-    
-        <li class="related">
-        <a href="/blog/2012/10/06/rails-recipes-rails-3-edition-recipe-2-create-declarative-named-queries/">Rails Recipes Rails 3 Edition Recipe 2 Create Declarative Named Queries</a>
-        </li>
     
     </ul>
 </section>
@@ -665,10 +430,7 @@ $(document).ready(function(){
       var disqus_shortname = 'tech-blogbin-blog';
       
         
-        // var disqus_developer = 1;
-        var disqus_identifier = 'http://tech-blog.blogbin.info/blog/2012/09/09/using-bootstrap/';
-        var disqus_url = 'http://tech-blog.blogbin.info/blog/2012/09/09/using-bootstrap/';
-        var disqus_script = 'embed.js';
+        var disqus_script = 'count.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
