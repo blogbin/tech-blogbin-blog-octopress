@@ -4,7 +4,7 @@
   <title><![CDATA[Tech.Blogbin's Blog]]></title>
   <link href="http://tech-blog.blogbin.info/atom.xml" rel="self"/>
   <link href="http://tech-blog.blogbin.info/"/>
-  <updated>2012-10-07T08:01:05+08:00</updated>
+  <updated>2013-02-28T00:04:57+08:00</updated>
   <id>http://tech-blog.blogbin.info/</id>
   <author>
     <name><![CDATA[Tech Blogbin ]]></name>
@@ -12,6 +12,383 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Install Ruby 2.0 on CentOS 6.3]]></title>
+    <link href="http://tech-blog.blogbin.info/blog/2013/02/27/install-ruby-2-dot-0-on-centos-6-dot-3/"/>
+    <updated>2013-02-27T23:44:00+08:00</updated>
+    <id>http://tech-blog.blogbin.info/blog/2013/02/27/install-ruby-2-dot-0-on-centos-6-dot-3</id>
+    <content type="html"><![CDATA[<p>Ruby 2.0 终于出来了，着了一台 VPS Centos 6.3 安装看看：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[atyun@v1.ex.ays.atyun.net ~]$rvm get stable
+</span><span class='line'>  % Total % Received % Xferd Average Speed Time Time Time Current
+</span><span class='line'>                                 Dload Upload Total Spent Left Speed
+</span><span class='line'>100 11525 100 11525 0 0 4146 0 0:00:02 0:00:02 --:--:-- 27571
+</span><span class='line'>Downloading RVM from wayneeseguin branch stable
+</span><span class='line'>  % Total % Received % Xferd Average Speed Time Time Time Current
+</span><span class='line'>                                 Dload Upload Total Spent Left Speed
+</span><span class='line'>100 1490k 100 1490k 0 0 18984 0 0:01:20 0:01:20 --:--:-- 22889
+</span><span class='line'>
+</span><span class='line'>Upgrading the RVM installation in /home/atyun/.rvm/
+</span><span class='line'>    RVM PATH line found in /home/atyun/.bashrc /home/atyun/.zshrc.
+</span><span class='line'>    RVM sourcing line found in /home/atyun/.bash_profile /home/atyun/.zlogin.
+</span><span class='line'>    Installing rvm gem in 1 gemsets ….
+</span><span class='line'>
+</span><span class='line'>Upgrade Notes:
+</span><span class='line'>
+</span><span class='line'>  * If you wish to get more default(global) gems installed, install RVM with this flag: --with-gems="pry vagrant"
+</span><span class='line'>    this option is remembered, it's enough to use it once.
+</span><span class='line'>
+</span><span class='line'>  * For first installed ruby RVM will: display rvm requirements, set it as default and use it.
+</span><span class='line'>    To avoid this behavior either use full path to rvm binary or prefix it with `command `.
+</span><span class='line'>
+</span><span class='line'>  * Binary rubies are installed by default if available, you can read about it in help:
+</span><span class='line'>      rvm help install
+</span><span class='line'>      rvm help mount
+</span><span class='line'>
+</span><span class='line'>  * The default umask for multi-user installation got extended to `umask u=rwx,g=rwx,o=rx`,
+</span><span class='line'>    comment it out to avoid automatic updates.
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'># RVM: Shell scripts enabling management of multiple ruby environments.
+</span><span class='line'># RTFM: https://rvm.io/
+</span><span class='line'># HELP: http://webchat.freenode.net/?channels=rvm (#rvm on irc.freenode.net)
+</span><span class='line'># Cheatsheet: http://cheat.errtheblog.com/s/rvm/
+</span><span class='line'># Screencast: http://screencasts.org/episodes/how-to-use-rvm
+</span><span class='line'>
+</span><span class='line'># In case of any issues read output of 'rvm requirements' and/or 'dvm notes'
+</span><span class='line'>
+</span><span class='line'>Upgrade of RVM in /home/atyun/.rvm/ is complete.
+</span><span class='line'>
+</span><span class='line'># atyun@v1.ex.ays.atyun.net,
+</span><span class='line'>#
+</span><span class='line'># Thank you for using RVM!
+</span><span class='line'># I sincerely hope that RVM helps to make your life easier and
+</span><span class='line'># more enjoyable!!!
+</span><span class='line'>#
+</span><span class='line'># ~Wayne
+</span><span class='line'>
+</span><span class='line'>RVM reloaded!</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[atyun@v1.ex.ays.atyun.net ~]$rvm list known
+</span><span class='line'># MRI Rubies
+</span><span class='line'>[ruby-]1.8.6[-p420]
+</span><span class='line'>[ruby-]1.8.7[-p371]
+</span><span class='line'>[ruby-]1.9.1[-p431]
+</span><span class='line'>[ruby-]1.9.2[-p320]
+</span><span class='line'>[ruby-]1.9.3-p125
+</span><span class='line'>[ruby-]1.9.3-p194
+</span><span class='line'>[ruby-]1.9.3-p286
+</span><span class='line'>[ruby-]1.9.3-p327
+</span><span class='line'>[ruby-]1.9.3-p362
+</span><span class='line'>[ruby-]1.9.3-p374
+</span><span class='line'>[ruby-]1.9.3-p385
+</span><span class='line'>[ruby-]1.9.3-[p392]
+</span><span class='line'>[ruby-]1.9.3-head
+</span><span class='line'>[ruby-]2.0.0-rc1
+</span><span class='line'>[ruby-]2.0.0-rc2
+</span><span class='line'>[ruby-]2.0.0[-p0]
+</span><span class='line'>ruby-head
+</span><span class='line'>
+</span><span class='line'># GoRuby
+</span><span class='line'>goruby
+</span><span class='line'>
+</span><span class='line'># TheCodeShop - MRI experimental patches
+</span><span class='line'>tcs
+</span><span class='line'>
+</span><span class='line'># jamesgolick - All around gangster
+</span><span class='line'>jamesgolick
+</span><span class='line'>
+</span><span class='line'># Minimalistic ruby implementation - ISO 30170:2012
+</span><span class='line'>mruby[-head]
+</span><span class='line'>
+</span><span class='line'># JRuby
+</span><span class='line'>jruby-1.2.0
+</span><span class='line'>jruby-1.3.1
+</span><span class='line'>jruby-1.4.0
+</span><span class='line'>jruby-1.6.5.1
+</span><span class='line'>jruby-1.6.6
+</span><span class='line'>jruby-1.6.7.2
+</span><span class='line'>jruby-1.6.8
+</span><span class='line'>jruby[-1.7.3]
+</span><span class='line'>jruby-head
+</span><span class='line'>
+</span><span class='line'># Rubinius
+</span><span class='line'>rbx-1.0.1
+</span><span class='line'>rbx-1.1.1
+</span><span class='line'>rbx-1.2.3
+</span><span class='line'>rbx-1.2.4
+</span><span class='line'>rbx[-head]
+</span><span class='line'>rbx-2.0.testing
+</span><span class='line'>rbx-2.0.0-rc1
+</span><span class='line'>
+</span><span class='line'># Ruby Enterprise Edition
+</span><span class='line'>ree-1.8.6
+</span><span class='line'>ree[-1.8.7][-2012.02]
+</span><span class='line'>
+</span><span class='line'># Kiji
+</span><span class='line'>kiji
+</span><span class='line'>
+</span><span class='line'># MagLev
+</span><span class='line'>maglev[-head]
+</span><span class='line'>maglev-1.0.0
+</span><span class='line'>
+</span><span class='line'># Mac OS X Snow Leopard Or Newer
+</span><span class='line'>macruby-0.10
+</span><span class='line'>macruby-0.11
+</span><span class='line'>macruby[-0.12]
+</span><span class='line'>macruby-nightly
+</span><span class='line'>macruby-head
+</span><span class='line'>
+</span><span class='line'># Opal
+</span><span class='line'>opal
+</span><span class='line'>
+</span><span class='line'># IronRuby
+</span><span class='line'>ironruby[-1.1.3]
+</span><span class='line'>ironruby-head</span></code></pre></td></tr></table></div></figure>
+
+
+<p>出现莫名其妙的错误 curl: (6) Couldn&#8217;t resolve host &#8216;ftp.ruby-lang.org&#8217;</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[atyun@v1.ex.ays.atyun.net ~]$rvm install 2.0.0
+</span><span class='line'>Searching for binary rubies, this might take some time.
+</span><span class='line'>No binary rubies available for: centos/6.3/x86_64/ruby-2.0.0-p0.
+</span><span class='line'>Continuing with compilation. Please read 'rvm mount' to get more information on binary rubies.
+</span><span class='line'>Installing Ruby from source to: /home/atyun/.rvm/rubies/ruby-2.0.0-p0, this may take a while depending on your cpu(s)…
+</span><span class='line'>ruby-2.0.0-p0 - #downloading ruby-2.0.0-p0, this may take a while depending on your connection…
+</span><span class='line'>curl: (6) Couldn't resolve host 'ftp.ruby-lang.org'
+</span><span class='line'>There was an error(6), please check /home/atyun/.rvm/log//*.log. Next we'll try to fetch via http.
+</span><span class='line'>Trying ftp:// URL instead.
+</span><span class='line'>curl: (6) Couldn't resolve host 'ftp:'
+</span><span class='line'>There was an error(6), please check /home/atyun/.rvm/log//*.log
+</span><span class='line'>There has been an error fetching the ruby interpreter. Halting the installation.</span></code></pre></td></tr></table></div></figure>
+
+
+<p>估计是网络不稳定，重新安装</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[atyun@v1.ex.ays.atyun.net ~]$rvm install 2.0.0
+</span><span class='line'>Searching for binary rubies, this might take some time.
+</span><span class='line'>No binary rubies available for: centos/6.3/x86_64/ruby-2.0.0-p0.
+</span><span class='line'>Continuing with compilation. Please read 'rvm mount' to get more information on binary rubies.
+</span><span class='line'>Installing Ruby from source to: /home/atyun/.rvm/rubies/ruby-2.0.0-p0, this may take a while depending on your cpu(s)…
+</span><span class='line'>ruby-2.0.0-p0 - #downloading ruby-2.0.0-p0, this may take a while depending on your connection…
+</span><span class='line'>######################################################################## 100.0%
+</span><span class='line'>ruby-2.0.0-p0 - #extracting ruby-2.0.0-p0 to /home/atyun/.rvm/src/ruby-2.0.0-p0
+</span><span class='line'>ruby-2.0.0-p0 - #extracted to /home/atyun/.rvm/src/ruby-2.0.0-p0
+</span><span class='line'>ruby-2.0.0-p0 - #configuring
+</span><span class='line'>ruby-2.0.0-p0 - #compiling
+</span><span class='line'>ruby-2.0.0-p0 - #installing 
+</span><span class='line'>Retrieving rubygems-2.0.0
+</span><span class='line'>######################################################################## 100.0%
+</span><span class='line'>Extracting rubygems-2.0.0 …
+</span><span class='line'>Removing old Rubygems files…
+</span><span class='line'>Installing rubygems-2.0.0 for ruby-2.0.0-p0 …
+</span><span class='line'>Installation of rubygems completed successfully.
+</span><span class='line'>Saving wrappers to '/home/atyun/.rvm/bin'.
+</span><span class='line'>ruby-2.0.0-p0 - #adjusting #shebangs for (gem irb erb ri rdoc testrb rake).
+</span><span class='line'>ruby-2.0.0-p0 - #importing default gemsets, this may take time …
+</span><span class='line'>Install of ruby-2.0.0-p0 - #complete 
+</span><span class='line'>[atyun@v1.ex.ays.atyun.net ~]$rvm list
+</span><span class='line'>
+</span><span class='line'>rvm rubies
+</span><span class='line'>
+</span><span class='line'>=* ruby-1.9.3-p194 [ x86_64 ]
+</span><span class='line'>   ruby-2.0.0-p0 [ x86_64 ]
+</span><span class='line'>
+</span><span class='line'># =&gt; - current
+</span><span class='line'># =* - current && default
+</span><span class='line'># * - default
+</span><span class='line'>
+</span><span class='line'>[atyun@v1.ex.ays.atyun.net ~]$rvm use 2.0.0
+</span><span class='line'>Using /home/atyun/.rvm/gems/ruby-2.0.0-p0</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[atyun@v1.ex.ays.atyun.net ~]$ruby -v
+</span><span class='line'>ruby 2.0.0p0 (2013-02-24 revision 39474) [x86_64-linux]</span></code></pre></td></tr></table></div></figure>
+
+
+<p>安装成功</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Rails Recipes Rails 3 Edition Recipe 5 Add Behavior to Active Record Associations]]></title>
@@ -2068,33 +2445,6 @@ BigBlueButton 的 VM 虚拟机重新启动，会提示 Error: FreeSwitch fail&#8
 
 
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Using jcftang's octopress-relatedposts]]></title>
-    <link href="http://tech-blog.blogbin.info/blog/2012/08/25/using-jcftangs-octopress-relatedposts/"/>
-    <updated>2012-08-25T08:33:00+08:00</updated>
-    <id>http://tech-blog.blogbin.info/blog/2012/08/25/using-jcftangs-octopress-relatedposts</id>
-    <content type="html"><![CDATA[<p>参阅 jcftang/octopress-relatedposts <a href="https://github.com/jcftang/octopress-relatedposts">https://github.com/jcftang/octopress-relatedposts</a></p>
-
-<p>其实 Octopress 已经内置了 LSI 引擎，安装和配置 octopress-relatedposts 比较简单。</p>
-
-<blockquote><p>Firstly add this to your _config.yml file</p><p>lsi: true<br/>The create a file such as source/_includes/custom/asides/related.html with the following content</p><p>&#8230;.</p><p>It is possible to style the list, but in the above I have chosen to keep the same style as the recent posts.</p><p>Finally, add the file to your default asides list in your _config.yml file</p><p>default_asides: [custom/asides/related.html, &#8230;]</p></blockquote>
-
-
-
-
-<!--more-->
-
-
-<p>相关帖子效果如下图：</p>
-
-<blockquote><p><img src="http://tech-blog.blogbin.info/images/2012-08-25-using-jcftangs-octopress-relatedposts/octopress-relatedposts.jpeg"></p></blockquote>
-
-
-<p>引入   source/_includes/custom/asides/related.html
-比较遗憾的时，启用 LSI 后，运行 rake generate 的时间延长了 10 倍左右。</p>
 ]]></content>
   </entry>
   
